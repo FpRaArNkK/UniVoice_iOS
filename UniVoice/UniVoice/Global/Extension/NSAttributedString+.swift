@@ -8,7 +8,7 @@
 import UIKit
 
 extension NSAttributedString {
-    static func pretendardAttributedString(for type: UIFont.PretendardFont, with string: String = "") -> NSAttributedString {
+    static func pretendardAttributedString(for type: UIFont.PretendardFont, with text: String = "") -> NSAttributedString {
         // 행간 설정
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = type.lineHeight
@@ -18,6 +18,6 @@ extension NSAttributedString {
             .paragraphStyle: paragraphStyle
         ]
         
-        return NSAttributedString(string: string, attributes: attributes)
+        return NSAttributedString(string: text, attributes: attributes)
     }
 }

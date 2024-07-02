@@ -27,3 +27,20 @@ extension UIButton {
         setAttributedTitle(attributedString, for: .normal)
     }
 }
+
+// Custom Font
+extension UIButton {
+    func setCustomTitle(_ text: String, size fontSize: CGFloat, weight: UIFont.Weight, lineHeight: CGFloat) {
+        self.titleLabel?.font = UIFont.customFont(size: fontSize, weight: weight)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = lineHeight
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.paragraphStyle,
+                                      value: paragraphStyle,
+                                      range: NSRange(location: 0, length: attributedString.length))
+        
+        self.setAttributedTitle(attributedString, for: .normal)
+    }
+}

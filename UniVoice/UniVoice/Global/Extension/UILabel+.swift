@@ -13,3 +13,20 @@ extension UILabel {
         self.textColor = color
     }
 }
+
+// Custom Font
+extension UILabel {
+    func setCustomText(_ text: String, size fontSize: CGFloat, weight: UIFont.Weight, lineHeight: CGFloat) {
+        self.font = UIFont.customFont(size: fontSize, weight: weight)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = lineHeight
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.paragraphStyle,
+                                      value: paragraphStyle,
+                                      range: NSRange(location: 0, length: attributedString.length))
+        
+        self.attributedText = attributedString
+    }
+}

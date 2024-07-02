@@ -11,9 +11,7 @@ extension UIFont {
     static func pretendardFont(for type: PretendardFont) -> UIFont {
         return UIFont(name: type.weight, size: type.size) ?? .systemFont(ofSize: type.size)
     }
-}
-
-extension UIFont {
+    
     enum PretendardFont {
         case H1B, H1SB, H1R, H2B, H2SB, H2R, H3B, H3SB, H3R, H4B, H4SB, H4R, H5B, H5SB, H5R, H6B, H6SB, H6R, H7B, H7SB, H7R
         case T1B, T1SB, T1R, T2B, T2SB, T2R, T3B, T3SB, T3R, T4B, T4SB, T4R
@@ -41,7 +39,7 @@ extension UIFont {
         
         var weight: String {
             switch self {
-            case .H1B, .H2B, .H3B, .H4B, .H5B, .H6B, .H7B, .T1B, .T2B, .T3B, .T4B, .B1B, .B2B, .B3B, .B4B, .BUT1B, .BUT2B, .BUT3B, .BUT4B: 
+            case .H1B, .H2B, .H3B, .H4B, .H5B, .H6B, .H7B, .T1B, .T2B, .T3B, .T4B, .B1B, .B2B, .B3B, .B4B, .BUT1B, .BUT2B, .BUT3B, .BUT4B:
                 "Pretendard-Bold"
             case .H1SB, .H2SB, .H3SB, .H4SB, .H5SB, .H6SB, .H7SB, .T1SB, .T2SB, .T3SB, .T4SB, .B1SB, .B2SB, .B3SB, .B4SB, .BUT1SB, .BUT2SB, .BUT3SB, .BUT4SB:
                 "Pretendard-SemiBold"
@@ -59,5 +57,39 @@ extension UIFont {
             default: 0
             }
         }
+    }
+}
+
+// Custom Font
+extension UIFont {
+    static func customFont(size fontSize: CGFloat, weight: UIFont.Weight) -> UIFont {
+        let familyName = "Pretendard"
+        
+        var weightString: String
+        switch weight {
+        case .black:
+            weightString = "Black"
+        case .bold:
+            weightString = "Bold"
+        case .heavy:
+            weightString = "ExtraBold"
+        case .ultraLight:
+            weightString = "ExtraLight"
+        case .light:
+            weightString = "Light"
+        case .medium:
+            weightString = "Medium"
+        case .regular:
+            weightString = "Regular"
+        case .semibold:
+            weightString = "SemiBold"
+        case .thin:
+            weightString = "Thin"
+        default:
+            weightString = "Regular"
+        }
+        
+        let font = UIFont(name: "\(familyName)-\(weightString)", size: fontSize) ?? .systemFont(ofSize: fontSize, weight: weight)
+        return font
     }
 }
