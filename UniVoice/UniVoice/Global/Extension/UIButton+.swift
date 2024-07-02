@@ -20,7 +20,8 @@ extension UIButton {
     }
     
     func addUnderline() {
-        let attributedString = NSMutableAttributedString(string: self.titleLabel?.text ?? "")
+        let titleLabel = self.titleLabel?.attributedText ?? NSAttributedString(string: self.title(for: .normal) ?? "")
+        let attributedString = NSMutableAttributedString(attributedString: titleLabel)
         attributedString.addAttribute(.underlineStyle,
                                       value: NSUnderlineStyle.single.rawValue,
                                       range: NSRange(location: 0, length: attributedString.length))
