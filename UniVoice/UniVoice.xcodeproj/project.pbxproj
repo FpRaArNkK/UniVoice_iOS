@@ -44,6 +44,7 @@
 		882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1642C31D83F00D73FEF /* WelcomeView.swift */; };
 		882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1662C31D8F200D73FEF /* WelcomeViewController.swift */; };
 		88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C2C2C382DF4004A293D /* PreviewController.swift */; };
+		88325C302C384440004A293D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C2F2C384440004A293D /* CustomButton.swift */; };
 		8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8851A2712C2404CA006912D4 /* .swiftlint.yml */; };
 		DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */; };
 		EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */; };
@@ -87,6 +88,7 @@
 		882DB1642C31D83F00D73FEF /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		882DB1662C31D8F200D73FEF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		88325C2C2C382DF4004A293D /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		88325C2F2C384440004A293D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		8851A2712C2404CA006912D4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpIntroView.swift; sourceTree = "<group>"; };
@@ -210,9 +212,9 @@
 		880ED9662C23FDB60045A620 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				880ED9732C24011A0045A620 /* Components */,
 				EDE8CA182C37C3B700E828F1 /* SignUpPage */,
 				882DB1562C31C35B00D73FEF /* LoginPage */,
-				880ED9732C24011A0045A620 /* Components */,
 				880ED96E2C23FEB30045A620 /* Dummy */,
 			);
 			path = Presentation;
@@ -318,6 +320,7 @@
 		880ED9732C24011A0045A620 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				88325C2F2C384440004A293D /* CustomButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 			files = (
 				EDE8CA222C37C51300E828F1 /* DepartmentInputView.swift in Sources */,
 				880ED9532C23F75B0045A620 /* ViewController.swift in Sources */,
+				88325C302C384440004A293D /* CustomButton.swift in Sources */,
 				EDE8CA262C37C53F00E828F1 /* UnivInfoConfirmView.swift in Sources */,
 				EDE8CA2A2C37C5B800E828F1 /* DepartmentInputVC.swift in Sources */,
 				DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */,
