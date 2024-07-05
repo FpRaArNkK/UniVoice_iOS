@@ -13,7 +13,8 @@ final class WelcomeView: UIView {
     
     // MARK: Views
     private let welcomeLabel = UILabel()
-    let homeButton = UIButton()
+    private let welcomeImageView = UIImageView()
+    let homeButton = CustomButton(with: .active)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -37,6 +38,7 @@ final class WelcomeView: UIView {
     private func setUpHierarchy() {
         [
             welcomeLabel,
+            welcomeImageView,
             homeButton
         ].forEach { self.addSubview($0) }
     }
@@ -45,23 +47,35 @@ final class WelcomeView: UIView {
     private func setUpUI() {
         welcomeLabel.do {
             $0.text = "환영합니다!"
+            $0.font = .pretendardFont(for: .T1SB)
+        }
+        
+        welcomeImageView.do {
+            $0.backgroundColor = .gray
         }
 
         homeButton.do {
             $0.setTitle("유니보이스 홈 가기", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
         }
     }
     
     // MARK: setUpLayout
     private func setUpLayout() {
         welcomeLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(112)
+            $0.centerX.equalToSuperview()
+        }
+        
+        welcomeImageView.snp.makeConstraints {
+            $0.top.equalTo(welcomeLabel.snp.bottom).offset(26)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(224)
         }
         
         homeButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(20)
-            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(53)
         }
     }
 }
