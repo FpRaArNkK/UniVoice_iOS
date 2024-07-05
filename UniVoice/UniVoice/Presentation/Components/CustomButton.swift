@@ -61,16 +61,24 @@ enum CustomButtonType {
 
 /// 앱에서 사용되는 Custom Button 입니다.
 /// Type에 따라 active, inactive, line으로 구분됩니다. - CustomButtonType
-/// 선언 시 bindData() 함수 호출이 필요합니다.
+/// Type이 고정되는 경우 init(type:) 을 통해 선언할 수 있습니다.
+/// 동적 Type 선언 시 bindData() 함수 호출이 필요합니다.
 class CustomButton: UIButton {
     
     // MARK: Properties
-    private let customButtonType = BehaviorRelay<CustomButtonType>(value: .active)
+    private lazy var customButtonType = BehaviorRelay<CustomButtonType>(value: initialState)
     private let disposeBag = DisposeBag()
+    private var initialState: CustomButtonType = .active
     
     // MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        bindUI()
+    }
+    
+    init(with type: CustomButtonType) {
+        super.init(frame: .zero)
+        self.initialState = type
         bindUI()
     }
     
@@ -80,7 +88,7 @@ class CustomButton: UIButton {
     
     // MARK: bindUI
     private func bindUI() {
-        customButtonType.asDriver(onErrorJustReturn: .active)
+        customButtonType.asDriver(onErrorJustReturn: initialState)
             .drive(onNext: { [weak self] type in
                 self?.configuration = self?.createButtonConfiguration(
                     title: self?.titleLabel?.text ?? "",
