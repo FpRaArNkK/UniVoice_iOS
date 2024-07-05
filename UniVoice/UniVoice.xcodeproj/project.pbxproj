@@ -43,6 +43,7 @@
 		882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1622C31D74100D73FEF /* InitialViewController.swift */; };
 		882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1642C31D83F00D73FEF /* WelcomeView.swift */; };
 		882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1662C31D8F200D73FEF /* WelcomeViewController.swift */; };
+		88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C2C2C382DF4004A293D /* PreviewController.swift */; };
 		8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8851A2712C2404CA006912D4 /* .swiftlint.yml */; };
 		DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */; };
 		EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */; };
@@ -85,6 +86,7 @@
 		882DB1622C31D74100D73FEF /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		882DB1642C31D83F00D73FEF /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		882DB1662C31D8F200D73FEF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		88325C2C2C382DF4004A293D /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		8851A2712C2404CA006912D4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpIntroView.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				880ED95C2C23F75D0045A620 /* Info.plist */,
+				88325C2C2C382DF4004A293D /* PreviewController.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
+				88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */,
 				EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */,
 				882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */,
 				21F7B15C2C3471AA00A082D8 /* NSAttributedString+.swift in Sources */,
