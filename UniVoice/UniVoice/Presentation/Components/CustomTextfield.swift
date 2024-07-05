@@ -23,7 +23,7 @@ class CustomTextfield: UITextField {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        borderLayer.frame = CGRect(x: 0, y: frame.size.height - 2, width: frame.size.width, height: 2)
+        borderLayer.frame = CGRect(x: 0, y: frame.size.height + 12, width: frame.size.width, height: 2)
     }
     
     // MARK: Init
@@ -48,19 +48,22 @@ class CustomTextfield: UITextField {
         borderLayer.borderWidth = 2.0
         borderLayer.borderColor = inactiveColor.cgColor
         borderLayer.frame = CGRect(x: 0, y: frame.size.height - 2, width: frame.size.width, height: 2)
+        borderLayer.cornerRadius = 1
         layer.addSublayer(borderLayer)
         borderStyle = .none
         tintColor = activeColor
         
+        addHorizontalPadding(left: 5, right: 5)
+        
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.B_04,
-            .font: UIFont.PretendardFont.H7R
+            .font: UIFont.pretendardFont(for: .H7R)
         ]
         attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: placeholderAttributes)
         
         defaultTextAttributes = [
             .foregroundColor: UIColor.B_01,
-            .font: UIFont.PretendardFont.H7SB
+            .font: UIFont.pretendardFont(for: .H7SB)
         ]
     }
     
