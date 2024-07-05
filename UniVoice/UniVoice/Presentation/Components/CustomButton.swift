@@ -83,6 +83,7 @@ class CustomButton: UIButton {
         customButtonType.asDriver(onErrorJustReturn: .active)
             .drive(onNext: { [weak self] type in
                 self?.configuration = self?.createButtonConfiguration(
+                    title: self?.titleLabel?.text ?? "",
                     backgroundColor: type.backgroundColor,
                     titleColor: type.titleColor,
                     borderColor: type.borderColor,
@@ -96,6 +97,7 @@ class CustomButton: UIButton {
 // MARK: Internal Logic
 private extension CustomButton {
     func createButtonConfiguration(
+        title: String,
         backgroundColor: UIColor,
         titleColor: UIColor,
         borderColor: UIColor? = nil,
@@ -103,6 +105,7 @@ private extension CustomButton {
     ) -> UIButton.Configuration {
         
         var config = UIButton.Configuration.filled()
+        config.title = title
         config.baseBackgroundColor = backgroundColor
         config.baseForegroundColor = titleColor
         config.cornerStyle = .capsule
