@@ -16,6 +16,10 @@ enum CustomButtonType {
     case inActive
     case line
     
+    var titleFont: UIFont {
+        return .pretendardFont(for: .T4B)
+    }
+    
     var titleColor: UIColor {
         switch self {
             
@@ -86,17 +90,15 @@ class CustomButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func setTitle(_ title: String?, for state: UIControl.State) {
+        updateUI(with: initialState, title: title)
+    }
+    
     // MARK: bindUI
     private func bindUI() {
         customButtonType.asDriver(onErrorJustReturn: initialState)
             .drive(onNext: { [weak self] type in
-                self?.configuration = self?.createButtonConfiguration(
-                    title: self?.titleLabel?.text ?? "",
-                    backgroundColor: type.backgroundColor,
-                    titleColor: type.titleColor,
-                    borderColor: type.borderColor,
-                    borderWidth: type.borderWidth
-                )
+                self?.updateUI(with: type)
             })
             .disposed(by: disposeBag)
     }
@@ -104,8 +106,20 @@ class CustomButton: UIButton {
 
 // MARK: Internal Logic
 private extension CustomButton {
+    func updateUI(with type: CustomButtonType, title: String? = nil) {
+        self.configuration = self.createButtonConfiguration(
+            title: title ?? self.titleLabel?.text ?? "",
+            font: type.titleFont,
+            backgroundColor: type.backgroundColor,
+            titleColor: type.titleColor,
+            borderColor: type.borderColor,
+            borderWidth: type.borderWidth
+        )
+    }
+    
     func createButtonConfiguration(
         title: String,
+        font: UIFont,
         backgroundColor: UIColor,
         titleColor: UIColor,
         borderColor: UIColor? = nil,
@@ -113,7 +127,7 @@ private extension CustomButton {
     ) -> UIButton.Configuration {
         
         var config = UIButton.Configuration.filled()
-        config.title = title
+        config.attributedTitle = .init(title, attributes: .init([.font: font]))
         config.baseBackgroundColor = backgroundColor
         config.baseForegroundColor = titleColor
         config.cornerStyle = .capsule
