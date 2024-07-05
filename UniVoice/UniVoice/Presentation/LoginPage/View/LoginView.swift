@@ -61,19 +61,19 @@ final class LoginView: UIView {
     // MARK: setUpLayout
     private func setUpLayout() {
         idTextField.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(36)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(33)
         }
         
         pwTextField.snp.makeConstraints {
-            $0.top.equalTo(idTextField.snp.bottom).offset(20)
+            $0.top.equalTo(idTextField.snp.bottom).offset(32)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(33)
         }
         
         loginButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(20)
+            $0.bottom.equalTo(self.keyboardLayoutGuide.snp.top).offset(-12)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(53)
         }
