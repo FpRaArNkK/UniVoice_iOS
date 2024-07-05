@@ -23,7 +23,7 @@ class CustomTextfield: UITextField {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        borderLayer.frame = CGRect(x: 0, y: frame.size.height + 12, width: frame.size.width, height: 2)
+        borderLayer.frame = CGRect(x: 0, y: frame.size.height + 10, width: frame.size.width, height: 2)
     }
     
     // MARK: Init
