@@ -51,6 +51,7 @@ final class LoginView: UIView {
         
         pwTextField.do {
             $0.placeholder = "비밀번호"
+            $0.isSecureTextEntry = true
         }
         
         loginButton.do {
