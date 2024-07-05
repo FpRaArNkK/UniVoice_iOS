@@ -59,6 +59,9 @@ enum CustomButtonType {
     }
 }
 
+/// 앱에서 사용되는 Custom Button 입니다.
+/// Type에 따라 active, inactive, line으로 구분됩니다. - CustomButtonType
+/// 선언 시 bindData() 함수 호출이 필요합니다.
 class CustomButton: UIButton {
     
     // MARK: Properties
@@ -75,6 +78,7 @@ class CustomButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: bindUI
     private func bindUI() {
         guard let disposeBag = self.disposeBag else { return }
         

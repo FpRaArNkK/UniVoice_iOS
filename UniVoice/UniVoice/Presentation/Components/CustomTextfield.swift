@@ -11,6 +11,8 @@ import Then
 import RxSwift
 import RxCocoa
 
+/// 앱에서 사용되는 Custom Textfield 입니다.
+/// 선언 시 bindData() 함수 호출이 필요합니다.
 class CustomTextfield: UITextField {
     
     // MARK: Properties
