@@ -12,9 +12,9 @@ import Then
 final class LoginView: UIView {
     
     // MARK: Views
-    let idTextField = UITextField()
-    let pwTextField = UITextField()
-    let loginButton = UIButton()
+    let idTextField = CustomTextfield()
+    let pwTextField = CustomTextfield()
+    let loginButton = CustomButton()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -55,7 +55,6 @@ final class LoginView: UIView {
         
         loginButton.do {
             $0.setTitle("확인", for: .normal)
-            $0.backgroundColor = .gray
         }
     }
     
@@ -63,17 +62,20 @@ final class LoginView: UIView {
     private func setUpLayout() {
         idTextField.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide)
-            $0.centerX.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(33)
         }
         
         pwTextField.snp.makeConstraints {
             $0.top.equalTo(idTextField.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(33)
         }
         
         loginButton.snp.makeConstraints {
             $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(20)
-            $0.centerX.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(53)
         }
     }
 }
