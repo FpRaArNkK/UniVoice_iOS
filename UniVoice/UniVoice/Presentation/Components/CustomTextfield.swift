@@ -12,11 +12,10 @@ import RxSwift
 import RxCocoa
 
 /// 앱에서 사용되는 Custom Textfield 입니다.
-/// 선언 시 bindData() 함수 호출이 필요합니다.
 class CustomTextfield: UITextField {
     
     // MARK: Properties
-    private var disposeBag: DisposeBag?
+    private let disposeBag = DisposeBag()
     private let borderLayer = CALayer()
     private let activeColor = UIColor.mint600
     private let inactiveColor = UIColor.gray200
@@ -31,6 +30,7 @@ class CustomTextfield: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
+        bindUI()
     }
     
     required init?(coder: NSCoder) {
@@ -66,8 +66,6 @@ class CustomTextfield: UITextField {
     
     // MARK: bindUI
     private func bindUI() {
-        guard let disposeBag = self.disposeBag else { return }
-        
         Observable.merge(
             self.rx.controlEvent([.editingDidBegin]).map { true },
             self.rx.controlEvent([.editingDidEnd]).map { false }
@@ -77,13 +75,5 @@ class CustomTextfield: UITextField {
             self?.setNeedsDisplay()
         })
         .disposed(by: disposeBag)
-    }
-}
-
-// MARK: External Logic
-extension CustomTextfield {
-    func bindData(with disposeBag: DisposeBag) {
-        self.disposeBag = disposeBag
-        bindUI()
     }
 }

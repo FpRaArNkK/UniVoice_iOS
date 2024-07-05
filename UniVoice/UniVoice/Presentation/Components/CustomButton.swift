@@ -66,7 +66,7 @@ class CustomButton: UIButton {
     
     // MARK: Properties
     private let customButtonType = BehaviorRelay<CustomButtonType>(value: .active)
-    private var disposeBag: DisposeBag?
+    private let disposeBag = DisposeBag()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -80,8 +80,6 @@ class CustomButton: UIButton {
     
     // MARK: bindUI
     private func bindUI() {
-        guard let disposeBag = self.disposeBag else { return }
-        
         customButtonType.asDriver(onErrorJustReturn: .active)
             .drive(onNext: { [weak self] type in
                 self?.configuration = self?.createButtonConfiguration(
@@ -122,11 +120,9 @@ private extension CustomButton {
 
 // MARK: External Logic
 extension CustomButton {
-    func bindData(buttonType: Observable<CustomButtonType>, with disposeBag: DisposeBag) {
+    func bindData(buttonType: Observable<CustomButtonType>) {
         buttonType
             .bind(to: customButtonType)
             .disposed(by: disposeBag)
-        
-        self.disposeBag = disposeBag
     }
 }
