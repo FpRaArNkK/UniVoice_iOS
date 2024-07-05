@@ -49,6 +49,17 @@ class CustomTextfield: UITextField {
         layer.addSublayer(borderLayer)
         borderStyle = .none
         tintColor = activeColor
+        
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.B_04,
+            .font: UIFont.PretendardFont.H7R
+        ]
+        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: placeholderAttributes)
+        
+        defaultTextAttributes = [
+            .foregroundColor: UIColor.B_01,
+            .font: UIFont.PretendardFont.H7SB
+        ]
     }
     
     // MARK: bindUI
