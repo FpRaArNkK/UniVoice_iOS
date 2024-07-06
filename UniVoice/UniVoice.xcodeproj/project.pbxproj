@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */; };
 		21F7B1502C345F8F00A082D8 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */; };
 		21F7B1512C345F8F00A082D8 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */; };
 		21F7B1522C345F8F00A082D8 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1492C345F8E00A082D8 /* Pretendard-ExtraLight.otf */; };
@@ -58,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVM.swift; sourceTree = "<group>"; };
 		21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		21F7B1492C345F8E00A082D8 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -121,6 +123,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2195F6DB2C397539008D2485 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		21F7B1462C345EDA00A082D8 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +372,7 @@
 			children = (
 				EDE8CA1A2C37C3C800E828F1 /* ViewController */,
 				EDE8CA192C37C3C100E828F1 /* View */,
+				2195F6DB2C397539008D2485 /* ViewModel */,
 			);
 			path = SignUpPage;
 			sourceTree = "<group>";
@@ -534,6 +545,7 @@
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
+				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
 				EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */,
 				882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */,
