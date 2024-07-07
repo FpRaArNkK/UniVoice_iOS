@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */; };
+		21F7B1502C345F8F00A082D8 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */; };
+		21F7B1512C345F8F00A082D8 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */; };
+		21F7B1522C345F8F00A082D8 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1492C345F8E00A082D8 /* Pretendard-ExtraLight.otf */; };
+		21F7B1532C345F8F00A082D8 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B14A2C345F8E00A082D8 /* Pretendard-Black.otf */; };
+		21F7B1542C345F8F00A082D8 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B14B2C345F8E00A082D8 /* Pretendard-Bold.otf */; };
+		21F7B1552C345F8F00A082D8 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B14C2C345F8F00A082D8 /* Pretendard-Thin.otf */; };
+		21F7B1562C345F8F00A082D8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B14D2C345F8F00A082D8 /* Pretendard-SemiBold.otf */; };
+		21F7B1572C345F8F00A082D8 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B14E2C345F8F00A082D8 /* Pretendard-Medium.otf */; };
+		21F7B1582C345F8F00A082D8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B14F2C345F8F00A082D8 /* Pretendard-Light.otf */; };
+		21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7B1592C34620A00A082D8 /* UIFont+.swift */; };
+		21F7B15C2C3471AA00A082D8 /* NSAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7B15B2C3471AA00A082D8 /* NSAttributedString+.swift */; };
+		21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7B15D2C3473C500A082D8 /* UILabel+.swift */; };
+		21F7B1602C34748700A082D8 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7B15F2C34748700A082D8 /* UIButton+.swift */; };
 		880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED94E2C23F75B0045A620 /* AppDelegate.swift */; };
 		880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED9502C23F75B0045A620 /* SceneDelegate.swift */; };
 		880ED9532C23F75B0045A620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED9522C23F75B0045A620 /* ViewController.swift */; };
@@ -30,13 +44,42 @@
 		882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1622C31D74100D73FEF /* InitialViewController.swift */; };
 		882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1642C31D83F00D73FEF /* WelcomeView.swift */; };
 		882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB1662C31D8F200D73FEF /* WelcomeViewController.swift */; };
+		88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C2C2C382DF4004A293D /* PreviewController.swift */; };
+		88325C302C384440004A293D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C2F2C384440004A293D /* CustomButton.swift */; };
+		88325C322C385CD1004A293D /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C312C385CD1004A293D /* CustomTextfield.swift */; };
+		88325C342C38762D004A293D /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C332C38762D004A293D /* UITextField+.swift */; };
+		88325C362C38B5C5004A293D /* UINavigationBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C352C38B5C5004A293D /* UINavigationBar+.swift */; };
 		8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8851A2712C2404CA006912D4 /* .swiftlint.yml */; };
 		DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DAF82C39CD1F008B321E /* MainHomeView.swift */; };
 		DC33DB062C3A60B4008B321E /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB052C3A60B4008B321E /* ArticleHeaderView.swift */; };
 		DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */; };
+		EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */; };
+		EDE8CA1E2C37C4AD00E828F1 /* SignUpIntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1D2C37C4AD00E828F1 /* SignUpIntroVC.swift */; };
+		EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */; };
+		EDE8CA222C37C51300E828F1 /* DepartmentInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA212C37C51300E828F1 /* DepartmentInputView.swift */; };
+		EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA232C37C52B00E828F1 /* AdmissionYearSelectionView.swift */; };
+		EDE8CA262C37C53F00E828F1 /* UnivInfoConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA252C37C53F00E828F1 /* UnivInfoConfirmView.swift */; };
+		EDE8CA282C37C59800E828F1 /* UniversityInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA272C37C59800E828F1 /* UniversityInputVC.swift */; };
+		EDE8CA2A2C37C5B800E828F1 /* DepartmentInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA292C37C5B800E828F1 /* DepartmentInputVC.swift */; };
+		EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */; };
+		EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVM.swift; sourceTree = "<group>"; };
+		21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		21F7B1492C345F8E00A082D8 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		21F7B14A2C345F8E00A082D8 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		21F7B14B2C345F8E00A082D8 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		21F7B14C2C345F8F00A082D8 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		21F7B14D2C345F8F00A082D8 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		21F7B14E2C345F8F00A082D8 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		21F7B14F2C345F8F00A082D8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		21F7B1592C34620A00A082D8 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		21F7B15B2C3471AA00A082D8 /* NSAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+.swift"; sourceTree = "<group>"; };
+		21F7B15D2C3473C500A082D8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		21F7B15F2C34748700A082D8 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		880ED94B2C23F75B0045A620 /* UniVoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniVoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		880ED94E2C23F75B0045A620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		880ED9502C23F75B0045A620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,10 +94,25 @@
 		882DB1622C31D74100D73FEF /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		882DB1642C31D83F00D73FEF /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		882DB1662C31D8F200D73FEF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		88325C2C2C382DF4004A293D /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		88325C2F2C384440004A293D /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		88325C312C385CD1004A293D /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
+		88325C332C38762D004A293D /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		88325C352C38B5C5004A293D /* UINavigationBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+.swift"; sourceTree = "<group>"; };
 		8851A2712C2404CA006912D4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DC33DAF82C39CD1F008B321E /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		DC33DB052C3A60B4008B321E /* ArticleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleHeaderView.swift; sourceTree = "<group>"; };
 		DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpIntroView.swift; sourceTree = "<group>"; };
+		EDE8CA1D2C37C4AD00E828F1 /* SignUpIntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpIntroVC.swift; sourceTree = "<group>"; };
+		EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInputView.swift; sourceTree = "<group>"; };
+		EDE8CA212C37C51300E828F1 /* DepartmentInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentInputView.swift; sourceTree = "<group>"; };
+		EDE8CA232C37C52B00E828F1 /* AdmissionYearSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionYearSelectionView.swift; sourceTree = "<group>"; };
+		EDE8CA252C37C53F00E828F1 /* UnivInfoConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivInfoConfirmView.swift; sourceTree = "<group>"; };
+		EDE8CA272C37C59800E828F1 /* UniversityInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInputVC.swift; sourceTree = "<group>"; };
+		EDE8CA292C37C5B800E828F1 /* DepartmentInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentInputVC.swift; sourceTree = "<group>"; };
+		EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionYearSelectionVC.swift; sourceTree = "<group>"; };
+		EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivInfoConfirmVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +137,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2195F6DB2C397539008D2485 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		21F7B1462C345EDA00A082D8 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				21F7B14A2C345F8E00A082D8 /* Pretendard-Black.otf */,
+				21F7B14B2C345F8E00A082D8 /* Pretendard-Bold.otf */,
+				21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */,
+				21F7B1492C345F8E00A082D8 /* Pretendard-ExtraLight.otf */,
+				21F7B14F2C345F8F00A082D8 /* Pretendard-Light.otf */,
+				21F7B14E2C345F8F00A082D8 /* Pretendard-Medium.otf */,
+				21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */,
+				21F7B14D2C345F8F00A082D8 /* Pretendard-SemiBold.otf */,
+				21F7B14C2C345F8F00A082D8 /* Pretendard-Thin.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		880ED9422C23F75B0045A620 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +232,8 @@
 		880ED9662C23FDB60045A620 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				880ED9732C24011A0045A620 /* Components */,
+				EDE8CA182C37C3B700E828F1 /* SignUpPage */,
 				882DB1562C31C35B00D73FEF /* LoginPage */,
 				DC33DAF42C39C75E008B321E /* MainHome */,
 				880ED9732C24011A0045A620 /* Components */,
@@ -190,6 +274,7 @@
 		880ED96B2C23FE400045A620 /* Literal */ = {
 			isa = PBXGroup;
 			children = (
+				21F7B1462C345EDA00A082D8 /* Font */,
 			);
 			path = Literal;
 			sourceTree = "<group>";
@@ -198,6 +283,12 @@
 			isa = PBXGroup;
 			children = (
 				DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */,
+				21F7B1592C34620A00A082D8 /* UIFont+.swift */,
+				21F7B15B2C3471AA00A082D8 /* NSAttributedString+.swift */,
+				21F7B15D2C3473C500A082D8 /* UILabel+.swift */,
+				21F7B15F2C34748700A082D8 /* UIButton+.swift */,
+				88325C332C38762D004A293D /* UITextField+.swift */,
+				88325C352C38B5C5004A293D /* UINavigationBar+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -206,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				880ED95C2C23F75D0045A620 /* Info.plist */,
+				88325C2C2C382DF4004A293D /* PreviewController.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -252,6 +344,8 @@
 		880ED9732C24011A0045A620 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				88325C2F2C384440004A293D /* CustomButton.swift */,
+				88325C312C385CD1004A293D /* CustomTextfield.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -292,6 +386,40 @@
 				882DB1642C31D83F00D73FEF /* WelcomeView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EDE8CA182C37C3B700E828F1 /* SignUpPage */ = {
+			isa = PBXGroup;
+			children = (
+				EDE8CA1A2C37C3C800E828F1 /* ViewController */,
+				EDE8CA192C37C3C100E828F1 /* View */,
+				2195F6DB2C397539008D2485 /* ViewModel */,
+			);
+			path = SignUpPage;
+			sourceTree = "<group>";
+		};
+		EDE8CA192C37C3C100E828F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */,
+				EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */,
+				EDE8CA212C37C51300E828F1 /* DepartmentInputView.swift */,
+				EDE8CA232C37C52B00E828F1 /* AdmissionYearSelectionView.swift */,
+				EDE8CA252C37C53F00E828F1 /* UnivInfoConfirmView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EDE8CA1A2C37C3C800E828F1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDE8CA1D2C37C4AD00E828F1 /* SignUpIntroVC.swift */,
+				EDE8CA272C37C59800E828F1 /* UniversityInputVC.swift */,
+				EDE8CA292C37C5B800E828F1 /* DepartmentInputVC.swift */,
+				EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */,
+				EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		DC33DAF42C39C75E008B321E /* MainHome */ = {
@@ -415,9 +543,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21F7B1522C345F8F00A082D8 /* Pretendard-ExtraLight.otf in Resources */,
+				21F7B1542C345F8F00A082D8 /* Pretendard-Bold.otf in Resources */,
 				8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */,
+				21F7B1552C345F8F00A082D8 /* Pretendard-Thin.otf in Resources */,
+				21F7B1502C345F8F00A082D8 /* Pretendard-Regular.otf in Resources */,
+				21F7B1582C345F8F00A082D8 /* Pretendard-Light.otf in Resources */,
+				21F7B1512C345F8F00A082D8 /* Pretendard-ExtraBold.otf in Resources */,
 				880ED9582C23F75D0045A620 /* Assets.xcassets in Resources */,
+				21F7B1562C345F8F00A082D8 /* Pretendard-SemiBold.otf in Resources */,
+				21F7B1532C345F8F00A082D8 /* Pretendard-Black.otf in Resources */,
 				880ED95B2C23F75D0045A620 /* Base in Resources */,
+				21F7B1572C345F8F00A082D8 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,19 +586,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88325C322C385CD1004A293D /* CustomTextfield.swift in Sources */,
+				EDE8CA222C37C51300E828F1 /* DepartmentInputView.swift in Sources */,
 				880ED9532C23F75B0045A620 /* ViewController.swift in Sources */,
+				88325C362C38B5C5004A293D /* UINavigationBar+.swift in Sources */,
+				88325C302C384440004A293D /* CustomButton.swift in Sources */,
+				EDE8CA262C37C53F00E828F1 /* UnivInfoConfirmView.swift in Sources */,
+				EDE8CA2A2C37C5B800E828F1 /* DepartmentInputVC.swift in Sources */,
 				DC33DB062C3A60B4008B321E /* ArticleHeaderView.swift in Sources */,
 				DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */,
 				882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */,
+				88325C342C38762D004A293D /* UITextField+.swift in Sources */,
 				880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */,
+				21F7B1602C34748700A082D8 /* UIButton+.swift in Sources */,
+				EDE8CA282C37C59800E828F1 /* UniversityInputVC.swift in Sources */,
+				21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */,
+				21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */,
+				EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */,
 				882DB15F2C31C94A00D73FEF /* LoginViewModel.swift in Sources */,
+				EDE8CA1E2C37C4AD00E828F1 /* SignUpIntroVC.swift in Sources */,
+				EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */,
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
+				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
+				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
+				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
 				DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */,
+				88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */,
+				EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */,
 				882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */,
+				21F7B15C2C3471AA00A082D8 /* NSAttributedString+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +689,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = UniVoice/Global/Utility/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -590,7 +747,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = UniVoice/Global/Utility/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

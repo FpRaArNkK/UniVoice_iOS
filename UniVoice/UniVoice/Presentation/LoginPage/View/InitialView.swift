@@ -14,9 +14,9 @@ final class InitialView: UIView {
     // MARK: Views
     private let logoImageView = UIImageView()
     let buttonStack = UIStackView()
-    let startButton = UIButton()
-    let loginButton = UIButton()
-    let councilButton = UIButton()
+    let startButton = CustomButton(with: .active)
+    let loginButton = CustomButton(with: .line)
+//    let councilButton = UIButton()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -40,8 +40,8 @@ final class InitialView: UIView {
     private func setUpHierarchy() {
         [
             startButton,
-            loginButton,
-            councilButton
+            loginButton
+//            councilButton
         ].forEach { buttonStack.addArrangedSubview($0) }
         
         [
@@ -58,35 +58,41 @@ final class InitialView: UIView {
         
         buttonStack.do {
             $0.axis = .vertical
-            $0.spacing = 10
+            $0.spacing = 12
         }
         
         startButton.do {
             $0.setTitle("유니보이스 시작하기", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
         }
         
         loginButton.do {
-            $0.setTitle("로그인 하기", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
+            $0.setTitle("로그인", for: .normal)
         }
         
-        councilButton.do {
-            $0.setTitle("학생회이신가요?", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
-        }
+//        councilButton.do {
+//            $0.setTitle("학생회이신가요?", for: .normal)
+//        }
     }
     
     // MARK: setUpLayout
     private func setUpLayout() {
         logoImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.size.equalTo(200)
+            $0.top.equalToSuperview().offset(257)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(224)
         }
         
         buttonStack.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(20)
-            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+        }
+        
+        startButton.snp.makeConstraints {
+            $0.height.equalTo(53)
+        }
+        
+        loginButton.snp.makeConstraints {
+            $0.height.equalTo(53)
         }
     }
 }
