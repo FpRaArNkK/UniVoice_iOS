@@ -24,6 +24,6 @@ class CreateAccountVC: UIViewController {
 
     // MARK: - setUpFoundation
     private func setUpFoundation() {
-        self.title = "회원가입"
+        self.title = "계정 생성"
     }
 }
