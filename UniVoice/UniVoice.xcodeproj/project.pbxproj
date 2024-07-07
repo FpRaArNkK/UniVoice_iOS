@@ -232,7 +232,6 @@
 		880ED9662C23FDB60045A620 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				880ED9732C24011A0045A620 /* Components */,
 				EDE8CA182C37C3B700E828F1 /* SignUpPage */,
 				882DB1562C31C35B00D73FEF /* LoginPage */,
 				DC33DAF42C39C75E008B321E /* MainHome */,
@@ -388,40 +387,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		EDE8CA182C37C3B700E828F1 /* SignUpPage */ = {
-			isa = PBXGroup;
-			children = (
-				EDE8CA1A2C37C3C800E828F1 /* ViewController */,
-				EDE8CA192C37C3C100E828F1 /* View */,
-				2195F6DB2C397539008D2485 /* ViewModel */,
-			);
-			path = SignUpPage;
-			sourceTree = "<group>";
-		};
-		EDE8CA192C37C3C100E828F1 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */,
-				EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */,
-				EDE8CA212C37C51300E828F1 /* DepartmentInputView.swift */,
-				EDE8CA232C37C52B00E828F1 /* AdmissionYearSelectionView.swift */,
-				EDE8CA252C37C53F00E828F1 /* UnivInfoConfirmView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		EDE8CA1A2C37C3C800E828F1 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				EDE8CA1D2C37C4AD00E828F1 /* SignUpIntroVC.swift */,
-				EDE8CA272C37C59800E828F1 /* UniversityInputVC.swift */,
-				EDE8CA292C37C5B800E828F1 /* DepartmentInputVC.swift */,
-				EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */,
-				EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		DC33DAF42C39C75E008B321E /* MainHome */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,6 +426,40 @@
 			children = (
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		EDE8CA182C37C3B700E828F1 /* SignUpPage */ = {
+			isa = PBXGroup;
+			children = (
+				EDE8CA1A2C37C3C800E828F1 /* ViewController */,
+				EDE8CA192C37C3C100E828F1 /* View */,
+				2195F6DB2C397539008D2485 /* ViewModel */,
+			);
+			path = SignUpPage;
+			sourceTree = "<group>";
+		};
+		EDE8CA192C37C3C100E828F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */,
+				EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */,
+				EDE8CA212C37C51300E828F1 /* DepartmentInputView.swift */,
+				EDE8CA232C37C52B00E828F1 /* AdmissionYearSelectionView.swift */,
+				EDE8CA252C37C53F00E828F1 /* UnivInfoConfirmView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EDE8CA1A2C37C3C800E828F1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDE8CA1D2C37C4AD00E828F1 /* SignUpIntroVC.swift */,
+				EDE8CA272C37C59800E828F1 /* UniversityInputVC.swift */,
+				EDE8CA292C37C5B800E828F1 /* DepartmentInputVC.swift */,
+				EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */,
+				EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

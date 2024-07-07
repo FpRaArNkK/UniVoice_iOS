@@ -15,15 +15,14 @@ final class MainHomeView: UIView {
     ///empty view
     let emptyStackView = UIStackView()
     let emptyViewLabel = UILabel()
-    let councilApplyButton = UIButton()
+    let councilApplyButton = CustomButton(with: .active)
     ///main view
     let scrollView = UIScrollView()
     let contentView = UIView()
     let logoImageView = UIImageView()
     let quickScanLabel = UILabel()
     let quickScanCollectionView = UICollectionView()
-    let articleLabel = UILabel()
-    let articleLabelCollectionView = UICollectionView()
+    let articleStickyHeader = ArticleHeaderView()
     let articleTableView = UITableView()
     
     
@@ -44,12 +43,14 @@ final class MainHomeView: UIView {
     private func setUpFoundation() {
         self.backgroundColor = .white
         self.emptyStackView.isHidden = true
+        self.articleStickyHeader.isHidden = true
     }
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         [
             emptyStackView,
+            articleStickyHeader,
             scrollView
         ].forEach { self.addSubview($0) }
         
@@ -62,34 +63,36 @@ final class MainHomeView: UIView {
         
         [
             logoImageView,
-            quickScanLabel,
             quickScanCollectionView,
-            articleLabel,
-            articleLabelCollectionView,
             articleTableView
         ].forEach { contentView.addSubview($0) }
     }
     
     // MARK: setUpUI
     private func setUpUI() {
-        logoImageView.do {
-            $0.image = .remove //fix
-        }
         emptyStackView.do {
             $0.axis = .vertical
             $0.spacing = 16
         }
+        
         emptyViewLabel.do {
-            $0.text = "아직 학생회가 등록되어 있지 않아,\n공지사항을 확인할 수 없어요."
+            $0.setText("아직 학생회가 등록되어 있지 않아,\n공지사항을 확인할 수 없어요.",
+                       font: .H7SB,
+                       color: .black)
         }
+        
         councilApplyButton.do {
             $0.setTitle("학생회 등록 신청하기", for: .normal)
         }
-        quickScanLabel.do {
-            $0.text = "퀵 스캔"
+        
+        logoImageView.do {
+            $0.image = UIImage(named: "mainLogo")
         }
-        articleLabel.do {
-            $0.text = "공지사항"
+        
+        quickScanLabel.do{
+            $0.setText("퀵 스캔",
+                       font: .H5B,
+                       color: .black)
         }
     }
     
@@ -106,22 +109,39 @@ final class MainHomeView: UIView {
         }
         
         councilApplyButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(emptyViewLabel.snp.bottom).offset(16)
             $0.height.equalTo(51)
             $0.width.equalTo(181)
-            
         }
         
         ///main view
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(<#T##other: any ConstraintRelatableTarget##any ConstraintRelatableTarget#>)
-        }
-        quickScanLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(11)
-            $0.leading.equalToSuperview().offset(16)
+            $0.top.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview()
         }
         
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.height.equalTo(2000)
+        }
         
+        logoImageView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(46)
+        }
+        quickScanCollectionView.snp.makeConstraints {
+            $0.top.equalTo(logoImageView.snp.bottom)
+            $0.height.equalTo(158)
+        }
+        articleStickyHeader.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(94)
+        }
+        articleTableView.snp.makeConstraints {
+            $0.top.equalTo(quickScanCollectionView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1000)
+        }
     }
 }
