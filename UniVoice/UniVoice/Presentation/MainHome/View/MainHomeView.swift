@@ -21,7 +21,13 @@ final class MainHomeView: UIView {
     let contentView = UIView()
     let logoImageView = UIImageView()
     let quickScanLabel = UILabel()
-    let quickScanCollectionView = UICollectionView()
+    let quickScanCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()    
     let articleStickyHeader = ArticleHeaderView()
     let articleTableView = UITableView()
     
@@ -33,10 +39,24 @@ final class MainHomeView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
+        setDelegate()
+        setRegister()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: delegate
+    private func setDelegate() {
+        quickScanCollectionView.dataSource = self
+        quickScanCollectionView.delegate = self
+    }
+    
+    private func setRegister() {
+        quickScanCollectionView.register(QuickScanCollectionViewCell.self,
+                                         forCellWithReuseIdentifier: QuickScanCollectionViewCell.identifier)
+
     }
     
     // MARK: setUpFoundation
@@ -63,6 +83,7 @@ final class MainHomeView: UIView {
         
         [
             logoImageView,
+            quickScanLabel,
             quickScanCollectionView,
             articleTableView
         ].forEach { contentView.addSubview($0) }
@@ -78,7 +99,9 @@ final class MainHomeView: UIView {
         emptyViewLabel.do {
             $0.setText("아직 학생회가 등록되어 있지 않아,\n공지사항을 확인할 수 없어요.",
                        font: .H7SB,
-                       color: .black)
+                       color: .B_01)
+            $0.numberOfLines = 2
+            $0.textAlignment = .center
         }
         
         councilApplyButton.do {
@@ -87,12 +110,13 @@ final class MainHomeView: UIView {
         
         logoImageView.do {
             $0.image = UIImage(named: "mainLogo")
+            $0.contentMode = .scaleAspectFit
         }
         
         quickScanLabel.do{
             $0.setText("퀵 스캔",
                        font: .H5B,
-                       color: .black)
+                       color: .B_01)
         }
     }
     
@@ -102,10 +126,8 @@ final class MainHomeView: UIView {
         ///empty view
         emptyStackView.snp.makeConstraints {
             $0.center.equalToSuperview()
-        }
-        
-        emptyViewLabel.snp.makeConstraints {
-            $0.centerX.top.equalToSuperview()
+            $0.width.equalTo(214)
+            $0.height.equalTo(119)
         }
         
         councilApplyButton.snp.makeConstraints {
@@ -120,17 +142,22 @@ final class MainHomeView: UIView {
         }
         
         contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.width.equalToSuperview()
             $0.height.equalTo(2000)
         }
         
         logoImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
             $0.height.equalTo(46)
         }
+        quickScanLabel.snp.makeConstraints {
+            $0.top.equalTo(logoImageView.snp.bottom).offset(11)
+            $0.leading.equalTo(logoImageView)
+        }
         quickScanCollectionView.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom)
+            $0.top.equalTo(quickScanLabel.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(158)
         }
         articleStickyHeader.snp.makeConstraints {
@@ -138,10 +165,25 @@ final class MainHomeView: UIView {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(94)
         }
-        articleTableView.snp.makeConstraints {
-            $0.top.equalTo(quickScanCollectionView.snp.bottom)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(1000)
+    }
+}
+
+extension MainHomeView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "QuickScanCollectionViewCell", for: indexPath) as? QuickScanCollectionViewCell else {
+            return UICollectionViewCell()
         }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                       layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 95, height: 118)
     }
 }
