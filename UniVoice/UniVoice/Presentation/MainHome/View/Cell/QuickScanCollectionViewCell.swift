@@ -8,16 +8,30 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 class QuickScanCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Properties
+    
     static let identifier = "QuickScanCollectionViewCell"
+    
+    private let disposeBag = DisposeBag()
+    
+    var viewModel: QuickScanViewModel? {
+        didSet {
+            bindViewModel()
+        }
+    }
+    
+    // MARK: Views
     
     private let councilImage = UIImageView()
     
     private let councilName = UILabel()
     
-    private let articleNumber = CustomView().quickScanNumber(number: 10)
+    private var articleNumber = CustomView().quickScanNumber(number: 10)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -68,5 +82,35 @@ class QuickScanCollectionViewCell: UICollectionViewCell {
             $0.top.equalToSuperview()
             $0.centerX.equalTo(councilImage).offset(21)
         }
+    }
+}
+
+extension QuickScanCollectionViewCell {
+    private func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+        
+        let input = QuickScanViewModel.Input(trigger: Observable.just(()))
+        let output = viewModel.transform(input: input)
+        
+        output.councilImage
+            .drive(councilImage.rx.image)
+            .disposed(by: disposeBag)
+        
+        output.councilName
+            .drive(councilName.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.articleNumber
+            .drive(onNext: { [weak self] number in
+                guard let self = self else { return }
+                self.articleNumber.removeFromSuperview()
+                self.articleNumber = CustomView().quickScanNumber(number: number)
+                self.addSubview(self.articleNumber)
+                self.articleNumber.snp.makeConstraints {
+                    $0.top.equalToSuperview()
+                    $0.centerX.equalTo(self.councilImage).offset(21)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

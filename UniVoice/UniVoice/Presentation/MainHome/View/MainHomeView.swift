@@ -39,24 +39,10 @@ final class MainHomeView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
-        setDelegate()
-        setRegister()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: delegate
-    private func setDelegate() {
-        quickScanCollectionView.dataSource = self
-        quickScanCollectionView.delegate = self
-    }
-    
-    private func setRegister() {
-        quickScanCollectionView.register(QuickScanCollectionViewCell.self,
-                                         forCellWithReuseIdentifier: QuickScanCollectionViewCell.identifier)
-
     }
     
     // MARK: setUpFoundation
@@ -165,25 +151,9 @@ final class MainHomeView: UIView {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(94)
         }
-    }
-}
-
-extension MainHomeView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "QuickScanCollectionViewCell", for: indexPath) as? QuickScanCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                       layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 95, height: 118)
+//        articleTableView.snp.makeConstraints {
+//            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+//            $0.horizontalEdges.equalToSuperview()
+//        }
     }
 }
