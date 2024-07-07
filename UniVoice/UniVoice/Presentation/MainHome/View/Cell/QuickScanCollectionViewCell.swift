@@ -17,7 +17,7 @@ class QuickScanCollectionViewCell: UICollectionViewCell {
     
     private let councilName = UILabel()
     
-    private let articleNumber = UILabel()
+    private let articleNumber = CustomView().quickScanNumber(number: 10)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -52,26 +52,21 @@ class QuickScanCollectionViewCell: UICollectionViewCell {
             $0.numberOfLines = 2
             $0.textAlignment = .center
         }
-        articleNumber.do {
-            $0.setText("5", font: .B1SB, color: .W_01)
-            $0.backgroundColor = .blue300
-        }
-        
     }
     // MARK: setUpLayout
     private func setUpLayout() {
         councilImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(6)
-            $0.centerX.equalToSuperview()
+            $0.centerX.equalToSuperview().offset(4)
             $0.size.equalTo(68)
         }
         councilName.snp.makeConstraints {
             $0.top.equalTo(councilImage.snp.bottom).offset(8)
-            $0.centerX.equalToSuperview()
+            $0.centerX.equalToSuperview().offset(4)
         }
         articleNumber.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.centerX.equalTo(councilImage).offset(17)
+            $0.centerX.equalTo(councilImage).offset(21)
         }
     }
 }
