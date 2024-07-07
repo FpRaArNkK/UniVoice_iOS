@@ -12,9 +12,9 @@ import Then
 final class LoginView: UIView {
     
     // MARK: Views
-    let idTextField = UITextField()
-    let pwTextField = UITextField()
-    let loginButton = UIButton()
+    let idTextField = CustomTextfield()
+    let pwTextField = CustomTextfield()
+    let loginButton = CustomButton()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -51,29 +51,32 @@ final class LoginView: UIView {
         
         pwTextField.do {
             $0.placeholder = "비밀번호"
+            $0.isSecureTextEntry = true
         }
         
         loginButton.do {
             $0.setTitle("확인", for: .normal)
-            $0.backgroundColor = .gray
         }
     }
     
     // MARK: setUpLayout
     private func setUpLayout() {
         idTextField.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(36)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(33)
         }
         
         pwTextField.snp.makeConstraints {
-            $0.top.equalTo(idTextField.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(idTextField.snp.bottom).offset(32)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(33)
         }
         
         loginButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(20)
-            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(self.keyboardLayoutGuide.snp.top).offset(-12)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(53)
         }
     }
 }

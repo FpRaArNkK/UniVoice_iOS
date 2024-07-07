@@ -42,9 +42,10 @@ final class LoginViewController: UIViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.isValid
-            .drive(rootView.loginButton.rx.isEnabled)
-            .disposed(by: viewModel.disposeBag)
+        let isValid = output.isValid
+            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
+        
+        rootView.loginButton.bindData(buttonType: isValid.asObservable())
         
         output.loginState
             .drive(onNext: { [weak self] isUser in
