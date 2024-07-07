@@ -68,10 +68,12 @@ class StudentInfoInputView: UIView {
         
         studentNameTextField.do {
             $0.placeholder = "이름"
+            $0.addHorizontalPadding(left: 5, right: 5)
         }
         
         studentIDTextField.do {
             $0.placeholder = "전체 학번   ex. 2024123456"
+            $0.addHorizontalPadding(left: 5, right: 5)
         }
         
         nextButton.do {
