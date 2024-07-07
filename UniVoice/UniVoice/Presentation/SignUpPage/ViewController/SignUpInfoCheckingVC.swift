@@ -24,6 +24,6 @@ class SignUpInfoCheckingVC: UIViewController {
 
     // MARK: - setUpFoundation
     private func setUpFoundation() {
-        self.title = "회원가입"
+        
     }
 }
