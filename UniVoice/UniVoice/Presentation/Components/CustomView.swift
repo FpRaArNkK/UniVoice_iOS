@@ -19,19 +19,25 @@ class CustomView: UIView {
         let view = UIView()
         view.backgroundColor = .blue300
         view.clipsToBounds = true
+        view.isHidden = number == 0 ? true : false
         view.layer.cornerRadius = 21/2
-        view.frame.size = number < 10 ? CGSize(width: 21, height: 21) : CGSize(width: 28, height: 21)
-
-        
         view.addSubview(label)
+        
         label.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
+        
         view.snp.makeConstraints {
             $0.width.equalTo(21)
             $0.height.equalTo(21)
         }
         
         return view
+    }
+    
+    func updateQuickScanNumber(number: Int) {
+        self.subviews.forEach { $0.removeFromSuperview() }
+        let view = quickScanNumber(number: number)
+        self.addSubview(view)
     }
 }
