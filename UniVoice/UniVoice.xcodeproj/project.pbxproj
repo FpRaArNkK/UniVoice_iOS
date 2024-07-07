@@ -280,6 +280,7 @@
 		880ED9662C23FDB60045A620 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				881A3C562C3AA0AA003A72E6 /* QuickScanPage */,
 				EDE8CA182C37C3B700E828F1 /* SignUpPage */,
 				882DB1562C31C35B00D73FEF /* LoginPage */,
 				DC33DAF42C39C75E008B321E /* MainHome */,
@@ -396,6 +397,37 @@
 				88325C312C385CD1004A293D /* CustomTextfield.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		881A3C562C3AA0AA003A72E6 /* QuickScanPage */ = {
+			isa = PBXGroup;
+			children = (
+				881A3C592C3AA0C4003A72E6 /* View */,
+				881A3C582C3AA0BE003A72E6 /* ViewModel */,
+				881A3C572C3AA0B6003A72E6 /* ViewController */,
+			);
+			path = QuickScanPage;
+			sourceTree = "<group>";
+		};
+		881A3C572C3AA0B6003A72E6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		881A3C582C3AA0BE003A72E6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		881A3C592C3AA0C4003A72E6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		882DB1562C31C35B00D73FEF /* LoginPage */ = {
