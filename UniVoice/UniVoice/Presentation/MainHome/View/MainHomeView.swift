@@ -29,7 +29,7 @@ final class MainHomeView: UIView {
         return collectionView
     }()    
     let articleStickyHeader = ArticleHeaderView()
-    let articleTableView = UITableView()
+//    let articleTableView = UITableView()
     
     
     // MARK: Init
@@ -85,7 +85,7 @@ final class MainHomeView: UIView {
             logoImageView,
             quickScanLabel,
             quickScanCollectionView,
-            articleTableView
+//            articleTableView
         ].forEach { contentView.addSubview($0) }
     }
     
@@ -168,7 +168,7 @@ final class MainHomeView: UIView {
     }
 }
 
-extension MainHomeView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MainHomeView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         5
