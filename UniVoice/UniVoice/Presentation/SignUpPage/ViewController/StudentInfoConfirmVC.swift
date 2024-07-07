@@ -1,5 +1,5 @@
 //
-//  StudentIDPhotoInputVC.swift
+//  StudentInfoConfirmVC.swift
 //  UniVoice
 //
 //  Created by 왕정빈 on 7/7/24.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class StudentIDPhotoInputVC: UIViewController {
+class StudentInfoConfirmVC: UIViewController {
     
     // MARK: - Properties
-    private let rootView = StudentIDPhotoInputView()
+    private let rootView = StudentInfoConfirmView()
 
     // MARK: - Life Cycle
     override func loadView() {

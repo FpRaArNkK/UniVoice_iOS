@@ -1,5 +1,5 @@
 //
-//  StudentIDPhotoInputView.swift
+//  StudentInfoInputView.swift
 //  UniVoice
 //
 //  Created by 왕정빈 on 7/7/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StudentIDPhotoInputView: UIView {
+class StudentInfoInputView: UIView {
 
     // MARK: - Views
     
