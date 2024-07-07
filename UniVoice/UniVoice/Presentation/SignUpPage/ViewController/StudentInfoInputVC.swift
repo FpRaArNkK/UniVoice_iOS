@@ -24,6 +24,6 @@ class StudentInfoInputVC: UIViewController {
 
     // MARK: - setUpFoundation
     private func setUpFoundation() {
-        self.title = "회원가입"
+        self.title = "학생증 인증"
     }
 }
