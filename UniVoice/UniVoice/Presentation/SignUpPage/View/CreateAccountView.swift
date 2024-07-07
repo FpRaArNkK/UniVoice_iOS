@@ -122,6 +122,7 @@ class CreateAccountView: UIView {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(17)
             $0.height.equalTo(33)
+            $0.width.equalTo(222)
         }
         
         checkDuplicationButton.snp.makeConstraints {
