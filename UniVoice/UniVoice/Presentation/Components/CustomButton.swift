@@ -87,11 +87,8 @@ class CustomButton: UIButton {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func setTitle(_ title: String?, for state: UIControl.State) {
-        updateUI(with: initialState, title: title)
+        super.init(coder: coder)
+        bindUI()
     }
     
     // MARK: bindUI
@@ -106,6 +103,7 @@ class CustomButton: UIButton {
 
 // MARK: Internal Logic
 private extension CustomButton {
+    
     func updateUI(with type: CustomButtonType, title: String? = nil) {
         self.configuration = self.createButtonConfiguration(
             title: title ?? self.titleLabel?.text ?? "",
@@ -145,6 +143,11 @@ private extension CustomButton {
 
 // MARK: External Logic
 extension CustomButton {
+    
+    override func setTitle(_ title: String?, for state: UIControl.State) {
+        updateUI(with: initialState, title: title)
+    }
+    
     func bindData(buttonType: Observable<CustomButtonType>) {
         buttonType
             .bind(to: customButtonType)
