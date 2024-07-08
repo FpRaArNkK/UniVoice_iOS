@@ -49,7 +49,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QuickScanViewModel>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCollectionViewCell.identifier, for: indexPath) as! QuickScanCollectionViewCell
-            cell.viewModel = viewModel
+            cell.bind(viewModel: viewModel)
             return cell
         })
         
@@ -64,7 +64,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
 
 extension MainHomeViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
-                       layout collectionViewLayout: UICollectionViewLayout,
+                        layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 95, height: 118)
     }

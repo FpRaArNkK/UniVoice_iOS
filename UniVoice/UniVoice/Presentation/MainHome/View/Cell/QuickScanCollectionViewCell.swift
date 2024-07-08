@@ -19,12 +19,6 @@ class QuickScanCollectionViewCell: UICollectionViewCell {
     
     private let disposeBag = DisposeBag()
     
-    var viewModel: QuickScanViewModel? {
-        didSet {
-            bindViewModel()
-        }
-    }
-    
     // MARK: Views
     
     private let councilImage = UIImageView()
@@ -86,7 +80,7 @@ class QuickScanCollectionViewCell: UICollectionViewCell {
 }
 
 extension QuickScanCollectionViewCell {
-    private func bindViewModel() {
+    func bind(viewModel: QuickScanViewModel?) {
         guard let viewModel = viewModel else { return }
         
         let input = QuickScanViewModel.Input(trigger: Observable.just(()))
