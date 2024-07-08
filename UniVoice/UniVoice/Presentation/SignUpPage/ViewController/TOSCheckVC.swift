@@ -24,6 +24,6 @@ class TOSCheckVC: UIViewController {
     
     // MARK: - setUpFoundation
     private func setUpFoundation() {
-        self.title = "회원가입"
+        navigationController?.navigationBar.isHidden = true
     }
 }
