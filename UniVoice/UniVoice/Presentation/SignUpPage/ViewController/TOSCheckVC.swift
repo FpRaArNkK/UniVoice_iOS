@@ -21,7 +21,7 @@ class TOSCheckVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
     }
-
+    
     // MARK: - setUpFoundation
     private func setUpFoundation() {
         self.title = "회원가입"

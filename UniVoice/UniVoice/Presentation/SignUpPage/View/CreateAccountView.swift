@@ -10,6 +10,7 @@ import UIKit
 class CreateAccountView: UIView {
     
     // MARK: - Views
+    let confirmAndNextButton = CustomButton()
     private let descriptionLabel = UILabel()
     private let idTextField = CustomTextfield()
     private let idConditionLabel = UILabel()
@@ -18,7 +19,6 @@ class CreateAccountView: UIView {
     private let pwConditionLabel = UILabel()
     private let confirmPwTextField = CustomTextfield()
     private let pwMatchLabel = UILabel()
-    private let confirmAndNextButton = CustomButton()
     
     // MARK: - Init
     override init(frame: CGRect) {
