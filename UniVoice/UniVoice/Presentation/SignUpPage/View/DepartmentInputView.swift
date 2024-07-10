@@ -63,7 +63,7 @@ final class DepartmentInputView: UIView {
         }
         
         departTextField.snp.makeConstraints {
-            $0.top.equalTo(departInputLabel.snp.bottom)
+            $0.top.equalTo(departInputLabel.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(33)
         }
