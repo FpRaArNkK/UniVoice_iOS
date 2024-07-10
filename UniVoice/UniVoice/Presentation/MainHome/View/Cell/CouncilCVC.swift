@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class CouncilCVC: UICollectionViewCell {
     
@@ -17,7 +18,7 @@ final class CouncilCVC: UICollectionViewCell {
     
     // MARK: Views
     
-    private let councilButton = CustomButton()
+    private let councilButton = CustomButton(with: .unselected)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -38,14 +39,24 @@ final class CouncilCVC: UICollectionViewCell {
     
     // MARK: setUpUI
     private func setUpUI() {
-//        councilButton.do {
-//            $0.
-//        }
+        councilButton.do {
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = 2
+        }
     }
     // MARK: setUpLayout
     private func setUpLayout() {
         councilButton.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+}
+
+extension CouncilCVC {
+    func councilDataBind(councilName: String, type: CustomButtonType) {
+        councilButton.setTitle(councilName, font: .B3SB, titleColor: .B_01)
+        councilButton.bindData(buttonType: Observable.just(type))
+        councilButton.clipsToBounds = true
+        councilButton.layer.cornerRadius = 2
     }
 }
