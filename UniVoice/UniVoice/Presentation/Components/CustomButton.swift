@@ -14,6 +14,7 @@ import RxCocoa
 enum CustomButtonType {
     case active
     case inActive
+    case unselected
     case line
     
     var titleFont: UIFont {
@@ -25,6 +26,8 @@ enum CustomButtonType {
             
         case .active, .inActive:
             return .white
+        case .unselected:
+            return .gray800
         case .line:
             return .mint600
         }
@@ -37,6 +40,8 @@ enum CustomButtonType {
             return .mint400
         case .inActive:
             return .gray200
+        case .unselected
+            return .gray50
         case .line:
             return .clear
         }
@@ -45,7 +50,7 @@ enum CustomButtonType {
     var borderColor: UIColor? {
         switch self {
             
-        case .active, .inActive:
+        case .active, .inActive, .unselected:
             return nil
         case .line:
             return .mint600
@@ -55,7 +60,7 @@ enum CustomButtonType {
     var borderWidth: CGFloat {
         switch self {
             
-        case .active, .inActive:
+        case .active, .inActive, .unselected:
             return 0
         case .line:
             return 1
