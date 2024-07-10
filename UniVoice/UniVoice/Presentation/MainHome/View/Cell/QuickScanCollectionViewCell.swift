@@ -70,7 +70,7 @@ final class QuickScanCVC: UICollectionViewCell {
         circleView.do {
             $0.backgroundColor = .blue300
             $0.clipsToBounds = true
-            $0.isHidden = number == 0 ? true : false
+            //$0.isHidden = number == 0 ? true : false
             $0.layer.cornerRadius = 21/2
         }
         articleNumber.do {
@@ -106,12 +106,22 @@ extension QuickScanCVC {
         councilImage.image = UIImage(named: viewModel.councilImage)
         councilName.text = viewModel.councilName
         articleNumber.text = "\(viewModel.articleNumber)"
-        
         articleNumber.removeFromSuperview()
-        contentView.addSubview(articleNumber)
-        articleNumber.snp.makeConstraints {
+        circleView.addSubview(articleNumber)
+        circleView.isHidden = viewModel.articleNumber == 0 ? true : false
+        circleView.snp.removeConstraints()
+        circleView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.centerX.equalTo(councilImage).offset(21)
+            if viewModel.articleNumber > 9 {
+                
+                $0.size.equalTo(CGSize(width: 28, height: 21))
+            } else {
+                $0.size.equalTo(CGSize(width: 21, height: 21))
+            }
+        }
+        articleNumber.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 }
