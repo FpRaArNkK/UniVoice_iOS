@@ -14,12 +14,12 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
     private let disposeBag = DisposeBag()
     
-    private let dummyData = [
-        (imageName: "emptyImage", name: "홍익대학교\n총학생회", articleNumber: 5),
-        (imageName: "emptyImage", name: "공과대학\n학생회", articleNumber: 10),
-        (imageName: "emptyImage", name: "컴퓨터공학과\n학생회", articleNumber: 0),
-        (imageName: "emptyImage", name: "산업공학과\n학생회", articleNumber: 15),
-        (imageName: "emptyImage", name: "시각디자인학과\n학생회", articleNumber: 15),
+    private let dummyData: [QS] = [
+        QS(councilImage: "defaultImage", councilName: "홍익대학교\n총학생회", articleNumber: 5),
+        QS(councilImage: "defaultImage", councilName: "공과대학\n학생회", articleNumber: 10),
+        QS(councilImage: "mainLogo", councilName: "컴퓨터공학과\n학생회", articleNumber: 0),
+        QS(councilImage: "defaultImage", councilName: "산업공학과\n학생회", articleNumber: 15),
+        QS(councilImage: "defaultImage", councilName: "시각디자인학과\n학생회", articleNumber: 15),
     ]
     
     // MARK: Views
@@ -39,13 +39,11 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     private func setupCollectionView() {
-        rootView.quickScanCollectionView.register(QuickScanCollectionViewCell.self, forCellWithReuseIdentifier: QuickScanCollectionViewCell.identifier)
+        rootView.quickScanCollectionView.register(QuickScanCVC.self, forCellWithReuseIdentifier: QuickScanCVC.identifier)
     }
     
     private func bindCollectionView() {
-        let items = Observable.just(dummyData.map { QuickScanViewModel(councilImageName: $0.imageName,
-                                                                       councilNameText: $0.name,
-                                                                       articleNumberValue: $0.articleNumber) })
+        let qsItems: Observable<[QS]> = Observable.just(dummyData)
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QuickScanViewModel>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCollectionViewCell.identifier, for: indexPath) as? QuickScanCollectionViewCell
@@ -56,9 +54,9 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             return cell
         })
         
-        items
+        qsItems
             .map { [SectionModel(model: "Section 1", items: $0)] }
-            .bind(to: rootView.quickScanCollectionView.rx.items(dataSource: dataSource))
+            .bind(to: rootView.quickScanCollectionView.rx.items(dataSource: qsDataSource))
             .disposed(by: disposeBag)
         
         rootView.quickScanCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
