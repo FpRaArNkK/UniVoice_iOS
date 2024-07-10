@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class QuickScanCollectionViewCell: UICollectionViewCell {
+final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: Properties
     
@@ -49,7 +49,7 @@ class QuickScanCollectionViewCell: UICollectionViewCell {
     // MARK: setUpUI
     private func setUpUI() {
         councilImage.do {
-            $0.image = UIImage(named: "emptyImage")
+            $0.image = UIImage(named: "defaultImage")
             $0.layer.borderColor = UIColor.regular.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 34
