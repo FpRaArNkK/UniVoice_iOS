@@ -23,12 +23,13 @@ class CapsuleLabelView: UIView {
     init(
         with name: String,
         font: UIFont = .pretendardFont(for: .BUT4SB),
-        color: UIColor = .gray800
+        labelColor: UIColor = .gray800,
+        borderColor: UIColor = .regular
     ) {
         super.init(frame: .zero)
         setupView()
         setTitle(title: name, font: font)
-        setColor(color: color)
+        setColor(labelColor: labelColor, borderColor: borderColor)
     }
     
     required init?(coder: NSCoder) {
@@ -69,9 +70,9 @@ extension CapsuleLabelView {
         self.contentLabel.font = font
     }
     
-    func setColor(color: UIColor) {
-        self.contentLabel.textColor = color
-        self.layer.borderColor = color.cgColor
+    func setColor(labelColor: UIColor, borderColor: UIColor) {
+        self.contentLabel.textColor = labelColor
+        self.layer.borderColor = borderColor.cgColor
     }
     
     func setInset(inset: UIEdgeInsets) {
