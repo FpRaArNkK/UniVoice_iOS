@@ -69,6 +69,7 @@
 		88AB98062C3EC95B00AC5043 /* QuickScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98052C3EC95B00AC5043 /* QuickScan.swift */; };
 		88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98072C3ECAB900AC5043 /* QuickScanView.swift */; };
 		88AB980A2C3EF48F00AC5043 /* CapsuleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98092C3EF48F00AC5043 /* CapsuleLabelView.swift */; };
+		88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980B2C3F04B300AC5043 /* ChipContentView.swift */; };
 		DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DAF82C39CD1F008B321E /* MainHomeView.swift */; };
 		DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */; };
 		DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */; };
@@ -145,6 +146,7 @@
 		88AB98052C3EC95B00AC5043 /* QuickScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScan.swift; sourceTree = "<group>"; };
 		88AB98072C3ECAB900AC5043 /* QuickScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanView.swift; sourceTree = "<group>"; };
 		88AB98092C3EF48F00AC5043 /* CapsuleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLabelView.swift; sourceTree = "<group>"; };
+		88AB980B2C3F04B300AC5043 /* ChipContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipContentView.swift; sourceTree = "<group>"; };
 		DC33DAF82C39CD1F008B321E /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainHomeViewController.swift; path = UniVoice/Presentation/MainHome/ViewController/MainHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScanCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				881A3C5A2C3AE6E2003A72E6 /* QuickScanPageIndicatorView.swift */,
+				88AB980B2C3F04B300AC5043 /* ChipContentView.swift */,
 				88AB98072C3ECAB900AC5043 /* QuickScanView.swift */,
 			);
 			path = View;
@@ -745,6 +748,7 @@
 				211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */,
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
+				88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
 				88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */,
