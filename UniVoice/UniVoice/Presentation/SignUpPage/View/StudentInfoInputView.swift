@@ -10,13 +10,12 @@ import UIKit
 class StudentInfoInputView: UIView {
 
     // MARK: - Views
-    
+    let studentNameTextField = CustomTextfield()
+    let studentIDTextField = CustomTextfield()
+    let nextButton = CustomButton()
     private let mainDescriptionLabel = UILabel()
     private let subDescriptionLabel = UILabel()
     private let descriptionStack = UIStackView()
-    private let studentNameTextField = CustomTextfield()
-    private let studentIDTextField = CustomTextfield()
-    private let nextButton = CustomButton()
     
     // MARK: - Init
     override init(frame: CGRect) {

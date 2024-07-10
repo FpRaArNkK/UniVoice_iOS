@@ -10,18 +10,17 @@ import Then
 import SnapKit
 
 class StudentIDPhotoInputView: UIView {
-
-    // MARK: - Views
     
+    // MARK: - Views
+    let studentIDPhotoimgaeView = UIImageView()
+    let nextButton = CustomButton()
+    let putPhotoLabel = UILabel()
     private let mainDescriptionLabel = UILabel()
     private let subDescriptionLabel = UILabel()
     private let descriptionStack = UIStackView()
-    private let studentIDPhotoimgaeView = UIImageView()
-    private let putPhotoLabel = UILabel()
     private let cautionLabel1 = UILabel()
     private let cautionLabel2 = UILabel()
     private let cautionStack = UIStackView()
-    private let nextButton = CustomButton(with: .active)
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -31,11 +30,11 @@ class StudentIDPhotoInputView: UIView {
         setUpUI()
         setUpLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - setUpFoundation
     private func setUpFoundation() {
         self.backgroundColor = .white
@@ -56,7 +55,7 @@ class StudentIDPhotoInputView: UIView {
     // MARK: - setUpUI
     private func setUpUI() {
         mainDescriptionLabel.do {
-            $0.setText("학교 인증을 위해\n학생증 사진이 필요해요", 
+            $0.setText("학교 인증을 위해\n학생증 사진이 필요해요",
                        font: .T1SB,
                        color: .B_01)
             $0.textAlignment = .left
@@ -78,13 +77,14 @@ class StudentIDPhotoInputView: UIView {
         
         studentIDPhotoimgaeView.do {
             $0.backgroundColor = .gray50
-            $0.layer.borderWidth = 1
+            $0.layer.borderWidth = 0
             $0.layer.borderColor = UIColor.gray300.cgColor
             $0.layer.cornerRadius = 10
+            $0.clipsToBounds = true
         }
         
         putPhotoLabel.do {
-            $0.setText("클릭해서\n이미지 업로드하기", 
+            $0.setText("클릭해서\n이미지 업로드하기",
                        font: .B1R,
                        color: .gray500)
             $0.textAlignment = .center
@@ -110,7 +110,10 @@ class StudentIDPhotoInputView: UIView {
             $0.alignment = .leading
         }
         
-        nextButton.do { $0.setTitle("다음", for: .normal) }
+        nextButton.do {
+            $0.setTitle("다음", for: .normal)
+            $0.isHidden = true
+        }
     }
     
     // MARK: - setUpLayout
