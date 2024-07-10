@@ -14,7 +14,7 @@ import RxCocoa
 class QuickScanPageIndicatorView: UIView {
     
     // MARK: Properties
-    private var quickScanCount: BehaviorRelay<Int>
+    private var quickScanCount = BehaviorRelay(value: 0)
     private let currentIndex = BehaviorRelay<Int>(value: 0)
     private let disposeBag = DisposeBag()
     private let mainColor = UIColor.mint400
@@ -24,9 +24,12 @@ class QuickScanPageIndicatorView: UIView {
     private let indicatorStackView = UIStackView()
     
     // MARK: Init
-    private override init(frame: CGRect) {
-        self.quickScanCount = BehaviorRelay(value: 0)
+    override init(frame: CGRect) {
         super.init(frame: frame)
+        setUpHierarchy()
+        setUpUI()
+        setUpLayout()
+        bindUI()
     }
     
     init(with count: BehaviorRelay<Int>) {
@@ -65,12 +68,20 @@ class QuickScanPageIndicatorView: UIView {
     
     // MARK: bindUI
     private func bindUI() {
+//        quickScanCount
+//            .subscribe(onNext: { [weak self] count in
+//                guard let self = self else { return }
+//                self.updateIndicators(count: count)
+//            })
+//            .disposed(by: disposeBag)
+        
         quickScanCount
-            .subscribe(onNext: { [weak self] count in
-                guard let self = self else { return }
-                self.updateIndicators(count: count)
-            })
-            .disposed(by: disposeBag)
+               .asDriver(onErrorJustReturn: 0)
+               .drive(onNext: { [weak self] count in
+                   guard let self = self else { return }
+                   self.updateIndicators(count: count)
+               })
+               .disposed(by: disposeBag)
     }
 }
 
