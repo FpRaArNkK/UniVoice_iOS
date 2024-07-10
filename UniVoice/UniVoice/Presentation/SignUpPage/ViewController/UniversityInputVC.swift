@@ -13,7 +13,7 @@ final class UniversityInputVC: UIViewController {
 
     // MARK: Views
     private let rootView = UniversityInputView()
-    private let viewModel = UniversityInputViewModel()
+    private let viewModel = UniversityInputVM()
     private let disposeBag = DisposeBag()
 
     // MARK: Life Cycle - loadView
@@ -44,7 +44,7 @@ final class UniversityInputVC: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        let input = UniversityInputViewModel.Input(
+        let input = UniversityInputVM.Input(
             inputText: Observable.just(""), // 검색 기능 없이 모든 데이터를 표시하기 위해 빈 문자열 사용
             selectedUniversity: rootView.univTableView.rx.modelSelected(University.self).map { $0.name }.asObservable())
         
