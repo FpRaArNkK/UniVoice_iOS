@@ -12,16 +12,15 @@ import SnapKit
 class StudentIDPhotoInputView: UIView {
 
     // MARK: - Views
-    
+    let studentIDPhotoimgaeView = UIImageView()
+    let nextButton = CustomButton()
+    let putPhotoLabel = UILabel()
     private let mainDescriptionLabel = UILabel()
     private let subDescriptionLabel = UILabel()
     private let descriptionStack = UIStackView()
-    private let studentIDPhotoimgaeView = UIImageView()
-    private let putPhotoLabel = UILabel()
     private let cautionLabel1 = UILabel()
     private let cautionLabel2 = UILabel()
     private let cautionStack = UIStackView()
-    private let nextButton = CustomButton(with: .active)
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -81,6 +80,7 @@ class StudentIDPhotoInputView: UIView {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray300.cgColor
             $0.layer.cornerRadius = 10
+            $0.clipsToBounds = true
         }
         
         putPhotoLabel.do {
