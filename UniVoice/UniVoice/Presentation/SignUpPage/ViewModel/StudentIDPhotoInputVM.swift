@@ -17,7 +17,7 @@ final class StudentIDPhotoInputVM: ViewModelType {
     
     struct Output {
         let image: Driver<UIImage>
-        let nextButtonState: Driver<Bool>
+        let nextButtonIsHidden: Driver<Bool>
     }
     
     let photoImageRelay = BehaviorRelay<UIImage>(value: .imageInputUnselected)
@@ -32,10 +32,9 @@ final class StudentIDPhotoInputVM: ViewModelType {
             .asDriver(onErrorDriveWith: .empty())
         
         let nextButtonState = input.imageSelected
-            .map { _ in true }
-            .startWith(false)
+            .map { _ in false }
             .asDriver(onErrorJustReturn: false)
         
-        return Output(image: image, nextButtonState: nextButtonState)
+        return Output(image: image, nextButtonIsHidden: nextButtonState)
     }
 }

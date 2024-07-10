@@ -34,15 +34,15 @@ class StudentIDPhotoInputVC: UIViewController {
         
         let output = viewModel.transform(input: input)
         
-        let nextButtonState = output.nextButtonState
-            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
-        
-        rootView.nextButton.bindData(buttonType: nextButtonState.asObservable())
+        output.nextButtonIsHidden
+            .drive { [weak self] isHidden in
+                self?.rootView.nextButton.isHidden = isHidden
+            }
+            .disposed(by: viewModel.disposeBag)
         
         output.image
             .drive { [weak self] image in
                 self?.rootView.studentIDPhotoimgaeView.image = image
-                self?.rootView.studentIDPhotoimgaeView.layer.borderWidth = 0
             }
             .disposed(by: viewModel.disposeBag)
         

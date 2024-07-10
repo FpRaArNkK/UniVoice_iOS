@@ -75,9 +75,6 @@ class StudentIDPhotoInputView: UIView {
         }
         
         studentIDPhotoimgaeView.do {
-            $0.backgroundColor = .gray50
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray300.cgColor
             $0.layer.cornerRadius = 10
             $0.clipsToBounds = true
         }
@@ -101,7 +98,10 @@ class StudentIDPhotoInputView: UIView {
             $0.alignment = .leading
         }
         
-        nextButton.do { $0.setTitle("다음", for: .normal) }
+        nextButton.do {
+            $0.setTitle("다음", for: .normal)
+            $0.isHidden = true
+        }
     }
     
     // MARK: - setUpLayout
