@@ -36,7 +36,7 @@ final class QuickScanViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let councilImage = input.trigger
             .map { UIImage(named: self.councilImageName) }
-            .asDriver(onErrorJustReturn: UIImage(named: "emptyImage"))
+            .asDriver(onErrorJustReturn: UIImage(named: "defaultImage"))
         
         let councilName = input.trigger
             .map { self.councilNameText }
