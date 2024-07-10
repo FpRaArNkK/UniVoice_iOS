@@ -61,6 +61,8 @@
 		EDE8CA2A2C37C5B800E828F1 /* DepartmentInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA292C37C5B800E828F1 /* DepartmentInputVC.swift */; };
 		EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */; };
 		EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */; };
+		EDF4C8792C3B12F700DE7643 /* UniversityInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */; };
+		EDF4C87D2C3B17C000DE7643 /* UniversityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +111,8 @@
 		EDE8CA292C37C5B800E828F1 /* DepartmentInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentInputVC.swift; sourceTree = "<group>"; };
 		EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionYearSelectionVC.swift; sourceTree = "<group>"; };
 		EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivInfoConfirmVC.swift; sourceTree = "<group>"; };
+		EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInputVM.swift; sourceTree = "<group>"; };
+		EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */,
+				EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 				EDE8CA212C37C51300E828F1 /* DepartmentInputView.swift */,
 				EDE8CA232C37C52B00E828F1 /* AdmissionYearSelectionView.swift */,
 				EDE8CA252C37C53F00E828F1 /* UnivInfoConfirmView.swift */,
+				EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -546,6 +552,7 @@
 				88325C302C384440004A293D /* CustomButton.swift in Sources */,
 				EDE8CA262C37C53F00E828F1 /* UnivInfoConfirmView.swift in Sources */,
 				EDE8CA2A2C37C5B800E828F1 /* DepartmentInputVC.swift in Sources */,
+				EDF4C8792C3B12F700DE7643 /* UniversityInputVM.swift in Sources */,
 				DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */,
 				882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */,
 				88325C342C38762D004A293D /* UITextField+.swift in Sources */,
@@ -566,6 +573,7 @@
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
 				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
+				EDF4C87D2C3B17C000DE7643 /* UniversityTableViewCell.swift in Sources */,
 				88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */,
 				EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */,
 				882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */,
