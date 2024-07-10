@@ -113,6 +113,8 @@ private extension CustomButton {
             borderColor: type.borderColor,
             borderWidth: type.borderWidth
         )
+        
+        self.isUserInteractionEnabled = type != .inActive
     }
     
     func createButtonConfiguration(

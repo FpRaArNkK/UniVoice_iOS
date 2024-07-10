@@ -2,18 +2,7 @@
   "images" : [
     {
       "filename" : "icn_polygon_up.svg",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "icn_polygon_up 1.svg",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "icn_polygon_up 2.svg",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "universal"
     }
   ],
   "info" : {
