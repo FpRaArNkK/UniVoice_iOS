@@ -14,7 +14,7 @@ class ArticleHeaderView: UIView {
     // MARK: Views
     let articleLabel = UILabel()
     
-    //let articleLabelCollectionView = UICollectionView()
+//    let articleLabelCollectionView = UICollectionView()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -38,7 +38,7 @@ class ArticleHeaderView: UIView {
     private func setUpHierarchy() {
         [
             articleLabel,
-            //articleLabelCollectionView
+//            articleLabelCollectionView
         ].forEach { self.addSubview($0) }
     }
     

@@ -45,9 +45,12 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     private func bindCollectionView() {
         let qsItems: Observable<[QS]> = Observable.just(dummyData)
         
-        let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QS>>(configureCell: { dataSource, collectionView, indexPath, item in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as! QuickScanCVC
-            cell.bind(viewModel: item)
+        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QuickScanViewModel>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCollectionViewCell.identifier, for: indexPath) as? QuickScanCollectionViewCell
+            else {
+                return UICollectionViewCell()
+            }
+            cell.bind(viewModel: viewModel)
             return cell
         })
         
