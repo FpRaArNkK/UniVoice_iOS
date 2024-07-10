@@ -97,7 +97,9 @@ class StudentIDPhotoInputVC: UIViewController {
             completion(true)
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { statusForRequest in
-                completion(statusForRequest == .authorized || statusForRequest == .limited)
+                DispatchQueue.main.async {
+                    completion(statusForRequest == .authorized || statusForRequest == .limited)
+                }
             }
         default:
             completion(false)
