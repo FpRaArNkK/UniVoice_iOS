@@ -14,7 +14,6 @@ class StudentIDPhotoInputView: UIView {
     // MARK: - Views
     let studentIDPhotoimgaeView = UIImageView()
     let nextButton = CustomButton()
-    let putPhotoLabel = UILabel()
     private let mainDescriptionLabel = UILabel()
     private let subDescriptionLabel = UILabel()
     private let descriptionStack = UIStackView()
@@ -48,7 +47,7 @@ class StudentIDPhotoInputView: UIView {
         [cautionLabel1, cautionLabel2]
             .forEach { cautionStack.addArrangedSubview($0) }
         
-        [descriptionStack, studentIDPhotoimgaeView, putPhotoLabel, cautionStack, nextButton]
+        [descriptionStack, studentIDPhotoimgaeView, cautionStack, nextButton]
             .forEach { addSubview($0) }
     }
     
@@ -81,14 +80,6 @@ class StudentIDPhotoInputView: UIView {
             $0.layer.borderColor = UIColor.gray300.cgColor
             $0.layer.cornerRadius = 10
             $0.clipsToBounds = true
-        }
-        
-        putPhotoLabel.do {
-            $0.setText("클릭해서\n이미지 업로드하기", 
-                       font: .B1R,
-                       color: .gray500)
-            $0.textAlignment = .center
-            $0.numberOfLines = 0
         }
         
         cautionLabel1.do {
@@ -126,11 +117,6 @@ class StudentIDPhotoInputView: UIView {
             $0.top.equalTo(descriptionStack.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(204)
-        }
-        
-        putPhotoLabel.snp.makeConstraints {
-            $0.centerX.equalTo(studentIDPhotoimgaeView)
-            $0.centerY.equalTo(studentIDPhotoimgaeView).offset(-7)
         }
         
         cautionStack.snp.makeConstraints {

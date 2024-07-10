@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */; };
+		211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -78,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoInputVM.swift; sourceTree = "<group>"; };
+		211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoConfirmVM.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -164,6 +166,7 @@
 			children = (
 				2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */,
 				211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */,
+				211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				2132A8422C3A6FD400795667 /* CreateAccountView.swift in Sources */,
 				2132A83E2C3A6FC000795667 /* StudentInfoConfirmView.swift in Sources */,
 				EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */,
+				211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */,
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,

@@ -13,7 +13,17 @@ class StudentInfoInputVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = StudentInfoInputView()
-    private let viewModel = StudentInfoInputVM()
+    private let viewModel: StudentInfoInputVM
+    
+    // MARK: - Initializer
+    init(viewModel: StudentInfoInputVM) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -34,7 +44,7 @@ class StudentInfoInputVC: UIViewController {
     // MARK: - setUpBindUI
     private func setUpBindUI() {
         let input = StudentInfoInputVM.Input(
-            nameText: rootView.studentNameTextField.rx.text.orEmpty.asObservable(),
+            studentNameText: rootView.studentNameTextField.rx.text.orEmpty.asObservable(),
             studentID: rootView.studentIDTextField.rx.text.orEmpty.asObservable()
         )
         
@@ -48,7 +58,17 @@ class StudentInfoInputVC: UIViewController {
         rootView.nextButton.rx.tap
             .observe(on: MainScheduler.instance)
             .bind { [weak self] in
-                self?.navigationController?.pushViewController(StudentInfoConfirmVC(), animated: true)
+                guard let photoImageRelay = self?.viewModel.photoImageRelay,
+                      let studentNameRelay = self?.viewModel.studentNameRelay,
+                      let studentIDRelay = self?.viewModel.studentIDRelay
+                else { return }
+                
+                let viewModel = StudentInfoConfirmVM(photoImageRelay: photoImageRelay,
+                                                     studentNameRelay: studentNameRelay,
+                                                     studentIDRelay: studentIDRelay)
+                let viewController = StudentInfoConfirmVC(viewModel: viewModel)
+                
+                self?.navigationController?.pushViewController(viewController, animated: true)
             }
             .disposed(by: viewModel.disposeBag)
     }
