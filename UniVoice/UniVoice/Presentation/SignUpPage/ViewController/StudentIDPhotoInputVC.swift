@@ -43,6 +43,8 @@ class StudentIDPhotoInputVC: UIViewController {
         output.image
             .drive { [weak self] image in
                 self?.rootView.studentIDPhotoimgaeView.image = image
+                self?.rootView.studentIDPhotoimgaeView.layer.borderWidth = 0
+                self?.rootView.putPhotoLabel.isHidden = true
             }
             .disposed(by: viewModel.disposeBag)
         
@@ -70,7 +72,9 @@ class StudentIDPhotoInputVC: UIViewController {
     
     @objc
     private func imageViewDidTap() {
-        rootView.studentIDPhotoimgaeView.image = .imageInputSelected
+        if rootView.studentIDPhotoimgaeView.image == nil {
+            rootView.studentIDPhotoimgaeView.layer.borderWidth = 1
+        }
         
         let addImageAlert = UIAlertController(title: "사진 첨부하기",
                                               message: "먼저 실물 학생증이나 모바일 학생증을 카메라로 촬영해주세요",
@@ -82,7 +86,7 @@ class StudentIDPhotoInputVC: UIViewController {
             })
         }
         let cancelAction = UIAlertAction(title: "취소", style: .destructive) { [weak self] _ in
-            self?.rootView.studentIDPhotoimgaeView.image = .imageInputUnselected
+            self?.rootView.studentIDPhotoimgaeView.layer.borderWidth = 0
         }
         addImageAlert.addAction(addImageAction)
         addImageAlert.addAction(cancelAction)

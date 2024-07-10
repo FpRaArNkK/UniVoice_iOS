@@ -20,7 +20,7 @@ final class StudentIDPhotoInputVM: ViewModelType {
         let nextButtonIsHidden: Driver<Bool>
     }
     
-    let photoImageRelay = BehaviorRelay<UIImage>(value: .imageInputUnselected)
+    let photoImageRelay = BehaviorRelay<UIImage>(value: .emptyImage())
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
@@ -28,7 +28,7 @@ final class StudentIDPhotoInputVM: ViewModelType {
             .bind(to: photoImageRelay)
             .disposed(by: disposeBag)
         
-        let image = photoImageRelay
+        let image = input.imageSelected
             .asDriver(onErrorDriveWith: .empty())
         
         let nextButtonState = input.imageSelected
