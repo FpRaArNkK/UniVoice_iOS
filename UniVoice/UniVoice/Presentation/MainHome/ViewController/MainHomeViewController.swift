@@ -48,7 +48,10 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                                                                        articleNumberValue: $0.articleNumber) })
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QuickScanViewModel>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCollectionViewCell.identifier, for: indexPath) as! QuickScanCollectionViewCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCollectionViewCell.identifier, for: indexPath) as? QuickScanCollectionViewCell
+            else {
+                return UICollectionViewCell()
+            }
             cell.bind(viewModel: viewModel)
             return cell
         })
