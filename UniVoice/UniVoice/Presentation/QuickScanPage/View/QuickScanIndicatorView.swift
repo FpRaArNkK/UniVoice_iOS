@@ -1,5 +1,5 @@
 //
-//  QuickScanPageIndicatorView.swift
+//  QuickScanIndicatorView.swift
 //  UniVoice
 //
 //  Created by 박민서 on 7/8/24.
@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class QuickScanPageIndicatorView: UIView {
+class QuickScanIndicatorView: UIView {
     
     // MARK: Properties
     private var quickScanCount = BehaviorRelay(value: 0)
@@ -68,13 +68,6 @@ class QuickScanPageIndicatorView: UIView {
     
     // MARK: bindUI
     private func bindUI() {
-//        quickScanCount
-//            .subscribe(onNext: { [weak self] count in
-//                guard let self = self else { return }
-//                self.updateIndicators(count: count)
-//            })
-//            .disposed(by: disposeBag)
-        
         quickScanCount
                .asDriver(onErrorJustReturn: 0)
                .drive(onNext: { [weak self] count in
@@ -86,7 +79,7 @@ class QuickScanPageIndicatorView: UIView {
 }
 
 // MARK: Internal Logic
-private extension QuickScanPageIndicatorView {
+private extension QuickScanIndicatorView {
     
     func indicatorView(viewIndex: Int, currentIndex: BehaviorRelay<Int>) -> UIView {
         let view = UIView().then {
@@ -106,6 +99,19 @@ private extension QuickScanPageIndicatorView {
     func updateIndicators(count: Int) {
         indicatorStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
+        switch count {
+        case 0...1:
+            return
+        case 2...5:
+            indicatorStackView.spacing = 8
+        case 6...8:
+            indicatorStackView.spacing = 6
+        case 9...:
+            indicatorStackView.spacing = 4
+        default:
+            return
+        }
+        
         for index in 0..<count {
             let indicator = indicatorView(viewIndex: index, currentIndex: currentIndex)
             indicatorStackView.addArrangedSubview(indicator)
@@ -114,7 +120,7 @@ private extension QuickScanPageIndicatorView {
 }
 
 // MARK: External Logic
-extension QuickScanPageIndicatorView {
+extension QuickScanIndicatorView {
     func bindData(quickScanCount: BehaviorRelay<Int>, currentIndex: BehaviorRelay<Int>) {
         quickScanCount
             .bind(to: self.quickScanCount)
@@ -128,7 +134,7 @@ extension QuickScanPageIndicatorView {
 
 //@available(iOS 17.0, *)
 //#Preview {
-//    PreviewController(QuickScanPageIndicatorView(with: BehaviorRelay(value: 5)), snp: { view in
+//    PreviewController(QuickScanIndicatorView(with: BehaviorRelay(value: 8)), snp: { view in
 //        view.snp.makeConstraints {
 //            $0.horizontalEdges.equalToSuperview().inset(16)
 //            $0.height.equalTo(4)
