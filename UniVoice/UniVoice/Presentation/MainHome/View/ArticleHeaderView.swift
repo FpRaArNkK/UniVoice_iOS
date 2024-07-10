@@ -14,7 +14,7 @@ class ArticleHeaderView: UIView {
     // MARK: Views
     let articleLabel = UILabel()
     
-    let articleLabelCollectionView = UICollectionView()
+    //let articleLabelCollectionView = UICollectionView()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -38,7 +38,7 @@ class ArticleHeaderView: UIView {
     private func setUpHierarchy() {
         [
             articleLabel,
-            articleLabelCollectionView
+            //articleLabelCollectionView
         ].forEach { self.addSubview($0) }
     }
     
@@ -57,10 +57,10 @@ class ArticleHeaderView: UIView {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        articleLabelCollectionView.snp.makeConstraints {
-            $0.top.equalTo(articleLabel.snp.bottom).offset(14)
-            $0.horizontalEdges.equalToSuperview()
-        }
+//        articleLabelCollectionView.snp.makeConstraints {
+//            $0.top.equalTo(articleLabel.snp.bottom).offset(14)
+//            $0.horizontalEdges.equalToSuperview()
+//        }
         
     }
 }

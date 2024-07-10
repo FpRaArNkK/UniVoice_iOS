@@ -19,13 +19,19 @@ final class QuickScanCVC: UICollectionViewCell {
     
     private let disposeBag = DisposeBag()
     
+    private let number = 10
+    
+    private let circleWidth = 21
+    
     // MARK: Views
     
     private let councilImage = UIImageView()
     
     private let councilName = UILabel()
     
-    private var articleNumber = CustomView().quickScanNumber(number: 10)
+    private let circleView = UIView()
+    
+    private var articleNumber = UILabel()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -34,16 +40,17 @@ final class QuickScanCVC: UICollectionViewCell {
         setUpUI()
         setUpLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
-        [councilImage, councilName, articleNumber].forEach {
+        [councilImage, councilName, circleView].forEach {
             self.addSubview($0)
         }
+        circleView.addSubview(articleNumber)
     }
     
     // MARK: setUpUI
@@ -60,6 +67,16 @@ final class QuickScanCVC: UICollectionViewCell {
             $0.numberOfLines = 2
             $0.textAlignment = .center
         }
+        circleView.do {
+            $0.backgroundColor = .blue300
+            $0.clipsToBounds = true
+            $0.isHidden = number == 0 ? true : false
+            $0.layer.cornerRadius = 21/2
+        }
+        articleNumber.do {
+            $0.setText("\(number)", font: .B2SB, color: .W_01)
+            $0.textAlignment = .center
+        }
     }
     // MARK: setUpLayout
     private func setUpLayout() {
@@ -72,39 +89,29 @@ final class QuickScanCVC: UICollectionViewCell {
             $0.top.equalTo(councilImage.snp.bottom).offset(8)
             $0.centerX.equalToSuperview().offset(4)
         }
-        articleNumber.snp.makeConstraints {
+        circleView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.centerX.equalTo(councilImage).offset(21)
+            $0.height.equalTo(21)
+            $0.width.equalTo(circleWidth)
+        }
+        articleNumber.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 }
 
-extension QuickScanCollectionViewCell {
-    func bind(viewModel: QuickScanViewModel?) {
-        guard let viewModel = viewModel else { return }
+extension QuickScanCVC {
+    func bind(viewModel: QS) {
+        councilImage.image = UIImage(named: viewModel.councilImage)
+        councilName.text = viewModel.councilName
+        articleNumber.text = "\(viewModel.articleNumber)"
         
-        let input = QuickScanViewModel.Input(trigger: Observable.just(()))
-        let output = viewModel.transform(input: input)
-        
-        output.councilImage
-            .drive(councilImage.rx.image)
-            .disposed(by: disposeBag)
-        
-        output.councilName
-            .drive(councilName.rx.text)
-            .disposed(by: disposeBag)
-        
-        output.articleNumber
-            .drive(onNext: { [weak self] number in
-                guard let self = self else { return }
-                self.articleNumber.removeFromSuperview()
-                self.articleNumber = CustomView().quickScanNumber(number: number)
-                self.addSubview(self.articleNumber)
-                self.articleNumber.snp.makeConstraints {
-                    $0.top.equalToSuperview()
-                    $0.centerX.equalTo(self.councilImage).offset(21)
-                }
-            })
-            .disposed(by: disposeBag)
+        articleNumber.removeFromSuperview()
+        contentView.addSubview(articleNumber)
+        articleNumber.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalTo(councilImage).offset(21)
+        }
     }
 }
