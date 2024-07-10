@@ -40,7 +40,7 @@ enum CustomButtonType {
             return .mint400
         case .inActive:
             return .gray200
-        case .unselected
+        case .unselected:
             return .gray50
         case .line:
             return .clear
