@@ -39,12 +39,11 @@ final class MainHomeView: UIView {
     }()
     let articleCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-    
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -63,7 +62,7 @@ final class MainHomeView: UIView {
     private func setUpFoundation() {
         self.backgroundColor = .white
         self.emptyStackView.isHidden = true
-        self.stickyHeader.isHidden = true
+//        self.stickyHeader.isHidden = true
     }
     
     // MARK: setUpHierarchy
@@ -90,10 +89,10 @@ final class MainHomeView: UIView {
             articleCollectionView
         ].forEach { contentView.addSubview($0) }
         
-        [
-            articleLabel,
-            councilCollectionView
-        ].forEach { stickyHeader.addSubview($0) }
+//        [
+//            articleLabel,
+//            councilCollectionView
+//        ].forEach { stickyHeader.addSubview($0) }
     }
     
     // MARK: setUpUI
@@ -172,11 +171,11 @@ final class MainHomeView: UIView {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(158)
         }
-        stickyHeader.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(94)
-        }
+//        stickyHeader.snp.makeConstraints {
+//            $0.top.equalTo(self.safeAreaLayoutGuide)
+//            $0.horizontalEdges.equalToSuperview()
+//            $0.height.equalTo(94)
+//        }
         articleLabel.snp.makeConstraints {
             $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
             $0.leading.equalTo(logoImageView)
@@ -187,7 +186,7 @@ final class MainHomeView: UIView {
             $0.height.equalTo(32)
         }
         articleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(councilCollectionView.snp.bottom).offset(20)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
     }
