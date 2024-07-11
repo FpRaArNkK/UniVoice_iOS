@@ -22,6 +22,7 @@
 		2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A84B2C3A701D00795667 /* CreateAccountVC.swift */; };
 		2132A84E2C3A702400795667 /* SignUpInfoCheckingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A84D2C3A702400795667 /* SignUpInfoCheckingVC.swift */; };
 		2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */; };
+		21DF05C42C3FCE01005EB117 /* CreateAccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF05C32C3FCE01005EB117 /* CreateAccountVM.swift */; };
 		21E15DFE2C3F0637003358A0 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E15DFD2C3F0637003358A0 /* UIImage+.swift */; };
 		21F7B1502C345F8F00A082D8 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */; };
 		21F7B1512C345F8F00A082D8 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */; };
@@ -103,6 +104,7 @@
 		2132A84B2C3A701D00795667 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		2132A84D2C3A702400795667 /* SignUpInfoCheckingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoCheckingVC.swift; sourceTree = "<group>"; };
 		2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVM.swift; sourceTree = "<group>"; };
+		21DF05C32C3FCE01005EB117 /* CreateAccountVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVM.swift; sourceTree = "<group>"; };
 		21E15DFD2C3F0637003358A0 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */,
 				211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */,
 				211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */,
+				21DF05C32C3FCE01005EB117 /* CreateAccountVM.swift */,
 				EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */,
 			);
 			path = ViewModel;
@@ -691,6 +694,7 @@
 				EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */,
 				211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */,
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
+				21DF05C42C3FCE01005EB117 /* CreateAccountVM.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,

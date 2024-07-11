@@ -11,14 +11,14 @@ class CreateAccountView: UIView {
     
     // MARK: - Views
     let confirmAndNextButton = CustomButton()
+    let idTextField = CustomTextfield()
+    let idConditionLabel = UILabel()
+    let checkDuplicationButton = CustomButton()
+    let pwTextField = CustomTextfield()
+    let pwConditionLabel = UILabel()
+    let confirmPwTextField = CustomTextfield()
+    let pwMatchLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let idTextField = CustomTextfield()
-    private let idConditionLabel = UILabel()
-    private let checkDuplicationButton = CustomButton()
-    private let pwTextField = CustomTextfield()
-    private let pwConditionLabel = UILabel()
-    private let confirmPwTextField = CustomTextfield()
-    private let pwMatchLabel = UILabel()
     
     // MARK: - Init
     override init(frame: CGRect) {
