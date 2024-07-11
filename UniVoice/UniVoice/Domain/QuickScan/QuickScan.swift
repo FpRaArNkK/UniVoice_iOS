@@ -27,4 +27,6 @@ struct QuickScan {
     let endTime: Date?
     /// 공지 내용
     let content: String
+    /// 저장 유무
+    let isScrapped: Bool
 }
