@@ -14,6 +14,7 @@ import RxCocoa
 final class QuickScanContentCVC: UICollectionViewCell {
     
     // MARK: Properties
+    static let identifier = "QuickScanContentCollectionViewCell"
     private let baseMargin = 16
     private let extraMargin = 6
     
@@ -103,7 +104,7 @@ final class QuickScanContentCVC: UICollectionViewCell {
     // MARK: setUpLayout
     private func setUpLayout() {
         profileImageView.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(21)
+            $0.top.equalToSuperview()
             $0.leading.equalToSuperview().offset(baseMargin)
             $0.size.equalTo(40)
         }
@@ -111,7 +112,7 @@ final class QuickScanContentCVC: UICollectionViewCell {
         affilationNameLabel.snp.makeConstraints {
             $0.bottom.equalTo(profileImageView.snp.centerY).offset(-1)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(7)
-            $0.trailing.equalToSuperview().offset(-baseMargin)
+            $0.trailing.equalToSuperview().offset(-baseMargin).priority(.low)
         }
         
         uploadTimeLabel.snp.makeConstraints {
@@ -134,13 +135,14 @@ final class QuickScanContentCVC: UICollectionViewCell {
         noticeTitleLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageView.snp.bottom).offset(14)
             $0.leading.equalToSuperview().offset(baseMargin)
-            $0.trailing.equalToSuperview().offset(-baseMargin-extraMargin)
+            $0.trailing.equalToSuperview().offset(-baseMargin-extraMargin).priority(.low)
         }
         
         contentStackView.snp.makeConstraints {
             $0.top.equalTo(noticeTitleLabel.snp.bottom).offset(14)
             $0.leading.equalToSuperview().offset(baseMargin)
             $0.trailing.equalToSuperview().offset(-baseMargin)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).priority(.low)
         }
         
         bookmarkButton.snp.makeConstraints {
@@ -157,7 +159,7 @@ private extension QuickScanContentCVC {
         guard let startTime = startTime, let endTime = endTime else {
             return nil
         }
-        return "\(startTime.toFormattedString())~\(endTime.toFormattedString())"
+        return "\(startTime.toFormattedString()) ~ \(endTime.toFormattedString())"
     }
     
     private func timeAgoString(from date: Date) -> String {
@@ -214,7 +216,7 @@ extension QuickScanContentCVC {
                     return "일시"
                 case 2:
                     return "요약"
-                default :
+                default:
                     return ""
                 }
             }()
