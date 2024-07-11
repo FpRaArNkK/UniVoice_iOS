@@ -71,6 +71,7 @@
 		88AB980A2C3EF48F00AC5043 /* CapsuleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98092C3EF48F00AC5043 /* CapsuleLabelView.swift */; };
 		88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980B2C3F04B300AC5043 /* ChipContentView.swift */; };
 		88AB980E2C3F27A300AC5043 /* QuickScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980D2C3F27A300AC5043 /* QuickScanViewController.swift */; };
+		88AB98102C3FD35300AC5043 /* QuickScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */; };
 		DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DAF82C39CD1F008B321E /* MainHomeView.swift */; };
 		DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */; };
 		DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */; };
@@ -149,6 +150,7 @@
 		88AB98092C3EF48F00AC5043 /* CapsuleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLabelView.swift; sourceTree = "<group>"; };
 		88AB980B2C3F04B300AC5043 /* ChipContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipContentView.swift; sourceTree = "<group>"; };
 		88AB980D2C3F27A300AC5043 /* QuickScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanViewController.swift; sourceTree = "<group>"; };
+		88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanViewModel.swift; sourceTree = "<group>"; };
 		DC33DAF82C39CD1F008B321E /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainHomeViewController.swift; path = UniVoice/Presentation/MainHome/ViewController/MainHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScanCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 		881A3C582C3AA0BE003A72E6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
 				88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */,
 				DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */,
+				88AB98102C3FD35300AC5043 /* QuickScanViewModel.swift in Sources */,
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
