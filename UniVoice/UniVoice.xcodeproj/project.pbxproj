@@ -72,6 +72,7 @@
 		88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980B2C3F04B300AC5043 /* ChipContentView.swift */; };
 		88AB980E2C3F27A300AC5043 /* QuickScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980D2C3F27A300AC5043 /* QuickScanViewController.swift */; };
 		88AB98102C3FD35300AC5043 /* QuickScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */; };
+		88AB98132C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98122C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift */; };
 		DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DAF82C39CD1F008B321E /* MainHomeView.swift */; };
 		DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */; };
 		DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */; };
@@ -151,6 +152,7 @@
 		88AB980B2C3F04B300AC5043 /* ChipContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipContentView.swift; sourceTree = "<group>"; };
 		88AB980D2C3F27A300AC5043 /* QuickScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanViewController.swift; sourceTree = "<group>"; };
 		88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanViewModel.swift; sourceTree = "<group>"; };
+		88AB98122C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC33DAF82C39CD1F008B321E /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainHomeViewController.swift; path = UniVoice/Presentation/MainHome/ViewController/MainHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScanCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 		881A3C592C3AA0C4003A72E6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				88AB98112C3FD5C100AC5043 /* Cell */,
 				881A3C5A2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift */,
 				88AB980B2C3F04B300AC5043 /* ChipContentView.swift */,
 				88AB98072C3ECAB900AC5043 /* QuickScanView.swift */,
@@ -495,6 +498,14 @@
 				88AB98052C3EC95B00AC5043 /* QuickScan.swift */,
 			);
 			path = QuickScan;
+			sourceTree = "<group>";
+		};
+		88AB98112C3FD5C100AC5043 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				88AB98122C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DC33DAF42C39C75E008B321E /* MainHome */ = {
@@ -765,6 +776,7 @@
 				DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
 				211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */,
+				88AB98132C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift in Sources */,
 				2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */,
 				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
