@@ -21,7 +21,7 @@ struct QS {
 struct Article {
     let council: String
     let chip: String
-    let chipTitle: String
+    let articleTitle: String
     let thumbnailImage: UIImage?
     let duration: String
     let likedNumber: Int

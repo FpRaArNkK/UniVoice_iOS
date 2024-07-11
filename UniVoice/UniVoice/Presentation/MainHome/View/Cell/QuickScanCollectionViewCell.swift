@@ -102,7 +102,7 @@ final class QuickScanCVC: UICollectionViewCell {
 }
 
 extension QuickScanCVC {
-    func bind(viewModel: QS) {
+    func quickScanDataBind(viewModel: QS) {
         councilImage.image = UIImage(named: viewModel.councilImage)
         councilName.text = viewModel.councilName
         articleNumber.text = "\(viewModel.articleNumber)"

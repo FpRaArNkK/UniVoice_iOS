@@ -28,9 +28,22 @@ final class MainHomeView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()    
-    let articleStickyHeader = ArticleHeaderView()
-//    let articleTableView = UITableView()
-    
+    let articleLabel = UILabel()
+    let stickyHeader = UIView()
+    let councilCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    let articleCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -49,14 +62,14 @@ final class MainHomeView: UIView {
     private func setUpFoundation() {
         self.backgroundColor = .white
         self.emptyStackView.isHidden = true
-        self.articleStickyHeader.isHidden = true
+//        self.stickyHeader.isHidden = true
     }
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         [
             emptyStackView,
-            articleStickyHeader,
+            stickyHeader,
             scrollView
         ].forEach { self.addSubview($0) }
         
@@ -71,8 +84,15 @@ final class MainHomeView: UIView {
             logoImageView,
             quickScanLabel,
             quickScanCollectionView,
-//            articleTableView
+            articleLabel,
+            councilCollectionView,
+            articleCollectionView
         ].forEach { contentView.addSubview($0) }
+        
+//        [
+//            articleLabel,
+//            councilCollectionView
+//        ].forEach { stickyHeader.addSubview($0) }
     }
     
     // MARK: setUpUI
@@ -101,6 +121,11 @@ final class MainHomeView: UIView {
         
         quickScanLabel.do{
             $0.setText("퀵 스캔",
+                       font: .H5B,
+                       color: .B_01)
+        }
+        articleLabel.do{
+            $0.setText("공지사항",
                        font: .H5B,
                        color: .B_01)
         }
@@ -146,14 +171,23 @@ final class MainHomeView: UIView {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(158)
         }
-        articleStickyHeader.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(94)
-        }
-//        articleTableView.snp.makeConstraints {
-//            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+//        stickyHeader.snp.makeConstraints {
+//            $0.top.equalTo(self.safeAreaLayoutGuide)
 //            $0.horizontalEdges.equalToSuperview()
+//            $0.height.equalTo(94)
 //        }
+        articleLabel.snp.makeConstraints {
+            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+            $0.leading.equalTo(logoImageView)
+        }
+        councilCollectionView.snp.makeConstraints {
+            $0.top.equalTo(articleLabel.snp.bottom).offset(14)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(32)
+        }
+        articleCollectionView.snp.makeConstraints {
+            $0.top.equalTo(councilCollectionView.snp.bottom).offset(20)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
     }
 }
