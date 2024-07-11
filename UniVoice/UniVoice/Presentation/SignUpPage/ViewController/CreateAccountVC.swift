@@ -34,7 +34,9 @@ class CreateAccountVC: UIViewController {
     
     private func setUpBindUI() {
         let input = CreateAccountVM.Input(
-            idText: rootView.idTextField.rx.text.orEmpty.asObservable())
+            idText: rootView.idTextField.rx.text.orEmpty.asObservable(),
+            pwText: rootView.pwTextField.rx.text.orEmpty.asObservable()
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -42,6 +44,13 @@ class CreateAccountVC: UIViewController {
             .drive { [weak self] isValid in
                 let idConditionLabel = self?.rootView.idConditionLabel
                 idConditionLabel?.textColor = isValid ? .blue400 : .B_01
+            }
+            .disposed(by: disposeBag)
+        
+        output.pwIsValid
+            .drive { [weak self] isValid in
+                let pwConditionLabel = self?.rootView.pwConditionLabel
+                pwConditionLabel?.textColor = isValid ? .blue400 : .B_01
             }
             .disposed(by: disposeBag)
         

@@ -13,10 +13,12 @@ final class CreateAccountVM: ViewModelType {
     
     struct Input {
         let idText: Observable<String>
+        let pwText: Observable<String>
     }
     
     struct Output {
         let idIsValid: Driver<Bool>
+        let pwIsValid: Driver<Bool>
     }
     
     var disposeBag = DisposeBag()
@@ -30,6 +32,14 @@ final class CreateAccountVM: ViewModelType {
             }
             .asDriver(onErrorJustReturn: false)
         
-        return Output(idIsValid: idIsValid)
+        let pwIsValid = input.pwText
+            .map { password in
+                let pwRegex = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+=-]).{8,16}$"
+                let pwTest = NSPredicate(format: "SELF MATCHES %@", pwRegex)
+                return pwTest.evaluate(with: password)
+            }
+            .asDriver(onErrorJustReturn: false)
+        
+        return Output(idIsValid: idIsValid, pwIsValid: pwIsValid)
     }
 }
