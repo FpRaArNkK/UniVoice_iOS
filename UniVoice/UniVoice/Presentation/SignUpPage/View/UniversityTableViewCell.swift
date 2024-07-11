@@ -10,6 +10,7 @@ import SnapKit
 import Then
 
 class UniversityTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "UniversityTableViewCell"
     
     // MARK: Views
     let univNameLabel = UILabel()

@@ -29,7 +29,7 @@ final class AdmissionYearSelectionVC: UIViewController {
 
     // MARK: setUpFoundation
     private func setUpFoundation() {
-        self.title = "개인정보입력U"
+        self.title = "개인정보입력"
     }
     
     // MARK: setUpBindUI
