@@ -96,6 +96,7 @@ class CreateAccountView: UIView {
             $0.placeholder = "비밀번호를 확인해주세요"
             $0.addHorizontalPadding(left: 5, right: 5)
             $0.isHidden = true
+            $0.isSecureTextEntry = true
         }
         
         pwMatchLabel.do {

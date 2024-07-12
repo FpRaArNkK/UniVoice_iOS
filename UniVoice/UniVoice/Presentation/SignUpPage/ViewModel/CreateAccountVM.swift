@@ -22,14 +22,16 @@ final class CreateAccountVM: ViewModelType {
         let pwText: Observable<String>
         let checkDuplicationButtonDidTap: Observable<Void>
         let confirmAndNextButtonDidTap: Observable<String?>
+        let confirmPwText: Observable<String>
     }
     
     struct Output {
         let idIsValid: Driver<Bool>
         let pwIsValid: Driver<Bool>
         let checkDuplication: Driver<Bool>
-        let confirmButtonIsEnabled: Driver<Bool>
         let confirmAndNextAction: Driver<ConfirmAndNextAction>
+        let pwIsMatched: Driver<Bool>
+        let confirmAndNextButtonIsEnabled: Driver<Bool>
     }
     
     var disposeBag = DisposeBag()
@@ -58,20 +60,8 @@ final class CreateAccountVM: ViewModelType {
             })
             .asDriver(onErrorJustReturn: false)
         
-        let confirmButtonIsEnabled = Observable
-            .combineLatest(
-                checkDuplication.asObservable(),
-                pwIsValid.asObservable()
-            )
-            .map { checkDuplication, pwIsValid in
-                return !checkDuplication && pwIsValid
-            }
-            .startWith(false)
-            .asDriver(onErrorJustReturn: false)
-        
         let confirmAndNextAction = input.confirmAndNextButtonDidTap
             .map { title -> ConfirmAndNextAction in
-                print(title)
                 switch title {
                 case "확인":
                     return .confirm
@@ -83,12 +73,40 @@ final class CreateAccountVM: ViewModelType {
             }
             .asDriver(onErrorJustReturn: .none)
         
+        let pwIsMatched = Observable
+            .combineLatest(input.pwText, input.confirmPwText)
+            .filter { !$0.isEmpty || !$1.isEmpty }
+            .map { $0 == $1 }
+            .asDriver(onErrorJustReturn: false)
+        
+        let confirmButtonState = Observable
+            .combineLatest(
+                checkDuplication.asObservable(),
+                pwIsValid.asObservable()
+            )
+            .map { checkDuplication, pwIsValid in
+                return !checkDuplication && pwIsValid
+            }
+        
+        let nextButtonState = pwIsMatched
+            .asObservable()
+        
+        let confirmAndNextButtonIsEnabled = Observable
+            .merge(
+                confirmButtonState.take(until: input.confirmAndNextButtonDidTap),
+                input.confirmAndNextButtonDidTap.flatMapLatest { _ in nextButtonState }
+            )
+            .startWith(false)
+            .asDriver(onErrorJustReturn: false)
+            .debug()
+        
         return Output(
             idIsValid: idIsValid,
             pwIsValid: pwIsValid,
             checkDuplication: checkDuplication,
-            confirmButtonIsEnabled: confirmButtonIsEnabled,
-            confirmAndNextAction: confirmAndNextAction
+            confirmAndNextAction: confirmAndNextAction,
+            pwIsMatched: pwIsMatched,
+            confirmAndNextButtonIsEnabled: confirmAndNextButtonIsEnabled
         )
     }
 }

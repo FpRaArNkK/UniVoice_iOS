@@ -39,7 +39,8 @@ class CreateAccountVC: UIViewController {
             idText: rootView.idTextField.rx.text.orEmpty.asObservable(),
             pwText: rootView.pwTextField.rx.text.orEmpty.asObservable(),
             checkDuplicationButtonDidTap: rootView.checkDuplicationButton.rx.tap.asObservable(),
-            confirmAndNextButtonDidTap: confirmAndNextButtonDidTap
+            confirmAndNextButtonDidTap: confirmAndNextButtonDidTap,
+            confirmPwText: rootView.confirmPwTextField.rx.text.orEmpty.asObservable()
         )
         
         let output = viewModel.transform(input: input)
@@ -47,8 +48,14 @@ class CreateAccountVC: UIViewController {
         let duplicationButtonIsEnabled = output.checkDuplication
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
-        let confirmAndNextButtonIsEnabled = output.confirmButtonIsEnabled
+        let confirmAndNextButtonIsEnabled = output.confirmAndNextButtonIsEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
+        
+        rootView.checkDuplicationButton.bindData(buttonType: duplicationButtonIsEnabled.asObservable())
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.rootView.confirmAndNextButton.bindData(buttonType: confirmAndNextButtonIsEnabled.asObservable())
+        }
         
         output.idIsValid
             .drive { [weak self] isValid in
@@ -79,9 +86,11 @@ class CreateAccountVC: UIViewController {
             }
             .disposed(by: viewModel.disposeBag)
         
-        rootView.checkDuplicationButton.bindData(buttonType: duplicationButtonIsEnabled.asObservable())
-        
-        rootView.confirmAndNextButton.bindData(buttonType: confirmAndNextButtonIsEnabled.asObservable())
+        output.pwIsMatched
+            .drive { [weak self] isMatched in
+                self?.rootView.pwMatchLabel.isHidden = !isMatched
+            }
+            .disposed(by: viewModel.disposeBag)
         
         output.confirmAndNextAction
             .drive { [weak self] buttonAction in
@@ -89,9 +98,8 @@ class CreateAccountVC: UIViewController {
                 case .confirm:
                     self?.rootView.pwConditionLabel.isHidden = true
                     self?.rootView.confirmPwTextField.isHidden = false
-                    self?.rootView.pwMatchLabel.isHidden = false
+                    self?.rootView.pwTextField.endEditing(true)
                     self?.rootView.confirmAndNextButton.setTitle("다음", for: .normal)
-                    self?.rootView.confirmAndNextButton.bindData(buttonType: Observable.just(CustomButtonType.inActive))
                     
                 case .next:
                     let bottomSheet = TOSCheckVC()
@@ -103,13 +111,5 @@ class CreateAccountVC: UIViewController {
                 }
             }
             .disposed(by: viewModel.disposeBag)
-        
-//        rootView.confirmAndNextButton.rx.tap
-//            .bind { [weak self] in
-//                let bottomSheet = TOSCheckVC()
-//                bottomSheet.modalPresentationStyle = .overFullScreen
-//                self?.present(bottomSheet, animated: true)
-//            }
-//            .disposed(by: viewModel.disposeBag)
     }
 }
