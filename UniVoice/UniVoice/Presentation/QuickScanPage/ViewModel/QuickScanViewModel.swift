@@ -85,6 +85,7 @@ private extension QuickScanViewModel {
     }
     
     func patchBookmark(id: Int) -> Observable<Bool> {
+        // 해당 API 로직은 1초 딜레이가 필요합니다.
         let item = self.quickScans.value.first(where: { $0.noticeId == id })
         return Observable.just(!(item?.isScrapped ?? true))
     }
