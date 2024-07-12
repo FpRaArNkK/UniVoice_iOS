@@ -46,6 +46,11 @@ final class SignUpIntroView: UIView {
             $0.setText("회원가입을 위해서는\n몇 가지 개인정보가 필요해요", font: .T1SB, color: .B_01)
         }
         
+        introIcon.do {
+            $0.image = .signUpIntro
+            $0.contentMode = .scaleAspectFit
+        }
+        
         signUpStartButton.do {
             $0.setTitle("회원가입 시작하기", for: .normal)
         }
@@ -55,6 +60,12 @@ final class SignUpIntroView: UIView {
         introLabel.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(34)
             $0.horizontalEdges.equalToSuperview().inset(16)
+        }
+        
+        introIcon.snp.makeConstraints {
+            $0.top.equalTo(introLabel.snp.bottom).offset(107)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(206)
         }
         
         signUpStartButton.snp.makeConstraints {
