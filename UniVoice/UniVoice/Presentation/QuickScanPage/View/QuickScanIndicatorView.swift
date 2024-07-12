@@ -69,12 +69,13 @@ class QuickScanIndicatorView: UIView {
     // MARK: bindUI
     private func bindUI() {
         quickScanCount
-               .asDriver(onErrorJustReturn: 0)
-               .drive(onNext: { [weak self] count in
-                   guard let self = self else { return }
-                   self.updateIndicators(count: count)
-               })
-               .disposed(by: disposeBag)
+            .asDriver(onErrorJustReturn: 0)
+            .distinctUntilChanged()
+            .drive(onNext: { [weak self] count in
+                guard let self = self else { return }
+                self.updateIndicators(count: count)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -89,8 +90,14 @@ private extension QuickScanIndicatorView {
         }
         
         currentIndex
+            .distinctUntilChanged()
             .map { $0 == viewIndex ? self.mainColor : self.subColor }
-            .bind(to: view.rx.backgroundColor)
+            .subscribe(onNext: { [weak view] color in
+                guard let view = view else { return }
+                UIView.animate(withDuration: 0.3) {
+                    view.backgroundColor = color
+                }
+            })
             .disposed(by: disposeBag)
         
         return view
@@ -121,7 +128,7 @@ private extension QuickScanIndicatorView {
 
 // MARK: External Logic
 extension QuickScanIndicatorView {
-    func bindData(quickScanCount: BehaviorRelay<Int>, currentIndex: BehaviorRelay<Int>) {
+    func bindData(quickScanCount: Observable<Int>, currentIndex: Observable<Int>) {
         quickScanCount
             .bind(to: self.quickScanCount)
             .disposed(by: disposeBag)
@@ -132,13 +139,13 @@ extension QuickScanIndicatorView {
     }
 }
 
-//@available(iOS 17.0, *)
-//#Preview {
-//    PreviewController(QuickScanIndicatorView(with: BehaviorRelay(value: 8)), snp: { view in
-//        view.snp.makeConstraints {
-//            $0.horizontalEdges.equalToSuperview().inset(16)
-//            $0.height.equalTo(4)
-//            $0.center.equalToSuperview()
-//        }
-//    })
-//}
+//    @available(iOS 17.0, *)
+//    #Preview {
+//        PreviewController(QuickScanIndicatorView(with: BehaviorRelay(value: 8)), snp: { view in
+//            view.snp.makeConstraints {
+//                $0.horizontalEdges.equalToSuperview().inset(16)
+//                $0.height.equalTo(4)
+//                $0.center.equalToSuperview()
+//            }
+//        })
+//    }
