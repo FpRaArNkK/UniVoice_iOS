@@ -59,8 +59,9 @@ final class QuickScanViewController: UIViewController {
                 guard let self = self else { return false }
                 let collectionView = self.rootView.quickScanContentCollectionView
                 let collectionViewWidth = collectionView.contentSize.width - collectionView.frame.width
-                return offsetX > collectionViewWidth
+                return offsetX > collectionViewWidth + 50
             }
+            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] _ in
                 self?.pushNextVC()
             })
@@ -121,7 +122,7 @@ extension QuickScanViewController: UICollectionViewDelegateFlowLayout {
 // MARK: Internal Logic
 private extension QuickScanViewController {
     func pushNextVC() {
-        let nextVC = ViewController()
+        let nextVC = QuickScanCompletionViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
