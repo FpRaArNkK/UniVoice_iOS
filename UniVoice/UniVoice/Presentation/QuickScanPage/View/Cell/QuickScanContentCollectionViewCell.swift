@@ -17,6 +17,7 @@ final class QuickScanContentCVC: UICollectionViewCell {
     static let identifier = "QuickScanContentCollectionViewCell"
     private let baseMargin = 16
     private let extraMargin = 6
+    private var disposeBag = DisposeBag()
     
     // MARK: Views
     private let profileImageView = UIImageView()
@@ -228,5 +229,31 @@ extension QuickScanContentCVC {
             
             self.contentStackView.addArrangedSubview(contentView)
         }
+    }
+    
+    func bindTapEvent(relay: PublishRelay<Int>, index: Int) {
+        self.bookmarkButton.rx.tap
+            .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+            .map { index }
+            .bind(to: relay)
+            .disposed(by: disposeBag)
+    }
+    
+    func bindUI(isScrapped: Observable<Bool>) {
+        isScrapped
+            .map { $0 ? UIImage.icnBookmarkOn : UIImage.icnBookmarkOff }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak bookmarkButton] image in
+                guard let bookmarkButton = bookmarkButton else { return }
+                UIView.transition(with: bookmarkButton, duration: 0.15, options: .transitionCrossDissolve, animations: {
+                    bookmarkButton.setImage(image, for: .normal)
+                }, completion: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
     }
 }
