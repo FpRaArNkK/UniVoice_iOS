@@ -61,7 +61,7 @@ final class QuickScanViewController: UIViewController {
                 let collectionViewWidth = collectionView.contentSize.width - collectionView.frame.width
                 return offsetX > collectionViewWidth + 50
             }
-            .distinctUntilChanged()
+            .take(1)
             .subscribe(onNext: { [weak self] _ in
                 self?.pushNextVC()
             })
