@@ -1,19 +1,17 @@
 //
-//  UniversityTableViewCell.swift
+//  DepartmentTableViewCell.swift
 //  UniVoice
 //
-//  Created by 이자민 on 7/8/24.
+//  Created by 이자민 on 7/12/24.
 //
 
 import UIKit
-import SnapKit
-import Then
 
-class UniversityTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "UniversityTableViewCell"
+class DepartmentTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "DepartmentTableViewCell"
     
     // MARK: Views
-    let univNameLabel = UILabel()
+    let departNameLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,21 +33,22 @@ class UniversityTableViewCell: UITableViewCell {
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         [
-            univNameLabel
+            departNameLabel
         ].forEach { self.addSubview($0) }
     }
 
     // MARK: setUpUI
     private func setUpUI() {
-        univNameLabel.do {
+        departNameLabel.do {
             $0.setText("", font: .H7R, color: .B_01)
         }
     }
     
     private func setUpLayout() {
-        univNameLabel.snp.makeConstraints {
+        departNameLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(22)
             $0.centerY.equalToSuperview()
         }
     }
+
 }

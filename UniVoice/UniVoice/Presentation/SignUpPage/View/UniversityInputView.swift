@@ -13,7 +13,7 @@ final class UniversityInputView: UIView {
     let univInputLabel = UILabel()
     let univTextField = CustomTextfield()
     let univTableView = UITableView()
-    let nextButton = CustomButton()
+    let nextButton = CustomButton(with: .inActive)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -51,6 +51,11 @@ final class UniversityInputView: UIView {
             $0.placeholder = "학교 이름 검색하기"
         }
         
+        univTableView.do {
+            $0.separatorInset.left = 0
+            $0.showsVerticalScrollIndicator = false
+        }
+        
         nextButton.do {
             $0.setTitle("다음", for: .normal)
         }
@@ -70,6 +75,7 @@ final class UniversityInputView: UIView {
         
         univTableView.snp.makeConstraints {
             $0.top.equalTo(univTextField.snp.bottom)
+            $0.height.equalTo(204)
             $0.horizontalEdges.equalToSuperview().inset(16)
         }
         
