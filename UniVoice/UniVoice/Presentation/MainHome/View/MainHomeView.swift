@@ -44,6 +44,7 @@ final class MainHomeView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
+    let noCouncilLabel = UILabel()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -62,6 +63,7 @@ final class MainHomeView: UIView {
     private func setUpFoundation() {
         self.backgroundColor = .white
         self.emptyStackView.isHidden = true
+        self.noCouncilLabel.isHidden = true
 //        self.stickyHeader.isHidden = true
     }
     
@@ -86,7 +88,8 @@ final class MainHomeView: UIView {
             quickScanCollectionView,
             articleLabel,
             councilCollectionView,
-            articleCollectionView
+            articleCollectionView,
+            noCouncilLabel
         ].forEach { contentView.addSubview($0) }
         
 //        [
@@ -128,6 +131,12 @@ final class MainHomeView: UIView {
             $0.setText("공지사항",
                        font: .H5B,
                        color: .B_01)
+        }
+        noCouncilLabel.do {
+            $0.setText("아직 등록되어 있는 공지사항이 없어요.",
+                       font: .H7SB,
+                       color: .B_01)
+            $0.textAlignment = .center
         }
     }
     
@@ -188,6 +197,10 @@ final class MainHomeView: UIView {
         articleCollectionView.snp.makeConstraints {
             $0.top.equalTo(councilCollectionView.snp.bottom).offset(20)
             $0.horizontalEdges.bottom.equalToSuperview()
+        }
+        noCouncilLabel.snp.makeConstraints {
+            $0.top.equalTo(councilCollectionView.snp.bottom).offset(170)
+            $0.centerX.equalToSuperview()
         }
     }
 }

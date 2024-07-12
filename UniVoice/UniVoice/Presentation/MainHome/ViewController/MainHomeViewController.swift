@@ -110,10 +110,19 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .disposed(by: disposeBag)
         
         output.councilItems
+            .do(onNext: { [weak self] councils in
+                self?.rootView.emptyStackView.isHidden = !self!.viewModel.councilList.isEmpty
+                self?.rootView.stickyHeader.isHidden = self!.viewModel.councilList.isEmpty
+                self?.rootView.scrollView.isHidden = self!.viewModel.councilList.isEmpty
+                self?.rootView.contentView.isHidden = self!.viewModel.councilList.isEmpty
+            })
             .bind(to: rootView.councilCollectionView.rx.items(dataSource: councilDataSource))
             .disposed(by: disposeBag)
         
         output.articleItems
+            .do(onNext: { [weak self] articles in
+                self?.rootView.noCouncilLabel.isHidden = !articles.isEmpty
+            })
             .map { [SectionModel(model: "Section 3", items: $0)] }
             .bind(to: rootView.articleCollectionView.rx.items(dataSource: articleDataSource))
             .disposed(by: disposeBag)
