@@ -81,6 +81,7 @@ class CreateAccountVC: UIViewController {
                 }
                 
                 if !isDuplicated {
+                    self?.rootView.idTextField.isUserInteractionEnabled = false
                     self?.rootView.pwTextField.becomeFirstResponder()
                 }
             }
