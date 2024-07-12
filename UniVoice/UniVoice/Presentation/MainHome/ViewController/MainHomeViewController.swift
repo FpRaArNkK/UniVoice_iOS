@@ -73,12 +73,25 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             return cell
         })
         
-        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
+        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(configureCell: {
+            dataSource,
+            collectionView,
+            indexPath,
+            viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CouncilCVC.identifier, for: indexPath) as? CouncilCVC else {
                 return UICollectionViewCell()
             }
-            let isActive = indexPath.row == self.viewModel.selectedCouncilIndexRelay.value
-            let buttonType: CustomButtonType = isActive ? .selected : .unselected
+            
+            cell.councilButton.rx.tap
+                .map { return indexPath }
+                .bind(to: self.itemSelectedSubject)
+                .disposed(by: self.disposeBag)
+            
+            let buttonType = self.viewModel.selectedCouncilIndexRelay
+                .map { index in
+                    return indexPath.row == index ? CustomButtonType.selected : CustomButtonType.unselected
+                }
+            
             cell.councilDataBind(councilName: viewModel, type: buttonType)
             return cell
         })
@@ -96,7 +109,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: rootView.quickScanCollectionView.rx.items(dataSource: qsDataSource))
             .disposed(by: disposeBag)
         
-        // ViewModel의 Output을 View와 바인딩
         output.councilItems
             .bind(to: rootView.councilCollectionView.rx.items(dataSource: councilDataSource))
             .disposed(by: disposeBag)
@@ -106,21 +118,23 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: rootView.articleCollectionView.rx.items(dataSource: articleDataSource))
             .disposed(by: disposeBag)
         
-        // Delegate 설정
         rootView.quickScanCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.councilCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.articleCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        
-        // Item Selected 바인딩
+    
         rootView.councilCollectionView.rx.itemSelected
-            .bind(to: itemSelectedSubject)
+            .subscribe(onNext: { indexPath in
+                self.itemSelectedSubject.on(.next(indexPath))
+                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
+            })
             .disposed(by: disposeBag)
         
-        // 선택된 인덱스에 따라 CollectionView를 리로드
         output.selectedCouncilIndex
-            .subscribe(onNext: { [weak self] _ in
-                self?.rootView.councilCollectionView.reloadData()
-                self?.rootView.articleCollectionView.reloadData()
+            .subscribe(onNext: { [weak self] index in
+                guard let self = self else { return }
+                
+                self.rootView.councilCollectionView.reloadData()
+                self.rootView.articleCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }
