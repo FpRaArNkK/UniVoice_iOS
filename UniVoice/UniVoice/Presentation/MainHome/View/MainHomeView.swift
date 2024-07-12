@@ -28,8 +28,8 @@ final class MainHomeView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()    
-    let articleLabel = UILabel()
     let stickyHeader = UIView()
+    let articleLabel = UILabel()
     let councilCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -59,19 +59,31 @@ final class MainHomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func calculateHeight() -> CGFloat {
+//        let count = CGFloat(itemData.count)
+//        let heightCount = count / 2 + count.truncatingRemainder(dividingBy: 2)
+//        return heightCount * cellHeight + (heightCount - 1) * carrotLineSpacing + carrotInset.top + carrotInset.bottom
+        let viewModel = MainHomeViewModel()
+        let count = CGFloat(viewModel.articleList.count)
+        switch count {
+        case 0...5:
+            return CGFloat()
+        default:
+            return CGFloat()
+        }
+    }
+    
     // MARK: setUpFoundation
     private func setUpFoundation() {
         self.backgroundColor = .white
         self.emptyStackView.isHidden = true
         self.noCouncilLabel.isHidden = true
-//        self.stickyHeader.isHidden = true
     }
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         [
             emptyStackView,
-            stickyHeader,
             scrollView
         ].forEach { self.addSubview($0) }
         
@@ -86,16 +98,15 @@ final class MainHomeView: UIView {
             logoImageView,
             quickScanLabel,
             quickScanCollectionView,
-            articleLabel,
-            councilCollectionView,
+            stickyHeader,
             articleCollectionView,
             noCouncilLabel
         ].forEach { contentView.addSubview($0) }
         
-//        [
-//            articleLabel,
-//            councilCollectionView
-//        ].forEach { stickyHeader.addSubview($0) }
+        [
+            articleLabel,
+            councilCollectionView
+        ].forEach { stickyHeader.addSubview($0) }
     }
     
     // MARK: setUpUI
@@ -122,12 +133,12 @@ final class MainHomeView: UIView {
             $0.contentMode = .scaleAspectFit
         }
         
-        quickScanLabel.do{
+        quickScanLabel.do {
             $0.setText("퀵 스캔",
                        font: .H5B,
                        color: .B_01)
         }
-        articleLabel.do{
+        articleLabel.do {
             $0.setText("공지사항",
                        font: .H5B,
                        color: .B_01)
@@ -163,7 +174,6 @@ final class MainHomeView: UIView {
         
         contentView.snp.makeConstraints {
             $0.edges.width.equalToSuperview()
-            $0.height.equalTo(2000)
         }
         
         logoImageView.snp.makeConstraints {
@@ -180,13 +190,15 @@ final class MainHomeView: UIView {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(158)
         }
-//        stickyHeader.snp.makeConstraints {
+        stickyHeader.snp.makeConstraints {
+            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(70)
 //            $0.top.equalTo(self.safeAreaLayoutGuide)
 //            $0.horizontalEdges.equalToSuperview()
-//            $0.height.equalTo(94)
-//        }
+        }
         articleLabel.snp.makeConstraints {
-            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+            $0.top.equalToSuperview()//.offset(16)
             $0.leading.equalTo(logoImageView)
         }
         councilCollectionView.snp.makeConstraints {
@@ -195,11 +207,11 @@ final class MainHomeView: UIView {
             $0.height.equalTo(32)
         }
         articleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(councilCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(stickyHeader.snp.bottom).offset(20)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         noCouncilLabel.snp.makeConstraints {
-            $0.top.equalTo(councilCollectionView.snp.bottom).offset(170)
+            $0.top.equalTo(stickyHeader.snp.bottom).offset(170)
             $0.centerX.equalToSuperview()
         }
     }

@@ -13,7 +13,7 @@ import RxDataSources
 final class MainHomeViewModel: ViewModelType {
     
     let councilList: [String] = [
-        "전체", "총학생회", "공과대학 학생회", "컴퓨터공학과 학생회", "몰라라ㅏ라아ㅏ"
+        "전체", "총학생회", "공과대학 학생회", "컴퓨터공학과 학생회"
     ]
     
     let articleList: [Article] = [
@@ -24,9 +24,9 @@ final class MainHomeViewModel: ViewModelType {
         Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "디자인 파이팅", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
         Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "안드 파이팅", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
         Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "서버 파이팅", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "몰라라ㅏ라아ㅏ", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "몰라라ㅏ라아ㅏ", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "몰라라ㅏ라아ㅏ", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
+        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
+        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
+        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
     ]
     
     struct Input {

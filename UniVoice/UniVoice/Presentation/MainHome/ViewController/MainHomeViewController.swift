@@ -19,8 +19,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         QS(councilImage: "defaultImage", councilName: "홍익대학교\n총학생회", articleNumber: 5),
         QS(councilImage: "defaultImage", councilName: "공과대학\n학생회", articleNumber: 10),
         QS(councilImage: "mainLogo", councilName: "컴퓨터공학과\n학생회", articleNumber: 0),
-        QS(councilImage: "defaultImage", councilName: "산업공학과\n학생회", articleNumber: 15),
-        QS(councilImage: "defaultImage", councilName: "시각디자인학과\n학생회", articleNumber: 15),
     ]
     
     private let viewModel = MainHomeViewModel()
