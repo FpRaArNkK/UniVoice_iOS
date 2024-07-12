@@ -176,8 +176,7 @@ private extension QuickScanContentCVC {
             let hours = Int(timeInterval / 3600)
             return "\(hours)시간 전"
         } else {
-            let days = Int(timeInterval / 86400)
-            return "\(days)일 전"
+            return date.toFormattedStringWithoutTime()
         }
     }
 }

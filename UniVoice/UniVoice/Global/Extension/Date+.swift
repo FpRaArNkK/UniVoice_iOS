@@ -17,4 +17,14 @@ extension Date {
         dateFormatter.timeZone = TimeZone(abbreviation: "KST") // 불필요 시 삭제
         return dateFormatter.string(from: self)
     }
+    
+    /// Date를 "yyyy/MM/dd" 형식의 문자열로 변환합니다. ex - "2024/05/21"
+    /// - Returns: 변환된 문자열
+    func toFormattedStringWithoutTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR") // 불필요 시 삭제
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST") // 불필요 시 삭제
+        return dateFormatter.string(from: self)
+    }
 }
