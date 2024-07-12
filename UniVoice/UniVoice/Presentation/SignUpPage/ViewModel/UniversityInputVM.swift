@@ -21,7 +21,11 @@ final class UniversityInputVM: ViewModelType {
     }
     
     var disposeBag = DisposeBag()
+    let selectedUniversity = BehaviorRelay<String?>(value: nil)
     
+    func selectUniversity(_ universityName: String) {
+        selectedUniversity.accept(universityName)
+    }
     private let textFieldString = BehaviorRelay(value: "")
     private let validationString = BehaviorRelay(value: "")
     

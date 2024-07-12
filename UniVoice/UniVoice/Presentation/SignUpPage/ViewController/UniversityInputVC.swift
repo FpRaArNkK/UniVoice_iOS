@@ -16,6 +16,9 @@ final class UniversityInputVC: UIViewController {
     private let viewModel = UniversityInputVM()
     private let disposeBag = DisposeBag()
 
+    // MARK: Properties
+    var selectedUniversity = BehaviorRelay<String>(value: "")
+    
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
@@ -36,14 +39,18 @@ final class UniversityInputVC: UIViewController {
     
     // MARK: setUpBindUI
     private func setUpBindUI() {
+//        let selectedUniversity = PublishSubject<String>()
+        
         rootView.nextButton.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.navigationController?.pushViewController(DepartmentInputVC(), animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        let selectedUniversity = PublishSubject<String>()
-        
+                    .bind(onNext: { [weak self] in
+                        guard let self = self, let inputText = self.rootView.univTextField.text else { return }
+                        self.selectedUniversity.accept(inputText)
+                        let departmentInputVC = DepartmentInputVC(university: inputText)
+                        departmentInputVC.selectedUniversity = self.selectedUniversity
+                        self.navigationController?.pushViewController(departmentInputVC, animated: true)
+                    })
+                    .disposed(by: disposeBag)
+
         rootView.univTableView.rx.modelSelected(University.self)
             .map { $0.name }
             .bind(to: selectedUniversity)
@@ -69,7 +76,10 @@ final class UniversityInputVC: UIViewController {
         rootView.nextButton.bindData(buttonType: isNextButtonEnabled.asObservable())
         
         output.filteredUniversities
-            .drive(rootView.univTableView.rx.items(cellIdentifier: "UniversityTableViewCell", cellType: UniversityTableViewCell.self)) { index, university, cell in
+            .drive(rootView.univTableView.rx.items(
+                cellIdentifier: "UniversityTableViewCell",
+                cellType: UniversityTableViewCell.self
+            )) { index, university, cell in
                 cell.univNameLabel.text = university.name
             }
             .disposed(by: disposeBag)

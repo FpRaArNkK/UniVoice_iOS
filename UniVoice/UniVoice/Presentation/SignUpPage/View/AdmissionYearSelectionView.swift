@@ -62,6 +62,7 @@ final class AdmissionYearSelectionView: UIView {
         
         admissionTextField.do {
             $0.placeholder = "학번 선택하기"
+            $0.isEnabled = false
         }
         
         admissionButton.do {
@@ -182,6 +183,7 @@ extension AdmissionYearSelectionView: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = menuItems[indexPath.row]
         admissionTextField.text = selectedItem
+        nextButton.bindData(buttonType: .just(.active))
         toggleMenu()
     }
 }

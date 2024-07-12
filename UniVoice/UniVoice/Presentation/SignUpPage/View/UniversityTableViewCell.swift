@@ -42,7 +42,7 @@ class UniversityTableViewCell: UITableViewCell {
     // MARK: setUpUI
     private func setUpUI() {
         univNameLabel.do {
-            $0.setText("서울대학교", font: .H7R, color: .B_01)
+            $0.setText("", font: .H7R, color: .B_01)
         }
     }
     

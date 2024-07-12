@@ -17,7 +17,6 @@ class StudentInfoConfirmView: UIView {
     private let studentIDTextField = CustomTextfield()
     private let confirmButton = CustomButton()
     
-    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
