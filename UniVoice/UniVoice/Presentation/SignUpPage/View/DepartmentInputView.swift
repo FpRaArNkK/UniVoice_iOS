@@ -51,6 +51,11 @@ final class DepartmentInputView: UIView {
             $0.placeholder = "학과 이름 검색하기"
         }
         
+        departTableView.do {
+            $0.separatorInset.left = 0
+            $0.showsVerticalScrollIndicator = false
+        }
+        
         nextButton.do {
             $0.setTitle("다음", for: .normal)
         }
@@ -70,6 +75,7 @@ final class DepartmentInputView: UIView {
         
         departTableView.snp.makeConstraints {
             $0.top.equalTo(departTextField.snp.bottom)
+            $0.height.equalTo(204)
             $0.horizontalEdges.equalToSuperview().inset(16)
         }
         

@@ -13,12 +13,15 @@ final class AdmissionYearSelectionView: UIView {
     let admissionSelctionLabel = UILabel()
     let admissionTextField = CustomTextfield()
     let admissionButton = UIButton()
-    //drop down 추가
+    let menuTableView = UITableView()
     let departLabel = UILabel()
     let departTextField = CustomTextfield()
     let univLabel = UILabel()
     let univTextField = CustomTextfield()
-    let nextButton = CustomButton()
+    let nextButton = CustomButton(with: .inActive)
+    
+    private var isMenuOpen = true
+    let menuItems = (18...24).reversed().map { "\($0)학번" }
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -47,6 +50,7 @@ final class AdmissionYearSelectionView: UIView {
             departTextField,
             univLabel,
             univTextField,
+            menuTableView,
             nextButton
         ].forEach { self.addSubview($0) }
     }
@@ -58,10 +62,12 @@ final class AdmissionYearSelectionView: UIView {
         
         admissionTextField.do {
             $0.placeholder = "학번 선택하기"
+            $0.isEnabled = false
         }
         
         admissionButton.do {
             $0.setImage(.icnPolygonUp, for: .normal)
+            $0.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
         }
         
         departLabel.do {
@@ -83,7 +89,21 @@ final class AdmissionYearSelectionView: UIView {
         nextButton.do {
             $0.setTitle("다음", for: .normal)
         }
-
+        
+        menuTableView.do {
+            $0.isHidden = false
+            $0.delegate = self
+            $0.dataSource = self
+            $0.register(CustomMenuTableViewCell.self, forCellReuseIdentifier: "CustomMenuTableViewCell")
+            $0.layer.borderColor = UIColor(named: "Regular")?.cgColor
+            $0.layer.borderWidth = 3
+            $0.layer.cornerRadius = 10
+            $0.rowHeight = 45
+            $0.backgroundColor = .white
+            $0.isScrollEnabled = false
+            $0.separatorInset.left = 8
+            $0.separatorInset.right = 8
+        }
     }
     // MARK: setUpLayout
     private func setUpLayout() {
@@ -101,6 +121,13 @@ final class AdmissionYearSelectionView: UIView {
         admissionButton.snp.makeConstraints {
             $0.centerY.equalTo(admissionTextField)
             $0.trailing.equalTo(admissionTextField.snp.trailing)
+        }
+        
+        menuTableView.snp.makeConstraints {
+            $0.top.equalTo(admissionTextField.snp.bottom)
+            $0.trailing.equalTo(admissionTextField.snp.trailing)
+            $0.width.equalTo(129)
+            $0.height.equalTo(315)
         }
         
         departLabel.snp.makeConstraints {
@@ -130,5 +157,33 @@ final class AdmissionYearSelectionView: UIView {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(53)
         }
+    }
+    
+    // MARK: Toggle Menu
+    @objc private func toggleMenu() {
+        isMenuOpen.toggle()
+        menuTableView.isHidden = !isMenuOpen
+        admissionButton.setImage(isMenuOpen ? .icnPolygonUp : .icnPolygonDown, for: .normal)
+    }
+}
+
+extension AdmissionYearSelectionView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuItems.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomMenuTableViewCell", for: indexPath) as? CustomMenuTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: menuItems[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = menuItems[indexPath.row]
+        admissionTextField.text = selectedItem
+        nextButton.bindData(buttonType: .just(.active))
+        toggleMenu()
     }
 }
