@@ -9,18 +9,27 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum ConfirmAndNextAction {
+    case confirm
+    case next
+    case none
+}
+
 final class CreateAccountVM: ViewModelType {
     
     struct Input {
         let idText: Observable<String>
         let pwText: Observable<String>
         let checkDuplicationButtonDidTap: Observable<Void>
+        let confirmAndNextButtonDidTap: Observable<String?>
     }
     
     struct Output {
         let idIsValid: Driver<Bool>
         let pwIsValid: Driver<Bool>
         let checkDuplication: Driver<Bool>
+        let confirmButtonIsEnabled: Driver<Bool>
+        let confirmAndNextAction: Driver<ConfirmAndNextAction>
     }
     
     var disposeBag = DisposeBag()
@@ -49,10 +58,37 @@ final class CreateAccountVM: ViewModelType {
             })
             .asDriver(onErrorJustReturn: false)
         
+        let confirmButtonIsEnabled = Observable
+            .combineLatest(
+                checkDuplication.asObservable(),
+                pwIsValid.asObservable()
+            )
+            .map { checkDuplication, pwIsValid in
+                return !checkDuplication && pwIsValid
+            }
+            .startWith(false)
+            .asDriver(onErrorJustReturn: false)
+        
+        let confirmAndNextAction = input.confirmAndNextButtonDidTap
+            .map { title -> ConfirmAndNextAction in
+                print(title)
+                switch title {
+                case "확인":
+                    return .confirm
+                case "다음":
+                    return .next
+                default:
+                    return .none
+                }
+            }
+            .asDriver(onErrorJustReturn: .none)
+        
         return Output(
             idIsValid: idIsValid,
             pwIsValid: pwIsValid,
-            checkDuplication: checkDuplication
+            checkDuplication: checkDuplication,
+            confirmButtonIsEnabled: confirmButtonIsEnabled,
+            confirmAndNextAction: confirmAndNextAction
         )
     }
 }

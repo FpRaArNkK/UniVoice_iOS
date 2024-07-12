@@ -83,6 +83,7 @@ class CreateAccountView: UIView {
         pwTextField.do {
             $0.placeholder = "비밀번호 설정하기"
             $0.addHorizontalPadding(left: 5, right: 5)
+            $0.isSecureTextEntry = true
         }
         
         pwConditionLabel.do {

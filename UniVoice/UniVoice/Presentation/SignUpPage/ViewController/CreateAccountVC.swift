@@ -32,15 +32,22 @@ class CreateAccountVC: UIViewController {
     }
     
     private func setUpBindUI() {
+        let confirmAndNextButtonDidTap = rootView.confirmAndNextButton.rx.tap
+            .withLatestFrom(rootView.confirmAndNextButton.rx.title(for: .normal))
+        
         let input = CreateAccountVM.Input(
             idText: rootView.idTextField.rx.text.orEmpty.asObservable(),
             pwText: rootView.pwTextField.rx.text.orEmpty.asObservable(),
-            checkDuplicationButtonDidTap: rootView.checkDuplicationButton.rx.tap.asObservable()
+            checkDuplicationButtonDidTap: rootView.checkDuplicationButton.rx.tap.asObservable(),
+            confirmAndNextButtonDidTap: confirmAndNextButtonDidTap
         )
         
         let output = viewModel.transform(input: input)
         
         let duplicationButtonIsEnabled = output.checkDuplication
+            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
+        
+        let confirmAndNextButtonIsEnabled = output.confirmButtonIsEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
         output.idIsValid
@@ -74,12 +81,35 @@ class CreateAccountVC: UIViewController {
         
         rootView.checkDuplicationButton.bindData(buttonType: duplicationButtonIsEnabled.asObservable())
         
-        rootView.confirmAndNextButton.rx.tap
-            .bind { [weak self] in
-                let bottomSheet = TOSCheckVC()
-                bottomSheet.modalPresentationStyle = .overFullScreen
-                self?.present(bottomSheet, animated: true)
+        rootView.confirmAndNextButton.bindData(buttonType: confirmAndNextButtonIsEnabled.asObservable())
+        
+        output.confirmAndNextAction
+            .drive { [weak self] buttonAction in
+                switch buttonAction {
+                case .confirm:
+                    self?.rootView.pwConditionLabel.isHidden = true
+                    self?.rootView.confirmPwTextField.isHidden = false
+                    self?.rootView.pwMatchLabel.isHidden = false
+                    self?.rootView.confirmAndNextButton.setTitle("다음", for: .normal)
+                    self?.rootView.confirmAndNextButton.bindData(buttonType: Observable.just(CustomButtonType.inActive))
+                    
+                case .next:
+                    let bottomSheet = TOSCheckVC()
+                    bottomSheet.modalPresentationStyle = .overFullScreen
+                    self?.present(bottomSheet, animated: true)
+                    
+                case .none:
+                    print("none")
+                }
             }
             .disposed(by: viewModel.disposeBag)
+        
+//        rootView.confirmAndNextButton.rx.tap
+//            .bind { [weak self] in
+//                let bottomSheet = TOSCheckVC()
+//                bottomSheet.modalPresentationStyle = .overFullScreen
+//                self?.present(bottomSheet, animated: true)
+//            }
+//            .disposed(by: viewModel.disposeBag)
     }
 }
