@@ -103,9 +103,9 @@ class CreateAccountVC: UIViewController {
                     self?.rootView.confirmAndNextButton.setTitle("다음", for: .normal)
                     
                 case .next:
-                    let bottomSheet = TOSCheckVC()
-                    bottomSheet.modalPresentationStyle = .overFullScreen
-                    self?.present(bottomSheet, animated: true)
+                    let tosCheckVC = UINavigationController(rootViewController: TOSCheckVC())
+                    tosCheckVC.modalPresentationStyle = .overFullScreen
+                    self?.present(tosCheckVC, animated: true)
                 }
             }
             .disposed(by: viewModel.disposeBag)
