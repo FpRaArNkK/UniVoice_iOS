@@ -105,9 +105,6 @@ class CreateAccountVC: UIViewController {
                     let bottomSheet = TOSCheckVC()
                     bottomSheet.modalPresentationStyle = .overFullScreen
                     self?.present(bottomSheet, animated: true)
-                    
-                case .none:
-                    print("none")
                 }
             }
             .disposed(by: viewModel.disposeBag)

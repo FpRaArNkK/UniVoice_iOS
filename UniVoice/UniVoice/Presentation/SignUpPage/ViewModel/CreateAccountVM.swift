@@ -12,7 +12,6 @@ import RxCocoa
 enum ConfirmAndNextAction {
     case confirm
     case next
-    case none
 }
 
 final class CreateAccountVM: ViewModelType {
@@ -62,16 +61,9 @@ final class CreateAccountVM: ViewModelType {
         
         let confirmAndNextAction = input.confirmAndNextButtonDidTap
             .map { title -> ConfirmAndNextAction in
-                switch title {
-                case "확인":
-                    return .confirm
-                case "다음":
-                    return .next
-                default:
-                    return .none
-                }
+                return title == "확인" ? ConfirmAndNextAction.confirm : ConfirmAndNextAction.next
             }
-            .asDriver(onErrorJustReturn: .none)
+            .asDriver(onErrorJustReturn: .confirm)
         
         let pwIsMatched = Observable
             .combineLatest(input.pwText, input.confirmPwText)
@@ -98,7 +90,6 @@ final class CreateAccountVM: ViewModelType {
             )
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
-            .debug()
         
         return Output(
             idIsValid: idIsValid,
