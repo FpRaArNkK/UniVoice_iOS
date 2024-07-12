@@ -10,12 +10,11 @@ import UIKit
 class StudentInfoConfirmView: UIView {
 
     // MARK: - Views
-    
+    let studentIDPhotoimgaeView = UIImageView()
+    let studentNameTextField = CustomTextfield()
+    let studentIDTextField = CustomTextfield()
+    let confirmButton = CustomButton()
     private let descriptionLabel = UILabel()
-    private let studentIDPhotoimgaeView = UIImageView()
-    private let studentNameTextField = CustomTextfield()
-    private let studentIDTextField = CustomTextfield()
-    private let confirmButton = CustomButton()
     
     // MARK: - Init
     override init(frame: CGRect) {

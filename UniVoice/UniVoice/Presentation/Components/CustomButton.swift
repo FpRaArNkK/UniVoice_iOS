@@ -14,6 +14,8 @@ import RxCocoa
 enum CustomButtonType {
     case active
     case inActive
+    case selected
+    case unselected
     case line
     
     var titleFont: UIFont {
@@ -23,8 +25,10 @@ enum CustomButtonType {
     var titleColor: UIColor {
         switch self {
             
-        case .active, .inActive:
+        case .active, .inActive, .selected:
             return .white
+        case .unselected:
+            return .gray800
         case .line:
             return .mint600
         }
@@ -33,10 +37,12 @@ enum CustomButtonType {
     var backgroundColor: UIColor {
         switch self {
             
-        case .active:
+        case .active, .selected:
             return .mint400
         case .inActive:
             return .gray200
+        case .unselected:
+            return .gray50
         case .line:
             return .clear
         }
@@ -45,7 +51,7 @@ enum CustomButtonType {
     var borderColor: UIColor? {
         switch self {
             
-        case .active, .inActive:
+        case .active, .inActive, .unselected, .selected:
             return nil
         case .line:
             return .mint600
@@ -55,10 +61,20 @@ enum CustomButtonType {
     var borderWidth: CGFloat {
         switch self {
             
-        case .active, .inActive:
+        case .active, .inActive, .unselected, .selected:
             return 0
         case .line:
             return 1
+        }
+    }
+    
+    var cornerStyle: UIButton.Configuration.CornerStyle {
+        switch self {
+            
+        case .active, .inActive, .line:
+            return .capsule
+        case .unselected, .selected:
+            return .fixed
         }
     }
 }
@@ -111,7 +127,8 @@ private extension CustomButton {
             backgroundColor: type.backgroundColor,
             titleColor: type.titleColor,
             borderColor: type.borderColor,
-            borderWidth: type.borderWidth
+            borderWidth: type.borderWidth,
+            cornerStyle: type.cornerStyle
         )
         
         self.isUserInteractionEnabled = type != .inActive
@@ -123,14 +140,15 @@ private extension CustomButton {
         backgroundColor: UIColor,
         titleColor: UIColor,
         borderColor: UIColor? = nil,
-        borderWidth: CGFloat = 0
+        borderWidth: CGFloat = 0,
+        cornerStyle: UIButton.Configuration.CornerStyle
     ) -> UIButton.Configuration {
         
         var config = UIButton.Configuration.filled()
         config.attributedTitle = .init(title, attributes: .init([.font: font]))
         config.baseBackgroundColor = backgroundColor
         config.baseForegroundColor = titleColor
-        config.cornerStyle = .capsule
+        config.cornerStyle = cornerStyle
         
         if let borderColor = borderColor {
             config.background.strokeColor = borderColor
