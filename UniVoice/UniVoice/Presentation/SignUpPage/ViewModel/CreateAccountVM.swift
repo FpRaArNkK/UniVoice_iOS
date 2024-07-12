@@ -14,11 +14,13 @@ final class CreateAccountVM: ViewModelType {
     struct Input {
         let idText: Observable<String>
         let pwText: Observable<String>
+        let checkDuplicationButtonDidTap: Observable<Void>
     }
     
     struct Output {
         let idIsValid: Driver<Bool>
         let pwIsValid: Driver<Bool>
+        let checkDuplication: Driver<Bool>
     }
     
     var disposeBag = DisposeBag()
@@ -40,6 +42,26 @@ final class CreateAccountVM: ViewModelType {
             }
             .asDriver(onErrorJustReturn: false)
         
-        return Output(idIsValid: idIsValid, pwIsValid: pwIsValid)
+        let checkDuplication = input.checkDuplicationButtonDidTap
+            .withLatestFrom(input.idText)
+            .flatMapLatest({ id in
+                return self.checkDuplication(id: id)
+            })
+            .asDriver(onErrorJustReturn: false)
+        
+        return Output(
+            idIsValid: idIsValid,
+            pwIsValid: pwIsValid,
+            checkDuplication: checkDuplication
+        )
+    }
+}
+
+//중복 확인 API 가정
+extension CreateAccountVM {
+    private func checkDuplication(id: String) -> Observable<Bool> {
+        return id == "aaaaa"
+        ? Observable.just(true).delay(.milliseconds(200), scheduler: MainScheduler.instance)
+        : Observable.just(false).delay(.milliseconds(200), scheduler: MainScheduler.instance)
     }
 }
