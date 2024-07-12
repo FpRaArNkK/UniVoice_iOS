@@ -59,6 +59,7 @@ class QuickScanCompletionView: UIView {
         
         completionStackView.do {
             $0.axis = .vertical
+            $0.alignment = .center
         }
         
         completionLabel.do {
@@ -76,7 +77,13 @@ class QuickScanCompletionView: UIView {
     }
     
     // MARK: setUpLayout
-    private func setUpLayout() {        
+    private func setUpLayout() {    
+        
+        completionImageView.snp.makeConstraints {
+            $0.height.equalTo(250)
+            $0.width.equalTo(300)
+        }
+        
         completionStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().inset(57+16)
