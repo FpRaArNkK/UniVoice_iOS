@@ -23,7 +23,7 @@ class CustomTextfield: UITextField {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        let newFrame = CGRect(x: 0, y: frame.size.height + 10, width: frame.size.width, height: 2)
+        let newFrame = CGRect(x: 0, y: frame.size.height - 2, width: frame.size.width, height: 2)
         if borderLayer.frame != newFrame {
             borderLayer.frame = newFrame
         }
@@ -52,11 +52,12 @@ class CustomTextfield: UITextField {
     private func setUpUI() {
         borderLayer.borderWidth = 2.0
         borderLayer.borderColor = inactiveColor.cgColor
-        borderLayer.frame = CGRect(x: 0, y: frame.size.height + 10, width: frame.size.width, height: 2)
+        borderLayer.frame = CGRect(x: 0, y: frame.size.height - 2, width: frame.size.width, height: 2)
         borderLayer.cornerRadius = 1
         layer.addSublayer(borderLayer)
         borderStyle = .none
         tintColor = activeColor
+        clipsToBounds = false
         
         addHorizontalPadding(left: 5, right: 5)
         
