@@ -52,6 +52,7 @@
 		880ED98A2C2403120045A620 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 880ED9892C2403120045A620 /* RxSwift */; };
 		880ED98D2C2403490045A620 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 880ED98C2C2403490045A620 /* Differentiator */; };
 		880ED98F2C2403490045A620 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 880ED98E2C2403490045A620 /* RxDataSources */; };
+		881A3C5B2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881A3C5A2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift */; };
 		882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB15A2C31C45400D73FEF /* LoginView.swift */; };
 		882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB15C2C31C6D200D73FEF /* LoginViewController.swift */; };
 		882DB15F2C31C94A00D73FEF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DB15E2C31C94A00D73FEF /* LoginViewModel.swift */; };
@@ -65,6 +66,16 @@
 		88325C342C38762D004A293D /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C332C38762D004A293D /* UITextField+.swift */; };
 		88325C362C38B5C5004A293D /* UINavigationBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C352C38B5C5004A293D /* UINavigationBar+.swift */; };
 		8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8851A2712C2404CA006912D4 /* .swiftlint.yml */; };
+		88AB98062C3EC95B00AC5043 /* QuickScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98052C3EC95B00AC5043 /* QuickScan.swift */; };
+		88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98072C3ECAB900AC5043 /* QuickScanView.swift */; };
+		88AB980A2C3EF48F00AC5043 /* CapsuleLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98092C3EF48F00AC5043 /* CapsuleLabelView.swift */; };
+		88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980B2C3F04B300AC5043 /* ChipContentView.swift */; };
+		88AB980E2C3F27A300AC5043 /* QuickScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980D2C3F27A300AC5043 /* QuickScanViewController.swift */; };
+		88AB98102C3FD35300AC5043 /* QuickScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */; };
+		88AB98132C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98122C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift */; };
+		88AB98152C3FDB2F00AC5043 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98142C3FDB2F00AC5043 /* Date+.swift */; };
+		88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98162C41749D00AC5043 /* QuickScanCompletionView.swift */; };
+		88AB98192C418A2000AC5043 /* QuickScanCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */; };
 		DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DAF82C39CD1F008B321E /* MainHomeView.swift */; };
 		DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */; };
 		DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */; };
@@ -127,6 +138,7 @@
 		880ED9572C23F75D0045A620 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		880ED95A2C23F75D0045A620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		880ED95C2C23F75D0045A620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		881A3C5A2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanIndicatorView.swift; sourceTree = "<group>"; };
 		882DB15A2C31C45400D73FEF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		882DB15C2C31C6D200D73FEF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		882DB15E2C31C94A00D73FEF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -140,6 +152,16 @@
 		88325C332C38762D004A293D /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		88325C352C38B5C5004A293D /* UINavigationBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+.swift"; sourceTree = "<group>"; };
 		8851A2712C2404CA006912D4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		88AB98052C3EC95B00AC5043 /* QuickScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScan.swift; sourceTree = "<group>"; };
+		88AB98072C3ECAB900AC5043 /* QuickScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanView.swift; sourceTree = "<group>"; };
+		88AB98092C3EF48F00AC5043 /* CapsuleLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLabelView.swift; sourceTree = "<group>"; };
+		88AB980B2C3F04B300AC5043 /* ChipContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipContentView.swift; sourceTree = "<group>"; };
+		88AB980D2C3F27A300AC5043 /* QuickScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanViewController.swift; sourceTree = "<group>"; };
+		88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanViewModel.swift; sourceTree = "<group>"; };
+		88AB98122C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanContentCollectionViewCell.swift; sourceTree = "<group>"; };
+		88AB98142C3FDB2F00AC5043 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		88AB98162C41749D00AC5043 /* QuickScanCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionView.swift; sourceTree = "<group>"; };
+		88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionViewController.swift; sourceTree = "<group>"; };
 		DC33DAF82C39CD1F008B321E /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainHomeViewController.swift; path = UniVoice/Presentation/MainHome/ViewController/MainHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScanCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -269,6 +291,7 @@
 		880ED9642C23FDAF0045A620 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				88AB98042C3EC8C800AC5043 /* QuickScan */,
 				DC9EBCAE2C3EB2B3007337A0 /* MainHomeModel */,
 			);
 			path = Domain;
@@ -287,6 +310,7 @@
 		880ED9662C23FDB60045A620 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				881A3C562C3AA0AA003A72E6 /* QuickScanPage */,
 				EDE8CA182C37C3B700E828F1 /* SignUpPage */,
 				882DB1562C31C35B00D73FEF /* LoginPage */,
 				DC33DAF42C39C75E008B321E /* MainHome */,
@@ -344,6 +368,7 @@
 				88325C332C38762D004A293D /* UITextField+.swift */,
 				88325C352C38B5C5004A293D /* UINavigationBar+.swift */,
 				21E15DFD2C3F0637003358A0 /* UIImage+.swift */,
+				88AB98142C3FDB2F00AC5043 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -401,9 +426,49 @@
 			children = (
 				88325C2F2C384440004A293D /* CustomButton.swift */,
 				88325C312C385CD1004A293D /* CustomTextfield.swift */,
+				88AB98092C3EF48F00AC5043 /* CapsuleLabelView.swift */,
 				EDF4C8802C3F13D900DE7643 /* CustomMenuTableViewCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		881A3C562C3AA0AA003A72E6 /* QuickScanPage */ = {
+			isa = PBXGroup;
+			children = (
+				881A3C592C3AA0C4003A72E6 /* View */,
+				881A3C572C3AA0B6003A72E6 /* ViewController */,
+				881A3C582C3AA0BE003A72E6 /* ViewModel */,
+			);
+			path = QuickScanPage;
+			sourceTree = "<group>";
+		};
+		881A3C572C3AA0B6003A72E6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				88AB980D2C3F27A300AC5043 /* QuickScanViewController.swift */,
+				88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		881A3C582C3AA0BE003A72E6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				88AB980F2C3FD35300AC5043 /* QuickScanViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		881A3C592C3AA0C4003A72E6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88AB98112C3FD5C100AC5043 /* Cell */,
+				881A3C5A2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift */,
+				88AB980B2C3F04B300AC5043 /* ChipContentView.swift */,
+				88AB98072C3ECAB900AC5043 /* QuickScanView.swift */,
+				88AB98162C41749D00AC5043 /* QuickScanCompletionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		882DB1562C31C35B00D73FEF /* LoginPage */ = {
@@ -442,6 +507,22 @@
 				882DB1642C31D83F00D73FEF /* WelcomeView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		88AB98042C3EC8C800AC5043 /* QuickScan */ = {
+			isa = PBXGroup;
+			children = (
+				88AB98052C3EC95B00AC5043 /* QuickScan.swift */,
+			);
+			path = QuickScan;
+			sourceTree = "<group>";
+		};
+		88AB98112C3FD5C100AC5043 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				88AB98122C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DC33DAF42C39C75E008B321E /* MainHome */ = {
@@ -675,6 +756,7 @@
 				880ED9532C23F75B0045A620 /* ViewController.swift in Sources */,
 				21E15DFE2C3F0637003358A0 /* UIImage+.swift in Sources */,
 				88325C362C38B5C5004A293D /* UINavigationBar+.swift in Sources */,
+				881A3C5B2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift in Sources */,
 				88325C302C384440004A293D /* CustomButton.swift in Sources */,
 				EDE8CA262C37C53F00E828F1 /* UnivInfoConfirmView.swift in Sources */,
 				2132A8442C3A6FEA00795667 /* SignUpInfoCheckingView.swift in Sources */,
@@ -700,26 +782,36 @@
 				2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */,
 				2132A8422C3A6FD400795667 /* CreateAccountView.swift in Sources */,
 				2132A83E2C3A6FC000795667 /* StudentInfoConfirmView.swift in Sources */,
+				88AB98192C418A2000AC5043 /* QuickScanCompletionViewController.swift in Sources */,
+				88AB980E2C3F27A300AC5043 /* QuickScanViewController.swift in Sources */,
 				EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */,
 				211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */,
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
+				88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
+				88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */,
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
+				88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */,
 				DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */,
+				88AB98102C3FD35300AC5043 /* QuickScanViewModel.swift in Sources */,
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
 				211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */,
+				88AB98132C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift in Sources */,
 				2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */,
 				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
 				EDF4C87D2C3B17C000DE7643 /* UniversityTableViewCell.swift in Sources */,
+				88AB980A2C3EF48F00AC5043 /* CapsuleLabelView.swift in Sources */,
 				DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */,
+				88AB98152C3FDB2F00AC5043 /* Date+.swift in Sources */,
 				DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */,
 				DC9EBCB02C3EB2CC007337A0 /* mainHomeModel.swift in Sources */,
 				DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */,
 				88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */,
+				88AB98062C3EC95B00AC5043 /* QuickScan.swift in Sources */,
 				EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */,
 				2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */,
 				882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */,
