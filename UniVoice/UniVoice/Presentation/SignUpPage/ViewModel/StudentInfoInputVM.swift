@@ -9,20 +9,32 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+enum ButtonState {
+    case nameIsEditingWithoutID
+    case idIsEditingWithoutName
+    case bothIsFilled
+    case none
+}
+
 final class StudentInfoInputVM: ViewModelType {
 
     struct Input {
         let studentNameText: Observable<String>
-        let studentID: Observable<String>
+        let studentIDText: Observable<String>
+        let nextButtonDidTap: Observable<Void>
     }
     
     struct Output {
-        let nextButtonState: Driver<Bool>
+        let nextButtonIsEnabled: Driver<Bool>
+        let nextButtonState: Driver<ButtonState>
     }
     
     let photoImageRelay: BehaviorRelay<UIImage>
     let studentNameRelay = BehaviorRelay<String>(value: "")
     let studentIDRelay = BehaviorRelay<String>(value: "")
+    
+    private let nameTextFieldCompletedRelay = BehaviorRelay<Bool>(value: false)
+    private let idTextFieldCompletedRelay = BehaviorRelay<Bool>(value: false)
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
@@ -30,18 +42,50 @@ final class StudentInfoInputVM: ViewModelType {
             .bind(to: studentNameRelay)
             .disposed(by: disposeBag)
         
-        input.studentID
+        input.studentIDText
             .bind(to: studentIDRelay)
             .disposed(by: disposeBag)
         
-        let nextButtonState = Observable
-            .combineLatest(input.studentNameText, input.studentID)
-            .map { name, studentID in
-                return !name.isEmpty && !studentID.isEmpty
+        let nextButtonIsEnabled = Observable
+            .combineLatest(
+                input.studentNameText,
+                input.studentIDText,
+                nameTextFieldCompletedRelay,
+                idTextFieldCompletedRelay
+            )
+            .map { name, studentID, nameCompleted, idCompleted in
+                if nameCompleted {
+                    return !studentID.isEmpty
+                } else if idCompleted {
+                    return !name.isEmpty
+                } else {
+                    return !studentID.isEmpty || !name.isEmpty
+                }
             }
+            .startWith(false)
             .asDriver(onErrorJustReturn: false)
         
-        return Output(nextButtonState: nextButtonState)
+        let nextButtonState = input.nextButtonDidTap
+            .withLatestFrom(Observable.combineLatest(input.studentNameText, input.studentIDText))
+            .map { [weak self] name, studentID in
+                if !name.isEmpty && studentID.isEmpty {
+                    self?.nameTextFieldCompletedRelay.accept(true)
+                    return ButtonState.nameIsEditingWithoutID
+                } else if name.isEmpty && !studentID.isEmpty {
+                    self?.idTextFieldCompletedRelay.accept(true)
+                    return ButtonState.idIsEditingWithoutName
+                } else if !name.isEmpty && !studentID.isEmpty {
+                    return ButtonState.bothIsFilled
+                } else {
+                    return ButtonState.none
+                }
+            }
+            .asDriver(onErrorJustReturn: ButtonState.none)
+        
+        return Output(
+            nextButtonIsEnabled: nextButtonIsEnabled,
+            nextButtonState: nextButtonState
+        )
     }
     
     init(photoImageRelay: BehaviorRelay<UIImage>) {
