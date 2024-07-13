@@ -69,9 +69,9 @@ final class SignUpIntroView: UIView {
         }
         
         signUpStartButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(53)
+            $0.height.equalTo(57)
         }
 
     }

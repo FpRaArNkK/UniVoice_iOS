@@ -66,7 +66,7 @@ final class UniversityInputVC: UIViewController {
         
         let input = UniversityInputVM.Input(
             inputText: rootView.univTextField.rx.text.orEmpty.asObservable(),
-            selectedUniversity: rootView.univTableView.rx.modelSelected(University.self).map { $0.name }.asObservable())
+            selectedUniversity: selectedUniversity.asObservable())
         
         let output = viewModel.transform(input: input)
         
@@ -80,6 +80,10 @@ final class UniversityInputVC: UIViewController {
                 cellIdentifier: "UniversityTableViewCell",
                 cellType: UniversityTableViewCell.self
             )) { index, university, cell in
+                //rootView.univTextField.text // 서울
+                let attrString = AttributedString("university.name")
+                // attrString에서 rootView.univTextField.text랑 겹치는 부분 찾고, 해당 부분만 특정 폰트 지정가능
+                // 나머지 부분은 기본 지정 폰트로
                 cell.univNameLabel.text = university.name
             }
             .disposed(by: disposeBag)
