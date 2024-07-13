@@ -10,7 +10,7 @@ import RxSwift
 
 //Button이 tap 됐을 때 title을 Observable로 보내기 위한 함수
 extension Reactive where Base: UIButton {
-    func title(for state: UIControl.State) -> Observable<String?> {
+    func title() -> Observable<String?> {
         return self.tap
             .map { [weak base] in
                 return base?.titleLabel?.text
