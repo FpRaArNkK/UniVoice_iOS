@@ -105,6 +105,7 @@ final class MainHomeView: UIView {
         
         scrollView.do {
             $0.showsHorizontalScrollIndicator = false
+            $0.refreshControl = UIRefreshControl()
         }
         
         councilApplyButton.do {
@@ -131,7 +132,7 @@ final class MainHomeView: UIView {
             $0.setTitle("+ 작성하기", for: .normal)
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            $0.layer.shadowOpacity = 12.0
+            $0.layer.shadowOpacity = 0.12
             $0.layer.shadowRadius = 0.0
         }
     }
@@ -180,8 +181,6 @@ final class MainHomeView: UIView {
             $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(70)
-//            $0.top.equalTo(self.safeAreaLayoutGuide)
-//            $0.horizontalEdges.equalToSuperview()
         }
         stickyHeaderView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide)
@@ -192,7 +191,6 @@ final class MainHomeView: UIView {
             $0.top.equalTo(headerView.snp.bottom).offset(20)
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.height.equalTo(UIScreen.main.bounds.size.height - 70)
-            //$0.bottom.equalTo(contentView)
         }
         noCouncilLabel.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom).offset(170)
@@ -200,7 +198,9 @@ final class MainHomeView: UIView {
         }
         createNoticeButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
-            //$0.bottom.equalTo()
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(20)
+            $0.height.equalTo(48)
+            $0.width.equalTo(102)
         }
     }
 }
