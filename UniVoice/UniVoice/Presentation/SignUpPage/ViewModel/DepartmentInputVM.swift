@@ -1,31 +1,32 @@
 //
-//  UniversityInputVM.swift
+//  DepartmentInputVM.swift
 //  UniVoice
 //
-//  Created by 이자민 on 7/8/24.
+//  Created by 이자민 on 7/12/24.
 //
 
 import RxSwift
 import RxCocoa
 
-final class UniversityInputVM: ViewModelType {
+final class DepartmentInputVM: ViewModelType {
     
     struct Input {
         let inputText: Observable<String>
-        let selectedUniversity: Observable<String>
+        let selectedDepartment: Observable<String>
     }
     
     struct Output {
         let isNextButtonEnabled: Driver<Bool>
-        let filteredUniversities: Driver<[University]>
+        let filteredDepartments: Driver<[Department]>
     }
     
     var disposeBag = DisposeBag()
-    let selectedUniversity = BehaviorRelay<String?>(value: nil)
+    let selectedDepartment = BehaviorRelay<String?>(value: nil)
     
-    func selectUniversity(_ universityName: String) {
-        selectedUniversity.accept(universityName)
+    func selectDepartment(_ departmentName: String) {
+        selectedDepartment.accept(departmentName)
     }
+    
     private let textFieldString = BehaviorRelay(value: "")
     private let validationString = BehaviorRelay(value: "")
     
@@ -34,11 +35,11 @@ final class UniversityInputVM: ViewModelType {
             .bind(to: textFieldString)
             .disposed(by: disposeBag)
         
-        input.selectedUniversity
+        input.selectedDepartment
             .bind(to: textFieldString)
             .disposed(by: disposeBag)
         
-        input.selectedUniversity
+        input.selectedDepartment
             .bind(to: validationString)
             .disposed(by: disposeBag)
         
@@ -50,45 +51,40 @@ final class UniversityInputVM: ViewModelType {
             }
             .asDriver(onErrorJustReturn: false)
         
-        let filteredUniversities = input.inputText
+        let filteredDepartments = input.inputText
             .map { query in
-                self.filterUniversities(with: query)
+                self.filterDepartments(with: query)
             }
             .asDriver(onErrorJustReturn: [])
         
-//        let selectedName = input.selectedUniversity
-        
-        return Output(isNextButtonEnabled: isNextButtonEnabled, filteredUniversities: filteredUniversities)
+        return Output(isNextButtonEnabled: isNextButtonEnabled, filteredDepartments: filteredDepartments)
     }
-
 }
 
-struct University {
+struct Department {
     let name: String
 }
 
 // 더미 데이터
 private let dummyData = [
-    University(name: "가나다라 대학교"),
-    University(name: "가나다 대학교"),
-    University(name: "Harvard of Oxford"),
-    University(name: "Harvard Institute of Technology"),
-    University(name: "Harvard of Cambridge"),
-    University(name: "Harvard of Cambridge"),
-    University(name: "Harvard of Cambridge"),
-    University(name: "Harvard of Cambridge")
+    Department(name: "컴퓨터공학과"),
+    Department(name: "교육학과"),
+    Department(name: "역사학과"),
+    Department(name: "컴퓨터학과"),
+    Department(name: "유니브학과"),
+    Department(name: "학과학과")
 ]
 
 // MARK: API Logic
-    // 일단 더미 데이터
-extension UniversityInputVM {
-    private func filterUniversities(with query: String) -> [University] {
+// 일단 더미 데이터
+extension DepartmentInputVM {
+    private func filterDepartments(with query: String) -> [Department] {
         guard !query.isEmpty else {
             return []
         }
 
-        return dummyData.filter { university in
-            university.name.lowercased().contains(query.lowercased())
+        return dummyData.filter { department in
+            department.name.lowercased().contains(query.lowercased())
         }
     }
 }

@@ -6,12 +6,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class UnivInfoConfirmView: UIView {
-    
-    let admission: String = "23학번"
-    let department: String = "컴퓨터공학과"
-    let university: String = "서울과학기술대학교"
 
     // MARK: Views
     let univInfoConfirmLabel = UILabel()
@@ -23,6 +21,8 @@ final class UnivInfoConfirmView: UIView {
     let univTextField = CustomTextfield()
     let confirmButton = CustomButton()
     
+    // MARK: Properties
+    private let disposeBag = DisposeBag()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -68,7 +68,6 @@ final class UnivInfoConfirmView: UIView {
             $0.isUserInteractionEnabled = false
             $0.font = .pretendardFont(for: .T4SB)
             $0.textColor = .B_01
-            $0.text = admission
         }
         
         departLabel.do {
@@ -79,7 +78,6 @@ final class UnivInfoConfirmView: UIView {
             $0.isUserInteractionEnabled = false
             $0.font = .pretendardFont(for: .T4SB)
             $0.textColor = .B_01
-            $0.text = department
         }
 
         univLabel.do {
@@ -90,7 +88,6 @@ final class UnivInfoConfirmView: UIView {
             $0.isUserInteractionEnabled = false
             $0.font = .pretendardFont(for: .T4SB)
             $0.textColor = .B_01
-            $0.text = university
         }
         
         confirmButton.do {
