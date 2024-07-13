@@ -16,6 +16,9 @@ final class UniversityInputVC: UIViewController {
     private let viewModel = UniversityInputVM()
     private let disposeBag = DisposeBag()
 
+    // MARK: Properties
+    var selectedUniversity = BehaviorRelay<String>(value: "")
+    
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
@@ -34,31 +37,49 @@ final class UniversityInputVC: UIViewController {
         self.title = "개인정보입력"
     }
     
-    
     // MARK: setUpBindUI
     private func setUpBindUI() {
-        // 임시
+//        let selectedUniversity = PublishSubject<String>()
+        
         rootView.nextButton.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.navigationController?.pushViewController(DepartmentInputVC(), animated: true)
-            })
+                    .bind(onNext: { [weak self] in
+                        guard let self = self, let inputText = self.rootView.univTextField.text else { return }
+                        self.selectedUniversity.accept(inputText)
+                        let departmentInputVC = DepartmentInputVC(university: inputText)
+                        departmentInputVC.selectedUniversity = self.selectedUniversity
+                        self.navigationController?.pushViewController(departmentInputVC, animated: true)
+                    })
+                    .disposed(by: disposeBag)
+
+        rootView.univTableView.rx.modelSelected(University.self)
+            .map { $0.name }
+            .bind(to: selectedUniversity)
+            .disposed(by: disposeBag)
+        
+        rootView.univTextField.rx.text.orEmpty
+            .bind(to: selectedUniversity)
+            .disposed(by: disposeBag)
+        
+        selectedUniversity
+            .bind(to: rootView.univTextField.rx.text)
             .disposed(by: disposeBag)
         
         let input = UniversityInputVM.Input(
-            inputText: Observable.just(""), // 검색 기능 없이 모든 데이터를 표시하기 위해 빈 문자열 사용
+            inputText: rootView.univTextField.rx.text.orEmpty.asObservable(),
             selectedUniversity: rootView.univTableView.rx.modelSelected(University.self).map { $0.name }.asObservable())
         
         let output = viewModel.transform(input: input)
         
         let isNextButtonEnabled = output.isNextButtonEnabled
-            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive}
-        
-        print("isNextButtonEnabled:", isNextButtonEnabled.asObservable())
+            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
         rootView.nextButton.bindData(buttonType: isNextButtonEnabled.asObservable())
         
-        output.universities
-            .drive(rootView.univTableView.rx.items(cellIdentifier: "UniversityCell", cellType: UniversityTableViewCell.self)) { index, university, cell in
+        output.filteredUniversities
+            .drive(rootView.univTableView.rx.items(
+                cellIdentifier: "UniversityTableViewCell",
+                cellType: UniversityTableViewCell.self
+            )) { index, university, cell in
                 cell.univNameLabel.text = university.name
             }
             .disposed(by: disposeBag)
@@ -69,17 +90,15 @@ final class UniversityInputVC: UIViewController {
             })
             .disposed(by: disposeBag)
     }
-    
+}
+
+extension UniversityInputVC: UITableViewDelegate {
     // MARK: setUpTableView
     private func setUpTableView() {
-        rootView.univTableView.register(UniversityTableViewCell.self, forCellReuseIdentifier: "UniversityCell")
+        rootView.univTableView.register(UniversityTableViewCell.self, forCellReuseIdentifier: "UniversityTableViewCell")
         rootView.univTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
-}
-
-
-extension UniversityInputVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 51
     }
@@ -87,7 +106,7 @@ extension UniversityInputVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // Perform action when a row is selected
+        // 학교 선택시
         if let university = try? rootView.univTableView.rx.model(at: indexPath) as University {
             print("Selected university: \(university.name)")
         }
