@@ -17,7 +17,8 @@ final class CreateNoticeView: UIView {
     let createButton = UIButton()
     let noticeScrollView = UIScrollView()
     let contentView = UIView()
-    let titleTextField = CustomTextfield()
+    let titleTextField = UITextField()
+    let devideView = UIView()
     let contentTextView = UITextView()
     let noticeStackView = UIStackView()
     let imageCollectionView = {
@@ -70,6 +71,7 @@ final class CreateNoticeView: UIView {
         
         [
             titleTextField,
+            devideView,
             contentTextView,
             noticeStackView
         ].forEach { contentView.addSubview($0) }
@@ -111,13 +113,18 @@ final class CreateNoticeView: UIView {
         
         titleTextField.do {
             $0.placeholder = "제목"
+            $0.font = .pretendardFont(for: .H6SB)
+        }
+        
+        devideView.do {
+            $0.backgroundColor = .regular
         }
         
         contentTextView.do {
             $0.text = textViewPlaceHolder
             $0.font = .pretendardFont(for: .B1R)
             $0.textColor = .B_03
-            $0.textContainerInset = .init(top: 0, left: 0, bottom: 40, right: 0)
+            $0.textContainerInset = .init(top: 12, left: 0, bottom: 40, right: 0)
             $0.isScrollEnabled = false
         }
         
@@ -228,9 +235,15 @@ final class CreateNoticeView: UIView {
             $0.height.equalTo(53)
         }
         
+        devideView.snp.makeConstraints {
+            $0.top.equalTo(titleTextField.snp.bottom)
+            $0.height.equalTo(1)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+        }
+        
         contentTextView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.top.equalTo(titleTextField.snp.bottom)
+            $0.top.equalTo(devideView.snp.bottom)
             $0.height.equalTo(200).priority(.low)
         }
         
@@ -309,4 +322,5 @@ final class CreateNoticeView: UIView {
             }
             .disposed(by: disposeBag)
     }
+    
 }

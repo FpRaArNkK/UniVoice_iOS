@@ -55,11 +55,18 @@ final class DateView: UIView {
         startDateLabel.do {
             $0.font = .pretendardFont(for: .B1R)
             $0.textColor = .B_01
+            $0.numberOfLines = 2
         }
         
         finishDateLabel.do {
             $0.font = .pretendardFont(for: .B1R)
             $0.textColor = .B_01
+            $0.numberOfLines = 2
+        }
+        
+        nextIcon.do {
+            $0.image = .icnNext
+            $0.tintColor = .mint700
         }
         
         deleteButton.do {
@@ -81,6 +88,13 @@ final class DateView: UIView {
         
         finishDateLabel.snp.makeConstraints {
             $0.bottom.trailing.equalToSuperview().inset(16)
+        }
+        
+        nextIcon.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(startDateLabel)
+            $0.height.width.equalTo(24)
+            
         }
         
         deleteButton.snp.makeConstraints {
