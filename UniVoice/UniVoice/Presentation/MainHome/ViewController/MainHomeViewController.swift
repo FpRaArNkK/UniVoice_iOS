@@ -65,15 +65,25 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     private func bindScrollView() {
         rootView.scrollView.rx.contentOffset
             .map { $0.y > self.rootView.headerView.frame.minY }
-            .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] shouldShowSticky in
                 guard let self = self else { return }
+                
                 self.rootView.logoImageView.isHidden = shouldShowSticky
                 self.rootView.quickScanLabel.isHidden = shouldShowSticky
                 self.rootView.quickScanCollectionView.isHidden = shouldShowSticky
                 self.rootView.headerView.isHidden = shouldShowSticky
                 self.rootView.stickyHeaderView.isHidden = !shouldShowSticky
+            })
+            .disposed(by: disposeBag)
+        
+        rootView.scrollView.rx.contentOffset
+            .map { $0.y <= self.rootView.headerView.frame.minY }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] shouldDisableScroll in
+                guard let self = self else { return }
+                
+                self.rootView.articleCollectionView.isScrollEnabled = !shouldDisableScroll
             })
             .disposed(by: disposeBag)
     }
