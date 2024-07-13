@@ -58,6 +58,13 @@ extension UIFont {
             default: 0
             }
         }
+        
+        var kern: CGFloat {
+            switch self {
+            case .B2R: 0.01
+            default: 0
+            }
+        }
     }
 }
 
