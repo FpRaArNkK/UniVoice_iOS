@@ -33,7 +33,7 @@ class CreateAccountVC: UIViewController {
     
     private func setUpBindUI() {
         let confirmAndNextButtonDidTap = rootView.confirmAndNextButton.rx.tap
-            .withLatestFrom(rootView.confirmAndNextButton.rx.title(for: .normal))
+            .withLatestFrom(rootView.confirmAndNextButton.rx.title())
         
         let input = CreateAccountVM.Input(
             idText: rootView.idTextField.rx.text.orEmpty.asObservable(),

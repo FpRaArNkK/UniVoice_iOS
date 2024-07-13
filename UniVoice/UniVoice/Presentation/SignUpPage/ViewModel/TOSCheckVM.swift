@@ -29,9 +29,9 @@ final class TOSCheckVM: ViewModelType {
         let completeButtonState: Driver<Bool>
     }
     
-    var overallAgreeCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
-    var serviceTermsCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
-    var personalInfoTOSCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
+    private var overallAgreeCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
+    private var serviceTermsCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
+    private var personalInfoTOSCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
