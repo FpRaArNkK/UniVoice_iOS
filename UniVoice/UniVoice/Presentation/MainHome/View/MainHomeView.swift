@@ -27,23 +27,18 @@ final class MainHomeView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
-    }()    
-    let articleLabel = UILabel()
-    let stickyHeader = UIView()
-    let councilCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
-    }()
+    }() 
+    let headerView = HeaderView()
+    let stickyHeaderView = HeaderView()
     let articleCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsLargeContentViewer = false
         return collectionView
     }()
+    let noCouncilLabel = UILabel()
+    let createNoticeButton = CustomButton(with: .active)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -62,15 +57,18 @@ final class MainHomeView: UIView {
     private func setUpFoundation() {
         self.backgroundColor = .white
         self.emptyStackView.isHidden = true
-//        self.stickyHeader.isHidden = true
+        self.noCouncilLabel.isHidden = true
+        self.stickyHeaderView.isHidden = true
+        self.createNoticeButton.isHidden = false
     }
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         [
             emptyStackView,
-            stickyHeader,
-            scrollView
+            scrollView,
+            stickyHeaderView,
+            createNoticeButton
         ].forEach { self.addSubview($0) }
         
         [
@@ -84,15 +82,10 @@ final class MainHomeView: UIView {
             logoImageView,
             quickScanLabel,
             quickScanCollectionView,
-            articleLabel,
-            councilCollectionView,
-            articleCollectionView
+            headerView,
+            articleCollectionView,
+            noCouncilLabel
         ].forEach { contentView.addSubview($0) }
-        
-//        [
-//            articleLabel,
-//            councilCollectionView
-//        ].forEach { stickyHeader.addSubview($0) }
     }
     
     // MARK: setUpUI
@@ -110,6 +103,10 @@ final class MainHomeView: UIView {
             $0.textAlignment = .center
         }
         
+        scrollView.do {
+            $0.showsHorizontalScrollIndicator = false
+        }
+        
         councilApplyButton.do {
             $0.setTitle("학생회 등록 신청하기", for: .normal)
         }
@@ -119,15 +116,23 @@ final class MainHomeView: UIView {
             $0.contentMode = .scaleAspectFit
         }
         
-        quickScanLabel.do{
+        quickScanLabel.do {
             $0.setText("퀵 스캔",
                        font: .H5B,
                        color: .B_01)
         }
-        articleLabel.do{
-            $0.setText("공지사항",
-                       font: .H5B,
+        noCouncilLabel.do {
+            $0.setText("아직 등록되어 있는 공지사항이 없어요.",
+                       font: .H7SB,
                        color: .B_01)
+            $0.textAlignment = .center
+        }
+        createNoticeButton.do {
+            $0.setTitle("+ 작성하기", for: .normal)
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+            $0.layer.shadowOpacity = 12.0
+            $0.layer.shadowRadius = 0.0
         }
     }
     
@@ -154,7 +159,6 @@ final class MainHomeView: UIView {
         
         contentView.snp.makeConstraints {
             $0.edges.width.equalToSuperview()
-            $0.height.equalTo(2000)
         }
         
         logoImageView.snp.makeConstraints {
@@ -165,29 +169,38 @@ final class MainHomeView: UIView {
         quickScanLabel.snp.makeConstraints {
             $0.top.equalTo(logoImageView.snp.bottom).offset(11)
             $0.leading.equalTo(logoImageView)
+            $0.trailing.equalToSuperview().inset(88)
         }
         quickScanCollectionView.snp.makeConstraints {
             $0.top.equalTo(quickScanLabel.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(158)
         }
-//        stickyHeader.snp.makeConstraints {
+        headerView.snp.makeConstraints {
+            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(70)
 //            $0.top.equalTo(self.safeAreaLayoutGuide)
 //            $0.horizontalEdges.equalToSuperview()
-//            $0.height.equalTo(94)
-//        }
-        articleLabel.snp.makeConstraints {
-            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
-            $0.leading.equalTo(logoImageView)
         }
-        councilCollectionView.snp.makeConstraints {
-            $0.top.equalTo(articleLabel.snp.bottom).offset(14)
+        stickyHeaderView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(32)
+            $0.height.equalTo(70)
         }
         articleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(councilCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(headerView.snp.bottom).offset(20)
             $0.horizontalEdges.bottom.equalToSuperview()
+            $0.height.equalTo(UIScreen.main.bounds.size.height - 70)
+            //$0.bottom.equalTo(contentView)
+        }
+        noCouncilLabel.snp.makeConstraints {
+            $0.top.equalTo(headerView.snp.bottom).offset(170)
+            $0.centerX.equalToSuperview()
+        }
+        createNoticeButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            //$0.bottom.equalTo()
         }
     }
 }

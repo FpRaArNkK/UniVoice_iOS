@@ -18,7 +18,7 @@ final class CouncilCVC: UICollectionViewCell {
     
     // MARK: Views
     
-    private let councilButton = CustomButton(with: .unselected)
+    let councilButton = CustomButton(with: .unselected)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -53,10 +53,10 @@ final class CouncilCVC: UICollectionViewCell {
 }
 
 extension CouncilCVC {
-    func councilDataBind(councilName: String, type: CustomButtonType) {
+    func councilDataBind(councilName: String, type: Observable<CustomButtonType>) {
         councilButton.setTitle(councilName, font: .B3SB, titleColor: .B_01)
-        councilButton.bindData(buttonType: Observable.just(type))
+        councilButton.bindData(buttonType: type)
         councilButton.clipsToBounds = true
-        councilButton.layer.cornerRadius = 2
+        councilButton.layer.cornerRadius = 10
     }
 }
