@@ -180,8 +180,6 @@ final class MainHomeView: UIView {
             $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(70)
-//            $0.top.equalTo(self.safeAreaLayoutGuide)
-//            $0.horizontalEdges.equalToSuperview()
         }
         stickyHeaderView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide)
@@ -192,7 +190,6 @@ final class MainHomeView: UIView {
             $0.top.equalTo(headerView.snp.bottom).offset(20)
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.height.equalTo(UIScreen.main.bounds.size.height - 70)
-            //$0.bottom.equalTo(contentView)
         }
         noCouncilLabel.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom).offset(170)
@@ -200,7 +197,7 @@ final class MainHomeView: UIView {
         }
         createNoticeButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(20)
             $0.height.equalTo(48)
             $0.width.equalTo(102)
         }
