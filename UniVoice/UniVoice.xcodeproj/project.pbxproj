@@ -88,6 +88,13 @@
 		EDF4C8812C3F13D900DE7643 /* CustomMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8802C3F13D900DE7643 /* CustomMenuTableViewCell.swift */; };
 		EDF4C8852C412E9900DE7643 /* DepartmentInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */; };
 		EDF4C8872C41307400DE7643 /* DepartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8862C41307400DE7643 /* DepartmentTableViewCell.swift */; };
+		EDF4C8892C41965900DE7643 /* CreateNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8882C41965900DE7643 /* CreateNoticeView.swift */; };
+		EDF4C88B2C41966300DE7643 /* CreateNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */; };
+		EDF4C8922C41DA6E00DE7643 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8912C41DA6E00DE7643 /* TargetView.swift */; };
+		EDF4C8942C41DB0200DE7643 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8932C41DB0200DE7643 /* DateView.swift */; };
+		EDF4C8962C42680200DE7643 /* ImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8952C42680200DE7643 /* ImageCVC.swift */; };
+		EDF4C8982C42AF7900DE7643 /* CreateNoticeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8972C42AF7900DE7643 /* CreateNoticeVM.swift */; };
+		EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8992C42BCD100DE7643 /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +170,13 @@
 		EDF4C8802C3F13D900DE7643 /* CustomMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuTableViewCell.swift; sourceTree = "<group>"; };
 		EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentInputVM.swift; sourceTree = "<group>"; };
 		EDF4C8862C41307400DE7643 /* DepartmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentTableViewCell.swift; sourceTree = "<group>"; };
+		EDF4C8882C41965900DE7643 /* CreateNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeView.swift; sourceTree = "<group>"; };
+		EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeVC.swift; sourceTree = "<group>"; };
+		EDF4C8912C41DA6E00DE7643 /* TargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
+		EDF4C8932C41DB0200DE7643 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		EDF4C8952C42680200DE7643 /* ImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCVC.swift; sourceTree = "<group>"; };
+		EDF4C8972C42AF7900DE7643 /* CreateNoticeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeVM.swift; sourceTree = "<group>"; };
+		EDF4C8992C42BCD100DE7643 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +358,7 @@
 				88325C332C38762D004A293D /* UITextField+.swift */,
 				88325C352C38B5C5004A293D /* UINavigationBar+.swift */,
 				21E15DFD2C3F0637003358A0 /* UIImage+.swift */,
+				EDF4C8992C42BCD100DE7643 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -459,6 +474,9 @@
 			children = (
 				DC33DAFA2C39D87A008B321E /* Cell */,
 				DC33DAF82C39CD1F008B321E /* MainHomeView.swift */,
+				EDF4C8882C41965900DE7643 /* CreateNoticeView.swift */,
+				EDF4C8912C41DA6E00DE7643 /* TargetView.swift */,
+				EDF4C8932C41DB0200DE7643 /* DateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -467,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9EBCB72C3F44FC007337A0 /* MainHomeViewModel.swift */,
+				EDF4C8972C42AF7900DE7643 /* CreateNoticeVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -477,6 +496,7 @@
 				DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */,
 				DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */,
 				DC9EBCB32C3EC386007337A0 /* ArticleCVC.swift */,
+				EDF4C8952C42680200DE7643 /* ImageCVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -485,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */,
+				EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -510,6 +531,7 @@
 		EDE8CA192C37C3C100E828F1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4C88E2C41C88D00DE7643 /* Cell */,
 				EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */,
 				EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */,
 				EDE8CA212C37C51300E828F1 /* DepartmentInputView.swift */,
@@ -521,8 +543,6 @@
 				2132A83F2C3A6FC800795667 /* TOSCheckView.swift */,
 				2132A8412C3A6FD400795667 /* CreateAccountView.swift */,
 				2132A8432C3A6FE900795667 /* SignUpInfoCheckingView.swift */,
-				EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */,
-				EDF4C8862C41307400DE7643 /* DepartmentTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -543,6 +563,15 @@
 				2132A84D2C3A702400795667 /* SignUpInfoCheckingVC.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		EDF4C88E2C41C88D00DE7643 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */,
+				EDF4C8862C41307400DE7643 /* DepartmentTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -685,6 +714,7 @@
 				2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */,
 				DC9EBCB42C3EC386007337A0 /* ArticleCVC.swift in Sources */,
 				882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */,
+				EDF4C88B2C41966300DE7643 /* CreateNoticeVC.swift in Sources */,
 				EDF4C8872C41307400DE7643 /* DepartmentTableViewCell.swift in Sources */,
 				88325C342C38762D004A293D /* UITextField+.swift in Sources */,
 				880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */,
@@ -703,14 +733,19 @@
 				EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */,
 				211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */,
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
+				EDF4C8982C42AF7900DE7643 /* CreateNoticeVM.swift in Sources */,
+				EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
+				EDF4C8942C41DB0200DE7643 /* DateView.swift in Sources */,
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
 				DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */,
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
+				EDF4C8922C41DA6E00DE7643 /* TargetView.swift in Sources */,
 				211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */,
+				EDF4C8962C42680200DE7643 /* ImageCVC.swift in Sources */,
 				2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */,
 				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
@@ -726,6 +761,7 @@
 				21F7B15C2C3471AA00A082D8 /* NSAttributedString+.swift in Sources */,
 				DC9EBCB22C3EC37C007337A0 /* CouncilCVC.swift in Sources */,
 				2132A84A2C3A701600795667 /* TOSCheckVC.swift in Sources */,
+				EDF4C8892C41965900DE7643 /* CreateNoticeView.swift in Sources */,
 				2132A8482C3A700F00795667 /* StudentInfoConfirmVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
