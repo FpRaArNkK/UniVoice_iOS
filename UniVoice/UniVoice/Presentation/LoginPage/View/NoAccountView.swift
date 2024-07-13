@@ -35,7 +35,7 @@ final class NoAccountView: UIView {
     
     // MARK: setUpFoundation
     private func setUpFoundation() {
-//        self.backgroundColor = .white
+//        self.backgroundColor = .clear
     }
     
     // MARK: setUpHierarchy
@@ -87,6 +87,7 @@ final class NoAccountView: UIView {
         
         closeButton.do {
             $0.setTitle("닫기", for: .normal)
+            $0.isUserInteractionEnabled = true
         }
         
         signUpButton.do {
@@ -122,13 +123,4 @@ final class NoAccountView: UIView {
             $0.height.equalTo(57)
         }
     }
-}
-
-@available(iOS 17.0, *)
-#Preview {
-    PreviewController(NoAccountView(), snp: { view in
-        view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    })
 }
