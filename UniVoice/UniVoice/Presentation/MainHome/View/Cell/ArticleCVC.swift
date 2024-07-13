@@ -85,13 +85,13 @@ final class ArticleCVC: UICollectionViewCell {
             $0.backgroundColor = .B_03
         }
         likedIcon.do {
-            $0.image = UIImage(named: "defaultImage")
+            $0.image = .icnLike
         }
         likedNumber.do {
             $0.setText("10", font: .C3R, color: .B_03)
         }
         savedIcon.do {
-            $0.image = UIImage(named: "defaultImage")
+            $0.image = .icnBookmarkOff
         }
         savedNumber.do {
             $0.setText("8", font: .C3R, color: .B_03)
