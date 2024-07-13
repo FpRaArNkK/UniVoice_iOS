@@ -11,14 +11,14 @@ class CreateAccountView: UIView {
     
     // MARK: - Views
     let confirmAndNextButton = CustomButton()
+    let idTextField = CustomTextfield()
+    let idConditionLabel = UILabel()
+    let checkDuplicationButton = CustomButton()
+    let pwTextField = CustomTextfield()
+    let pwConditionLabel = UILabel()
+    let confirmPwTextField = CustomTextfield()
+    let pwMatchLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let idTextField = CustomTextfield()
-    private let idConditionLabel = UILabel()
-    private let checkDuplicationButton = CustomButton()
-    private let pwTextField = CustomTextfield()
-    private let pwConditionLabel = UILabel()
-    private let confirmPwTextField = CustomTextfield()
-    private let pwMatchLabel = UILabel()
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -83,6 +83,7 @@ class CreateAccountView: UIView {
         pwTextField.do {
             $0.placeholder = "비밀번호 설정하기"
             $0.addHorizontalPadding(left: 5, right: 5)
+            $0.isSecureTextEntry = true
         }
         
         pwConditionLabel.do {
@@ -95,6 +96,7 @@ class CreateAccountView: UIView {
             $0.placeholder = "비밀번호를 확인해주세요"
             $0.addHorizontalPadding(left: 5, right: 5)
             $0.isHidden = true
+            $0.isSecureTextEntry = true
         }
         
         pwMatchLabel.do {
