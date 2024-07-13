@@ -68,6 +68,7 @@
 		88325C322C385CD1004A293D /* CustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C312C385CD1004A293D /* CustomTextfield.swift */; };
 		88325C342C38762D004A293D /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C332C38762D004A293D /* UITextField+.swift */; };
 		88325C362C38B5C5004A293D /* UINavigationBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88325C352C38B5C5004A293D /* UINavigationBar+.swift */; };
+		883B2CFD2C42B6E400D19A78 /* NoAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883B2CFC2C42B6E400D19A78 /* NoAccountView.swift */; };
 		8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8851A2712C2404CA006912D4 /* .swiftlint.yml */; };
 		88AB98062C3EC95B00AC5043 /* QuickScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98052C3EC95B00AC5043 /* QuickScan.swift */; };
 		88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98072C3ECAB900AC5043 /* QuickScanView.swift */; };
@@ -157,6 +158,7 @@
 		88325C312C385CD1004A293D /* CustomTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextfield.swift; sourceTree = "<group>"; };
 		88325C332C38762D004A293D /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		88325C352C38B5C5004A293D /* UINavigationBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+.swift"; sourceTree = "<group>"; };
+		883B2CFC2C42B6E400D19A78 /* NoAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAccountView.swift; sourceTree = "<group>"; };
 		8851A2712C2404CA006912D4 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		88AB98052C3EC95B00AC5043 /* QuickScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScan.swift; sourceTree = "<group>"; };
 		88AB98072C3ECAB900AC5043 /* QuickScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanView.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				882DB15A2C31C45400D73FEF /* LoginView.swift */,
 				882DB1602C31D38300D73FEF /* InitialView.swift */,
 				882DB1642C31D83F00D73FEF /* WelcomeView.swift */,
+				883B2CFC2C42B6E400D19A78 /* NoAccountView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -783,6 +786,7 @@
 				EDE8CA282C37C59800E828F1 /* UniversityInputVC.swift in Sources */,
 				21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */,
 				21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */,
+				883B2CFD2C42B6E400D19A78 /* NoAccountView.swift in Sources */,
 				2132A8402C3A6FC800795667 /* TOSCheckView.swift in Sources */,
 				21DF05C82C41A57B005EB117 /* TOSCheckVM.swift in Sources */,
 				EDF4C8812C3F13D900DE7643 /* CustomMenuTableViewCell.swift in Sources */,
