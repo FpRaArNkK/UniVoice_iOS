@@ -59,7 +59,9 @@ class StudentInfoConfirmView: UIView {
         studentIDPhotoimgaeView.do {
             $0.layer.cornerRadius = 10
             $0.image = UIImage(systemName: "person")
+            $0.contentMode = .scaleAspectFill
             $0.backgroundColor = .gray50
+            $0.clipsToBounds = true
         }
         
         studentNameTextField.do {
@@ -85,7 +87,6 @@ class StudentInfoConfirmView: UIView {
             $0.top.equalTo(safeAreaLayoutGuide).offset(36)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(4)
-            $0.height.equalTo(70)
         }
         
         studentIDPhotoimgaeView.snp.makeConstraints {

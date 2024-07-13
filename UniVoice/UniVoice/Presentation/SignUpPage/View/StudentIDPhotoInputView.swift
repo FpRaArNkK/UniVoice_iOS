@@ -77,6 +77,7 @@ class StudentIDPhotoInputView: UIView {
         
         studentIDPhotoimgaeView.do {
             $0.backgroundColor = .gray50
+            $0.contentMode = .scaleAspectFill
             $0.layer.borderWidth = 0
             $0.layer.borderColor = UIColor.gray300.cgColor
             $0.layer.cornerRadius = 10
