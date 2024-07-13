@@ -38,6 +38,7 @@ final class MainHomeView: UIView {
         return collectionView
     }()
     let noCouncilLabel = UILabel()
+    let createNoticeButton = CustomButton(with: .active)
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -58,6 +59,7 @@ final class MainHomeView: UIView {
         self.emptyStackView.isHidden = true
         self.noCouncilLabel.isHidden = true
         self.stickyHeaderView.isHidden = true
+        self.createNoticeButton.isHidden = false
     }
     
     // MARK: setUpHierarchy
@@ -65,7 +67,8 @@ final class MainHomeView: UIView {
         [
             emptyStackView,
             scrollView,
-            stickyHeaderView
+            stickyHeaderView,
+            createNoticeButton
         ].forEach { self.addSubview($0) }
         
         [
@@ -123,6 +126,13 @@ final class MainHomeView: UIView {
                        font: .H7SB,
                        color: .B_01)
             $0.textAlignment = .center
+        }
+        createNoticeButton.do {
+            $0.setTitle("+ 작성하기", for: .normal)
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+            $0.layer.shadowOpacity = 12.0
+            $0.layer.shadowRadius = 0.0
         }
     }
     
@@ -187,6 +197,10 @@ final class MainHomeView: UIView {
         noCouncilLabel.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom).offset(170)
             $0.centerX.equalToSuperview()
+        }
+        createNoticeButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            //$0.bottom.equalTo()
         }
     }
 }

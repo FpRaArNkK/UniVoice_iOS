@@ -12,6 +12,8 @@ import RxDataSources
 
 final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
+    //학생회일 시 createButton.isHidden = false 추가
+    
     //MARK: Properties
     private let disposeBag = DisposeBag()
     
@@ -60,7 +62,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
     private func bindScrollView() {
         rootView.scrollView.rx.contentOffset
-            .map { $0.y >= self.rootView.headerView.frame.minY }
+            .map { $0.y > self.rootView.headerView.frame.minY }
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] shouldShowSticky in

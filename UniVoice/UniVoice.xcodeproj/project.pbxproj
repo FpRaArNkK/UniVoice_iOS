@@ -80,6 +80,7 @@
 		DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */; };
 		DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */; };
 		DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */; };
+		DC91FACC2C42B9A70095DD5E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC91FACB2C42B9A70095DD5E /* HeaderView.swift */; };
 		DC9EBCB02C3EB2CC007337A0 /* mainHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCAF2C3EB2CC007337A0 /* mainHomeModel.swift */; };
 		DC9EBCB22C3EC37C007337A0 /* CouncilCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */; };
 		DC9EBCB42C3EC386007337A0 /* ArticleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB32C3EC386007337A0 /* ArticleCVC.swift */; };
@@ -166,6 +167,7 @@
 		DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainHomeViewController.swift; path = UniVoice/Presentation/MainHome/ViewController/MainHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScanCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		DC91FACB2C42B9A70095DD5E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		DC9EBCAF2C3EB2CC007337A0 /* mainHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainHomeModel.swift; sourceTree = "<group>"; };
 		DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouncilCVC.swift; sourceTree = "<group>"; };
 		DC9EBCB32C3EC386007337A0 /* ArticleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCVC.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				DC33DAFA2C39D87A008B321E /* Cell */,
+				DC91FACB2C42B9A70095DD5E /* HeaderView.swift */,
 				DC33DAF82C39CD1F008B321E /* MainHomeView.swift */,
 			);
 			path = View;
@@ -793,6 +796,7 @@
 				88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */,
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
 				88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */,
+				DC91FACC2C42B9A70095DD5E /* HeaderView.swift in Sources */,
 				DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */,
 				88AB98102C3FD35300AC5043 /* QuickScanViewModel.swift in Sources */,
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
