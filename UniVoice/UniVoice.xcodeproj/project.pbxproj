@@ -22,6 +22,9 @@
 		2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A84B2C3A701D00795667 /* CreateAccountVC.swift */; };
 		2132A84E2C3A702400795667 /* SignUpInfoCheckingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A84D2C3A702400795667 /* SignUpInfoCheckingVC.swift */; };
 		2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */; };
+		21DF05C42C3FCE01005EB117 /* CreateAccountVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF05C32C3FCE01005EB117 /* CreateAccountVM.swift */; };
+		21DF05C62C4146B4005EB117 /* Reactive+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF05C52C4146B4005EB117 /* Reactive+.swift */; };
+		21DF05C82C41A57B005EB117 /* TOSCheckVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF05C72C41A57B005EB117 /* TOSCheckVM.swift */; };
 		21E15DFE2C3F0637003358A0 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E15DFD2C3F0637003358A0 /* UIImage+.swift */; };
 		21F7B1502C345F8F00A082D8 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */; };
 		21F7B1512C345F8F00A082D8 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */; };
@@ -120,6 +123,9 @@
 		2132A84B2C3A701D00795667 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		2132A84D2C3A702400795667 /* SignUpInfoCheckingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInfoCheckingVC.swift; sourceTree = "<group>"; };
 		2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVM.swift; sourceTree = "<group>"; };
+		21DF05C32C3FCE01005EB117 /* CreateAccountVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountVM.swift; sourceTree = "<group>"; };
+		21DF05C52C4146B4005EB117 /* Reactive+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+.swift"; sourceTree = "<group>"; };
+		21DF05C72C41A57B005EB117 /* TOSCheckVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOSCheckVM.swift; sourceTree = "<group>"; };
 		21E15DFD2C3F0637003358A0 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		21F7B1472C345F8E00A082D8 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		21F7B1482C345F8E00A082D8 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -221,6 +227,8 @@
 				2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */,
 				211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */,
 				211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */,
+				21DF05C32C3FCE01005EB117 /* CreateAccountVM.swift */,
+				21DF05C72C41A57B005EB117 /* TOSCheckVM.swift */,
 				EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */,
 				EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */,
 			);
@@ -375,6 +383,7 @@
 				88325C332C38762D004A293D /* UITextField+.swift */,
 				88325C352C38B5C5004A293D /* UINavigationBar+.swift */,
 				21E15DFD2C3F0637003358A0 /* UIImage+.swift */,
+				21DF05C52C4146B4005EB117 /* Reactive+.swift */,
 				88AB98142C3FDB2F00AC5043 /* Date+.swift */,
 			);
 			path = Extension;
@@ -644,8 +653,8 @@
 				2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */,
 				2132A8452C3A6FFB00795667 /* StudentInfoInputVC.swift */,
 				2132A8472C3A700F00795667 /* StudentInfoConfirmVC.swift */,
-				2132A8492C3A701600795667 /* TOSCheckVC.swift */,
 				2132A84B2C3A701D00795667 /* CreateAccountVC.swift */,
+				2132A8492C3A701600795667 /* TOSCheckVC.swift */,
 				2132A84D2C3A702400795667 /* SignUpInfoCheckingVC.swift */,
 			);
 			path = ViewController;
@@ -802,6 +811,7 @@
 				DC91FAD22C42E75D0095DD5E /* AppTab.swift in Sources */,
 				21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */,
 				2132A8402C3A6FC800795667 /* TOSCheckView.swift in Sources */,
+				21DF05C82C41A57B005EB117 /* TOSCheckVM.swift in Sources */,
 				EDF4C8812C3F13D900DE7643 /* CustomMenuTableViewCell.swift in Sources */,
 				EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */,
 				882DB15F2C31C94A00D73FEF /* LoginViewModel.swift in Sources */,
@@ -814,6 +824,7 @@
 				EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */,
 				211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */,
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
+				21DF05C42C3FCE01005EB117 /* CreateAccountVM.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
 				88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
@@ -829,6 +840,7 @@
 				211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */,
 				88AB98132C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift in Sources */,
 				2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */,
+				21DF05C62C4146B4005EB117 /* Reactive+.swift in Sources */,
 				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
 				EDF4C87D2C3B17C000DE7643 /* UniversityTableViewCell.swift in Sources */,

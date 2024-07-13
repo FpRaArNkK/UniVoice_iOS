@@ -15,7 +15,8 @@ extension NSAttributedString {
         
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.pretendardFont(for: type),
-            .paragraphStyle: paragraphStyle
+            .paragraphStyle: paragraphStyle,
+            .kern: type.kern
         ]
         
         return NSAttributedString(string: text, attributes: attributes)
