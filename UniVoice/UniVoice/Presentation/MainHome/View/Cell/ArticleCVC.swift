@@ -74,6 +74,7 @@ final class ArticleCVC: UICollectionViewCell {
             $0.image = UIImage(named: "defaultImage")
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 5
+            $0.contentMode = .scaleAspectFit
         }
         articleTitle.do {
             $0.setText("명절 귀향 버스 수요 조사", font: .T4SB, color: .B_01)
