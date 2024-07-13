@@ -18,6 +18,7 @@ class QuickScanCompletionView: UIView {
     let extraMargin = 6
     
     // MARK: Views
+    private let blankView = UIView()
     private let completionStackView = UIStackView()
     let completionLabel = UILabel()
     let completionImageView = UIImageView()
@@ -49,6 +50,7 @@ class QuickScanCompletionView: UIView {
         ].forEach { completionStackView.addArrangedSubview($0) }
         
         [
+            blankView,
             completionStackView,
             completeButton
         ].forEach { self.addSubview($0) }
@@ -79,6 +81,12 @@ class QuickScanCompletionView: UIView {
     // MARK: setUpLayout
     private func setUpLayout() {    
         
+        blankView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(completeButton.snp.top)
+            $0.centerX.equalToSuperview()
+        }
+        
         completionImageView.snp.makeConstraints {
             $0.height.equalTo(250)
             $0.width.equalTo(300)
@@ -86,7 +94,7 @@ class QuickScanCompletionView: UIView {
         
         completionStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().inset(57+16)
+            $0.centerY.equalTo(blankView)
         }
         
         completeButton.snp.makeConstraints {
