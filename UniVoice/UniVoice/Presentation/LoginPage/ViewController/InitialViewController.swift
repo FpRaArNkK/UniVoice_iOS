@@ -34,6 +34,12 @@ final class InitialViewController: UIViewController {
     
     // MARK: setUpBindUI
     private func setUpBindUI() {
+        rootView.startButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(SignUpIntroVC(), animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         rootView.loginButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.navigationController?.pushViewController(LoginViewController(), animated: true)
