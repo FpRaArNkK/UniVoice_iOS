@@ -45,31 +45,42 @@ class StudentInfoInputVC: UIViewController {
     private func setUpBindUI() {
         let input = StudentInfoInputVM.Input(
             studentNameText: rootView.studentNameTextField.rx.text.orEmpty.asObservable(),
-            studentID: rootView.studentIDTextField.rx.text.orEmpty.asObservable()
+            studentIDText: rootView.studentIDTextField.rx.text.orEmpty.asObservable(),
+            nextButtonDidTap: rootView.nextButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
         
-        let nextButtonState = output.nextButtonState
+        let nextButtonIsEnabled = output.nextButtonIsEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
-        rootView.nextButton.bindData(buttonType: nextButtonState.asObservable())
+        rootView.nextButton.bindData(buttonType: nextButtonIsEnabled.asObservable())
         
-        rootView.nextButton.rx.tap
-            .observe(on: MainScheduler.instance)
-            .bind { [weak self] in
-                guard let photoImageRelay = self?.viewModel.photoImageRelay,
-                      let studentNameRelay = self?.viewModel.studentNameRelay,
-                      let studentIDRelay = self?.viewModel.studentIDRelay
-                else { return }
-                
-                let viewModel = StudentInfoConfirmVM(photoImageRelay: photoImageRelay,
-                                                     studentNameRelay: studentNameRelay,
-                                                     studentIDRelay: studentIDRelay)
-                let viewController = StudentInfoConfirmVC(viewModel: viewModel)
-                
-                self?.navigationController?.pushViewController(viewController, animated: true)
-            }
+        output.nextButtonState
+            .drive(onNext: { [weak self] currentState in
+                switch currentState {
+                case .nameIsEditingWithoutID:
+                    self?.rootView.studentIDTextField.becomeFirstResponder()
+                    
+                case .idIsEditingWithoutName:
+                    self?.rootView.studentNameTextField.becomeFirstResponder()
+                    
+                case .bothIsFilled:
+                    guard let photoImageRelay = self?.viewModel.photoImageRelay,
+                          let studentNameRelay = self?.viewModel.studentNameRelay,
+                          let studentIDRelay = self?.viewModel.studentIDRelay
+                    else { return }
+                    
+                    let viewModel = StudentInfoConfirmVM(photoImageRelay: photoImageRelay,
+                                                         studentNameRelay: studentNameRelay,
+                                                         studentIDRelay: studentIDRelay)
+                    let viewController = StudentInfoConfirmVC(viewModel: viewModel)
+                    
+                    self?.navigationController?.pushViewController(viewController, animated: true)
+                case .none:
+                    print("none")
+                }
+            })
             .disposed(by: viewModel.disposeBag)
     }
 }

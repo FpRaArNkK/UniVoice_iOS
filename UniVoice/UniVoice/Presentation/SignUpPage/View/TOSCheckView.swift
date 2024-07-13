@@ -14,19 +14,19 @@ class TOSCheckView: UIView {
     // MARK: - Views
     let dimmedView = UIVisualEffectView(effect: nil)
     let tosView = UIView()
+    let overallAgreeCheckBox = UIButton()
+    let serviceTermsCheckBox = UIButton()
+    let personalInfoTOSCheckBox = UIButton()
+    let completeButton = CustomButton()
     private let titleLabel = UILabel()
-    private let overallAgreeCheckBox = UIButton()
     private let overallAgreeLabel = UILabel()
-    private let serviceTermsCheckBox = UIButton()
     private let serviceTermsLabel = UILabel()
     private let toServiceTermsDetailButton = UIButton()
-    private let personalInfoTOSCheckBox = UIButton()
     private let personalInfoTOSLabel = UILabel()
     private let toPersonalInfoTOSDetailButton = UIButton()
     private let overallAgreeStack = UIStackView()
     private let serviceTermsStack = UIStackView()
     private let personalInfoTOSStack = UIStackView()
-    private let completeButton = CustomButton()
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -114,21 +114,15 @@ class TOSCheckView: UIView {
         }
         
         overallAgreeCheckBox.do {
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.regular.cgColor
-            $0.layer.cornerRadius = 5
+            $0.setImage(.icnUncheckedBox, for: .normal)
         }
         
         serviceTermsCheckBox.do {
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.regular.cgColor
-            $0.layer.cornerRadius = 5
+            $0.setImage(.icnUncheckedBox, for: .normal)
         }
         
         personalInfoTOSCheckBox.do {
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.regular.cgColor
-            $0.layer.cornerRadius = 5
+            $0.setImage(.icnUncheckedBox, for: .normal)
         }
         
         toServiceTermsDetailButton.do {
