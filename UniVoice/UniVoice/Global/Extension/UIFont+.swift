@@ -17,7 +17,7 @@ extension UIFont {
         case T1B, T1SB, T1R, T2B, T2SB, T2R, T3B, T3SB, T3R, T4B, T4SB, T4R
         case B1B, B1SB, B1R, B2B, B2SB, B2R, B3B, B3SB, B3R, B4B, B4SB, B4R
         case C1R, C2R, C3R, C4R
-        case BUT1B, BUT1SB, BUT1R, BUT2B, BUT2SB, BUT2R, BUT3B, BUT3SB, BUT3R, BUT4B, BUT4SB, BUT4R
+        case BUT1B, BUT1SB, BUT1R, BUT2B, BUT2SB, BUT2R, BUT3B, BUT3SB, BUT3R, BUT4B, BUT4SB, BUT4R, BUT4p1SB
         
         var size: CGFloat {
             switch self {
@@ -31,7 +31,7 @@ extension UIFont {
             case .B1B, .B1SB, .B1R: 15
             case .B2B, .B2SB, .B2R, .BUT2B, .BUT2SB, .BUT2R: 14
             case .B3B, .B3SB, .B3R, .C1R, .BUT3B, .BUT3SB, .BUT3R: 13
-            case .B4B, .B4SB, .B4R, .C2R, .BUT4B, .BUT4SB, .BUT4R: 12
+            case .B4B, .B4SB, .B4R, .C2R, .BUT4B, .BUT4SB, .BUT4R, .BUT4p1SB: 12
             case .C3R: 11
             case .C4R: 10
             }
@@ -41,7 +41,7 @@ extension UIFont {
             switch self {
             case .H1B, .H2B, .H3B, .H4B, .H5B, .H6B, .H7B, .T1B, .T2B, .T3B, .T4B, .B1B, .B2B, .B3B, .B4B, .BUT1B, .BUT2B, .BUT3B, .BUT4B:
                 "Pretendard-Bold"
-            case .H1SB, .H2SB, .H3SB, .H4SB, .H5SB, .H5p1SB, .H6SB, .H7SB, .T1SB, .T2SB, .T3SB, .T4SB, .B1SB, .B2SB, .B3SB, .B4SB, .BUT1SB, .BUT2SB, .BUT3SB, .BUT4SB:
+            case .H1SB, .H2SB, .H3SB, .H4SB, .H5SB, .H5p1SB, .H6SB, .H7SB, .T1SB, .T2SB, .T3SB, .T4SB, .B1SB, .B2SB, .B3SB, .B4SB, .BUT1SB, .BUT2SB, .BUT3SB, .BUT4SB, .BUT4p1SB:
                 "Pretendard-SemiBold"
             case .H1R, .H2R, .H3R, .H4R, .H5R, .H6R, .H7R, .T1R, .T2R, .T3R, .T4R, .B1R, .B2R, .B3R, .B4R, .C1R, .C2R, .C3R, .C4R, .BUT1R, .BUT2R, .BUT3R, .BUT4R:
                 "Pretendard-Regular"
@@ -62,6 +62,7 @@ extension UIFont {
         var kern: CGFloat {
             switch self {
             case .B2R: 0.01
+            case .BUT4p1SB: 0.02
             default: 0
             }
         }
