@@ -49,6 +49,14 @@ final class CreateNoticeVC: UIViewController {
         let rightButton = UIBarButtonItem(customView: buttonContainer)
         self.navigationItem.rightBarButtonItem = rightButton
         
+        rootView.titleTextField.rx.text.orEmpty
+            .bind(to: viewModel.titleTextRelay)
+            .disposed(by: disposeBag)
+        
+        rootView.contentTextView.rx.text.orEmpty
+            .bind(to: viewModel.contentTextRelay)
+            .disposed(by: disposeBag)
+        
         let input = CreateNoticeVM.Input(
             titleText: viewModel.titleTextRelay,
             contentText: viewModel.contentTextRelay,
@@ -62,6 +70,7 @@ final class CreateNoticeVC: UIViewController {
         
         output.buttonState
             .drive(onNext: { state in
+                print(state)
                 customButton.isUserInteractionEnabled = state.isEnabled
                 customButton.configuration?.baseBackgroundColor = state.backgroundColor
             })

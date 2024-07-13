@@ -301,6 +301,7 @@ final class CreateNoticeView: UIView {
                 guard let self = self else { return }
                 if contentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     contentTextView.text = self.textViewPlaceHolder
+                    // isEmptyText: Bool
                     contentTextView.textColor = .B_03
                 }
             }
