@@ -69,7 +69,9 @@ class SignUpInfoCheckingView: UIView {
         }
         
         iconImageView.do {
-            $0.backgroundColor = .gray300
+//            $0.backgroundColor = .gray300
+            $0.contentMode = .scaleAspectFit
+            $0.image = .imgCheckUniv
         }
         
         backToInitialButton.do {
@@ -82,16 +84,15 @@ class SignUpInfoCheckingView: UIView {
         descriptionStack.snp.makeConstraints {
             $0.top.equalToSuperview().offset(136)
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(120)
         }
         
         iconImageView.snp.makeConstraints {
-            $0.top.equalTo(descriptionStack.snp.bottom).offset(31)
+            $0.top.equalTo(descriptionStack.snp.bottom).offset(47)
             $0.centerX.equalToSuperview()
-            $0.size.equalTo(224)
+            $0.size.equalTo(300)
         }
         
-        backToInitialButton.snp.makeConstraints {
+        backToInitialButton.snp.makeConstraints {   
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview().offset(-32)
             $0.height.equalTo(53)

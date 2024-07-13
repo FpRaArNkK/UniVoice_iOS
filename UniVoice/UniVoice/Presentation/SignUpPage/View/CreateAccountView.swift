@@ -117,7 +117,6 @@ class CreateAccountView: UIView {
             $0.top.equalTo(safeAreaLayoutGuide).offset(36)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-53)
-            $0.height.equalTo(70)
         }
         
         idTextField.snp.makeConstraints {
