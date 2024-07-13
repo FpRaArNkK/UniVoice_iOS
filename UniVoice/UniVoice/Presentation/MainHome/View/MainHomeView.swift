@@ -131,7 +131,7 @@ final class MainHomeView: UIView {
             $0.setTitle("+ 작성하기", for: .normal)
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            $0.layer.shadowOpacity = 12.0
+            $0.layer.shadowOpacity = 0.12
             $0.layer.shadowRadius = 0.0
         }
     }
@@ -200,7 +200,9 @@ final class MainHomeView: UIView {
         }
         createNoticeButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
-            //$0.bottom.equalTo()
+            $0.bottom.equalToSuperview().inset(20)
+            $0.height.equalTo(48)
+            $0.width.equalTo(102)
         }
     }
 }
