@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class QuickScanContentCVC: UICollectionViewCell {
     
@@ -72,7 +73,7 @@ final class QuickScanContentCVC: UICollectionViewCell {
         }
         
         viewCountImage.do {
-            $0.image = UIImage(systemName: "shift.fill")?.withRenderingMode(.alwaysTemplate)
+            $0.image = UIImage.icnViewCount
             $0.tintColor = .mint400
         }
         
@@ -124,12 +125,12 @@ final class QuickScanContentCVC: UICollectionViewCell {
         viewCountImage.snp.makeConstraints {
             $0.centerY.equalTo(uploadTimeLabel)
             $0.leading.equalTo(uploadTimeLabel.snp.trailing).offset(8)
-            $0.size.equalTo(15)
+            $0.size.equalTo(14)
         }
         
         viewCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(viewCountImage)
-            $0.leading.equalTo(viewCountImage.snp.trailing).offset(2)
+            $0.leading.equalTo(viewCountImage.snp.trailing).offset(3)
             $0.trailing.equalToSuperview().offset(-baseMargin).priority(.low)
         }
         
@@ -186,7 +187,7 @@ extension QuickScanContentCVC {
     func fetchData(cellModel: QuickScan) {
         if let urlString = cellModel.affiliationImageURL, let url = URL(string: urlString) {
             // API 로직 호출
-            profileImageView.image = .icnDefaultProfile // 임시
+            profileImageView.kf.setImage(with: url, placeholder: UIImage.icnDefaultProfile)
         } else {
             profileImageView.image = .icnDefaultProfile
         }
