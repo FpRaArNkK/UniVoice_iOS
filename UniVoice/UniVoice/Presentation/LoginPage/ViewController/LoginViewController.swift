@@ -52,9 +52,9 @@ final class LoginViewController: UIViewController {
                 if isUser {
                     self?.navigationController?.pushViewController(WelcomeViewController(), animated: true)
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "Login failed", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-                    self?.present(alert, animated: true)
+                    let NoAccountVC = UINavigationController(rootViewController: NoAccountViewController())
+                    NoAccountVC.modalPresentationStyle = .overFullScreen
+                    self?.present(NoAccountVC, animated: true)
                 }
             })
             .disposed(by: viewModel.disposeBag)

@@ -12,6 +12,8 @@ import Then
 final class WelcomeView: UIView {
     
     // MARK: Views
+    private let blankView = UIView()
+    private let welcomeStackView = UIStackView()
     private let welcomeLabel = UILabel()
     private let welcomeImageView = UIImageView()
     let homeButton = CustomButton(with: .active)
@@ -38,20 +40,32 @@ final class WelcomeView: UIView {
     private func setUpHierarchy() {
         [
             welcomeLabel,
-            welcomeImageView,
+            welcomeImageView
+        ].forEach { welcomeStackView.addArrangedSubview($0) }
+        
+        [
+            blankView,
+            welcomeStackView,
             homeButton
         ].forEach { self.addSubview($0) }
     }
     
     // MARK: setUpUI
     private func setUpUI() {
+        
+        welcomeStackView.do {
+            $0.axis = .vertical
+            $0.alignment = .center
+        }
+        
         welcomeLabel.do {
             $0.text = "환영합니다!"
             $0.font = .pretendardFont(for: .T1SB)
         }
         
         welcomeImageView.do {
-            $0.backgroundColor = .gray
+            $0.image = UIImage.imgWelcomeUniv
+            $0.contentMode = .scaleAspectFit
         }
 
         homeButton.do {
@@ -61,21 +75,25 @@ final class WelcomeView: UIView {
     
     // MARK: setUpLayout
     private func setUpLayout() {
-        welcomeLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(112)
+        blankView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(homeButton.snp.top)
             $0.centerX.equalToSuperview()
         }
         
         welcomeImageView.snp.makeConstraints {
-            $0.top.equalTo(welcomeLabel.snp.bottom).offset(26)
+            $0.size.equalTo(300)
+        }
+        
+        welcomeStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.size.equalTo(224)
+            $0.centerY.equalTo(blankView)
         }
         
         homeButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(53)
+            $0.height.equalTo(57)
         }
     }
 }
