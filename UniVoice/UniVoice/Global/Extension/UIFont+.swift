@@ -50,11 +50,11 @@ extension UIFont {
         
         var lineHeight: CGFloat {
             switch self {
-            case .B4R: 1.25
+            case .B3R, .B4R: 1.25
             case .T3R: 1.3
             case .H5p1SB: 1.4
-            case .B2R: 1.5
-            case .B1R: 1.6
+            case .T1SB, .T2R, .T3SB, .B2R: 1.5
+            case .H7SB, .B1R: 1.6
             default: 0
             }
         }
