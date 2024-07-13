@@ -57,6 +57,6 @@ extension CouncilCVC {
         councilButton.setTitle(councilName, font: .B3SB, titleColor: .B_01)
         councilButton.bindData(buttonType: type)
         councilButton.clipsToBounds = true
-        councilButton.layer.cornerRadius = 2
+        councilButton.layer.cornerRadius = 10
     }
 }
