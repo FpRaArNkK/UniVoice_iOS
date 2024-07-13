@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SignUpInfoCheckingVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = SignUpInfoCheckingView()
+    private let disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -24,6 +27,13 @@ class SignUpInfoCheckingVC: UIViewController {
 
     // MARK: - setUpFoundation
     private func setUpFoundation() {
-        
+        rootView.backToInitialButton.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let self = self else { return }
+                let initialVC = UINavigationController(rootViewController: InitialViewController())
+                initialVC.modalPresentationStyle = .fullScreen
+                self.present(initialVC, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
