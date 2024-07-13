@@ -16,7 +16,7 @@ class SignUpInfoCheckingView: UIView {
     private let subDescriptionLabel = UILabel()
     private let descriptionStack = UIStackView()
     private let iconImageView = UIImageView()
-    private let backToInitialButton = CustomButton(with: .active)
+    let backToInitialButton = CustomButton(with: .active)
     
     // MARK: - Init
     override init(frame: CGRect) {
