@@ -91,7 +91,7 @@ final class ArticleCVC: UICollectionViewCell {
             $0.setText("10", font: .C3R, color: .B_03)
         }
         savedIcon.do {
-            $0.image = .icnBookmarkOff
+            $0.image = .icnViewCount
         }
         savedNumber.do {
             $0.setText("8", font: .C3R, color: .B_03)
@@ -142,7 +142,7 @@ final class ArticleCVC: UICollectionViewCell {
         }
         savedIcon.snp.makeConstraints {
             $0.centerY.equalTo(duration)
-            $0.leading.equalTo(likedNumber.snp.trailing).offset(8)
+            $0.leading.equalTo(likedNumber.snp.trailing).offset(6)
             $0.size.equalTo(12)
         }
         savedNumber.snp.makeConstraints {
