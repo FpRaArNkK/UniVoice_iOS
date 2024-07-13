@@ -56,11 +56,12 @@ final class QuickScanCVC: UICollectionViewCell {
     // MARK: setUpUI
     private func setUpUI() {
         councilImage.do {
-            $0.image = UIImage(named: "defaultImage")
+            $0.image = UIImage(named: "defaultImage")?.withRenderingMode(.alwaysOriginal)
             $0.layer.borderColor = UIColor.regular.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 34
             $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFit
         }
         councilName.do {
             $0.setText("아주대학교\n총학생회", font: .B4R, color: .B_01)
