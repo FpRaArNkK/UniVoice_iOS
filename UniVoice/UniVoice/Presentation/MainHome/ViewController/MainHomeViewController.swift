@@ -12,7 +12,8 @@ import RxDataSources
 
 final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
-    //학생회일 시 createButton.isHidden = false 추가
+    //api : 학생회일 시 createButton.isHidden = false 추가
+    //api : refresh control 추가
     
     //MARK: Properties
     private let disposeBag = DisposeBag()

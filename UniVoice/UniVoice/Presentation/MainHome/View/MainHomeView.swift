@@ -105,6 +105,7 @@ final class MainHomeView: UIView {
         
         scrollView.do {
             $0.showsHorizontalScrollIndicator = false
+            $0.refreshControl = UIRefreshControl()
         }
         
         councilApplyButton.do {
