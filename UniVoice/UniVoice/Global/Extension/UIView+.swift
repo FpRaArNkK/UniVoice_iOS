@@ -33,11 +33,6 @@ extension UIView {
         gradientLayer.frame = bounds
         layer.insertSublayer(gradientLayer, at: 0)
     }
-    
-    /// 그라데이션을 제거하는 메서드
-    func removeGradientLayer() {
-        self.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
-    }
 }
 
 // 코너 둥글게
@@ -50,14 +45,36 @@ extension UIView {
         layer.masksToBounds = true
     }
     
+    enum Corner {
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
+        
+        var maskedCorner: CACornerMask {
+            switch self {
+            case .topLeft: return .layerMinXMinYCorner
+            case .topRight: return .layerMaxXMinYCorner
+            case .bottomLeft: return .layerMinXMaxYCorner
+            case .bottomRight: return .layerMaxXMaxYCorner
+            }
+        }
+    }
+    
     /// 특정 코너만 둥글게 만드는 메서드
     /// - Parameters:
     ///   - radius: 둥글게 만들 반지름
-    ///   - corners: 둥글게 만들 코너
-    func roundSpecificCorners(radius: CGFloat, corners: CACornerMask) {
+    ///   - corners: 둥글게 만들 코너들
+    ///
+    /// `corners` 매개변수에 여러 코너를 추가하려면 `Corner` 배열을 사용합니다.
+    /// 예를 들어, 왼쪽 위와 오른쪽 아래 코너를 둥글게 만들려면 다음과 같이 설정합니다:
+    /// ```swift
+    /// view.roundSpecificCorners(radius: 10, corners: [.topLeft, .bottomRight])
+    /// ```
+    func roundSpecificCorners(radius: CGFloat, corners: [Corner]) {
         clipsToBounds = true
         layer.cornerRadius = radius
-        layer.maskedCorners = corners
+        layer.maskedCorners = CACornerMask(corners.map { $0.maskedCorner })
     }
     
     /// 모든 방향에 보더를 추가하는 메서드
