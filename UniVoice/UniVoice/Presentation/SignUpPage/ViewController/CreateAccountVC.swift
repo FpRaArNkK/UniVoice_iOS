@@ -76,7 +76,7 @@ class CreateAccountVC: UIViewController {
             .drive { [weak self] isDuplicated in
                 let idConditionLabel = self?.rootView.idConditionLabel
                 DispatchQueue.main.async {
-                    idConditionLabel?.text = isDuplicated ? "사용 불가능한 아이디입니다." : "사용 가능한 아이디입니다."
+                    idConditionLabel?.text = isDuplicated ? "이미 사용중인 아이디입니다" : "사용 가능한 아이디입니다"
                     idConditionLabel?.textColor = isDuplicated ? .red0 : .mint600
                 }
                 
@@ -88,7 +88,15 @@ class CreateAccountVC: UIViewController {
         
         output.pwIsMatched
             .drive { [weak self] isMatched in
-                self?.rootView.pwMatchLabel.isHidden = !isMatched
+                let pwMatchLabel = self?.rootView.pwMatchLabel
+                
+                if let text = self?.rootView.confirmPwTextField.text,
+                   text.isEmpty {
+                    pwMatchLabel?.text = ""
+                } else {
+                    pwMatchLabel?.text = isMatched ? "비밀번호가 일치합니다" : "비밀번호가 일치하지 않습니다"
+                    pwMatchLabel?.textColor = isMatched ? .mint600 : .red0
+                }
             }
             .disposed(by: viewModel.disposeBag)
         
@@ -98,6 +106,7 @@ class CreateAccountVC: UIViewController {
                 case .confirm:
                     self?.rootView.pwConditionLabel.isHidden = true
                     self?.rootView.confirmPwTextField.isHidden = false
+                    self?.rootView.pwMatchLabel.isHidden = false
                     self?.rootView.pwTextField.endEditing(true)
                     self?.rootView.confirmAndNextButton.setTitle("다음", for: .normal)
                     
