@@ -58,5 +58,3 @@ final class DateInputView: UIView {
     private func setUpLayout() {
     }
 }
-
-
