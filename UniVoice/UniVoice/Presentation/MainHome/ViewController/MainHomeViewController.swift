@@ -31,6 +31,16 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     // MARK: Views
     private let rootView = MainHomeView()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
