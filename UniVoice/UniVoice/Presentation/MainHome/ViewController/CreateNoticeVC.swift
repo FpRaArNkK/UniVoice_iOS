@@ -128,6 +128,12 @@ final class CreateNoticeVC: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        rootView.targetButton.rx.tap
+            .bind { [weak self] in
+                self?.targetButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
         let images: Observable<[UIImage]> = input.selectedImages.asObservable()
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, UIImage>>(configureCell: { dataSource, collectionView, indexPath, image in
@@ -159,6 +165,19 @@ final class CreateNoticeVC: UIViewController {
         present(addImageAlert, animated: true)
         
     }
+    
+    private func targetButtonTapped() {
+        if !self.rootView.subviews.contains(self.rootView.targetInputView) {
+            self.rootView.addSubview(self.rootView.targetInputView)
+            
+            self.rootView.targetInputView.snp.makeConstraints {
+                $0.bottom.equalToSuperview()
+                $0.horizontalEdges.equalToSuperview()
+                $0.height.equalTo(195) // 원하는 높이로 설정
+            }
+        }
+    }
+    
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images

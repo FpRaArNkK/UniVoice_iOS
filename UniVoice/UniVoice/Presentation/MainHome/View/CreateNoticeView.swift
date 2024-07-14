@@ -29,7 +29,9 @@ final class CreateNoticeView: UIView {
         return collectionView
     }()
     let targetView = TargetView()
+    let targetInputView = TargetInputView()
     let dateView = DateView()
+    let dateInputView = DateInputView()
     let bottomView = UIView()
     let buttonStackView = UIStackView()
     let imageButton = UIButton()
@@ -64,7 +66,9 @@ final class CreateNoticeView: UIView {
             createButton,
             noticeScrollView,
             bottomView,
-            buttonStackView
+            buttonStackView,
+            targetInputView,
+            dateInputView
         ].forEach { self.addSubview($0) }
         
         noticeScrollView.addSubview(contentView)
@@ -143,6 +147,11 @@ final class CreateNoticeView: UIView {
             $0.layer.cornerRadius = 16
             $0.layer.borderColor = UIColor.regular.cgColor
             $0.layer.borderWidth = 1
+        }
+        
+        targetInputView.do {
+            $0.roundSpecificCorners(radius: 20, corners: [.topLeft, .topRight])
+            $0.applyBorders(to: [.top], width: $0.frame.width, color: .regular)
         }
         
         bottomView.do {
