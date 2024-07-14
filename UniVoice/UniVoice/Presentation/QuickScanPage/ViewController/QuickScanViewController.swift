@@ -18,6 +18,16 @@ final class QuickScanViewController: UIViewController {
     private let rootView = QuickScanView()
     private let viewModel = QuickScanViewModel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
@@ -125,9 +135,4 @@ private extension QuickScanViewController {
         let nextVC = QuickScanCompletionViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-}
-
-@available(iOS 17.0, *)
-#Preview {
-    QuickScanViewController()
 }
