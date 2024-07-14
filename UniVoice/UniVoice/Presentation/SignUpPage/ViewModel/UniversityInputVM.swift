@@ -21,16 +21,16 @@ final class UniversityInputVM: ViewModelType {
         let filteredUniversities: Driver<[University]>
     }
     
-    private let isNextButtonEnabled = BehaviorRelay<Bool>(value: false)
     var disposeBag = DisposeBag()
-    
     let selectedUniversity = BehaviorRelay<String?>(value: nil)
     
     func selectUniversity(_ universityName: String) {
         selectedUniversity.accept(universityName)
     }
+    
     private let textFieldString = BehaviorRelay(value: "")
     private let validationString = BehaviorRelay(value: "")
+    private let isNextButtonEnabled = BehaviorRelay<Bool>(value: false)
     
     func transform(input: Input) -> Output {
         input.inputText
