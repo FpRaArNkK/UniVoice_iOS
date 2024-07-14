@@ -280,8 +280,8 @@ extension DetailNoticeView {
                                font: .C3R,
                                color: .B_03)
         contentLabel.setText(cellModel.content,
-                             font: .B1R,
-                             color: .black)
+                             font: .B2R,
+                             color: .B_01)
         
         basicInfoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
