@@ -40,12 +40,6 @@ final class QuickScanViewModel: ViewModelType {
             .bind(to: self.currentIndex)
             .disposed(by: disposeBag)
         
-        input.changeIndex
-            .bind(onNext: {
-                print("currentPage: \($0)")
-            })
-            .disposed(by: disposeBag)
-        
         input.bookmarkDidTap
             .withLatestFrom(self.currentIndex)
             .flatMapLatest { [weak self] index -> Observable<Bool> in

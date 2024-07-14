@@ -60,7 +60,7 @@ class ChipContentView: UIView {
         }
         
         contentLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.centerY.equalTo(chipLabel)
             $0.leading.equalTo(chipLabel.snp.trailing).offset(8)
             $0.trailing.equalToSuperview().inset(6)
             $0.bottom.equalToSuperview().priority(.high)
