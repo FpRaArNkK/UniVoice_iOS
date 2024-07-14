@@ -64,7 +64,9 @@ final class UniversityInputVC: UIViewController {
         
         let input = UniversityInputVM.Input(
             inputText: rootView.univTextField.rx.text.orEmpty.asObservable(),
-            selectedUniversity: selectedUniversity.asObservable())
+            selectedUniversity: selectedUniversity.asObservable(),
+            univCellIsSelected: rootView.univTableView.rx.modelSelected(University.self).asObservable()
+        )
         
         let output = viewModel.transform(input: input)
         
