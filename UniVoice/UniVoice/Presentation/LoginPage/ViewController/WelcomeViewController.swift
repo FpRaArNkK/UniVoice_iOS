@@ -36,7 +36,9 @@ final class WelcomeViewController: UIViewController {
     private func setUpBindUI() {
         rootView.homeButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.navigationController?.pushViewController(ViewController(), animated: true)
+                let mainVC = TabBarVC()
+                mainVC.modalPresentationStyle = .fullScreen
+                self?.present(mainVC, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }

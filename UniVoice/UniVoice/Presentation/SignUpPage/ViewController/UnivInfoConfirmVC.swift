@@ -44,6 +44,7 @@ final class UnivInfoConfirmVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         bindData()
+        setUpBindUI()
     }
 
     // MARK: setUpFoundation
@@ -55,5 +56,17 @@ final class UnivInfoConfirmVC: UIViewController {
         rootView.univTextField.text = selectedUniversity
         rootView.departTextField.text = selectedDepartment
         rootView.admissionTextField.text = selectedAdmission
+    }
+    
+    // MARK: setUpBindUI
+    private func setUpBindUI() {
+        rootView.confirmButton.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let self = self else { return }
+                // TODO: 현재 FLOW까지 저장된 회원정보 Singleton으로 emit 필요
+                let photoInputVC = StudentIDPhotoInputVC()
+                self.navigationController?.pushViewController(photoInputVC, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }

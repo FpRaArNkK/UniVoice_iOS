@@ -51,4 +51,26 @@ extension Date {
             return date.toFormattedStringWithoutTime()
         }
     }
+
+    /// Date를 "yyyy년 MM월 dd일" 형식의 문자열로 변환합니다. ex - "2024년 05월 21일"
+    /// - Returns: 변환된 문자열
+    func toDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        dateFormatter.locale = Locale(identifier: "ko_KR") // 불필요 시 삭제
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST") // 불필요 시 삭제
+        return dateFormatter.string(from: self)
+    }
+    
+    /// Date를 "yyyy년 MM월 dd일 a h시" 형식의 문자열로 변환합니다. ex - "2024년 05월 21일 \n 오후 7시"
+    /// - Returns: 변환된 문자열
+    func toDateTimeString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일'\n'a h시"
+        dateFormatter.locale = Locale(identifier: "ko_KR") // 불필요 시 삭제
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST") // 불필요 시 삭제
+        dateFormatter.amSymbol = "오전"
+        dateFormatter.pmSymbol = "오후"
+        return dateFormatter.string(from: self)
+    }
 }
