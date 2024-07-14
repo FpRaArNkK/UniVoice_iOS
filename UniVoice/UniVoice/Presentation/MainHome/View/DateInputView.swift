@@ -13,18 +13,22 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 import RxSwift
 import RxCocoa
 
 final class DateInputView: UIView {
     
+    // MARK: Properties
+    private let startDate = BehaviorRelay<Date>(value: .now)
+    private let endDate = BehaviorRelay<Date>(value: .now)
+    private let isUsingTime = BehaviorRelay<Bool>(value: false)
+    private let disposeBag = DisposeBag()
+    
     // MARK: Views
     let startDatePicker = UIDatePicker()
-    let finishDatePicker = UIDatePicker()
-    
-    // MARK: Properties
-    let contentRelay = BehaviorRelay<String>(value: "")
-    private let disposeBag = DisposeBag()
+    let endDatePicker = UIDatePicker()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -57,4 +61,14 @@ final class DateInputView: UIView {
     // MARK: setUpLayout
     private func setUpLayout() {
     }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    PreviewController(DateInputView(), snp: { view in
+        view.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+        }
+    })
 }
