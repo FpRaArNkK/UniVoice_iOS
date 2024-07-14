@@ -54,6 +54,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         setupCollectionView()
         bindCollectionView()
         bindScrollView()
+        bindUI()
     }
     
     private func setupCollectionView() {
@@ -224,6 +225,14 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 guard let self = self else { return }
                 let quickScanVC = QuickScanViewController()
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindUI() {
+        rootView.createNoticeButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(CreateNoticeVC(), animated: true)
             })
             .disposed(by: disposeBag)
     }
