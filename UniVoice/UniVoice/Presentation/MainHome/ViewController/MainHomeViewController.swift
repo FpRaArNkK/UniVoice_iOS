@@ -31,6 +31,16 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     // MARK: Views
     private let rootView = MainHomeView()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
@@ -44,6 +54,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         setupCollectionView()
         bindCollectionView()
         bindScrollView()
+        bindUI()
     }
     
     private func setupCollectionView() {
@@ -183,7 +194,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         rootView.headerView.councilCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.stickyHeaderView.councilCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.articleCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-    
+        
         rootView.headerView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
@@ -205,6 +216,23 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 self.rootView.headerView.councilCollectionView.reloadData()
                 self.rootView.stickyHeaderView.councilCollectionView.reloadData()
                 self.rootView.articleCollectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        // QuickScan item 셀 선택
+        rootView.quickScanCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                let quickScanVC = QuickScanViewController()
+                self.navigationController?.pushViewController(quickScanVC, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindUI() {
+        rootView.createNoticeButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(CreateNoticeVC(), animated: true)
             })
             .disposed(by: disposeBag)
     }
