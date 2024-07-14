@@ -109,8 +109,8 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         output.isTargetConfirmButtonEnabled
-                    .drive(rootView.targetInputView.confirmButton.rx.isEnabled)
-                    .disposed(by: disposeBag)
+            .drive(rootView.targetInputView.confirmButton.rx.isEnabled)
+            .disposed(by: disposeBag)
         
         let isTargetConfirmButtonEnabled = output.isTargetConfirmButtonEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
@@ -154,6 +154,11 @@ final class CreateNoticeVC: UIViewController {
                 return UICollectionViewCell()
             }
             cell.imageView.image = image
+            cell.deleteButton.rx.tap
+                .bind { [weak self] in
+                    self?.deleteImage(at: indexPath)
+                }
+                .disposed(by: cell.disposeBag)
             return cell
         })
         images
@@ -195,6 +200,15 @@ final class CreateNoticeVC: UIViewController {
         }
         self.rootView.targetInputView.isHidden = true
     }
+    
+    private func deleteImage(at indexPath: IndexPath) {
+        var images = selectedImagesRelay.value
+//        images.remove(at: indexPath.)
+        print(indexPath.row)
+        images.remove(at: indexPath.row)
+        selectedImagesRelay.accept(images)
+    }
+    
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
