@@ -31,6 +31,7 @@ final class QuickScanCompletionViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: Life Cycle - viewDidLoad

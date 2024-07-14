@@ -32,6 +32,7 @@ final class QuickScanViewController: UIViewController {
     
     // MARK: setUpFoundation
     private func setUpFoundation() {
+        self.tabBarController?.tabBar.isHidden = true
         self.title = "읽지 않은 공지"
         rootView.quickScanContentCollectionView.delegate = self
     }
@@ -125,9 +126,4 @@ private extension QuickScanViewController {
         let nextVC = QuickScanCompletionViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-}
-
-@available(iOS 17.0, *)
-#Preview {
-    QuickScanViewController()
 }
