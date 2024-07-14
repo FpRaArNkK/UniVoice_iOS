@@ -82,12 +82,12 @@ final class CreateNoticeVC: UIViewController {
         
         output.startDate
             .map { $0?.toDateTimeString() ?? "" }
-            .drive(rootView.dateView.startDateRelay)
+            .drive(rootView.dateView.startDateLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.finishDate
             .map { $0?.toDateString() ?? "" }
-            .drive(rootView.dateView.finishDateRelay)
+            .drive(rootView.dateView.finishDateLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.showImageCollection
@@ -136,6 +136,12 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         rootView.targetInputView.deleteButton.rx.tap
+            .bind { [weak self] in
+                self?.targetCancelButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        rootView.targetView.deleteButton.rx.tap
             .bind { [weak self] in
                 self?.targetCancelButtonTapped()
             }
