@@ -149,11 +149,6 @@ final class CreateNoticeView: UIView {
             $0.layer.borderWidth = 1
         }
         
-        targetInputView.do {
-            $0.roundSpecificCorners(radius: 20, corners: [.topLeft, .topRight])
-            $0.applyBorders(to: [.top], width: $0.frame.width, color: .regular)
-        }
-        
         bottomView.do {
             $0.backgroundColor = .clear
             let gradientLayer = CAGradientLayer()
@@ -165,7 +160,7 @@ final class CreateNoticeView: UIView {
             ]
             gradientLayer.colors = colors
             gradientLayer.type = .axial
-//            gradientLayer.frame = $0.bounds
+            gradientLayer.frame = $0.bounds
             gradientLayer.frame = .init(x: 0, y: 0, width: $0.widthAnchor.hash, height: 105)
             $0.layer.addSublayer(gradientLayer)
         }
@@ -216,6 +211,11 @@ final class CreateNoticeView: UIView {
             config.image = .icnCdr
             config.imagePadding = 4
             $0.configuration = config
+        }
+        
+        targetInputView.do {
+            $0.applyBorders(to: [.top], width: 1, color: .regular)
+            $0.isHidden = true
         }
     }
     
@@ -286,11 +286,17 @@ final class CreateNoticeView: UIView {
             $0.height.equalTo(32)
             $0.width.equalTo(231)
             $0.leading.equalToSuperview().inset(16)
-            $0.bottom.equalTo(bottomView.snp.bottom)
+            $0.bottom.equalTo(bottomView.snp.bottom).offset(-16)
         }
         
         imageButton.snp.makeConstraints {
             $0.width.equalTo(69)
+        }
+        
+        targetInputView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(self.keyboardLayoutGuide.snp.top)
+            $0.height.equalTo(192)
         }
     }
     

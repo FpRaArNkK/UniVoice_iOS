@@ -19,6 +19,7 @@ final class CreateNoticeVC: UIViewController {
     private let disposeBag = DisposeBag()
     
     private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
+    private let targetContentResultRelay = BehaviorRelay<String>(value: "")
     
     // MARK: Life Cycle - loadView
     override func loadView() {
@@ -39,6 +40,10 @@ final class CreateNoticeVC: UIViewController {
     
     // MARK: setUpBindUI
     private func setUpBindUI() {
+        targetContentResultRelay
+            .bind(to: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObserver())
+            .disposed(by: disposeBag)
+        
         let customButton = rootView.createButton
         let buttonContainer = UIView(frame: CGRect(x: 0, y: 0, width: 47, height: 32))
         
@@ -54,7 +59,9 @@ final class CreateNoticeVC: UIViewController {
             titleText: rootView.titleTextField.rx.text.orEmpty.asObservable(),
             contentText: rootView.contentTextView.rx.text.orEmpty.asObservable(),
             selectedImages: selectedImagesRelay.asObservable(),
-            targetContent: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
+            targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
+            targetContentResult:
+                targetContentResultRelay.asObservable(),
             startDate: rootView.dateInputView.startDatePicker.rx.date.map { $0 },
             finishDate: rootView.dateInputView.finishDatePicker.rx.date.map { $0 }
         )
@@ -74,53 +81,39 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         output.startDate
-            .map { $0?.toDateTimeString() ?? "" } // Convert Date to String
+            .map { $0?.toDateTimeString() ?? "" }
             .drive(rootView.dateView.startDateRelay)
             .disposed(by: disposeBag)
         
         output.finishDate
-            .map { $0?.toDateString() ?? "" } // Convert Date to String
+            .map { $0?.toDateString() ?? "" }
             .drive(rootView.dateView.finishDateRelay)
             .disposed(by: disposeBag)
         
         output.showImageCollection
-            .drive(onNext: { [weak self] (show: Bool) in
-                guard let self = self else { return }
-                if show {
-                    if !self.rootView.noticeStackView.arrangedSubviews.contains(self.rootView.imageCollectionView) {
-                        self.rootView.noticeStackView.insertArrangedSubview(self.rootView.imageCollectionView, at: 0)
-                    }
-                } else {
-                    self.rootView.imageCollectionView.removeFromSuperview()
-                }
+            .drive(onNext: { [weak self] show in
+                self?.rootView.imageCollectionView.isHidden = !show
             })
             .disposed(by: disposeBag)
         
         output.showTargetView
-            .drive(onNext: { [weak self] (show: Bool) in
-                guard let self = self else { return }
-                if show {
-                    if !self.rootView.noticeStackView.arrangedSubviews.contains(self.rootView.targetView) {
-                        self.rootView.noticeStackView.addArrangedSubview(self.rootView.targetView)
-                    }
-                } else {
-                    self.rootView.targetView.removeFromSuperview()
-                }
+            .drive(onNext: { [weak self] show in
+                self?.rootView.targetView.isHidden = !show
             })
             .disposed(by: disposeBag)
         
         output.showDateView
-            .drive(onNext: { [weak self] (show: Bool) in
-                guard let self = self else { return }
-                if show {
-                    if !self.rootView.noticeStackView.arrangedSubviews.contains(self.rootView.dateView) {
-                        self.rootView.noticeStackView.addArrangedSubview(self.rootView.dateView)
-                    }
-                } else {
-                    self.rootView.dateView.removeFromSuperview()
-                }
+            .drive(onNext: { [weak self] show in
+                self?.rootView.dateView.isHidden = !show
             })
             .disposed(by: disposeBag)
+        
+        output.isTargetConfirmButtonEnabled
+                    .drive(rootView.targetInputView.confirmButton.rx.isEnabled)
+                    .disposed(by: disposeBag)
+        
+        let isTargetConfirmButtonEnabled = output.isTargetConfirmButtonEnabled
+            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
         rootView.imageButton.rx.tap
             .bind { [weak self] in
@@ -131,6 +124,20 @@ final class CreateNoticeVC: UIViewController {
         rootView.targetButton.rx.tap
             .bind { [weak self] in
                 self?.targetButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        rootView.targetInputView.confirmButton.bindData(buttonType: isTargetConfirmButtonEnabled.asObservable())
+        
+        rootView.targetInputView.confirmButton.rx.tap
+            .bind { [weak self] in
+                self?.targetConfirmButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        rootView.targetInputView.deleteButton.rx.tap
+            .bind { [weak self] in
+                self?.targetCancelButtonTapped()
             }
             .disposed(by: disposeBag)
         
@@ -152,7 +159,7 @@ final class CreateNoticeVC: UIViewController {
     }
     
     private func imageButtonTapped() {
-        let addImageAlert = UIAlertController(title: "사진 첨부하기", message: "왕서희야 여기 멘트 작성해놔라 ㅡㅡㅋ", preferredStyle: .actionSheet)
+        let addImageAlert = UIAlertController(title: "사진 첨부하기", message: "공지사항에 들어 갈 사진을 선택해주세요 (최대 5장)", preferredStyle: .actionSheet)
         
         let addImageAction = UIAlertAction(title: "이미지 첨부하기", style: .default) { [weak self] _ in
             self?.presentPHPicker()
@@ -167,17 +174,21 @@ final class CreateNoticeVC: UIViewController {
     }
     
     private func targetButtonTapped() {
-        if !self.rootView.subviews.contains(self.rootView.targetInputView) {
-            self.rootView.addSubview(self.rootView.targetInputView)
-            
-            self.rootView.targetInputView.snp.makeConstraints {
-                $0.bottom.equalToSuperview()
-                $0.horizontalEdges.equalToSuperview()
-                $0.height.equalTo(195) // 원하는 높이로 설정
-            }
-        }
+        self.rootView.targetInputView.isHidden = false
+        self.rootView.targetInputView.targetInputTextField.becomeFirstResponder()
     }
     
+    private func targetCancelButtonTapped() {
+        self.targetContentResultRelay.accept("")
+        self.rootView.targetInputView.isHidden = true
+    }
+    
+    private func targetConfirmButtonTapped() {
+        if let targetText = self.rootView.targetInputView.targetInputTextField.text {
+            self.targetContentResultRelay.accept(targetText)
+        }
+        self.rootView.targetInputView.isHidden = true
+    }
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images

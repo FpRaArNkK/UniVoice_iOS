@@ -54,6 +54,7 @@ final class TargetInputView: UIView {
         
         titleLabel.do {
             $0.setText("대상", font: .T3SB, color: .B_01)
+            $0.textAlignment = .center
         }
         
         deleteButton.do {
@@ -70,6 +71,7 @@ final class TargetInputView: UIView {
             $0.layer.borderColor = UIColor.regular.cgColor
             $0.layer.borderWidth = 1
             $0.placeholder = "행사 대상을 입력해주세요."
+            $0.addHorizontalPadding(left: 16)
         }
         
         confirmButton.do {
@@ -87,17 +89,18 @@ final class TargetInputView: UIView {
         
         deleteButton.snp.makeConstraints {
             $0.width.height.equalTo(24)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.trailing.equalToSuperview().inset(16)
         }
         
         targetInputTextField.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.height.equalTo(51)
         }
         
         confirmButton.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(13)
+            $0.bottom.equalToSuperview().inset(16)
             $0.height.equalTo(50)
         }
     }

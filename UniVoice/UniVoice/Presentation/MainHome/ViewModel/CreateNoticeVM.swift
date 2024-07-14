@@ -14,7 +14,8 @@ final class CreateNoticeVM {
         let titleText: Observable<String>
         let contentText: Observable<String>
         let selectedImages: Observable<[UIImage]>
-        let targetContent: Observable<String>
+        let targetContenttext: Observable<String>
+        let targetContentResult: Observable<String>
         let startDate: Observable<Date?>
         let finishDate: Observable<Date?>
     }
@@ -28,6 +29,7 @@ final class CreateNoticeVM {
         let showImageCollection: Driver<Bool>
         let showTargetView: Driver<Bool>
         let showDateView: Driver<Bool>
+        let isTargetConfirmButtonEnabled: Driver<Bool>
     }
     
     struct ButtonState {
@@ -40,6 +42,7 @@ final class CreateNoticeVM {
     private let contentTextRelay = BehaviorRelay<String>(value: "")
     private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
     private let targetContentRelay = BehaviorRelay<String>(value: "")
+    private let targetContentResultRelay = BehaviorRelay<String>(value: "")
     private let startDateRelay = BehaviorRelay<Date?>(value: nil)
     private let finishDateRelay = BehaviorRelay<Date?>(value: nil)
     private let showImageCollectionRelay = BehaviorRelay<Bool>(value: false)
@@ -60,8 +63,12 @@ final class CreateNoticeVM {
             .bind(to: selectedImagesRelay)
             .disposed(by: disposeBag)
         
-        input.targetContent
+        input.targetContenttext
             .bind(to: targetContentRelay)
+            .disposed(by: disposeBag)
+        
+        input.targetContentResult
+            .bind(to: targetContentResultRelay)
             .disposed(by: disposeBag)
         
         input.startDate
@@ -82,8 +89,11 @@ final class CreateNoticeVM {
             .asDriver(onErrorJustReturn: ButtonState(isEnabled: false, backgroundColor: .gray200))
         
         let images = input.selectedImages.asDriver(onErrorJustReturn: [])
-        let targetContent = input.targetContent.asDriver(onErrorJustReturn: "")
+        
+        let targetContent = input.targetContentResult.asDriver(onErrorJustReturn: "")
+        
         let startDate = input.startDate.asDriver(onErrorJustReturn: nil)
+        
         let finishDate = input.finishDate.asDriver(onErrorJustReturn: nil)
         
         let showImageCollection = selectedImagesRelay
@@ -91,7 +101,7 @@ final class CreateNoticeVM {
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
         
-        let showTargetView = input.targetContent
+        let showTargetView = input.targetContentResult
             .map { !$0.isEmpty }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
@@ -104,6 +114,10 @@ final class CreateNoticeVM {
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
         
+        let isTargetConfirmButtonEnabled = input.targetContenttext
+                    .map { !$0.isEmpty }
+                    .asDriver(onErrorJustReturn: false)
+        
         return Output(
             buttonState: buttonState,
             images: images,
@@ -112,7 +126,8 @@ final class CreateNoticeVM {
             finishDate: finishDate,
             showImageCollection: showImageCollection,
             showTargetView: showTargetView,
-            showDateView: showDateView
+            showDateView: showDateView,
+            isTargetConfirmButtonEnabled: isTargetConfirmButtonEnabled
         )
     }
     
