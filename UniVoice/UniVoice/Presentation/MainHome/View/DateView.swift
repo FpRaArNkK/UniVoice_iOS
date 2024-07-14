@@ -14,13 +14,11 @@ final class DateView: UIView {
     // MARK: Views
     let titleLabel = UILabel()
     let startDateLabel = UILabel()
+    let dateStackView = UIStackView()
     let finishDateLabel = UILabel()
     let nextIcon = UIImageView()
     let deleteButton = UIButton()
     
-    // MARK: Properties
-    let startDateRelay = BehaviorRelay<String>(value: "")
-    let finishDateRelay = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
     
     // MARK: Init
@@ -29,7 +27,6 @@ final class DateView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
-        bindUI()
     }
     
     required init?(coder: NSCoder) {
@@ -38,12 +35,17 @@ final class DateView: UIView {
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
-        [titleLabel,
-         startDateLabel,
-         finishDateLabel,
-         nextIcon,
-         deleteButton
+        [
+            titleLabel,
+            dateStackView,
+            deleteButton
         ].forEach { self.addSubview($0) }
+        
+        [
+            startDateLabel,
+            nextIcon,
+            finishDateLabel
+        ].forEach { dateStackView.addArrangedSubview($0) }
     }
     
     // MARK: setUpUI
@@ -67,12 +69,18 @@ final class DateView: UIView {
         nextIcon.do {
             $0.image = .icnNext
             $0.tintColor = .mint700
+            $0.contentMode = .scaleAspectFit
         }
         
         deleteButton.do {
             var config = UIButton.Configuration.plain()
             config.image = .icnDelete
             $0.configuration = config
+        }
+        
+        dateStackView.do {
+            $0.axis = .horizontal
+            $0.distribution = .equalSpacing
         }
     }
     
@@ -82,35 +90,41 @@ final class DateView: UIView {
             $0.top.horizontalEdges.equalToSuperview().inset(16)
         }
         
-        startDateLabel.snp.makeConstraints {
-            $0.bottom.leading.equalToSuperview().inset(16)
-        }
-        
-        finishDateLabel.snp.makeConstraints {
-            $0.bottom.trailing.equalToSuperview().inset(16)
-        }
-        
-        nextIcon.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(startDateLabel)
-            $0.height.width.equalTo(24)
-            
-        }
+//        startDateLabel.snp.makeConstraints {
+//            $0.leading.equalToSuperview().inset(16)
+//            $0.centerY.equalTo(nextIcon)
+//        }
+//        
+//        finishDateLabel.snp.makeConstraints {
+//            $0.bottom.trailing.equalToSuperview().inset(16)
+//            $0.centerY.equalTo(nextIcon)
+//        }
+//        
+//        nextIcon.snp.makeConstraints {
+//            $0.centerX.equalToSuperview()
+//            $0.centerY.equalTo(startDateLabel)
+//            $0.height.width.equalTo(24)
+//            
+//        }
         
         deleteButton.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(12)
             $0.width.height.equalTo(24)
         }
+        
+        dateStackView.snp.makeConstraints {
+            $0.horizontalEdges.bottom.equalToSuperview().inset(16)
+        }
     }
     
     // MARK: bindUI
-    private func bindUI() {
-        startDateRelay
-            .bind(to: startDateLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        finishDateRelay
-            .bind(to: finishDateLabel.rx.text)
-            .disposed(by: disposeBag)
-    }
+    //    private func bindUI() {
+    //        startDateRelay
+    //            .bind(to: startDateLabel.rx.text)
+    //            .disposed(by: disposeBag)
+    //
+    //        finishDateRelay
+    //            .bind(to: finishDateLabel.rx.text)
+    //            .disposed(by: disposeBag)
+    //    }
 }
