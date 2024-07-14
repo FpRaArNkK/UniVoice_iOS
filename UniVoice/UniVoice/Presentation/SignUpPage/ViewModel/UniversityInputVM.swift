@@ -13,6 +13,7 @@ final class UniversityInputVM: ViewModelType {
     struct Input {
         let inputText: Observable<String>
         let selectedUniversity: Observable<String>
+        let univCellIsSelected: Observable<University>
     }
     
     struct Output {
@@ -20,7 +21,9 @@ final class UniversityInputVM: ViewModelType {
         let filteredUniversities: Driver<[University]>
     }
     
+    private let isNextButtonEnabled = BehaviorRelay<Bool>(value: false)
     var disposeBag = DisposeBag()
+    
     let selectedUniversity = BehaviorRelay<String?>(value: nil)
     
     func selectUniversity(_ universityName: String) {
@@ -42,13 +45,23 @@ final class UniversityInputVM: ViewModelType {
             .bind(to: validationString)
             .disposed(by: disposeBag)
         
-        let isNextButtonEnabled = Observable.combineLatest(textFieldString, validationString)
-            .map { textFieldString, validationString in
-                print("textFieldString: \(textFieldString)")
-                print("validationString: \(validationString)")
-                return textFieldString == validationString
+        input.inputText
+            .map { _ in
+                return false
             }
-            .asDriver(onErrorJustReturn: false)
+            .bind { [weak self] isEnabled in
+                self?.isNextButtonEnabled.accept(isEnabled)
+            }
+            .disposed(by: disposeBag)
+        
+        input.univCellIsSelected
+            .map { _ in
+                return true
+            }
+            .bind { [weak self] isEnabled in
+                self?.isNextButtonEnabled.accept(isEnabled)
+            }
+            .disposed(by: disposeBag)
         
         let filteredUniversities = input.inputText
             .map { query in
@@ -58,7 +71,10 @@ final class UniversityInputVM: ViewModelType {
         
 //        let selectedName = input.selectedUniversity
         
-        return Output(isNextButtonEnabled: isNextButtonEnabled, filteredUniversities: filteredUniversities)
+        return Output(
+            isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false),
+            filteredUniversities: filteredUniversities
+        )
     }
 
 }
