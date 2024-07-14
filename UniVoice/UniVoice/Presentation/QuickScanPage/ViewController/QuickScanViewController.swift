@@ -18,6 +18,16 @@ final class QuickScanViewController: UIViewController {
     private let rootView = QuickScanView()
     private let viewModel = QuickScanViewModel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
@@ -32,7 +42,6 @@ final class QuickScanViewController: UIViewController {
     
     // MARK: setUpFoundation
     private func setUpFoundation() {
-        self.tabBarController?.tabBar.isHidden = true
         self.title = "읽지 않은 공지"
         rootView.quickScanContentCollectionView.delegate = self
     }
