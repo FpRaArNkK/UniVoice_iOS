@@ -11,12 +11,12 @@ import RxCocoa
 
 final class CreateNoticeVM {
     struct Input {
-        let titleText: BehaviorRelay<String>
-        let contentText: BehaviorRelay<String>
-        let selectedImages: BehaviorRelay<[UIImage]>
-        let targetContent: BehaviorRelay<String>
-        let startDate: BehaviorRelay<Date?>
-        let finishDate: BehaviorRelay<Date?>
+        let titleText: Observable<String>
+        let contentText: Observable<String>
+        let selectedImages: Observable<[UIImage]>
+        let targetContent: Observable<String>
+        let startDate: Observable<Date?>
+        let finishDate: Observable<Date?>
     }
     
     struct Output {
@@ -36,8 +36,42 @@ final class CreateNoticeVM {
     }
     
     private let disposeBag = DisposeBag()
+    private let titleTextRelay = BehaviorRelay<String>(value: "")
+    private let contentTextRelay = BehaviorRelay<String>(value: "")
+    private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
+    private let targetContentRelay = BehaviorRelay<String>(value: "")
+    private let startDateRelay = BehaviorRelay<Date?>(value: nil)
+    private let finishDateRelay = BehaviorRelay<Date?>(value: nil)
+    private let showImageCollectionRelay = BehaviorRelay<Bool>(value: false)
+    private let showTargetViewRelay = BehaviorRelay<Bool>(value: false)
+    private let showDateViewRelay = BehaviorRelay<Bool>(value: false)
     
     func transform(input: Input) -> Output {
+        
+        input.titleText
+            .bind(to: titleTextRelay)
+            .disposed(by: disposeBag)
+        
+        input.contentText
+            .bind(to: contentTextRelay)
+            .disposed(by: disposeBag)
+        
+        input.selectedImages
+            .bind(to: selectedImagesRelay)
+            .disposed(by: disposeBag)
+        
+        input.targetContent
+            .bind(to: targetContentRelay)
+            .disposed(by: disposeBag)
+        
+        input.startDate
+            .bind(to: startDateRelay)
+            .disposed(by: disposeBag)
+        
+        input.finishDate
+            .bind(to: finishDateRelay)
+            .disposed(by: disposeBag)
+        
         let buttonState = Observable
             .combineLatest(input.titleText.asObservable(), input.contentText.asObservable())
             .map { title, content in
@@ -47,12 +81,12 @@ final class CreateNoticeVM {
             }
             .asDriver(onErrorJustReturn: ButtonState(isEnabled: false, backgroundColor: .gray200))
         
-        let images = input.selectedImages.asDriver()
-        let targetContent = input.targetContent.asDriver()
-        let startDate = input.startDate.asDriver()
-        let finishDate = input.finishDate.asDriver()
-
-        let showImageCollection = input.selectedImages
+        let images = input.selectedImages.asDriver(onErrorJustReturn: [])
+        let targetContent = input.targetContent.asDriver(onErrorJustReturn: "")
+        let startDate = input.startDate.asDriver(onErrorJustReturn: nil)
+        let finishDate = input.finishDate.asDriver(onErrorJustReturn: nil)
+        
+        let showImageCollection = selectedImagesRelay
             .map { !$0.isEmpty }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
@@ -82,26 +116,7 @@ final class CreateNoticeVM {
         )
     }
     
-    init() {
-        // 초기화
-        titleTextRelay.accept("")
-        contentTextRelay.accept("")
-        selectedImagesRelay.accept([])
-        targetContentRelay.accept("소프트웨어 공학과 1,2학년 학생들")
-        startDateRelay.accept(Date())
-        finishDateRelay.accept(Date())
-        showImageCollectionRelay.accept(false)
-        showTargetViewRelay.accept(false)
-        showDateViewRelay.accept(false)
+    func updateSelectedImages(_ images: [UIImage]) {
+        selectedImagesRelay.accept(images)
     }
-    
-    let titleTextRelay = BehaviorRelay<String>(value: "")
-        let contentTextRelay = BehaviorRelay<String>(value: "")
-    let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
-    let targetContentRelay = BehaviorRelay<String>(value: "소프트웨어 공학과 1,2학년 학생들")
-    let startDateRelay = BehaviorRelay<Date?>(value: Date())
-        let finishDateRelay = BehaviorRelay<Date?>(value: Date())
-    let showImageCollectionRelay = BehaviorRelay<Bool>(value: false)
-    let showTargetViewRelay = BehaviorRelay<Bool>(value: false)
-    let showDateViewRelay = BehaviorRelay<Bool>(value: false)
 }
