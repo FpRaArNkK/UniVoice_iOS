@@ -18,6 +18,8 @@ final class CreateNoticeVC: UIViewController {
     private let viewModel = CreateNoticeVM()
     private let disposeBag = DisposeBag()
     
+    private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
+    
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
@@ -28,7 +30,6 @@ final class CreateNoticeVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         setUpBindUI()
-        bindCollectionView()
     }
     
     // MARK: setUpFoundation
@@ -49,21 +50,13 @@ final class CreateNoticeVC: UIViewController {
         let rightButton = UIBarButtonItem(customView: buttonContainer)
         self.navigationItem.rightBarButtonItem = rightButton
         
-        rootView.titleTextField.rx.text.orEmpty
-            .bind(to: viewModel.titleTextRelay)
-            .disposed(by: disposeBag)
-        
-        rootView.contentTextView.rx.text.orEmpty
-            .bind(to: viewModel.contentTextRelay)
-            .disposed(by: disposeBag)
-        
         let input = CreateNoticeVM.Input(
-            titleText: viewModel.titleTextRelay,
-            contentText: viewModel.contentTextRelay,
-            selectedImages: viewModel.selectedImagesRelay,
-            targetContent: viewModel.targetContentRelay,
-            startDate: viewModel.startDateRelay,
-            finishDate: viewModel.finishDateRelay
+            titleText: rootView.titleTextField.rx.text.orEmpty.asObservable(),
+            contentText: rootView.contentTextView.rx.text.orEmpty.asObservable(),
+            selectedImages: selectedImagesRelay.asObservable(),
+            targetContent: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
+            startDate: rootView.dateInputView.startDatePicker.rx.date.map { $0 },
+            finishDate: rootView.dateInputView.finishDatePicker.rx.date.map { $0 }
         )
         
         let output = viewModel.transform(input: input)
@@ -91,7 +84,7 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         output.showImageCollection
-            .drive(onNext: { [weak self] show in
+            .drive(onNext: { [weak self] (show: Bool) in
                 guard let self = self else { return }
                 if show {
                     if !self.rootView.noticeStackView.arrangedSubviews.contains(self.rootView.imageCollectionView) {
@@ -104,7 +97,7 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         output.showTargetView
-            .drive(onNext: { [weak self] show in
+            .drive(onNext: { [weak self] (show: Bool) in
                 guard let self = self else { return }
                 if show {
                     if !self.rootView.noticeStackView.arrangedSubviews.contains(self.rootView.targetView) {
@@ -117,7 +110,7 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         output.showDateView
-            .drive(onNext: { [weak self] show in
+            .drive(onNext: { [weak self] (show: Bool) in
                 guard let self = self else { return }
                 if show {
                     if !self.rootView.noticeStackView.arrangedSubviews.contains(self.rootView.dateView) {
@@ -134,10 +127,14 @@ final class CreateNoticeVC: UIViewController {
                 self?.imageButtonTapped()
             }
             .disposed(by: disposeBag)
-    }
-    
-    private func bindCollectionView() {
-        let images: Observable<[UIImage]> = viewModel.selectedImagesRelay.asObservable()
+        
+        rootView.targetButton.rx.tap
+            .bind { [weak self] in
+                self?.targetButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        let images: Observable<[UIImage]> = input.selectedImages.asObservable()
         
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, UIImage>>(configureCell: { dataSource, collectionView, indexPath, image in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCVC.reuseIdentifier, for: indexPath) as? ImageCVC else {
@@ -146,7 +143,6 @@ final class CreateNoticeVC: UIViewController {
             cell.imageView.image = image
             return cell
         })
-        
         images
             .map { [SectionModel(model: "Section 1", items: $0)] }
             .bind(to: rootView.imageCollectionView.rx.items(dataSource: dataSource))
@@ -169,6 +165,19 @@ final class CreateNoticeVC: UIViewController {
         present(addImageAlert, animated: true)
         
     }
+    
+    private func targetButtonTapped() {
+        if !self.rootView.subviews.contains(self.rootView.targetInputView) {
+            self.rootView.addSubview(self.rootView.targetInputView)
+            
+            self.rootView.targetInputView.snp.makeConstraints {
+                $0.bottom.equalToSuperview()
+                $0.horizontalEdges.equalToSuperview()
+                $0.height.equalTo(195) // 원하는 높이로 설정
+            }
+        }
+    }
+    
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
@@ -188,6 +197,7 @@ extension CreateNoticeVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 86, height: 86)
     }
 }
+
 extension CreateNoticeVC: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
@@ -212,8 +222,7 @@ extension CreateNoticeVC: PHPickerViewControllerDelegate {
         }
         
         dispatchGroup.notify(queue: .main) { [weak self] in
-            self?.viewModel.selectedImagesRelay.accept(selectedImages)
-            self?.viewModel.showImageCollectionRelay.accept(!selectedImages.isEmpty)
+            self?.selectedImagesRelay.accept(selectedImages)
         }
     }
 }

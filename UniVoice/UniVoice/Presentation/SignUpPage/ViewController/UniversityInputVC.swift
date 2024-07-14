@@ -39,8 +39,6 @@ final class UniversityInputVC: UIViewController {
     
     // MARK: setUpBindUI
     private func setUpBindUI() {
-//        let selectedUniversity = PublishSubject<String>()
-        
         rootView.nextButton.rx.tap
                     .bind(onNext: { [weak self] in
                         guard let self = self, let inputText = self.rootView.univTextField.text else { return }
