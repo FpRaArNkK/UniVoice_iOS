@@ -45,7 +45,7 @@ class CreateAccountVC: UIViewController {
         
         let output = viewModel.transform(input: input)
         
-        let duplicationButtonIsEnabled = output.checkDuplication
+        let duplicationButtonIsEnabled = output.idIsValid
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
         let confirmAndNextButtonIsEnabled = output.confirmAndNextButtonIsEnabled
@@ -81,7 +81,6 @@ class CreateAccountVC: UIViewController {
                 }
                 
                 if !isDuplicated {
-                    self?.rootView.idTextField.isUserInteractionEnabled = false
                     self?.rootView.pwTextField.becomeFirstResponder()
                 }
             }
