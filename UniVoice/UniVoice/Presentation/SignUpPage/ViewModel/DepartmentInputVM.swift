@@ -49,18 +49,14 @@ final class DepartmentInputVM: ViewModelType {
             .map { _ in
                 return false
             }
-            .bind { [weak self] isEnabled in
-                self?.isNextButtonEnabled.accept(isEnabled)
-            }
+            .bind(to: isNextButtonEnabled)
             .disposed(by: disposeBag)
         
         input.departmentCellIsSelected
             .map { _ in
                 return true
             }
-            .bind { [weak self] isEnabled in
-                self?.isNextButtonEnabled.accept(isEnabled)
-            }
+            .bind(to: isNextButtonEnabled)
             .disposed(by: disposeBag)
         
         let filteredDepartments = input.inputText
