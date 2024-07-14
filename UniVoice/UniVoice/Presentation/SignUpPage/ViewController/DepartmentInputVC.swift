@@ -76,7 +76,8 @@ final class DepartmentInputVC: UIViewController {
         
         let input = DepartmentInputVM.Input(
             inputText: rootView.departTextField.rx.text.orEmpty.asObservable(),
-            selectedDepartment: selectedDepartment.asObservable()
+            selectedDepartment: selectedDepartment.asObservable(),
+            departmentCellIsSelected: rootView.departTableView.rx.modelSelected(Department.self).asObservable()
         )
         
         let output = viewModel.transform(input: input)

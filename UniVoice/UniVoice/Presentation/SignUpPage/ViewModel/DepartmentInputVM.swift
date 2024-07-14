@@ -13,6 +13,7 @@ final class DepartmentInputVM: ViewModelType {
     struct Input {
         let inputText: Observable<String>
         let selectedDepartment: Observable<String>
+        let departmentCellIsSelected: Observable<Department>
     }
     
     struct Output {
@@ -29,6 +30,7 @@ final class DepartmentInputVM: ViewModelType {
     
     private let textFieldString = BehaviorRelay(value: "")
     private let validationString = BehaviorRelay(value: "")
+    private let isNextButtonEnabled = BehaviorRelay<Bool>(value: false)
     
     func transform(input: Input) -> Output {
         input.inputText
@@ -43,13 +45,19 @@ final class DepartmentInputVM: ViewModelType {
             .bind(to: validationString)
             .disposed(by: disposeBag)
         
-        let isNextButtonEnabled = Observable.combineLatest(textFieldString, validationString)
-            .map { textFieldString, validationString in
-                print("textFieldString: \(textFieldString)")
-                print("validationString: \(validationString)")
-                return textFieldString == validationString
+        input.inputText
+            .map { _ in
+                return false
             }
-            .asDriver(onErrorJustReturn: false)
+            .bind(to: isNextButtonEnabled)
+            .disposed(by: disposeBag)
+        
+        input.departmentCellIsSelected
+            .map { _ in
+                return true
+            }
+            .bind(to: isNextButtonEnabled)
+            .disposed(by: disposeBag)
         
         let filteredDepartments = input.inputText
             .map { query in
@@ -57,7 +65,10 @@ final class DepartmentInputVM: ViewModelType {
             }
             .asDriver(onErrorJustReturn: [])
         
-        return Output(isNextButtonEnabled: isNextButtonEnabled, filteredDepartments: filteredDepartments)
+        return Output(
+            isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false),
+            filteredDepartments: filteredDepartments
+        )
     }
 }
 
