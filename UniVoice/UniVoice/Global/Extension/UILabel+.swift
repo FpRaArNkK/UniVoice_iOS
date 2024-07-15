@@ -17,6 +17,48 @@ extension UILabel {
         self.attributedText = .pretendardAttributedString(for: font, with: text)
         self.textColor = color
     }
+    
+    func addStrikeThrough(color: UIColor? = nil) {
+            guard let currentAttributedText = self.attributedText else {
+                return
+            }
+
+            let mutableAttributedString = NSMutableAttributedString(attributedString: currentAttributedText)
+            let fullRange = NSRange(location: 0, length: mutableAttributedString.length)
+
+            // 기존 중간 줄 속성이 있는지 확인
+            var hasStrikeThrough = false
+            currentAttributedText.enumerateAttribute(.strikethroughStyle, in: fullRange, options: []) { value, range, stop in
+                if value != nil {
+                    print("줄 표시 됩니다 !!")
+                    hasStrikeThrough = true
+                    stop.pointee = true
+                }
+            }
+
+            // 중복 추가 방지
+            if !hasStrikeThrough {
+                if let strikeThroughColor = color {
+                    mutableAttributedString.addAttribute(.strikethroughColor, value: strikeThroughColor, range: fullRange)
+                }
+                mutableAttributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: fullRange)
+            }
+
+            self.attributedText = mutableAttributedString
+        }
+
+        func removeStrikeThrough() {
+            guard let currentAttributedText = self.attributedText else {
+                return
+            }
+
+            let mutableAttributedString = NSMutableAttributedString(attributedString: currentAttributedText)
+            let fullRange = NSRange(location: 0, length: mutableAttributedString.length)
+
+            mutableAttributedString.removeAttribute(.strikethroughStyle, range: fullRange)
+            mutableAttributedString.removeAttribute(.strikethroughColor, range: fullRange)
+            self.attributedText = mutableAttributedString
+        }
 }
 
 // Custom Font

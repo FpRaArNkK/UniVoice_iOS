@@ -20,10 +20,16 @@ import RxCocoa
 
 final class DateInputView: UIView {
     
+    enum DatePickingState {
+        case start
+        case end
+    }
+    
     // MARK: Properties
     private let startDate = BehaviorRelay<Date>(value: .now)
     private let endDate = BehaviorRelay<Date>(value: .now)
     private let isUsingTime = BehaviorRelay<Bool>(value: true)
+    private let datePickingState = BehaviorRelay<DatePickingState>(value: .start)
     private let disposeBag = DisposeBag()
     private var tapEventDisposeBag = DisposeBag()
     
@@ -298,8 +304,53 @@ final class DateInputView: UIView {
         }
         .bind(to: endMainLabel.rx.text)
         .disposed(by: disposeBag)
+        
+        // 날짜 피커 상태와 시작 / 종료 날짜 뷰 컬러 바인딩
+        datePickingState.bind(onNext: { [weak self] state in
+            guard let self = self else { return }
+            let startColor: UIColor = state == .start ? .mint700 : .B_03
+            let endColor: UIColor = state == .end ? .mint700 : .B_03
+            startSubLabel.textColor = startColor
+            startMainLabel.textColor = startColor
+            endSubLabel.textColor = endColor
+            endMainLabel.textColor = endColor
+        })
+        .disposed(by: disposeBag)
+        
+        // 시작 날짜 or 종료 날짜 선택 시 검증 로직 수행
+        let validation = Observable.combineLatest(
+            startDate,
+            endDate
+        )
+            .map { [weak self] start, end in
+                guard let self = self else { return false }
+                return self.validateDuration(start: start, end: end)
+            }
+        
+        validation
+            .withLatestFrom(datePickingState) { isValid, state -> (Bool, DatePickingState) in
+                return (isValid, state)
+            }
+            .bind(onNext: { [weak self] isValid, state in
+                guard !isValid, let self = self else { return }
+                // 유효하지 않을 때
+                switch state {
+                    
+                case .start: // 시작 날짜가 종료 날짜에 후행
+                    self.endDate.accept(startDate.value)
+                case .end: // 종료 날짜가 시작 날짜에 선행
+                    self.startDate.accept(endDate.value)
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
+    /// 시작 날짜와 종료 날짜의 선행 관계가 올바른지 검증
+    private func validateDuration(start: Date, end: Date) -> Bool {
+        return start <= end
+    }
+    
+    /// 시작 날짜 뷰 탭 시 datePicker와 datePickingState에 선택 상태 바인딩
     @objc private func startStackViewDidTap() {
         tapEventDisposeBag = DisposeBag()
         
@@ -309,12 +360,10 @@ final class DateInputView: UIView {
             .bind(to: startDate)
             .disposed(by: tapEventDisposeBag)
         
-        startSubLabel.textColor = .mint700
-        startMainLabel.textColor = .mint700
-        endSubLabel.textColor = .B_03
-        endMainLabel.textColor = .B_03
+        datePickingState.accept(.start)
     }
     
+    /// 종료 날짜 뷰 탭 시 datePicker에 종료 날짜 바인딩
     @objc private func endStackViewDidTap() {
         // 기존 바인딩 로직 dispose
         tapEventDisposeBag = DisposeBag()
@@ -325,10 +374,7 @@ final class DateInputView: UIView {
             .bind(to: endDate)
             .disposed(by: tapEventDisposeBag)
         
-        startSubLabel.textColor = .B_03
-        startMainLabel.textColor = .B_03
-        endSubLabel.textColor = .mint700
-        endMainLabel.textColor = .mint700
+        datePickingState.accept(.end)
     }
     
     // MARK: 하루종일 버튼
