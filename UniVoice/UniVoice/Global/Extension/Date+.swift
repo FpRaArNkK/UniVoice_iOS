@@ -49,4 +49,41 @@ extension Date {
         dateFormatter.pmSymbol = "오후"
         return dateFormatter.string(from: self)
     }
+    
+    enum Language {
+        case korean
+        case english
+        
+        var amSymbol: String {
+            switch self {
+                
+            case .korean:
+                return "오전"
+            case .english:
+                return "AM"
+            }
+        }
+        
+        var pmSymbol: String {
+            switch self {
+                
+            case .korean:
+                return "오후"
+            case .english:
+                return "PM"
+            }
+        }
+    }
+    
+    /// Date를 주어진 형식의 문자열로 변환합니다. ex - "yyyy년 MM월 dd일"
+    /// - Returns: 변환된 문자열
+    func toCustomFormattedDateString(format: String, lang: Language = .korean) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: "ko_KR") // 불필요 시 삭제
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST") // 불필요 시 삭제
+        dateFormatter.amSymbol = lang.amSymbol
+        dateFormatter.pmSymbol = lang.pmSymbol
+        return dateFormatter.string(from: self)
+    }
 }
