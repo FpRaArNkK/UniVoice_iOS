@@ -55,9 +55,16 @@ final class CreateNoticeVC: UIViewController {
         let rightButton = UIBarButtonItem(customView: buttonContainer)
         self.navigationItem.rightBarButtonItem = rightButton
         
+        let isTextViewEmpty = rootView.contentTextView.rx.text.orEmpty
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+                    .asObservable()
+        
         let input = CreateNoticeVM.Input(
-            titleText: rootView.titleTextField.rx.text.orEmpty.asObservable(),
-            contentText: rootView.contentTextView.rx.text.orEmpty.asObservable(),
+            titleText: 
+                rootView.titleTextField.rx.text.orEmpty.asObservable(),
+            contentText: 
+                rootView.contentTextView.rx.text.orEmpty.asObservable(),
+            isTextViewEmpty: rootView.isTextViewEmptyRelay.asObservable(),
             selectedImages: selectedImagesRelay.asObservable(),
             targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
             targetContentResult:
@@ -70,7 +77,6 @@ final class CreateNoticeVC: UIViewController {
         
         output.buttonState
             .drive(onNext: { state in
-                print(state)
                 customButton.isUserInteractionEnabled = state.isEnabled
                 customButton.configuration?.baseBackgroundColor = state.backgroundColor
             })

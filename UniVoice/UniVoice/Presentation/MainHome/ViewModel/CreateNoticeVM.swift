@@ -13,6 +13,7 @@ final class CreateNoticeVM {
     struct Input {
         let titleText: Observable<String>
         let contentText: Observable<String>
+        let isTextViewEmpty: Observable<Bool>
         let selectedImages: Observable<[UIImage]>
         let targetContenttext: Observable<String>
         let targetContentResult: Observable<String>
@@ -40,6 +41,7 @@ final class CreateNoticeVM {
     private let disposeBag = DisposeBag()
     private let titleTextRelay = BehaviorRelay<String>(value: "")
     private let contentTextRelay = BehaviorRelay<String>(value: "")
+    private let isTextViewEmptyRelay = BehaviorRelay<Bool>(value: false)
     private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
     private let targetContentRelay = BehaviorRelay<String>(value: "")
     private let targetContentResultRelay = BehaviorRelay<String>(value: "")
@@ -57,6 +59,10 @@ final class CreateNoticeVM {
         
         input.contentText
             .bind(to: contentTextRelay)
+            .disposed(by: disposeBag)
+        
+        input.isTextViewEmpty
+            .bind(to: isTextViewEmptyRelay)
             .disposed(by: disposeBag)
         
         input.selectedImages
@@ -80,9 +86,9 @@ final class CreateNoticeVM {
             .disposed(by: disposeBag)
         
         let buttonState = Observable
-            .combineLatest(input.titleText.asObservable(), input.contentText.asObservable())
-            .map { title, content in
-                let isEnabled = !title.isEmpty && !content.isEmpty
+            .combineLatest(titleTextRelay, isTextViewEmptyRelay)
+            .map { title, isTextViewEmptyRelay in
+                let isEnabled = !title.isEmpty && !isTextViewEmptyRelay
                 let backgroundColor = isEnabled ? UIColor.mint400 : UIColor.gray200
                 return ButtonState(isEnabled: isEnabled, backgroundColor: backgroundColor)
             }
@@ -115,8 +121,8 @@ final class CreateNoticeVM {
             .asDriver(onErrorJustReturn: false)
         
         let isTargetConfirmButtonEnabled = input.targetContenttext
-                    .map { !$0.isEmpty }
-                    .asDriver(onErrorJustReturn: false)
+            .map { !$0.isEmpty }
+            .asDriver(onErrorJustReturn: false)
         
         return Output(
             buttonState: buttonState,
