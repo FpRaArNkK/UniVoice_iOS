@@ -568,10 +568,17 @@ final class DateInputView: UIView {
 }
 
 extension DateInputView {
-    /// DateInputView 컴포넌트에서 사용 가능한 시작 날짜, 종료 날짜의 Relay의 Observable 값을 반환합니다.
-    /// 해당 Relay를 ViewModel의 input으로 사용하면 됩니다.
-    func getDateObservables() -> (Observable<Date>, Observable<Date>) {
-        return (self.startDate.asObservable(), self.endDate.asObservable())
+    /// DateInputView 컴포넌트에서 사용하는 시작 날짜, 종료 날짜의 Relay의 Observable 값을 반환합니다.
+    /// 해당 Observable들은 Submit(확인) 버튼을 눌렀을 때만 startDate, endDate로 방출됩니다.
+    /// 해당 startDate, endDate를 ViewModel의 input으로 사용하면 됩니다.
+    func getSubmittedDateObservables() -> (Observable<Date>, Observable<Date>)? {
+        let submittedStartDate = submitButton.rx.tap
+            .withLatestFrom(startDate.asObservable())
+        
+        let submittedEndDate = submitButton.rx.tap
+            .withLatestFrom(endDate.asObservable())
+        
+        return (submittedStartDate, submittedEndDate)
     }
 }
 
