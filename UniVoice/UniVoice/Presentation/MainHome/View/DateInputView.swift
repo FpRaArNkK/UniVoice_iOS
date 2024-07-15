@@ -23,7 +23,7 @@ final class DateInputView: UIView {
     // MARK: Properties
     private let startDate = BehaviorRelay<Date>(value: .now)
     private let endDate = BehaviorRelay<Date>(value: .now)
-    private let isUsingTime = BehaviorRelay<Bool>(value: false)
+    private let isUsingTime = BehaviorRelay<Bool>(value: true)
     private let disposeBag = DisposeBag()
     
     // MARK: Views
@@ -39,7 +39,7 @@ final class DateInputView: UIView {
     private let endStackView = UIStackView()
     let endSubLabel = UILabel()
     let endMainLabel = UILabel()
-    let useTimeButton = AllDayButton(with: .off)
+    let useTimeButton = AllDayButton()
     let datePicker = UIDatePicker()
     let submitButton = CustomButton(with: .active)
     
@@ -240,9 +240,9 @@ final class DateInputView: UIView {
                 switch self {
                     
                 case .on:
-                    return .white
-                case .off:
                     return .gray200
+                case .off:
+                    return .white
                 }
             }
             
@@ -250,9 +250,9 @@ final class DateInputView: UIView {
                 switch self {
                     
                 case .on:
-                    return .mint900
-                case .off:
                     return .white
+                case .off:
+                    return .mint900
                 }
             }
             
@@ -260,9 +260,9 @@ final class DateInputView: UIView {
                 switch self {
                     
                 case .on:
-                    return nil
+                    return  .gray200
                 case .off:
-                    return .gray200
+                    return nil
                 }
             }
             
@@ -270,34 +270,19 @@ final class DateInputView: UIView {
                 switch self {
                     
                 case .on:
-                    return "시간설정"
-                case .off:
                     return "시간해제"
-                }
-            }
-            
-            func toggledValue() -> ButtonType {
-                switch self {
-                    
-                case .on:
-                    return .off
                 case .off:
-                    return .on
+                    return  "시간설정"
                 }
             }
-            
         }
         
         private let disposeBag = DisposeBag()
-        private let initialState: ButtonType
-        private lazy var isOn = BehaviorRelay<ButtonType>(value: initialState)
         
         // MARK: Init
-        init(with initialState: AllDayButton.ButtonType) {
-            self.initialState = initialState
+        init() {
             super.init(frame: .zero)
             setUpUI()
-            bindUI()
         }
         
         required init?(coder: NSCoder) {
@@ -309,43 +294,37 @@ final class DateInputView: UIView {
             self.clipsToBounds = true
         }
         
-        private func bindUI() {
-            isOn.bind(onNext: { [weak self] btnType in
-                guard let self = self else { return }
-                
-                var attrString = AttributedString(btnType.title)
-                attrString.font = UIFont.pretendardFont(for: .B3R)
-                
-                var config = UIButton.Configuration.filled()
-                config.baseForegroundColor = btnType.textColor
-                config.baseBackgroundColor = btnType.backgroundColor
-                config.attributedTitle = attrString
-                
-                config.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
-                self.configuration = config
-                
-                if let borderColor = btnType.borderColor {
-                    self.layer.borderWidth = 1
-                    self.layer.borderColor = borderColor.cgColor
-                }
-                else {
-                    self.layer.borderWidth = 0
-                }
-            })
-            .disposed(by: disposeBag)
-        }
-        
         // MARK: External Logic
-        func bindData(with isOn: BehaviorRelay<Bool>) {
-            isOn
+        func bindData(with isUsingTime: BehaviorRelay<Bool>) {
+            isUsingTime
                 .map { return $0 ? ButtonType.on : ButtonType.off }
-                .bind(to: self.isOn)
+                .bind(onNext: { [weak self] btnType in
+                    guard let self = self else { return }
+                    
+                    var attrString = AttributedString(btnType.title)
+                    attrString.font = UIFont.pretendardFont(for: .B3R)
+                    
+                    var config = UIButton.Configuration.filled()
+                    config.baseForegroundColor = btnType.textColor
+                    config.baseBackgroundColor = btnType.backgroundColor
+                    config.attributedTitle = attrString
+                    
+                    config.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
+                    self.configuration = config
+                    
+                    if let borderColor = btnType.borderColor {
+                        self.layer.borderWidth = 1
+                        self.layer.borderColor = borderColor.cgColor
+                    } else {
+                        self.layer.borderWidth = 0
+                    }
+                })
                 .disposed(by: disposeBag)
             
             self.rx.tap
-                .withLatestFrom(self.isOn)
-                .bind(onNext: { isOn in
-                    self.isOn.accept(isOn.toggledValue())
+                .withLatestFrom(isUsingTime)
+                .bind(onNext: {
+                    isUsingTime.accept(!$0)
                 })
                 .disposed(by: disposeBag)
         }
