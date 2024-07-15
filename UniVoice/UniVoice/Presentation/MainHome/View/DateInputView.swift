@@ -9,7 +9,7 @@
 //  TargetInputView.swift
 //  UniVoice
 //
-//  Created by 이자민 on 7/14/24.
+//  Created by 박민서 on 7/14/24.
 //
 
 import UIKit
@@ -37,19 +37,20 @@ final class DateInputView: UIView {
     private let borderLine = UIView()
     private let titleLabel = UILabel()
     let dismissButton = UIButton()
-    private let dateStackView = UIStackView()
+    private let layView = UIView()
+    private let dateView = UIView()
     private let startStackView = UIStackView()
 //    let startYearLabel = UILabel()
-    let startSubLabel = UILabel()
-    let startMainLabel = UILabel()
+    private let startSubLabel = UILabel()
+    private let startMainLabel = UILabel()
     private let blankView = UIView()
     private let chevronImageView = UIImageView()
     private let endStackView = UIStackView()
 //    let endYearLabel = UILabel()
-    let endSubLabel = UILabel()
-    let endMainLabel = UILabel()
-    let useTimeButton = AllDayButton()
-    let datePicker = UIDatePicker()
+    private let endSubLabel = UILabel()
+    private let endMainLabel = UILabel()
+    private let useTimeButton = AllDayButton()
+    private let datePicker = UIDatePicker()
     let submitButton = CustomButton(with: .active)
     
     // VC 연결용 임시
@@ -91,7 +92,7 @@ final class DateInputView: UIView {
             startStackView,
             blankView,
             endStackView
-        ].forEach { dateStackView.addArrangedSubview($0) }
+        ].forEach { dateView.addSubview($0) }
         
         [
             startSubLabel,
@@ -107,9 +108,10 @@ final class DateInputView: UIView {
             borderLine,
             titleLabel,
             dismissButton,
-            dateStackView,
+            dateView,
 //            startYearLabel,
 //            endYearLabel,
+            layView,
             useTimeButton,
             datePicker,
             submitButton
@@ -132,11 +134,6 @@ final class DateInputView: UIView {
             $0.imageView?.snp.makeConstraints {
                 $0.edges.equalToSuperview().inset(9)
             }
-        }
-        
-        dateStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = 16
         }
         
 //        startYearLabel.do {
@@ -195,6 +192,8 @@ final class DateInputView: UIView {
         datePicker.do {
             $0.preferredDatePickerStyle = .wheels
             $0.locale = Locale(identifier: "ko_KR")
+            $0.minimumDate = .now
+            $0.minuteInterval = 5
             // setValue 통한 커스텀 UI 설정
             $0.setValue(UIColor.mint900, forKey: "textColor")
             $0.setValue(false, forKey: "highlightsToday")
@@ -232,13 +231,34 @@ final class DateInputView: UIView {
         useTimeButton.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(42)
             $0.trailing.equalToSuperview().inset(24)
-            $0.leading.equalTo(dateStackView.snp.trailing).offset(44).priority(.low)
         }
         
-        dateStackView.snp.makeConstraints {
+        layView.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(useTimeButton.snp.leading)
+        }
+        
+        dateView.snp.makeConstraints {
             $0.centerY.equalTo(useTimeButton)
-            $0.trailing.equalTo(useTimeButton.snp.leading).inset(44).priority(.low)
-            $0.leading.equalToSuperview().offset(24)
+            $0.centerX.equalTo(layView)
+//            $0.leading.equalToSuperview().offset(24)
+        }
+        
+        startStackView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
+            $0.leading.equalToSuperview()
+        }
+        
+        blankView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
+            $0.width.equalTo(chevronImageView)
+            $0.leading.equalTo(startStackView.snp.trailing).offset(16)
+            $0.trailing.equalTo(endStackView.snp.leading).offset(-16)
+        }
+        
+        endStackView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         
 //        startYearLabel.snp.makeConstraints {
