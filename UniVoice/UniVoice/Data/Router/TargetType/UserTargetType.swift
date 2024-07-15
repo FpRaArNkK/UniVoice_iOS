@@ -12,7 +12,7 @@ enum UserTargetType {
     
 }
 
-extension UserTargetType: ServiceTargetType {
+extension UserTargetType: UniVoiceTargetType {
     var baseURL: URL {
         return URL(string: "test")!
     }

@@ -12,7 +12,7 @@ enum NoticeTargetType {
     
 }
 
-extension NoticeTargetType: ServiceTargetType {
+extension NoticeTargetType: UniVoiceTargetType {
     var baseURL: URL {
         return URL(string: "test")!
     }
