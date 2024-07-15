@@ -54,6 +54,7 @@ final class DateInputView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
+        setUpBindUI()
     }
     
     required init?(coder: NSCoder) {
@@ -222,6 +223,11 @@ final class DateInputView: UIView {
         }
     }
     
+    // MARK: setUpBindUI
+    private func setUpBindUI() {
+        useTimeButton.bindData(with: isUsingTime)
+    }
+    
     /// 일시 화면에서만 사용되는 시간설정/시간해제 버튼입니다.
     class AllDayButton: UIButton {
         
@@ -270,6 +276,16 @@ final class DateInputView: UIView {
                 }
             }
             
+            func toggledValue() -> ButtonType {
+                switch self {
+                    
+                case .on:
+                    return .off
+                case .off:
+                    return .on
+                }
+            }
+            
         }
         
         private let disposeBag = DisposeBag()
@@ -312,8 +328,26 @@ final class DateInputView: UIView {
                     self.layer.borderWidth = 1
                     self.layer.borderColor = borderColor.cgColor
                 }
+                else {
+                    self.layer.borderWidth = 0
+                }
             })
             .disposed(by: disposeBag)
+        }
+        
+        // MARK: External Logic
+        func bindData(with isOn: BehaviorRelay<Bool>) {
+            isOn
+                .map { return $0 ? ButtonType.on : ButtonType.off }
+                .bind(to: self.isOn)
+                .disposed(by: disposeBag)
+            
+            self.rx.tap
+                .withLatestFrom(self.isOn)
+                .bind(onNext: { isOn in
+                    self.isOn.accept(isOn.toggledValue())
+                })
+                .disposed(by: disposeBag)
         }
     }
 }
