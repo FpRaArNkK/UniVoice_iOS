@@ -25,6 +25,7 @@ final class DateInputView: UIView {
     private let endDate = BehaviorRelay<Date>(value: .now)
     private let isUsingTime = BehaviorRelay<Bool>(value: true)
     private let disposeBag = DisposeBag()
+    private var tapEventDisposeBag = DisposeBag()
     
     // MARK: Views
     private let borderLine = UIView()
@@ -55,6 +56,7 @@ final class DateInputView: UIView {
         setUpUI()
         setUpLayout()
         setUpBindUI()
+        startStackViewDidTap()
     }
     
     required init?(coder: NSCoder) {
@@ -64,6 +66,12 @@ final class DateInputView: UIView {
     // MARK: setUpFoundation
     private func setUpFoundation() {
         self.backgroundColor = .gray50
+        
+        let startDateTapGesture = UITapGestureRecognizer(target: self, action: #selector(startStackViewDidTap))
+        let endDateTapGesture = UITapGestureRecognizer(target: self, action: #selector(endStackViewDidTap))
+        
+        startStackView.addGestureRecognizer(startDateTapGesture)
+        endStackView.addGestureRecognizer(endDateTapGesture)
     }
     
     // MARK: setUpHierarchy
@@ -106,6 +114,7 @@ final class DateInputView: UIView {
         
         titleLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .T3SB, with: "일시")
+            $0.textColor = .B_01
         }
         
         dismissButton.do {
@@ -163,6 +172,7 @@ final class DateInputView: UIView {
         
         datePicker.do {
             $0.preferredDatePickerStyle = .wheels
+            $0.locale = Locale(identifier: "ko_KR")
             // setValue 통한 커스텀 UI 설정
             $0.setValue(UIColor.mint900, forKey: "textColor")
             $0.setValue(false, forKey: "highlightsToday")
@@ -226,8 +236,102 @@ final class DateInputView: UIView {
     // MARK: setUpBindUI
     private func setUpBindUI() {
         useTimeButton.bindData(with: isUsingTime)
+        
+        // 시간 설정/해제에 따라 날짜 라벨 표시 변경
+        isUsingTime.bind(onNext: { [weak self] isUsingTime in
+            guard let self = self else { return }
+            self.startSubLabel.isHidden = !isUsingTime
+            self.endSubLabel.isHidden = !isUsingTime
+        })
+        .disposed(by: disposeBag)
+        
+        // 시간 설정/해제에 따라 날짜 피커 표시 변경
+        isUsingTime
+            .map { isUsingTime -> UIDatePicker.Mode in
+                return isUsingTime ? .dateAndTime : .date
+            }
+            .bind(onNext: { [weak self] mode in
+                guard let self = self else { return }
+                let transition = CATransition()
+                transition.type = .fade
+                transition.duration = 0.3
+                datePicker.layer.add(transition, forKey: kCATransition)
+                self.datePicker.datePickerMode = mode
+            })
+            .disposed(by: disposeBag)
+        
+        // 시작 날짜 변경되면 상단 라벨 텍스트 연결
+        startDate
+            .map {
+                $0.toCustomFormattedDateString(format: "M월 d일(E)", lang: .english)
+            }
+            .bind(to: startSubLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // 종료 날짜 변경되면 상단 라벨 텍스트 연결
+        endDate
+            .map {
+                $0.toCustomFormattedDateString(format: "M월 d일(E)", lang: .english)
+            }
+            .bind(to: endSubLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // 시작 날짜 or 시간 선택 시 메인 시작 라벨 표시 상태 변경
+        Observable.combineLatest(
+            startDate,
+            isUsingTime
+        ).map { date, isUsingTime in
+            let format = isUsingTime ? "h:mma" : "M월 d일(E)"
+            return date.toCustomFormattedDateString(format: format, lang: .english)
+        }
+        .bind(to: startMainLabel.rx.text)
+        .disposed(by: disposeBag)
+        
+        // 종료 날짜 or 시간 선택 시 메인 종료 라벨 표시 상태 변경
+        Observable.combineLatest(
+            endDate,
+            isUsingTime
+        )
+        .map { date, isUsingTime in
+            let format = isUsingTime ? "h:mma" : "M월 d일(E)"
+            return date.toCustomFormattedDateString(format: format, lang: .english)
+        }
+        .bind(to: endMainLabel.rx.text)
+        .disposed(by: disposeBag)
     }
     
+    @objc private func startStackViewDidTap() {
+        tapEventDisposeBag = DisposeBag()
+        
+        datePicker.date = startDate.value
+        datePicker.rx.date
+            .skip(1)
+            .bind(to: startDate)
+            .disposed(by: tapEventDisposeBag)
+        
+        startSubLabel.textColor = .mint700
+        startMainLabel.textColor = .mint700
+        endSubLabel.textColor = .B_03
+        endMainLabel.textColor = .B_03
+    }
+    
+    @objc private func endStackViewDidTap() {
+        // 기존 바인딩 로직 dispose
+        tapEventDisposeBag = DisposeBag()
+        // 새롭게 값 주입, Rx 바인딩
+        datePicker.date = endDate.value
+        datePicker.rx.date
+            .skip(1)
+            .bind(to: endDate)
+            .disposed(by: tapEventDisposeBag)
+        
+        startSubLabel.textColor = .B_03
+        startMainLabel.textColor = .B_03
+        endSubLabel.textColor = .mint700
+        endMainLabel.textColor = .mint700
+    }
+    
+    // MARK: 하루종일 버튼
     /// 일시 화면에서만 사용되는 시간설정/시간해제 버튼입니다.
     class AllDayButton: UIButton {
         
@@ -337,7 +441,6 @@ final class DateInputView: UIView {
         view.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(500)
         }
     })
 }
