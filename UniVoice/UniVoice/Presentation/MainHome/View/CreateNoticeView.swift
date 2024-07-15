@@ -99,10 +99,10 @@ final class CreateNoticeView: UIView {
         createButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("등록")
-            attString.foregroundColor = .white
             attString.font = UIFont.pretendardFont(for: .BUT3SB)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint400
+            config.baseForegroundColor = .white
             config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
             config.cornerStyle = .capsule
             $0.configuration = config
@@ -168,17 +168,16 @@ final class CreateNoticeView: UIView {
         
         buttonStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 12
-            $0.distribution = .equalCentering
+            $0.distribution = .equalSpacing
         }
         
         imageButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("사진")
-            attString.foregroundColor = .mint900
             attString.font = UIFont.pretendardFont(for: .BUT4R)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint50
+            config.baseForegroundColor = .mint900
             config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 14, bottom: 8, trailing: 14)
             config.cornerStyle = .capsule
             config.image = .icnCamera
@@ -189,10 +188,10 @@ final class CreateNoticeView: UIView {
         targetButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("대상")
-            attString.foregroundColor = .mint900
             attString.font = UIFont.pretendardFont(for: .BUT4R)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint50
+            config.baseForegroundColor = .mint900
             config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 14, bottom: 8, trailing: 14)
             config.cornerStyle = .capsule
             config.image = .icnPeople
@@ -203,15 +202,17 @@ final class CreateNoticeView: UIView {
         dateButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("일시")
-            attString.foregroundColor = .mint900
             attString.font = UIFont.pretendardFont(for: .BUT4R)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint50
+            config.baseForegroundColor = .mint900
             config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 14, bottom: 8, trailing: 14)
             config.cornerStyle = .capsule
             config.image = .icnCdr
             config.imagePadding = 4
             $0.configuration = config
+            $0.tintColor = .mint900
+            $0.setTitleColor(.mint900, for: .normal)
         }
         
         targetInputView.do {
@@ -287,10 +288,6 @@ final class CreateNoticeView: UIView {
             $0.width.equalTo(231)
             $0.leading.equalToSuperview().inset(16)
             $0.bottom.equalTo(bottomView.snp.bottom).offset(-16)
-        }
-        
-        imageButton.snp.makeConstraints {
-            $0.width.equalTo(69)
         }
         
         targetInputView.snp.makeConstraints {
