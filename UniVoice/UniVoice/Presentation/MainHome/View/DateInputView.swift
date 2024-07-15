@@ -39,13 +39,13 @@ final class DateInputView: UIView {
     let dismissButton = UIButton()
     private let dateStackView = UIStackView()
     private let startStackView = UIStackView()
-    let startYearLabel = UILabel()
+//    let startYearLabel = UILabel()
     let startSubLabel = UILabel()
     let startMainLabel = UILabel()
     private let blankView = UIView()
     private let chevronImageView = UIImageView()
     private let endStackView = UIStackView()
-    let endYearLabel = UILabel()
+//    let endYearLabel = UILabel()
     let endSubLabel = UILabel()
     let endMainLabel = UILabel()
     let useTimeButton = AllDayButton()
@@ -108,8 +108,8 @@ final class DateInputView: UIView {
             titleLabel,
             dismissButton,
             dateStackView,
-            startYearLabel,
-            endYearLabel,
+//            startYearLabel,
+//            endYearLabel,
             useTimeButton,
             datePicker,
             submitButton
@@ -136,14 +136,14 @@ final class DateInputView: UIView {
         
         dateStackView.do {
             $0.axis = .horizontal
-            $0.distribution = .equalSpacing
+            $0.spacing = 16
         }
         
-        startYearLabel.do {
-            $0.font = .pretendardFont(for: .B3R)
-            $0.textColor = .mint700
-            $0.text = "2024년"
-        }
+//        startYearLabel.do {
+//            $0.font = .pretendardFont(for: .B3R)
+//            $0.textColor = .mint700
+//            $0.text = "2024년"
+//        }
         
         startStackView.do {
             $0.axis = .vertical
@@ -168,11 +168,11 @@ final class DateInputView: UIView {
             $0.tintColor = .mint700
         }
         
-        endYearLabel.do {
-            $0.font = .pretendardFont(for: .B3R)
-            $0.textColor = .B_02
-            $0.text = "2024년"
-        }
+//        endYearLabel.do {
+//            $0.font = .pretendardFont(for: .B3R)
+//            $0.textColor = .B_02
+//            $0.text = "2024년"
+//        }
         
         endStackView.do {
             $0.axis = .vertical
@@ -241,15 +241,15 @@ final class DateInputView: UIView {
             $0.leading.equalToSuperview().offset(24)
         }
         
-        startYearLabel.snp.makeConstraints {
-            $0.bottom.equalTo(startStackView.snp.top).offset(2)
-            $0.leading.equalTo(startStackView)
-        }
+//        startYearLabel.snp.makeConstraints {
+//            $0.bottom.equalTo(startStackView.snp.top).offset(2)
+//            $0.leading.equalTo(startStackView)
+//        }
         
-        endYearLabel.snp.makeConstraints {
-            $0.bottom.equalTo(endStackView.snp.top).offset(2)
-            $0.leading.equalTo(endStackView)
-        }
+//        endYearLabel.snp.makeConstraints {
+//            $0.bottom.equalTo(endStackView.snp.top).offset(2)
+//            $0.leading.equalTo(endStackView)
+//        }
         
         datePicker.snp.makeConstraints {
             $0.top.equalTo(useTimeButton.snp.bottom).offset(38)
@@ -293,12 +293,12 @@ final class DateInputView: UIView {
             .disposed(by: disposeBag)
         
         // 시작 날짜 변경되면 상단 연도 라벨 텍스트 연결
-        startDate
-            .map {
-                $0.toCustomFormattedDateString(format: "yyyy년", lang: .english)
-            }
-            .bind(to: startYearLabel.rx.text)
-            .disposed(by: disposeBag)
+//        startDate
+//            .map {
+//                $0.toCustomFormattedDateString(format: "yyyy년", lang: .english)
+//            }
+//            .bind(to: startYearLabel.rx.text)
+//            .disposed(by: disposeBag)
         
         // 시작 날짜 변경되면 상단 월/일 라벨 텍스트 연결
         startDate
@@ -309,24 +309,24 @@ final class DateInputView: UIView {
             .disposed(by: disposeBag)
         
         // 시작 날짜 현재 연도가 아니면 연도 라벨 표시
-        startDate
-            .map { ($0.isCurrentYear()) }
-            .bind(to: startYearLabel.rx.isHidden)
-            .disposed(by: disposeBag)
+//        startDate
+//            .map { ($0.isCurrentYear()) }
+//            .bind(to: startYearLabel.rx.isHidden)
+//            .disposed(by: disposeBag)
         
         // 종료 날짜 변경되면 상단 연도 라벨 텍스트 연결
-        endDate
-            .map {
-                $0.toCustomFormattedDateString(format: "yyyy년", lang: .english)
-            }
-            .bind(to: endYearLabel.rx.text)
-            .disposed(by: disposeBag)
+//        endDate
+//            .map {
+//                $0.toCustomFormattedDateString(format: "yyyy년", lang: .english)
+//            }
+//            .bind(to: endYearLabel.rx.text)
+//            .disposed(by: disposeBag)
         
         // 종료 날짜 현재 연도가 아니면 연도 라벨 표시
-        endDate
-            .map { ($0.isCurrentYear()) }
-            .bind(to: endYearLabel.rx.isHidden)
-            .disposed(by: disposeBag)
+//        endDate
+//            .map { ($0.isCurrentYear()) }
+//            .bind(to: endYearLabel.rx.isHidden)
+//            .disposed(by: disposeBag)
         
         // 종료 날짜 변경되면 상단 월/일 라벨 텍스트 연결
         endDate
@@ -364,10 +364,10 @@ final class DateInputView: UIView {
             guard let self = self else { return }
             let startColor: UIColor = state == .start ? .mint700 : .B_03
             let endColor: UIColor = state == .end ? .mint700 : .B_03
-            startYearLabel.textColor = startColor
+//            startYearLabel.textColor = startColor
             startSubLabel.textColor = startColor
             startMainLabel.textColor = startColor
-            endYearLabel.textColor = endColor
+//            endYearLabel.textColor = endColor
             endSubLabel.textColor = endColor
             endMainLabel.textColor = endColor
         })
@@ -538,12 +538,12 @@ final class DateInputView: UIView {
     }
 }
 
-//@available(iOS 17.0, *)
-//#Preview {
-//    PreviewController(DateInputView(), snp: { view in
-//        view.snp.makeConstraints {
-//            $0.bottom.equalToSuperview()
-//            $0.horizontalEdges.equalToSuperview()
-//        }
-//    })
-//}
+@available(iOS 17.0, *)
+#Preview {
+    PreviewController(DateInputView(), snp: { view in
+        view.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+        }
+    })
+}
