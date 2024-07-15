@@ -135,6 +135,98 @@ final class DateInputView: UIView {
     // MARK: setUpLayout
     private func setUpLayout() {
     }
+    
+    /// 일시 화면에서만 사용되는 시간설정/시간해제 버튼입니다.
+    private class AllDayButton: UIButton {
+        
+        // MARK: Properties
+        enum ButtonType {
+            case on
+            case off
+            
+            var textColor: UIColor {
+                switch self {
+                    
+                case .on:
+                    return .white
+                case .off:
+                    return .gray200
+                }
+            }
+            
+            var backgroundColor: UIColor {
+                switch self {
+                    
+                case .on:
+                    return .mint900
+                case .off:
+                    return .white
+                }
+            }
+            
+            var borderColor: UIColor? {
+                switch self {
+                    
+                case .on:
+                    nil
+                case .off:
+                        .gray200
+                }
+            }
+            
+            var title: String {
+                switch self {
+                    
+                case .on:
+                    return "시간설정"
+                case .off:
+                    return "시간해제"
+                }
+            }
+            
+        }
+        
+        private let disposeBag = DisposeBag()
+        private let initialState: ButtonType
+        private lazy var isOn = BehaviorRelay<ButtonType>(value: initialState)
+        
+        // MARK: Init
+        init(with initialState: AllDayButton.ButtonType) {
+            self.initialState = initialState
+            super.init(frame: .zero)
+            setUpUI()
+            bindUI()
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        private func setUpUI() {
+            self.layer.cornerRadius = 12
+            self.clipsToBounds = true
+        }
+        
+        private func bindUI() {
+            isOn.bind(onNext: { [weak self] btnType in
+                guard let self = self else { return }
+                
+                var config = UIButton.Configuration.filled()
+                config.baseForegroundColor = btnType.textColor
+                config.baseBackgroundColor = btnType.backgroundColor
+                config.title = btnType.title
+                
+                if let borderColor = btnType.borderColor {
+                    config.background.strokeColor = borderColor
+                    config.background.strokeWidth = 1
+                }
+                
+                config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
+                self.configuration = config
+            })
+            .disposed(by: disposeBag)
+        }
+    }
 }
 
 @available(iOS 17.0, *)
