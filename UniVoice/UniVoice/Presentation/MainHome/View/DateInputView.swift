@@ -27,19 +27,21 @@ final class DateInputView: UIView {
     private let disposeBag = DisposeBag()
     
     // MARK: Views
+    private let borderLine = UIView()
     private let titleLabel = UILabel()
     let dismissButton = UIButton()
     private let dateStackView = UIStackView()
     private let startStackView = UIStackView()
     let startSubLabel = UILabel()
     let startMainLabel = UILabel()
+    private let blankView = UIView()
     private let chevronImageView = UIImageView()
     private let endStackView = UIStackView()
     let endSubLabel = UILabel()
     let endMainLabel = UILabel()
-    let useTimeButton = UIButton()
+    let useTimeButton = AllDayButton(with: .off)
     let datePicker = UIDatePicker()
-    let submitButton = UIButton()
+    let submitButton = CustomButton(with: .active)
     
     // VC 연결용 임시
     let startDatePicker = UIDatePicker()
@@ -65,9 +67,12 @@ final class DateInputView: UIView {
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
+        
+        blankView.addSubview(chevronImageView)
+        
         [
             startStackView,
-            chevronImageView,
+            blankView,
             endStackView
         ].forEach { dateStackView.addArrangedSubview($0) }
         
@@ -82,6 +87,7 @@ final class DateInputView: UIView {
         ].forEach { endStackView.addArrangedSubview($0) }
         
         [
+            borderLine,
             titleLabel,
             dismissButton,
             dateStackView,
@@ -93,6 +99,10 @@ final class DateInputView: UIView {
     
     // MARK: setUpUI
     private func setUpUI() {
+        borderLine.do {
+            $0.backgroundColor = .regular
+        }
+        
         titleLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .T3SB, with: "일시")
         }
@@ -104,13 +114,27 @@ final class DateInputView: UIView {
             }
         }
         
+        dateStackView.do {
+            $0.axis = .horizontal
+            $0.distribution = .equalSpacing
+        }
+        
+        startStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 6
+            $0.alignment = .leading
+        }
+        
         startSubLabel.do {
             $0.font = .pretendardFont(for: .B3R)
             $0.textColor = .mint700
+            $0.text = "5월 5일 (목)"
         }
         
         startMainLabel.do {
             $0.font = .pretendardFont(for: .H6SB)
+            $0.textColor = .mint700
+            $0.text = "12:25PM"
         }
         
         chevronImageView.do {
@@ -118,26 +142,88 @@ final class DateInputView: UIView {
             $0.tintColor = .mint700
         }
         
+        endStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 6
+            $0.alignment = .leading
+        }
+        
         endSubLabel.do {
             $0.font = .pretendardFont(for: .B3R)
             $0.textColor = .mint700
+            $0.text = "5월 5일 (목)"
         }
         
-        endSubLabel.do {
+        endMainLabel.do {
             $0.font = .pretendardFont(for: .H6SB)
+            $0.textColor = .mint700
+            $0.text = "12:25PM"
         }
         
-//        useTimeButton.do {
-////            $0.
-//        }
+        datePicker.do {
+            $0.preferredDatePickerStyle = .wheels
+            // setValue 통한 커스텀 UI 설정
+            $0.setValue(UIColor.mint900, forKey: "textColor")
+            $0.setValue(false, forKey: "highlightsToday")
+        }
+        
+        submitButton.do {
+            $0.setTitle("확인", for: .normal)
+        }
     }
     
     // MARK: setUpLayout
     private func setUpLayout() {
+        borderLine.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.centerX.equalToSuperview()
+        }
+        
+        dismissButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(7)
+            $0.trailing.equalToSuperview().inset(7)
+            $0.size.equalTo(42)
+        }
+        
+        chevronImageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.size.equalTo(24)
+        }
+        
+        useTimeButton.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(42)
+            $0.trailing.equalToSuperview().inset(24)
+            $0.leading.equalTo(dateStackView.snp.trailing).offset(44).priority(.low)
+        }
+        
+        dateStackView.snp.makeConstraints {
+            $0.centerY.equalTo(useTimeButton)
+            $0.trailing.equalTo(useTimeButton.snp.leading).inset(44).priority(.low)
+            $0.leading.equalToSuperview().offset(24)
+        }
+        
+        datePicker.snp.makeConstraints {
+            $0.top.equalTo(useTimeButton.snp.bottom).offset(38)
+            $0.centerX.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(44).priority(.low)
+        }
+        
+        submitButton.snp.makeConstraints {
+            $0.top.equalTo(datePicker.snp.bottom).offset(38)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(57)
+            $0.bottom.equalToSuperview().inset(50)
+        }
     }
     
     /// 일시 화면에서만 사용되는 시간설정/시간해제 버튼입니다.
-    private class AllDayButton: UIButton {
+    class AllDayButton: UIButton {
         
         // MARK: Properties
         enum ButtonType {
@@ -168,9 +254,9 @@ final class DateInputView: UIView {
                 switch self {
                     
                 case .on:
-                    nil
+                    return nil
                 case .off:
-                        .gray200
+                    return .gray200
                 }
             }
             
@@ -211,18 +297,21 @@ final class DateInputView: UIView {
             isOn.bind(onNext: { [weak self] btnType in
                 guard let self = self else { return }
                 
+                var attrString = AttributedString(btnType.title)
+                attrString.font = UIFont.pretendardFont(for: .B3R)
+                
                 var config = UIButton.Configuration.filled()
                 config.baseForegroundColor = btnType.textColor
                 config.baseBackgroundColor = btnType.backgroundColor
-                config.title = btnType.title
+                config.attributedTitle = attrString
+                
+                config.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
+                self.configuration = config
                 
                 if let borderColor = btnType.borderColor {
-                    config.background.strokeColor = borderColor
-                    config.background.strokeWidth = 1
+                    self.layer.borderWidth = 1
+                    self.layer.borderColor = borderColor.cgColor
                 }
-                
-                config.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
-                self.configuration = config
             })
             .disposed(by: disposeBag)
         }
@@ -235,6 +324,7 @@ final class DateInputView: UIView {
         view.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(500)
         }
     })
 }
