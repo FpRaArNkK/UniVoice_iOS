@@ -567,12 +567,20 @@ final class DateInputView: UIView {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    PreviewController(DateInputView(), snp: { view in
-        view.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-        }
-    })
+extension DateInputView {
+    /// DateInputView 컴포넌트에서 사용 가능한 시작 날짜, 종료 날짜의 Relay의 Observable 값을 반환합니다.
+    /// 해당 Relay를 ViewModel의 input으로 사용하면 됩니다.
+    func getDateObservables() -> (Observable<Date>, Observable<Date>) {
+        return (self.startDate.asObservable(), self.endDate.asObservable())
+    }
 }
+
+//@available(iOS 17.0, *)
+//#Preview {
+//    PreviewController(DateInputView(), snp: { view in
+//        view.snp.makeConstraints {
+//            $0.bottom.equalToSuperview()
+//            $0.horizontalEdges.equalToSuperview()
+//        }
+//    })
+//}
