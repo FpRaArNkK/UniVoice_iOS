@@ -27,8 +27,23 @@ final class DateInputView: UIView {
     private let disposeBag = DisposeBag()
     
     // MARK: Views
+    private let titleLabel = UILabel()
+    let dismissButton = UIButton()
+    private let dateStackView = UIStackView()
+    private let startStackView = UIStackView()
+    let startSubLabel = UILabel()
+    let startMainLabel = UILabel()
+    private let chevronImageView = UIImageView()
+    private let endStackView = UIStackView()
+    let endSubLabel = UILabel()
+    let endMainLabel = UILabel()
+    let useTimeButton = UIButton()
+    let datePicker = UIDatePicker()
+    let submitButton = UIButton()
+    
+    // VC 연결용 임시
     let startDatePicker = UIDatePicker()
-    let endDatePicker = UIDatePicker()
+    let finishDatePicker = UIDatePicker()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -45,17 +60,76 @@ final class DateInputView: UIView {
     
     // MARK: setUpFoundation
     private func setUpFoundation() {
-//        self.backgroundColor = .white
+        self.backgroundColor = .gray50
     }
+    
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         [
-            
+            startStackView,
+            chevronImageView,
+            endStackView
+        ].forEach { dateStackView.addArrangedSubview($0) }
+        
+        [
+            startSubLabel,
+            startMainLabel
+        ].forEach { startStackView.addArrangedSubview($0) }
+        
+        [
+            endSubLabel,
+            endMainLabel
+        ].forEach { endStackView.addArrangedSubview($0) }
+        
+        [
+            titleLabel,
+            dismissButton,
+            dateStackView,
+            useTimeButton,
+            datePicker,
+            submitButton
         ].forEach { self.addSubview($0) }
     }
     
     // MARK: setUpUI
     private func setUpUI() {
+        titleLabel.do {
+            $0.attributedText = .pretendardAttributedString(for: .T3SB, with: "일시")
+        }
+        
+        dismissButton.do {
+            $0.setImage(.icnDelete, for: .normal)
+            $0.imageView?.snp.makeConstraints {
+                $0.edges.equalToSuperview().inset(9)
+            }
+        }
+        
+        startSubLabel.do {
+            $0.font = .pretendardFont(for: .B3R)
+            $0.textColor = .mint700
+        }
+        
+        startMainLabel.do {
+            $0.font = .pretendardFont(for: .H6SB)
+        }
+        
+        chevronImageView.do {
+            $0.image = .icnForward.withRenderingMode(.alwaysTemplate)
+            $0.tintColor = .mint700
+        }
+        
+        endSubLabel.do {
+            $0.font = .pretendardFont(for: .B3R)
+            $0.textColor = .mint700
+        }
+        
+        endSubLabel.do {
+            $0.font = .pretendardFont(for: .H6SB)
+        }
+        
+//        useTimeButton.do {
+////            $0.
+//        }
     }
     
     // MARK: setUpLayout
