@@ -39,11 +39,13 @@ final class DateInputView: UIView {
     let dismissButton = UIButton()
     private let dateStackView = UIStackView()
     private let startStackView = UIStackView()
+    let startYearLabel = UILabel()
     let startSubLabel = UILabel()
     let startMainLabel = UILabel()
     private let blankView = UIView()
     private let chevronImageView = UIImageView()
     private let endStackView = UIStackView()
+    let endYearLabel = UILabel()
     let endSubLabel = UILabel()
     let endMainLabel = UILabel()
     let useTimeButton = AllDayButton()
@@ -106,6 +108,8 @@ final class DateInputView: UIView {
             titleLabel,
             dismissButton,
             dateStackView,
+            startYearLabel,
+            endYearLabel,
             useTimeButton,
             datePicker,
             submitButton
@@ -135,6 +139,12 @@ final class DateInputView: UIView {
             $0.distribution = .equalSpacing
         }
         
+        startYearLabel.do {
+            $0.font = .pretendardFont(for: .B3R)
+            $0.textColor = .mint700
+            $0.text = "2024년"
+        }
+        
         startStackView.do {
             $0.axis = .vertical
             $0.spacing = 6
@@ -156,6 +166,12 @@ final class DateInputView: UIView {
         chevronImageView.do {
             $0.image = .icnForward.withRenderingMode(.alwaysTemplate)
             $0.tintColor = .mint700
+        }
+        
+        endYearLabel.do {
+            $0.font = .pretendardFont(for: .B3R)
+            $0.textColor = .B_02
+            $0.text = "2024년"
         }
         
         endStackView.do {
@@ -225,6 +241,16 @@ final class DateInputView: UIView {
             $0.leading.equalToSuperview().offset(24)
         }
         
+        startYearLabel.snp.makeConstraints {
+            $0.bottom.equalTo(startStackView.snp.top).offset(2)
+            $0.leading.equalTo(startStackView)
+        }
+        
+        endYearLabel.snp.makeConstraints {
+            $0.bottom.equalTo(endStackView.snp.top).offset(2)
+            $0.leading.equalTo(endStackView)
+        }
+        
         datePicker.snp.makeConstraints {
             $0.top.equalTo(useTimeButton.snp.bottom).offset(38)
             $0.centerX.equalToSuperview()
@@ -266,7 +292,15 @@ final class DateInputView: UIView {
             })
             .disposed(by: disposeBag)
         
-        // 시작 날짜 변경되면 상단 라벨 텍스트 연결
+        // 시작 날짜 변경되면 상단 연도 라벨 텍스트 연결
+        startDate
+            .map {
+                $0.toCustomFormattedDateString(format: "yyyy년", lang: .english)
+            }
+            .bind(to: startYearLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // 시작 날짜 변경되면 상단 월/일 라벨 텍스트 연결
         startDate
             .map {
                 $0.toCustomFormattedDateString(format: "M월 d일(E)", lang: .english)
@@ -274,7 +308,27 @@ final class DateInputView: UIView {
             .bind(to: startSubLabel.rx.text)
             .disposed(by: disposeBag)
         
-        // 종료 날짜 변경되면 상단 라벨 텍스트 연결
+        // 시작 날짜 현재 연도가 아니면 연도 라벨 표시
+        startDate
+            .map { ($0.isCurrentYear()) }
+            .bind(to: startYearLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        // 종료 날짜 변경되면 상단 연도 라벨 텍스트 연결
+        endDate
+            .map {
+                $0.toCustomFormattedDateString(format: "yyyy년", lang: .english)
+            }
+            .bind(to: endYearLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        // 종료 날짜 현재 연도가 아니면 연도 라벨 표시
+        endDate
+            .map { ($0.isCurrentYear()) }
+            .bind(to: endYearLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        // 종료 날짜 변경되면 상단 월/일 라벨 텍스트 연결
         endDate
             .map {
                 $0.toCustomFormattedDateString(format: "M월 d일(E)", lang: .english)
@@ -305,13 +359,15 @@ final class DateInputView: UIView {
         .bind(to: endMainLabel.rx.text)
         .disposed(by: disposeBag)
         
-        // 날짜 피커 상태와 시작 / 종료 날짜 뷰 컬러 바인딩
+        // 날짜 피커 상태를 시작/종료 날짜 뷰에 컬러 바인딩
         datePickingState.bind(onNext: { [weak self] state in
             guard let self = self else { return }
             let startColor: UIColor = state == .start ? .mint700 : .B_03
             let endColor: UIColor = state == .end ? .mint700 : .B_03
+            startYearLabel.textColor = startColor
             startSubLabel.textColor = startColor
             startMainLabel.textColor = startColor
+            endYearLabel.textColor = endColor
             endSubLabel.textColor = endColor
             endMainLabel.textColor = endColor
         })
@@ -327,6 +383,7 @@ final class DateInputView: UIView {
                 return self.validateDuration(start: start, end: end)
             }
         
+        // 검증 로직 결과를 UI에 반영
         validation
             .withLatestFrom(datePickingState) { isValid, state -> (Bool, DatePickingState) in
                 return (isValid, state)
@@ -481,12 +538,12 @@ final class DateInputView: UIView {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    PreviewController(DateInputView(), snp: { view in
-        view.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-        }
-    })
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    PreviewController(DateInputView(), snp: { view in
+//        view.snp.makeConstraints {
+//            $0.bottom.equalToSuperview()
+//            $0.horizontalEdges.equalToSuperview()
+//        }
+//    })
+//}

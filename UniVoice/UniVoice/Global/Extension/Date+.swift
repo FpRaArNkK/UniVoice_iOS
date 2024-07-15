@@ -86,4 +86,13 @@ extension Date {
         dateFormatter.pmSymbol = lang.pmSymbol
         return dateFormatter.string(from: self)
     }
+    
+    /// Date의 연도와 현재 연도를 비교하여, 해당 날짜가 현재 연도에 속하는지 여부를 반환합니다.
+    /// - Returns: 현재 연도 여부
+    func isCurrentYear() -> Bool {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        let yearOfDate = calendar.component(.year, from: self)
+        return currentYear == yearOfDate
+    }
 }
