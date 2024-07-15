@@ -403,7 +403,8 @@ final class DateInputView: UIView {
                 return self.validateDuration(start: start, end: end)
             }
         
-        // 검증 로직 결과를 UI에 반영
+        // 검증 로직 결과를 startDate, endDate에 반영 
+        // - 추후 날짜 변경 로직 삭제 시 주석처리
         validation
             .withLatestFrom(datePickingState) { isValid, state -> (Bool, DatePickingState) in
                 return (isValid, state)
@@ -420,6 +421,14 @@ final class DateInputView: UIView {
                 }
             })
             .disposed(by: disposeBag)
+        
+        // 검증 로직 결과 submit 버튼 활성화에 반영
+        let btnType = validation
+            .map {
+                $0 ? CustomButtonType.active : CustomButtonType.inActive
+            }
+        
+        submitButton.bindData(buttonType: btnType)
     }
     
     /// 시작 날짜와 종료 날짜의 선행 관계가 올바른지 검증
