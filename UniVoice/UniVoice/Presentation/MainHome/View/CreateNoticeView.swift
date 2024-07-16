@@ -39,6 +39,7 @@ final class CreateNoticeView: UIView {
     let dateButton = UIButton()
     
     let textViewPlaceHolder = "내용을 입력하세요"
+    let isTextViewEmptyRelay = BehaviorRelay<Bool>(value: true)
     let disposeBag = DisposeBag()
     
     // MARK: Init
@@ -98,10 +99,10 @@ final class CreateNoticeView: UIView {
         createButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("등록")
-            attString.foregroundColor = .white
             attString.font = UIFont.pretendardFont(for: .BUT3SB)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint400
+            config.baseForegroundColor = .white
             config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
             config.cornerStyle = .capsule
             $0.configuration = config
@@ -167,17 +168,16 @@ final class CreateNoticeView: UIView {
         
         buttonStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 12
-            $0.distribution = .equalCentering
+            $0.distribution = .equalSpacing
         }
         
         imageButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("사진")
-            attString.foregroundColor = .mint900
             attString.font = UIFont.pretendardFont(for: .BUT4R)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint50
+            config.baseForegroundColor = .mint900
             config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 14, bottom: 8, trailing: 14)
             config.cornerStyle = .capsule
             config.image = .icnCamera
@@ -188,10 +188,10 @@ final class CreateNoticeView: UIView {
         targetButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("대상")
-            attString.foregroundColor = .mint900
             attString.font = UIFont.pretendardFont(for: .BUT4R)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint50
+            config.baseForegroundColor = .mint900
             config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 14, bottom: 8, trailing: 14)
             config.cornerStyle = .capsule
             config.image = .icnPeople
@@ -202,15 +202,17 @@ final class CreateNoticeView: UIView {
         dateButton.do {
             var config = UIButton.Configuration.filled()
             var attString = AttributedString("일시")
-            attString.foregroundColor = .mint900
             attString.font = UIFont.pretendardFont(for: .BUT4R)
             config.attributedTitle = attString
             config.baseBackgroundColor = .mint50
+            config.baseForegroundColor = .mint900
             config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 14, bottom: 8, trailing: 14)
             config.cornerStyle = .capsule
             config.image = .icnCdr
             config.imagePadding = 4
             $0.configuration = config
+            $0.tintColor = .mint900
+            $0.setTitleColor(.mint900, for: .normal)
         }
         
         targetInputView.do {
@@ -231,7 +233,6 @@ final class CreateNoticeView: UIView {
         }
         
         contentView.snp.makeConstraints {
-            //            $0.horizontalEdges.equalToSuperview()
             $0.edges.equalTo(self.noticeScrollView.contentLayoutGuide)
             $0.height.greaterThanOrEqualTo(self.safeAreaLayoutGuide.snp.height).offset(-70)
                 .priority(.required)
@@ -289,10 +290,6 @@ final class CreateNoticeView: UIView {
             $0.bottom.equalTo(bottomView.snp.bottom).offset(-16)
         }
         
-        imageButton.snp.makeConstraints {
-            $0.width.equalTo(69)
-        }
-        
         targetInputView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalTo(self.keyboardLayoutGuide.snp.top)
@@ -314,9 +311,10 @@ final class CreateNoticeView: UIView {
         contentTextView.rx.didEndEditing
             .bind { [weak self] text in
                 guard let self = self else { return }
-                if contentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                let isEmpty = contentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                self.isTextViewEmptyRelay.accept(isEmpty)
+                if isEmpty {
                     contentTextView.text = self.textViewPlaceHolder
-                    // isEmptyText: Bool
                     contentTextView.textColor = .B_03
                 }
             }
@@ -328,13 +326,13 @@ final class CreateNoticeView: UIView {
                 let size = CGSize(width: self.frame.width, height: .infinity)
                 let estimatedSize = contentTextView.sizeThatFits(size)
                 contentTextView.constraints.forEach { (constraint) in
-                    /// 270 이하일때는 더 이상 줄어들지 않게
                     if estimatedSize.height <= 270 { return }
-                    else { if constraint.firstAttribute == .height {
-                            constraint.constant = estimatedSize.height
-                        }
+                    if constraint.firstAttribute == .height {
+                        constraint.constant = estimatedSize.height
                     }
                 }
+                let isEmpty = contentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                self.isTextViewEmptyRelay.accept(isEmpty)
             }
             .disposed(by: disposeBag)
     }

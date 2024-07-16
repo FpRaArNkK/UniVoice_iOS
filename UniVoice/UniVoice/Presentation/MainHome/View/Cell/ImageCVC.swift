@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class ImageCVC: UICollectionViewCell {
     static let reuseIdentifier = "ImageCVC"
@@ -15,6 +16,12 @@ final class ImageCVC: UICollectionViewCell {
     // MARK: Views
     let imageView = UIImageView()
     let deleteButton = UIButton()
+    var disposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)

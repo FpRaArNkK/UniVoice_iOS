@@ -55,9 +55,16 @@ final class CreateNoticeVC: UIViewController {
         let rightButton = UIBarButtonItem(customView: buttonContainer)
         self.navigationItem.rightBarButtonItem = rightButton
         
+        let isTextViewEmpty = rootView.contentTextView.rx.text.orEmpty
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+                    .asObservable()
+        
         let input = CreateNoticeVM.Input(
-            titleText: rootView.titleTextField.rx.text.orEmpty.asObservable(),
-            contentText: rootView.contentTextView.rx.text.orEmpty.asObservable(),
+            titleText: 
+                rootView.titleTextField.rx.text.orEmpty.asObservable(),
+            contentText: 
+                rootView.contentTextView.rx.text.orEmpty.asObservable(),
+            isTextViewEmpty: rootView.isTextViewEmptyRelay.asObservable(),
             selectedImages: selectedImagesRelay.asObservable(),
             targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
             targetContentResult:
@@ -70,7 +77,6 @@ final class CreateNoticeVC: UIViewController {
         
         output.buttonState
             .drive(onNext: { state in
-                print(state)
                 customButton.isUserInteractionEnabled = state.isEnabled
                 customButton.configuration?.baseBackgroundColor = state.backgroundColor
             })
@@ -109,8 +115,8 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         output.isTargetConfirmButtonEnabled
-                    .drive(rootView.targetInputView.confirmButton.rx.isEnabled)
-                    .disposed(by: disposeBag)
+            .drive(rootView.targetInputView.confirmButton.rx.isEnabled)
+            .disposed(by: disposeBag)
         
         let isTargetConfirmButtonEnabled = output.isTargetConfirmButtonEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
@@ -154,6 +160,11 @@ final class CreateNoticeVC: UIViewController {
                 return UICollectionViewCell()
             }
             cell.imageView.image = image
+            cell.deleteButton.rx.tap
+                .bind { [weak self] in
+                    self?.deleteImage(at: indexPath)
+                }
+                .disposed(by: cell.disposeBag)
             return cell
         })
         images
@@ -195,6 +206,15 @@ final class CreateNoticeVC: UIViewController {
         }
         self.rootView.targetInputView.isHidden = true
     }
+    
+    private func deleteImage(at indexPath: IndexPath) {
+        var images = selectedImagesRelay.value
+//        images.remove(at: indexPath.)
+        print(indexPath.row)
+        images.remove(at: indexPath.row)
+        selectedImagesRelay.accept(images)
+    }
+    
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
