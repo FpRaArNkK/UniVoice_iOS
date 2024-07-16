@@ -20,6 +20,9 @@
 		212FCADD2C459628000E8223 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADC2C459628000E8223 /* NoticeService.swift */; };
 		212FCAE62C467802000E8223 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE52C467802000E8223 /* Config.swift */; };
 		212FCAE82C467933000E8223 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE72C467933000E8223 /* BaseResponse.swift */; };
+		212FCAEA2C468289000E8223 /* UniversityDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE92C468289000E8223 /* UniversityDataResponse.swift */; };
+		212FCAED2C46A3AE000E8223 /* UniversityNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAEC2C46A3AE000E8223 /* UniversityNameRequest.swift */; };
+		212FCAF02C46AF7B000E8223 /* IDCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -147,6 +150,9 @@
 		212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
 		212FCAE52C467802000E8223 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		212FCAE72C467933000E8223 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		212FCAE92C468289000E8223 /* UniversityDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityDataResponse.swift; sourceTree = "<group>"; };
+		212FCAEC2C46A3AE000E8223 /* UniversityNameRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityNameRequest.swift; sourceTree = "<group>"; };
+		212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDCheckRequest.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -293,6 +299,23 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		212FCAEB2C46828E000E8223 /* ResponseModel */ = {
+			isa = PBXGroup;
+			children = (
+				212FCAE92C468289000E8223 /* UniversityDataResponse.swift */,
+			);
+			path = ResponseModel;
+			sourceTree = "<group>";
+		};
+		212FCAEE2C46A3E0000E8223 /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				212FCAEC2C46A3AE000E8223 /* UniversityNameRequest.swift */,
+				212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */,
+			);
+			path = RequestModel;
+			sourceTree = "<group>";
+		};
 		2195F6DB2C397539008D2485 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,8 +445,10 @@
 				212FCAE52C467802000E8223 /* Config.swift */,
 				212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */,
 				212FCAC82C4577BC000E8223 /* NetworkResult.swift */,
-				212FCAD72C458C5D000E8223 /* Service */,
 				212FCAD22C45799D000E8223 /* TargetType */,
+				212FCAD72C458C5D000E8223 /* Service */,
+				212FCAEE2C46A3E0000E8223 /* RequestModel */,
+				212FCAEB2C46828E000E8223 /* ResponseModel */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -942,6 +967,7 @@
 				EDF4C8872C41307400DE7643 /* DepartmentTableViewCell.swift in Sources */,
 				88325C342C38762D004A293D /* UITextField+.swift in Sources */,
 				880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */,
+				212FCAEA2C468289000E8223 /* UniversityDataResponse.swift in Sources */,
 				21F7B1602C34748700A082D8 /* UIButton+.swift in Sources */,
 				88293F812C43BBBE0082A986 /* SavedNoticeView.swift in Sources */,
 				DC91FACF2C42E4710095DD5E /* TabBarVC.swift in Sources */,
@@ -970,6 +996,7 @@
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
 				EDF4C8982C42AF7900DE7643 /* CreateNoticeVM.swift in Sources */,
 				EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */,
+				212FCAED2C46A3AE000E8223 /* UniversityNameRequest.swift in Sources */,
 				21DF05C42C3FCE01005EB117 /* CreateAccountVM.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
 				EDF4C89C2C43F9BD00DE7643 /* TargetInputView.swift in Sources */,
@@ -994,6 +1021,7 @@
 				EDF4C8922C41DA6E00DE7643 /* TargetView.swift in Sources */,
 				211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */,
 				EDF4C8962C42680200DE7643 /* ImageCVC.swift in Sources */,
+				212FCAF02C46AF7B000E8223 /* IDCheckRequest.swift in Sources */,
 				88AB98132C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift in Sources */,
 				2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */,
 				21DF05C62C4146B4005EB117 /* Reactive+.swift in Sources */,

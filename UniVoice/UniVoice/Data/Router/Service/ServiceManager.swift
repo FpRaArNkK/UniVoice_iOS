@@ -10,6 +10,4 @@ import Moya
 
 final class ServiceManager<T: UniVoiceTargetType> {
     let provider = MoyaProvider<T>(plugins: [MoyaLoggingPlugin()])
-    
-    init() {}
 }

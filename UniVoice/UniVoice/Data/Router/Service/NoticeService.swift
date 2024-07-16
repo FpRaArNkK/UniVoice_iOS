@@ -11,7 +11,4 @@ import RxSwift
 import RxMoya
 
 extension Service {
-//    func getUniversitList() -> Single<University> {
-//        return userService.provider.rx.request(<#T##token: UserTargetType##UserTargetType#>)
-//    }
 }
