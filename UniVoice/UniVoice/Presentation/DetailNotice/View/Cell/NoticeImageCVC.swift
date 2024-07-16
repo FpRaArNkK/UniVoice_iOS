@@ -1,24 +1,26 @@
 //
-//  CouncilCVC.swift
+//  NoticeImageCVC.swift
 //  UniVoice
 //
-//  Created by 오연서 on 7/10/24.
+//  Created by 오연서 on 7/15/24.
 //
 
 import UIKit
 import SnapKit
 import Then
 import RxSwift
+import RxCocoa
+import Kingfisher
 
-final class CouncilCVC: UICollectionViewCell {
+final class NoticeImageCVC: UICollectionViewCell {
     
     // MARK: Properties
     
-    static let identifier = "CouncilCVC"
+    static let identifier = "NoticeImageCollectionViewCell"
     
     // MARK: Views
     
-    let councilButton = CustomButton(with: .unselected)
+    let noticeImage = UIImageView()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -34,35 +36,36 @@ final class CouncilCVC: UICollectionViewCell {
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
-        self.addSubview(councilButton)
+        self.addSubview(noticeImage)
     }
     
     // MARK: setUpUI
     private func setUpUI() {
-        councilButton.do {
+        noticeImage.do {
             $0.clipsToBounds = true
-            $0.layer.cornerRadius = 2
+            $0.layer.cornerRadius = 8
+            $0.contentMode = .scaleAspectFit
         }
     }
+    
     // MARK: setUpLayout
     private func setUpLayout() {
-        councilButton.snp.makeConstraints {
+        noticeImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
+            $0.size.equalTo(343)
         }
     }
 }
 
-extension CouncilCVC {
-    
+extension NoticeImageCVC {
     override func prepareForReuse() {
         super.prepareForReuse()
-        councilButton.setTitle("", font: .B3SB, titleColor: .B_01)
+        noticeImage.image = UIImage(named: "defaultImage")
     }
     
-    func councilDataBind(councilName: String, type: Observable<CustomButtonType>) {
-        councilButton.setTitle(councilName, font: .B3SB, titleColor: .B_01)
-        councilButton.bindData(buttonType: type)
-        councilButton.clipsToBounds = true
-        councilButton.layer.cornerRadius = 10
+    func noticeImageDataBind(imgURL: String) {
+        if let url = URL(string: imgURL) {
+            noticeImage.kf.setImage(with: url)
+        }
     }
 }

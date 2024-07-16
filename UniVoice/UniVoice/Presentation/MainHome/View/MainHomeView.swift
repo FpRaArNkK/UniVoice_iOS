@@ -20,14 +20,13 @@ final class MainHomeView: UIView {
     let scrollView = UIScrollView()
     let contentView = UIView()
     let logoImageView = UIImageView()
-    let quickScanLabel = UILabel()
     let quickScanCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
-    }() 
+    }()
     let headerView = HeaderView()
     let stickyHeaderView = HeaderView()
     let articleCollectionView: UICollectionView = {
@@ -80,7 +79,6 @@ final class MainHomeView: UIView {
         
         [
             logoImageView,
-            quickScanLabel,
             quickScanCollectionView,
             headerView,
             articleCollectionView,
@@ -117,11 +115,6 @@ final class MainHomeView: UIView {
             $0.contentMode = .scaleAspectFit
         }
         
-        quickScanLabel.do {
-            $0.setText("퀵 스캔",
-                       font: .H5B,
-                       color: .B_01)
-        }
         noCouncilLabel.do {
             $0.setText("아직 등록되어 있는 공지사항이 없어요.",
                        font: .H7SB,
@@ -133,7 +126,7 @@ final class MainHomeView: UIView {
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
             $0.layer.shadowOpacity = 0.12
-            $0.layer.shadowRadius = 0.0
+            $0.layer.shadowRadius = 3
         }
     }
     
@@ -167,28 +160,21 @@ final class MainHomeView: UIView {
             $0.leading.equalToSuperview().offset(16)
             $0.height.equalTo(46)
         }
-        quickScanLabel.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom).offset(11)
-            $0.leading.equalTo(logoImageView)
-            $0.trailing.equalToSuperview().inset(88)
-        }
         quickScanCollectionView.snp.makeConstraints {
-            $0.top.equalTo(quickScanLabel.snp.bottom)
+            $0.top.equalTo(logoImageView.snp.bottom).offset(11)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(158)
         }
         headerView.snp.makeConstraints {
-            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(24)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(70)
         }
         stickyHeaderView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(70)
         }
         articleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(headerView.snp.bottom).offset(20)
+            $0.top.equalTo(headerView.snp.bottom).offset(8)
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.height.equalTo(UIScreen.main.bounds.size.height - 70)
         }

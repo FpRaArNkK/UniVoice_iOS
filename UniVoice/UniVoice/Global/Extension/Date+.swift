@@ -27,6 +27,30 @@ extension Date {
         dateFormatter.timeZone = TimeZone(abbreviation: "KST") // 불필요 시 삭제
         return dateFormatter.string(from: self)
     }
+    
+    func getDurationText(from startTime: Date?, to endTime: Date?) -> String? {
+        guard let startTime = startTime, let endTime = endTime else {
+            return nil
+        }
+        return "\(startTime.toFormattedString()) ~ \(endTime.toFormattedString())"
+    }
+    
+    func timeAgoString(from date: Date) -> String {
+        let now = Date()
+        let timeInterval = now.timeIntervalSince(date)
+        
+        if timeInterval < 60 {
+            return "방금 전"
+        } else if timeInterval < 3600 {
+            let minutes = Int(timeInterval / 60)
+            return "\(minutes)분 전"
+        } else if timeInterval < 86400 {
+            let hours = Int(timeInterval / 3600)
+            return "\(hours)시간 전"
+        } else {
+            return date.toFormattedStringWithoutTime()
+        }
+    }
 
     /// Date를 "yyyy년 MM월 dd일" 형식의 문자열로 변환합니다. ex - "2024년 05월 21일"
     /// - Returns: 변환된 문자열
