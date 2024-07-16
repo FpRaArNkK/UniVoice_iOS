@@ -20,14 +20,13 @@ final class MainHomeView: UIView {
     let scrollView = UIScrollView()
     let contentView = UIView()
     let logoImageView = UIImageView()
-    let quickScanLabel = UILabel()
     let quickScanCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
-    }() 
+    }()
     let headerView = HeaderView()
     let stickyHeaderView = HeaderView()
     let articleCollectionView: UICollectionView = {
@@ -80,7 +79,6 @@ final class MainHomeView: UIView {
         
         [
             logoImageView,
-            quickScanLabel,
             quickScanCollectionView,
             headerView,
             articleCollectionView,
@@ -117,11 +115,6 @@ final class MainHomeView: UIView {
             $0.contentMode = .scaleAspectFit
         }
         
-        quickScanLabel.do {
-            $0.setText("퀵 스캔",
-                       font: .H5B,
-                       color: .B_01)
-        }
         noCouncilLabel.do {
             $0.setText("아직 등록되어 있는 공지사항이 없어요.",
                        font: .H7SB,
@@ -167,13 +160,8 @@ final class MainHomeView: UIView {
             $0.leading.equalToSuperview().offset(16)
             $0.height.equalTo(46)
         }
-        quickScanLabel.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom).offset(11)
-            $0.leading.equalTo(logoImageView)
-            $0.trailing.equalToSuperview().inset(88)
-        }
         quickScanCollectionView.snp.makeConstraints {
-            $0.top.equalTo(quickScanLabel.snp.bottom)
+            $0.top.equalTo(logoImageView.snp.bottom).offset(11)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(158)
         }

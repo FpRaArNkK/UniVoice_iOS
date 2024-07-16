@@ -25,6 +25,8 @@ final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: Views
     
+    private let content = UIView()
+    
     private let councilImage = UIImageView()
     
     private let councilName = UILabel()
@@ -47,14 +49,20 @@ final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
+        self.addSubview(content)
         [councilImage, councilName, circleView].forEach {
-            self.addSubview($0)
+            content.addSubview($0)
         }
         circleView.addSubview(articleNumber)
     }
     
     // MARK: setUpUI
     private func setUpUI() {
+        content.do {
+            $0.backgroundColor = .blue50
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = 20
+        }
         councilImage.do {
             $0.image = UIImage(named: "defaultImage")?.withRenderingMode(.alwaysOriginal)
             $0.layer.borderColor = UIColor.regular.cgColor
@@ -71,7 +79,6 @@ final class QuickScanCVC: UICollectionViewCell {
         circleView.do {
             $0.backgroundColor = .blue300
             $0.clipsToBounds = true
-            //$0.isHidden = number == 0 ? true : false
             $0.layer.cornerRadius = 21/2
         }
         articleNumber.do {
@@ -81,18 +88,23 @@ final class QuickScanCVC: UICollectionViewCell {
     }
     // MARK: setUpLayout
     private func setUpLayout() {
+        content.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.height.equalTo(132)
+            $0.width.equalTo(97)
+        }
         councilImage.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(6)
-            $0.centerX.equalToSuperview().offset(4)
+            $0.top.equalToSuperview().offset(13)
+            $0.centerX.equalToSuperview()
             $0.size.equalTo(68)
         }
         councilName.snp.makeConstraints {
             $0.top.equalTo(councilImage.snp.bottom).offset(8)
-            $0.centerX.equalToSuperview().offset(4)
+            $0.centerX.equalToSuperview()
         }
         circleView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.centerX.equalTo(councilImage).offset(21)
+            $0.top.equalTo(content).offset(6)
+            $0.centerX.equalTo(councilImage).offset(17)
             $0.height.equalTo(21)
             $0.width.equalTo(circleWidth)
         }
@@ -121,7 +133,6 @@ extension QuickScanCVC {
         }
     }
     
-    
     func quickScanDataBind(viewModel: QS) {
         councilImage.image = UIImage(named: viewModel.councilImage)
         councilName.text = viewModel.councilName
@@ -131,7 +142,7 @@ extension QuickScanCVC {
         circleView.isHidden = viewModel.articleNumber == 0 ? true : false
         circleView.snp.removeConstraints()
         circleView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalTo(content).offset(6)
             $0.centerX.equalTo(councilImage).offset(21)
             if viewModel.articleNumber > 9 {
                 
