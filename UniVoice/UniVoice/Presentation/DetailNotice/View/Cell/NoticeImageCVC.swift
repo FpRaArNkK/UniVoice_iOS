@@ -58,6 +58,11 @@ final class NoticeImageCVC: UICollectionViewCell {
 }
 
 extension NoticeImageCVC {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        noticeImage.image = UIImage(named: "defaultImage")
+    }
+    
     func noticeImageDataBind(imgURL: String) {
         if let url = URL(string: imgURL) {
             noticeImage.kf.setImage(with: url)

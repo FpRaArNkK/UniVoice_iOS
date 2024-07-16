@@ -42,10 +42,12 @@ final class DetailNoticeVC: UIViewController {
         
         let output = viewModel.transform(input: input)
         
+        //TODO: API 연동 후 작업
         output.isLiked
             .drive()
             .disposed(by: disposeBag)
         
+        //TODO: API 연동 후 작업
         output.isSaved
             .drive()
             .disposed(by: disposeBag)
@@ -67,32 +69,23 @@ final class DetailNoticeVC: UIViewController {
         
         let imageUrls = viewModel.notice.noticeImageURL.compactMap { $0 }
         
-        if imageUrls.isEmpty {
-            rootView.noticeImageCollectionView.isHidden = true
-            rootView.noticeImageIndicatorView.isHidden = true
-        } else {
-            rootView.noticeImageCollectionView.isHidden = false
-            if imageUrls.count > 1 {
-                rootView.noticeImageIndicatorView.isHidden = false
-                rootView.noticeImageIndicatorView.numberOfPages = imageUrls.count
-            } else {
-                rootView.noticeImageIndicatorView.isHidden = true
-            }
+        rootView.noticeImageCollectionView.isHidden = imageUrls.isEmpty ? true : false
+        rootView.noticeImageIndicatorView.numberOfPages = imageUrls.count
             
-            let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
-                configureCell: { _, collectionView, indexPath, url in
-                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeImageCVC.identifier, for: indexPath) as? NoticeImageCVC else {
-                        return UICollectionViewCell()
-                    }
-                    cell.noticeImageDataBind(imgURL: url)
-                    print(url)
-                    return cell
-                })
-            
-            Observable.just([SectionModel(model: "section 0", items: imageUrls)])
-                .bind(to: rootView.noticeImageCollectionView.rx.items(dataSource: dataSource))
-                .disposed(by: disposeBag)
-        }
+        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
+            configureCell: { _, collectionView, indexPath, url in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeImageCVC.identifier, for: indexPath) as? NoticeImageCVC else {
+                    return UICollectionViewCell()
+                }
+                cell.noticeImageDataBind(imgURL: url)
+                print(url)
+                return cell
+            })
+        
+        Observable.just([SectionModel(model: "section 0", items: imageUrls)])
+            .bind(to: rootView.noticeImageCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
         
         rootView.noticeImageCollectionView.rx.didScroll
             .subscribe(onNext: { [weak self] in
