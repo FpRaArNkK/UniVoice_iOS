@@ -20,6 +20,10 @@ final class CreateNoticeVC: UIViewController {
     
     private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
     private let targetContentResultRelay = BehaviorRelay<String>(value: "")
+    private let startDateRelay = BehaviorRelay<Date?>(value: nil)
+    private let finishDateRelay = BehaviorRelay<Date?>(value: nil)
+    private let isUsingTimeRelay = BehaviorRelay<Bool?>(value: nil)
+    private var inputDates: (BehaviorRelay<Date>, BehaviorRelay<Date>)?
     
     // MARK: Life Cycle - loadView
     override func loadView() {
@@ -55,26 +59,21 @@ final class CreateNoticeVC: UIViewController {
         let rightButton = UIBarButtonItem(customView: buttonContainer)
         self.navigationItem.rightBarButtonItem = rightButton
         
-        let isTextViewEmpty = rootView.contentTextView.rx.text.orEmpty
-                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
-                    .asObservable()
-        
-        guard let (submittedStartDate, submittedEndDate, isUsingTime) = rootView.dateInputView.getSubmittedDateObservables()
-        else { return }
+        inputDates = rootView.dateInputView.bindData(startDate: startDateRelay, endDate: finishDateRelay, isUsingTime: isUsingTimeRelay)
         
         let input = CreateNoticeVM.Input(
-            titleText: 
+            titleText:
                 rootView.titleTextField.rx.text.orEmpty.asObservable(),
-            contentText: 
+            contentText:
                 rootView.contentTextView.rx.text.orEmpty.asObservable(),
             isTextViewEmpty: rootView.isTextViewEmptyRelay.asObservable(),
             selectedImages: selectedImagesRelay.asObservable(),
             targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
             targetContentResult:
                 targetContentResultRelay.asObservable(),
-            startDate: submittedStartDate,
-            finishDate: submittedEndDate,
-            isUsingTime: isUsingTime
+            startDate: startDateRelay.asObservable().compactMap { $0 },
+            finishDate: finishDateRelay.asObservable().compactMap { $0 },
+            isUsingTime: isUsingTimeRelay.asObservable().compactMap { $0 }
         )
         
         let output = viewModel.transform(input: input)
@@ -126,7 +125,6 @@ final class CreateNoticeVC: UIViewController {
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
         
-        
         rootView.imageButton.rx.tap
             .bind { [weak self] in
                 self?.imageButtonTapped()
@@ -147,6 +145,7 @@ final class CreateNoticeVC: UIViewController {
         
         rootView.targetInputView.confirmButton.rx.tap
             .bind { [weak self] in
+                self?.rootView.targetInputView.contentRelay.accept("")
                 self?.targetConfirmButtonTapped()
             }
             .disposed(by: disposeBag)
@@ -159,7 +158,15 @@ final class CreateNoticeVC: UIViewController {
         
         rootView.targetView.deleteButton.rx.tap
             .bind { [weak self] in
-                self?.targetCancelButtonTapped()
+                self?.rootView.targetView.isHidden = true
+                self?.targetContentResultRelay.accept("")
+                
+            }
+            .disposed(by: disposeBag)
+        
+        rootView.dateView.deleteButton.rx.tap
+            .bind { [weak self] in
+                self?.rootView.dateView.isHidden = true
             }
             .disposed(by: disposeBag)
         
@@ -169,15 +176,20 @@ final class CreateNoticeVC: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        let dateViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(dateViewTapped))
+        
+        rootView.dateView.addGestureRecognizer(dateViewTapGesture)
+        
         rootView.dateInputView.submitButton.rx.tap
             .bind { [weak self] in
-                self?.dateCancleButtonTapped()
+                self?.rootView.dateView.isHidden = false
+                self?.rootView.dateInputView.isHidden = true
             }
             .disposed(by: disposeBag)
         
         rootView.dateInputView.dismissButton.rx.tap
             .bind { [weak self] in
-                self?.dateCancleButtonTapped()
+                self?.rootView.dateInputView.isHidden = true
             }
             .disposed(by: disposeBag)
         
@@ -249,13 +261,23 @@ final class CreateNoticeVC: UIViewController {
         self.rootView.dateInputView.isHidden = false
     }
     
-    private func dateCancleButtonTapped() {
-        self.rootView.dateInputView.isHidden = true
+    @objc private func dateViewTapped() {
+        self.rootView.dateInputView.isHidden = false
+        if let startDate = startDateRelay.value,
+           let endDate = finishDateRelay.value {
+            inputDates?.0.accept(startDate)
+            inputDates?.1.accept(endDate)
+        }
     }
+    
+//    private func dateCancleButtonTapped() {
+//        self.rootView.dateInputView.isHidden = true
+//    }
+
     
     private func deleteImage(at indexPath: IndexPath) {
         var images = selectedImagesRelay.value
-//        images.remove(at: indexPath.)
+        //        images.remove(at: indexPath.)
         print(indexPath.row)
         images.remove(at: indexPath.row)
         selectedImagesRelay.accept(images)

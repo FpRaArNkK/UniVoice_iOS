@@ -53,10 +53,6 @@ final class DateInputView: UIView {
     private let datePicker = UIDatePicker()
     let submitButton = CustomButton(with: .active)
     
-//    // VC 연결용 임시
-//    let startDatePicker = UIDatePicker()
-//    let finishDatePicker = UIDatePicker()
-    
     // MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -568,20 +564,26 @@ final class DateInputView: UIView {
 }
 
 extension DateInputView {
-    /// DateInputView 컴포넌트에서 사용하는 시작 날짜, 종료 날짜, 시간포함여부의 Relay의 Observable 값을 반환합니다.
+    /// DateInputView 컴포넌트에서 사용하는 시작 날짜, 종료 날짜, 시간포함여부의 Relay를 받아 컴포넌트와 바인드합니다.
     /// 해당 Observable들은 Submit(확인) 버튼을 눌렀을 때만 startDate, endDate, isUsingTime으로 방출됩니다.
-    /// 해당 startDate, endDate, isUsingTime을 ViewModel의 input으로 사용하면 됩니다.
-    func getSubmittedDateObservables() -> (Observable<Date>, Observable<Date>, Observable<Bool>)? {
-        let submittedStartDate = submitButton.rx.tap
-            .withLatestFrom(startDate.asObservable())
+    func bindData(startDate: BehaviorRelay<Date?>, endDate: BehaviorRelay<Date?>, isUsingTime: BehaviorRelay<Bool?>) -> (BehaviorRelay<Date>, BehaviorRelay<Date>) {
         
-        let submittedEndDate = submitButton.rx.tap
-            .withLatestFrom(endDate.asObservable())
+        submitButton.rx.tap
+            .withLatestFrom(self.startDate.asObservable())
+            .bind(to: startDate)
+            .disposed(by: disposeBag)
         
-        let submittedUsingTime = submitButton.rx.tap
-            .withLatestFrom(isUsingTime.asObservable())
+        submitButton.rx.tap
+            .withLatestFrom(self.endDate.asObservable())
+            .bind(to: endDate)
+            .disposed(by: disposeBag)
         
-        return (submittedStartDate, submittedEndDate, submittedUsingTime)
+        submitButton.rx.tap
+            .withLatestFrom(self.isUsingTime.asObservable())
+            .bind(to: isUsingTime)
+            .disposed(by: disposeBag)
+        
+        return (self.startDate, self.endDate)
     }
 }
 
