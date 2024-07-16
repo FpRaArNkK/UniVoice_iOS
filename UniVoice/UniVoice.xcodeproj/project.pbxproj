@@ -18,6 +18,7 @@
 		212FCAD92C458CD1000E8223 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD82C458CD1000E8223 /* Service.swift */; };
 		212FCADB2C45933A000E8223 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADA2C45933A000E8223 /* UserService.swift */; };
 		212FCADD2C459628000E8223 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADC2C459628000E8223 /* NoticeService.swift */; };
+		212FCAE62C467802000E8223 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE52C467802000E8223 /* Config.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -142,6 +143,8 @@
 		212FCAD82C458CD1000E8223 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		212FCADA2C45933A000E8223 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		212FCADC2C459628000E8223 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
+		212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
+		212FCAE52C467802000E8223 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -413,6 +416,7 @@
 		880ED9682C23FE160045A620 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				212FCAE52C467802000E8223 /* Config.swift */,
 				212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */,
 				212FCAC82C4577BC000E8223 /* NetworkResult.swift */,
 				212FCAD72C458C5D000E8223 /* Service */,
@@ -466,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				880ED95C2C23F75D0045A620 /* Info.plist */,
+				212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */,
 				88325C2C2C382DF4004A293D /* PreviewController.swift */,
 			);
 			path = Utility;
@@ -945,6 +950,7 @@
 				883B2CFD2C42B6E400D19A78 /* NoAccountView.swift in Sources */,
 				2132A8402C3A6FC800795667 /* TOSCheckView.swift in Sources */,
 				21DF05C82C41A57B005EB117 /* TOSCheckVM.swift in Sources */,
+				212FCAE62C467802000E8223 /* Config.swift in Sources */,
 				EDF4C8812C3F13D900DE7643 /* CustomMenuTableViewCell.swift in Sources */,
 				EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */,
 				EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */,
@@ -1147,6 +1153,7 @@
 		};
 		880ED9602C23F75D0045A620 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1182,6 +1189,7 @@
 		};
 		880ED9612C23F75D0045A620 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
