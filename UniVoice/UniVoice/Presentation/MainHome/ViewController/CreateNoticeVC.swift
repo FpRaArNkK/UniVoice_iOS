@@ -59,6 +59,9 @@ final class CreateNoticeVC: UIViewController {
                     .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
                     .asObservable()
         
+        guard let (submittedStartDate, submittedEndDate, isUsingTime) = rootView.dateInputView.getSubmittedDateObservables()
+        else { return }
+        
         let input = CreateNoticeVM.Input(
             titleText: 
                 rootView.titleTextField.rx.text.orEmpty.asObservable(),
@@ -69,8 +72,9 @@ final class CreateNoticeVC: UIViewController {
             targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
             targetContentResult:
                 targetContentResultRelay.asObservable(),
-            startDate: rootView.dateInputView.startDatePicker.rx.date.map { $0 },
-            finishDate: rootView.dateInputView.finishDatePicker.rx.date.map { $0 }
+            startDate: submittedStartDate,
+            finishDate: submittedEndDate,
+            isUsingTime: isUsingTime
         )
         
         let output = viewModel.transform(input: input)
@@ -86,13 +90,13 @@ final class CreateNoticeVC: UIViewController {
             .drive(rootView.targetView.contentRelay)
             .disposed(by: disposeBag)
         
-        output.startDate
-            .map { $0?.toDateTimeString() ?? "" }
+        Driver.combineLatest(output.startDate, output.isUsingTime)
+            .map { date, includeTime in date.toString(includeTime: includeTime) }
             .drive(rootView.dateView.startDateLabel.rx.text)
             .disposed(by: disposeBag)
         
-        output.finishDate
-            .map { $0?.toDateString() ?? "" }
+        Driver.combineLatest(output.finishDate, output.isUsingTime)
+            .map { date, includeTime in date.toString(includeTime: includeTime) }
             .drive(rootView.dateView.finishDateLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -121,6 +125,8 @@ final class CreateNoticeVC: UIViewController {
         let isTargetConfirmButtonEnabled = output.isTargetConfirmButtonEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
+        
+        
         rootView.imageButton.rx.tap
             .bind { [weak self] in
                 self?.imageButtonTapped()
@@ -132,6 +138,10 @@ final class CreateNoticeVC: UIViewController {
                 self?.targetButtonTapped()
             }
             .disposed(by: disposeBag)
+        
+        let targetViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(targetViewTapped))
+        
+        rootView.targetView.addGestureRecognizer(targetViewTapGesture)
         
         rootView.targetInputView.confirmButton.bindData(buttonType: isTargetConfirmButtonEnabled.asObservable())
         
@@ -150,6 +160,24 @@ final class CreateNoticeVC: UIViewController {
         rootView.targetView.deleteButton.rx.tap
             .bind { [weak self] in
                 self?.targetCancelButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        rootView.dateButton.rx.tap
+            .bind { [weak self] in
+                self?.dateButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        rootView.dateInputView.submitButton.rx.tap
+            .bind { [weak self] in
+                self?.dateCancleButtonTapped()
+            }
+            .disposed(by: disposeBag)
+        
+        rootView.dateInputView.dismissButton.rx.tap
+            .bind { [weak self] in
+                self?.dateCancleButtonTapped()
             }
             .disposed(by: disposeBag)
         
@@ -195,8 +223,18 @@ final class CreateNoticeVC: UIViewController {
         self.rootView.targetInputView.targetInputTextField.becomeFirstResponder()
     }
     
+    @objc private func targetViewTapped() {
+        self.rootView.targetInputView.isHidden = false
+    }
+    
     private func targetCancelButtonTapped() {
-        self.targetContentResultRelay.accept("")
+        if targetContentResultRelay.value.isEmpty {
+            self.targetContentResultRelay.accept("")
+        } else {
+            if let targetText = self.rootView.targetView.contentLabel.text {
+                self.targetContentResultRelay.accept(targetText)
+            }
+        }
         self.rootView.targetInputView.isHidden = true
     }
     
@@ -205,6 +243,14 @@ final class CreateNoticeVC: UIViewController {
             self.targetContentResultRelay.accept(targetText)
         }
         self.rootView.targetInputView.isHidden = true
+    }
+    
+    private func dateButtonTapped() {
+        self.rootView.dateInputView.isHidden = false
+    }
+    
+    private func dateCancleButtonTapped() {
+        self.rootView.dateInputView.isHidden = true
     }
     
     private func deleteImage(at indexPath: IndexPath) {
