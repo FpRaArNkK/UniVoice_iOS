@@ -57,8 +57,6 @@ extension CouncilCVC {
     override func prepareForReuse() {
         super.prepareForReuse()
         councilButton.setTitle("", font: .B3SB, titleColor: .B_01)
-        councilButton.clipsToBounds = true
-        councilButton.layer.cornerRadius = 10
     }
     
     func councilDataBind(councilName: String, type: Observable<CustomButtonType>) {

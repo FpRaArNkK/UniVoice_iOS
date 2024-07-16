@@ -124,13 +124,6 @@ extension QuickScanCVC {
         articleNumber.removeFromSuperview()
         circleView.addSubview(articleNumber)
         circleView.isHidden = true
-        circleView.snp.removeConstraints()
-        circleView.snp.makeConstraints {
-                $0.size.equalTo(CGSize(width: 21, height: 21))
-        }
-        articleNumber.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
     }
     
     func quickScanDataBind(viewModel: QS) {
