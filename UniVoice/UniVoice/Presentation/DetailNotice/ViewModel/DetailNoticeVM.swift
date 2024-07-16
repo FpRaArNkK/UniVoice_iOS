@@ -30,8 +30,7 @@ final class DetailNoticeVM: ViewModelType {
     func transform(input: Input) -> Output {
         
         input.likedButtonDidTap
-            .flatMapLatest { [weak self] index -> Observable<Bool> in
-                guard let self = self else { return Observable.just(false) }
+            .flatMapLatest {
                 let noticeId = self.notice.noticeId
                 return self.patchLiked(id: noticeId)
             }
@@ -39,8 +38,7 @@ final class DetailNoticeVM: ViewModelType {
             .disposed(by: disposeBag)
         
         input.savedButtonDidTap
-            .flatMapLatest { [weak self] index -> Observable<Bool> in
-                guard let self = self else { return Observable.just(false) }
+            .flatMapLatest {
                 let noticeId = self.notice.noticeId
                 return self.patchSaved(id: noticeId)
             }
@@ -60,9 +58,7 @@ final class DetailNoticeVM: ViewModelType {
                 self.notice.isSaved = result
             })
             .disposed(by: disposeBag)
-        
-        let notice = Observable.just(self.notice)
-        
+                
         return Output(
             isLiked: isLikedRelay.asDriver(onErrorJustReturn: false),
             isSaved: isSavedRelay.asDriver(onErrorJustReturn: false)
