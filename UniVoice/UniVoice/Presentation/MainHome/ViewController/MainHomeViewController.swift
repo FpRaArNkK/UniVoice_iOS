@@ -21,7 +21,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     private let dummyData: [QS] = [
         QS(councilImage: "defaultImage", councilName: "홍익대학교\n총학생회", articleNumber: 5),
         QS(councilImage: "defaultImage", councilName: "공과대학\n학생회", articleNumber: 10),
-        QS(councilImage: "mainLogo", councilName: "컴퓨터공학과\n학생회", articleNumber: 0),
+        QS(councilImage: "mainLogo", councilName: "컴퓨터공학과\n학생회", articleNumber: 0)
     ]
     
     private let viewModel = MainHomeViewModel()
@@ -66,10 +66,10 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         }
         if let layout = rootView.headerView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 0)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
         }
         if let layout = rootView.stickyHeaderView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 0)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
         }
         if let layout = rootView.articleCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
@@ -246,7 +246,7 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
         case rootView.headerView.councilCollectionView,
             rootView.stickyHeaderView.councilCollectionView:
             let title = viewModel.councilList[indexPath.row]
-            let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 25
+            let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 20
             return CGSize(width: width, height: 32)
         case rootView.articleCollectionView:
             return CGSize(width: UIScreen.main.bounds.width - 32, height: 78)

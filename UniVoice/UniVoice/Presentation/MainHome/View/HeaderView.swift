@@ -67,6 +67,7 @@ final class HeaderView: UIView {
             $0.top.equalTo(articleLabel.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(32)
+            $0.bottom.equalToSuperview().inset(8)
         }
     }
 }

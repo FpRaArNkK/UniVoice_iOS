@@ -126,7 +126,7 @@ final class MainHomeView: UIView {
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
             $0.layer.shadowOpacity = 0.12
-            $0.layer.shadowRadius = 0.0
+            $0.layer.shadowRadius = 3
         }
     }
     
@@ -166,17 +166,15 @@ final class MainHomeView: UIView {
             $0.height.equalTo(158)
         }
         headerView.snp.makeConstraints {
-            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(20)
+            $0.top.equalTo(quickScanCollectionView.snp.bottom).offset(24)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(70)
         }
         stickyHeaderView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(70)
         }
         articleCollectionView.snp.makeConstraints {
-            $0.top.equalTo(headerView.snp.bottom).offset(20)
+            $0.top.equalTo(headerView.snp.bottom).offset(8)
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.height.equalTo(UIScreen.main.bounds.size.height - 70)
         }
