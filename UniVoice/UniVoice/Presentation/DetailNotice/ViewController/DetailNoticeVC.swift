@@ -26,18 +26,14 @@ final class DetailNoticeVC: UIViewController {
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpFoundation()
         setUpBindUI()
         updateNoticeImageStackView()
     }
     
-    // MARK: setUpFoundation
-    private func setUpFoundation() {
-        self.title = "학과 학생회"
-    }
-    
     // MARK: setUpBindUI
     private func setUpBindUI() {
+        
+        self.title = viewModel.notice.councilType
         
         let input = DetailNoticeVM.Input(
             likedButtonDidTap: rootView.likedButton.rx.tap.asObservable(),
