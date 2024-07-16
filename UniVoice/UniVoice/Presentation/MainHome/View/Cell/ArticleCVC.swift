@@ -159,6 +159,17 @@ final class ArticleCVC: UICollectionViewCell {
 }
 
 extension ArticleCVC {
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        chip.text = nil
+        articleTitle.text = nil
+        thumbnailImage.image = nil
+        duration.text = nil
+        likedNumber.text = nil
+        savedNumber.text = nil
+    }
+    
     func articleDataBind(viewModel: Article) {
         let width = viewModel.chip.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]).width
         chip.text = viewModel.chip

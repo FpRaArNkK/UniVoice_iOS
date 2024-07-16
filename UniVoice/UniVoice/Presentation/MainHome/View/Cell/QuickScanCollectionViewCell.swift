@@ -103,6 +103,25 @@ final class QuickScanCVC: UICollectionViewCell {
 }
 
 extension QuickScanCVC {
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        councilImage.image = nil
+        councilName.text = nil
+        articleNumber.text = nil
+        articleNumber.removeFromSuperview()
+        circleView.addSubview(articleNumber)
+        circleView.isHidden = true
+        circleView.snp.removeConstraints()
+        circleView.snp.makeConstraints {
+                $0.size.equalTo(CGSize(width: 21, height: 21))
+        }
+        articleNumber.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
+    
     func quickScanDataBind(viewModel: QS) {
         councilImage.image = UIImage(named: viewModel.councilImage)
         councilName.text = viewModel.councilName
