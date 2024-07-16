@@ -40,16 +40,11 @@ final class DetailNoticeVC: UIViewController {
     private func setUpBindUI() {
         
         let input = DetailNoticeVM.Input(
-            changeImageIndex: Observable.just(0),
             likedButtonDidTap: rootView.likedButton.rx.tap.asObservable(),
             savedButtonDidTap: rootView.savedButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
-        
-        output.currentImageIndex
-            .drive()
-            .disposed(by: disposeBag)
         
         output.isLiked
             .drive()
@@ -106,8 +101,10 @@ final class DetailNoticeVC: UIViewController {
         rootView.noticeImageCollectionView.rx.didScroll
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let visibleRect = CGRect(origin: self.rootView.noticeImageCollectionView.contentOffset, size: self.rootView.noticeImageCollectionView.bounds.size)
-                let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+                let visibleRect = CGRect(origin: self.rootView.noticeImageCollectionView.contentOffset, 
+                                         size: self.rootView.noticeImageCollectionView.bounds.size)
+                let visiblePoint = CGPoint(x: visibleRect.midX, 
+                                           y: visibleRect.midY)
                 if let indexPath = self.rootView.noticeImageCollectionView.indexPathForItem(at: visiblePoint) {
                     self.rootView.noticeImageIndicatorView.currentPage = indexPath.item
                 }

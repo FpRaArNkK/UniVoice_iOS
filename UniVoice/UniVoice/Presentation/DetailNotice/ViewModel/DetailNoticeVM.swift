@@ -13,28 +13,21 @@ final class DetailNoticeVM: ViewModelType {
     var notice = DetailNotice.dummyData[0]
     
     struct Input {
-        let changeImageIndex: Observable<Int>
         let likedButtonDidTap: Observable<Void>
         let savedButtonDidTap: Observable<Void>
     }
     
     struct Output {
-        let currentImageIndex: Driver<Int>
         let isLiked: Driver<Bool>
         let isSaved: Driver<Bool>
     }
     
     var disposeBag = DisposeBag()
     
-    private let currentImageIndexRelay = BehaviorRelay(value: 0)
     private let isLikedRelay = PublishRelay<Bool>()
     private let isSavedRelay = PublishRelay<Bool>()
     
     func transform(input: Input) -> Output {
-        
-        input.changeImageIndex
-            .bind(to: self.currentImageIndexRelay)
-            .disposed(by: disposeBag)
         
         input.likedButtonDidTap
             .flatMapLatest { [weak self] index -> Observable<Bool> in
@@ -71,7 +64,6 @@ final class DetailNoticeVM: ViewModelType {
         let notice = Observable.just(self.notice)
         
         return Output(
-            currentImageIndex: currentImageIndexRelay.asDriver(onErrorJustReturn: 0),
             isLiked: isLikedRelay.asDriver(onErrorJustReturn: false),
             isSaved: isSavedRelay.asDriver(onErrorJustReturn: false)
         )
