@@ -9,6 +9,7 @@ import Foundation
 import Moya
 
 enum UserTargetType {
+    case login(request: LoginRequest)
     case getUniversityList
     case getDepartmentList(request: UniversityNameRequest)
     case checkIDDuplication(request: IDCheckRequest)
@@ -22,6 +23,8 @@ extension UserTargetType: UniVoiceTargetType {
     
     var path: String {
         switch self {
+        case .login:
+            return "api/v1/auth/signin"
         case .getUniversityList:
             return "api/v1/universityData/university"
         case .getDepartmentList:
@@ -33,7 +36,8 @@ extension UserTargetType: UniVoiceTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getUniversityList,
+        case .login,
+                .getUniversityList,
                 .getDepartmentList,
                 .checkIDDuplication:
             return .post
@@ -42,6 +46,8 @@ extension UserTargetType: UniVoiceTargetType {
     
     var task: Moya.Task {
         switch self {
+        case .login(request: let request):
+            return .requestJSONEncodable(request)
         case .getUniversityList:
             return .requestPlain
         case .getDepartmentList(let request):

@@ -11,6 +11,14 @@ import RxSwift
 import RxMoya
 
 extension Service {
+    func login(request: LoginRequest) -> Single<LoginResponse> {
+        return rxRequest(
+            UserTargetType.login(request: request),
+            model: LoginResponse.self,
+            service: userService
+        )
+    }
+    
     func getUniversityList() -> Single<UniversityDataResponse> {
         return rxRequest(
             UserTargetType.getUniversityList,
@@ -30,8 +38,8 @@ extension Service {
     func checkIDDuplication(request: IDCheckRequest) -> Single<BaseResponse> {
         return rxRequest(
             UserTargetType.checkIDDuplication(request: request),
-                         model: BaseResponse.self,
-                         service: userService
+            model: BaseResponse.self,
+            service: userService
         )
     }
 }
