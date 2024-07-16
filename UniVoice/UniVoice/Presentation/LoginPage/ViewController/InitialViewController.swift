@@ -25,30 +25,6 @@ final class InitialViewController: UIViewController {
         super.viewDidLoad()
 //        setUpFoundation()
         setUpBindUI()
-        let universityName = UniversityNameRequest(universityName: "서울과학기술대학교")
-        Service.shared.getDepartmentList(request: universityName)
-            .subscribe { event in
-                switch event {
-                case .success(let response):
-                    switch response {
-                    case .success(let data):
-                        print(data)
-                    case .requestErr:
-                        print("Request Error")
-                    case .serverErr:
-                        print("Server Error")
-                    case .networkFail:
-                        print("Network Fail")
-                    case .decodedErr:
-                        print("Decoding Error")
-                    case .pathErr:
-                        print("pathErr")
-                    }
-                case .failure(let error):
-                    print("Failed to get university list: \(error)")
-                }
-            }
-            .disposed(by: disposeBag)
     }
     
     // MARK: setUpFoundation

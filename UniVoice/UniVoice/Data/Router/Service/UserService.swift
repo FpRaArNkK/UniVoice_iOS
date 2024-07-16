@@ -11,27 +11,27 @@ import RxSwift
 import RxMoya
 
 extension Service {
-    func getUniversityList() -> Single<NetworkResult<UniversityDataResponse>> {
-        return userService.provider.rx.request(.getUniversityList)
-            .map { [weak self] response in
-                guard let self = self else { return .networkFail }
-                return self.handleResponse(response, model: UniversityDataResponse.self)
-            }
+    func getUniversityList() -> Single<UniversityDataResponse> {
+        return rxRequest(
+            UserTargetType.getUniversityList,
+            model: UniversityDataResponse.self,
+            service: userService
+        )
     }
     
-    func getDepartmentList(request: UniversityNameRequest) -> Single<NetworkResult<UniversityDataResponse>> {
-        return userService.provider.rx.request(.getDepartmentList(request: request))
-            .map { [weak self] response in
-                guard let self = self else { return .networkFail }
-                return self.handleResponse(response, model: UniversityDataResponse.self)
-            }
+    func getDepartmentList(request: UniversityNameRequest) -> Single<UniversityDataResponse> {
+        return rxRequest(
+            UserTargetType.getDepartmentList(request: request),
+            model: UniversityDataResponse.self,
+            service: userService
+        )
     }
     
-    func checkIDDuplication(request: IDCheckRequest) -> Single<NetworkResult<BaseResponse>> {
-        return userService.provider.rx.request(.checkIDDuplication(request: request))
-            .map { [weak self] response in
-                guard let self = self else { return .networkFail }
-                return self.handleResponse(response, model: BaseResponse.self)
-            }
+    func checkIDDuplication(request: IDCheckRequest) -> Single<BaseResponse> {
+        return rxRequest(
+            UserTargetType.checkIDDuplication(request: request),
+                         model: BaseResponse.self,
+                         service: userService
+        )
     }
 }

@@ -33,9 +33,8 @@ extension UserTargetType: UniVoiceTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getUniversityList:
-            return .get
-        case .getDepartmentList,
+        case .getUniversityList,
+                .getDepartmentList,
                 .checkIDDuplication:
             return .post
         }
