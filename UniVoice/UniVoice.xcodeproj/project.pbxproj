@@ -19,6 +19,7 @@
 		212FCADB2C45933A000E8223 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADA2C45933A000E8223 /* UserService.swift */; };
 		212FCADD2C459628000E8223 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADC2C459628000E8223 /* NoticeService.swift */; };
 		212FCAE62C467802000E8223 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE52C467802000E8223 /* Config.swift */; };
+		212FCAE82C467933000E8223 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE72C467933000E8223 /* BaseResponse.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -145,6 +146,7 @@
 		212FCADC2C459628000E8223 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
 		212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
 		212FCAE52C467802000E8223 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		212FCAE72C467933000E8223 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -409,6 +411,7 @@
 		880ED9672C23FE0F0045A620 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				212FCAE72C467933000E8223 /* BaseResponse.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -984,6 +987,7 @@
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */,
 				212FCAD12C45796C000E8223 /* NoticeTargetType.swift in Sources */,
+				212FCAE82C467933000E8223 /* BaseResponse.swift in Sources */,
 				212FCAD42C458709000E8223 /* ServiceManager.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
 				88293F852C43F4680082A986 /* SavedNoticeVM.swift in Sources */,
