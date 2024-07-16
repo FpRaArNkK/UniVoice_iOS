@@ -12,8 +12,8 @@ import RxDataSources
 
 final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
-    //api : 학생회일 시 createButton.isHidden = false 추가
-    //api : refresh control 추가
+    //TODO: api - 학생회일 시 createButton.isHidden = false 추가
+    //TODO: refresh control logic 추가
     
     //MARK: Properties
     private let disposeBag = DisposeBag()
@@ -21,7 +21,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     private let dummyData: [QS] = [
         QS(councilImage: "defaultImage", councilName: "홍익대학교\n총학생회", articleNumber: 5),
         QS(councilImage: "defaultImage", councilName: "공과대학\n학생회", articleNumber: 10),
-        QS(councilImage: "mainLogo", councilName: "컴퓨터공학과\n학생회", articleNumber: 0),
+        QS(councilImage: "mainLogo", councilName: "컴퓨터공학과\n학생회", articleNumber: 0)
     ]
     
     private let viewModel = MainHomeViewModel()
@@ -62,11 +62,14 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         rootView.headerView.councilCollectionView.register(CouncilCVC.self, forCellWithReuseIdentifier: CouncilCVC.identifier)
         rootView.stickyHeaderView.councilCollectionView.register(CouncilCVC.self, forCellWithReuseIdentifier: CouncilCVC.identifier)
         rootView.articleCollectionView.register(ArticleCVC.self, forCellWithReuseIdentifier: ArticleCVC.identifier)
+        if let layout = rootView.quickScanCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        }
         if let layout = rootView.headerView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 0)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
         }
         if let layout = rootView.stickyHeaderView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 0)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
         }
         if let layout = rootView.articleCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
@@ -81,7 +84,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 guard let self = self else { return }
                 
                 self.rootView.logoImageView.isHidden = shouldShowSticky
-                self.rootView.quickScanLabel.isHidden = shouldShowSticky
                 self.rootView.quickScanCollectionView.isHidden = shouldShowSticky
                 self.rootView.headerView.isHidden = shouldShowSticky
                 self.rootView.stickyHeaderView.isHidden = !shouldShowSticky
@@ -117,11 +119,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             return cell
         })
         
-        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(configureCell: {
-            dataSource,
-            collectionView,
-            indexPath,
-            viewModel in
+        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CouncilCVC.identifier, for: indexPath) as? CouncilCVC else {
                 return UICollectionViewCell()
             }
@@ -227,14 +225,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
             })
             .disposed(by: disposeBag)
-        
-        rootView.articleCollectionView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
-                let detailNoticeVC = DetailNoticeVC()
-                self.navigationController?.pushViewController(detailNoticeVC, animated: true)
-            })
-            .disposed(by: disposeBag)
     }
     
     private func bindUI() {
@@ -252,11 +242,11 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case rootView.quickScanCollectionView:
-            return CGSize(width: 95, height: 118)
+            return CGSize(width: 97, height: 132)
         case rootView.headerView.councilCollectionView,
             rootView.stickyHeaderView.councilCollectionView:
             let title = viewModel.councilList[indexPath.row]
-            let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 25
+            let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 20
             return CGSize(width: width, height: 32)
         case rootView.articleCollectionView:
             return CGSize(width: UIScreen.main.bounds.width - 32, height: 78)
