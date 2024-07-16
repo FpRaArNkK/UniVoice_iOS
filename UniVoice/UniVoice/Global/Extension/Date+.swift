@@ -95,4 +95,11 @@ extension Date {
         let yearOfDate = calendar.component(.year, from: self)
         return currentYear == yearOfDate
     }
+    
+    /// Bool 값을 받아 true이면 toDateTimeString(), false이면 toDateString() 메서드를 호출합니다.
+    /// - Parameter includeTime: 시간 포함 여부
+    /// - Returns: 변환된 문자열
+    func toString(includeTime: Bool) -> String {
+        return includeTime ? self.toDateTimeString() : self.toDateString()
+    }
 }
