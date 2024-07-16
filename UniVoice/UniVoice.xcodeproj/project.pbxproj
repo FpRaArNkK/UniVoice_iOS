@@ -104,6 +104,11 @@
 		DC9EBCB22C3EC37C007337A0 /* CouncilCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */; };
 		DC9EBCB42C3EC386007337A0 /* ArticleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB32C3EC386007337A0 /* ArticleCVC.swift */; };
 		DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB72C3F44FC007337A0 /* MainHomeViewModel.swift */; };
+		DC9EBCBE2C4181BD007337A0 /* DetailNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCBD2C4181BD007337A0 /* DetailNoticeVC.swift */; };
+		DC9EBCC02C4181C9007337A0 /* DetailNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCBF2C4181C9007337A0 /* DetailNoticeView.swift */; };
+		DC9EBCC22C4181DA007337A0 /* DetailNoticeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCC12C4181DA007337A0 /* DetailNoticeVM.swift */; };
+		DC9F76132C43494E0019A83F /* DetailNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F76122C43494E0019A83F /* DetailNotice.swift */; };
+		DC9F76182C44489A0019A83F /* NoticeImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F76172C44489A0019A83F /* NoticeImageCVC.swift */; };
 		EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */; };
 		EDE8CA1E2C37C4AD00E828F1 /* SignUpIntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1D2C37C4AD00E828F1 /* SignUpIntroVC.swift */; };
 		EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */; };
@@ -219,6 +224,11 @@
 		DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouncilCVC.swift; sourceTree = "<group>"; };
 		DC9EBCB32C3EC386007337A0 /* ArticleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCVC.swift; sourceTree = "<group>"; };
 		DC9EBCB72C3F44FC007337A0 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
+		DC9EBCBD2C4181BD007337A0 /* DetailNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeVC.swift; sourceTree = "<group>"; };
+		DC9EBCBF2C4181C9007337A0 /* DetailNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeView.swift; sourceTree = "<group>"; };
+		DC9EBCC12C4181DA007337A0 /* DetailNoticeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeVM.swift; sourceTree = "<group>"; };
+		DC9F76122C43494E0019A83F /* DetailNotice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNotice.swift; sourceTree = "<group>"; };
+		DC9F76172C44489A0019A83F /* NoticeImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeImageCVC.swift; sourceTree = "<group>"; };
 		EDE8CA1B2C37C42D00E828F1 /* SignUpIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpIntroView.swift; sourceTree = "<group>"; };
 		EDE8CA1D2C37C4AD00E828F1 /* SignUpIntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpIntroVC.swift; sourceTree = "<group>"; };
 		EDE8CA1F2C37C4FF00E828F1 /* UniversityInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInputView.swift; sourceTree = "<group>"; };
@@ -372,6 +382,7 @@
 		880ED9642C23FDAF0045A620 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DC9F76112C43493F0019A83F /* DetailNotice */,
 				88AB98042C3EC8C800AC5043 /* QuickScan */,
 				DC9EBCAE2C3EB2B3007337A0 /* MainHomeModel */,
 			);
@@ -393,6 +404,7 @@
 			children = (
 				DC91FACD2C42E3FA0095DD5E /* TabBar */,
 				881A3C562C3AA0AA003A72E6 /* QuickScanPage */,
+				DC9EBCB92C418174007337A0 /* DetailNotice */,
 				EDE8CA182C37C3B700E828F1 /* SignUpPage */,
 				882DB1562C31C35B00D73FEF /* LoginPage */,
 				DC33DAF42C39C75E008B321E /* MainHome */,
@@ -729,6 +741,57 @@
 			path = MainHomeModel;
 			sourceTree = "<group>";
 		};
+		DC9EBCB92C418174007337A0 /* DetailNotice */ = {
+			isa = PBXGroup;
+			children = (
+				DC9EBCBB2C418191007337A0 /* View */,
+				DC9EBCBC2C418195007337A0 /* ViewModel */,
+				DC9EBCBA2C418189007337A0 /* ViewController */,
+			);
+			path = DetailNotice;
+			sourceTree = "<group>";
+		};
+		DC9EBCBA2C418189007337A0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DC9EBCBD2C4181BD007337A0 /* DetailNoticeVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DC9EBCBB2C418191007337A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC9F76162C4448890019A83F /* Cell */,
+				DC9EBCBF2C4181C9007337A0 /* DetailNoticeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC9EBCBC2C418195007337A0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DC9EBCC12C4181DA007337A0 /* DetailNoticeVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DC9F76112C43493F0019A83F /* DetailNotice */ = {
+			isa = PBXGroup;
+			children = (
+				DC9F76122C43494E0019A83F /* DetailNotice.swift */,
+			);
+			path = DetailNotice;
+			sourceTree = "<group>";
+		};
+		DC9F76162C4448890019A83F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DC9F76172C44489A0019A83F /* NoticeImageCVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		EDE8CA182C37C3B700E828F1 /* SignUpPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -924,7 +987,10 @@
 				EDE8CA262C37C53F00E828F1 /* UnivInfoConfirmView.swift in Sources */,
 				2132A8442C3A6FEA00795667 /* SignUpInfoCheckingView.swift in Sources */,
 				EDF4C8852C412E9900DE7643 /* DepartmentInputVM.swift in Sources */,
+				DC9EBCC22C4181DA007337A0 /* DetailNoticeVM.swift in Sources */,
 				EDE8CA2A2C37C5B800E828F1 /* DepartmentInputVC.swift in Sources */,
+				DC9EBCBE2C4181BD007337A0 /* DetailNoticeVC.swift in Sources */,
+				DC9F76182C44489A0019A83F /* NoticeImageCVC.swift in Sources */,
 				EDF4C8792C3B12F700DE7643 /* UniversityInputVM.swift in Sources */,
 				DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */,
 				2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */,
@@ -932,6 +998,7 @@
 				882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */,
 				EDF4C88B2C41966300DE7643 /* CreateNoticeVC.swift in Sources */,
 				EDF4C8872C41307400DE7643 /* DepartmentTableViewCell.swift in Sources */,
+				DC9F76132C43494E0019A83F /* DetailNotice.swift in Sources */,
 				88325C342C38762D004A293D /* UITextField+.swift in Sources */,
 				880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */,
 				21F7B1602C34748700A082D8 /* UIButton+.swift in Sources */,
@@ -962,6 +1029,7 @@
 				EDF4C8982C42AF7900DE7643 /* CreateNoticeVM.swift in Sources */,
 				EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */,
 				21DF05C42C3FCE01005EB117 /* CreateAccountVM.swift in Sources */,
+				DC9EBCC02C4181C9007337A0 /* DetailNoticeView.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
 				EDF4C89C2C43F9BD00DE7643 /* TargetInputView.swift in Sources */,
 				212FCACF2C457916000E8223 /* UserTargetType.swift in Sources */,
