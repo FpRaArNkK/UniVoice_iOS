@@ -43,7 +43,7 @@ final class UniversityInputVC: UIViewController {
                     .bind(onNext: { [weak self] in
                         guard let self = self, let inputText = self.rootView.univTextField.text else { return }
                         self.selectedUniversity.accept(inputText)
-                        let departmentInputVC = DepartmentInputVC(university: inputText)
+                        let departmentInputVC = DepartmentInputVC(university: self.selectedUniversity.value)
                         departmentInputVC.selectedUniversity = self.selectedUniversity
                         self.navigationController?.pushViewController(departmentInputVC, animated: true)
                     })
@@ -53,7 +53,6 @@ final class UniversityInputVC: UIViewController {
             .bind(to: selectedUniversity)
             .disposed(by: disposeBag)
 
-        
         rootView.univTextField.rx.text.orEmpty
             .bind(to: selectedUniversity)
             .disposed(by: disposeBag)
@@ -74,6 +73,10 @@ final class UniversityInputVC: UIViewController {
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
         rootView.nextButton.bindData(buttonType: isNextButtonEnabled.asObservable())
+        
+        output.isNextButtonEnabled
+            .drive(rootView.univTableView.rx.isHidden)
+            .disposed(by: disposeBag)
         
         output.filteredUniversities
             .drive(rootView.univTableView.rx.items(

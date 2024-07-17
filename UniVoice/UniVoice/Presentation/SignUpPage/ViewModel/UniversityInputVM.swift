@@ -65,6 +65,7 @@ final class UniversityInputVM: ViewModelType {
             .subscribe { response in
                 switch response {
                 case .success(let data):
+                    self.universitiesRelay.accept(data.data)
                     print(data)
                 case .failure(let error):
                     print(error)
