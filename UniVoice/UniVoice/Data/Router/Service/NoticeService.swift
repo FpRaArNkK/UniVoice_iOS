@@ -74,4 +74,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func unlikeNotice(noticeID: Int) -> Single<BaseResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.unlikeNotice(noticeID: noticeID),
+            model: BaseResponse.self,
+            service: noticeService
+        )
+    }
 }

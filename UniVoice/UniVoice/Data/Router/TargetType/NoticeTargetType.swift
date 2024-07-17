@@ -17,6 +17,7 @@ enum NoticeTargetType {
     case unreadQuickScanList(request: UnreadQuickScanRequest) // 퀵 스캔 읽지 않은 공지 리스트
     case getNoticeDetail(noticeID: Int) // 세부공지사항
     case likeNotice(noticeID: Int) // 공지 좋아요
+    case unlikeNotice(noticeID: Int) // 공지 좋아요 취소
 }
 
 extension NoticeTargetType: UniVoiceTargetType {
@@ -42,6 +43,8 @@ extension NoticeTargetType: UniVoiceTargetType {
             return "notice/\(noticeID)"
         case .likeNotice(let noticeID):
             return "notice/like/\(noticeID)"
+        case .unlikeNotice(let noticeID):
+            return "notice/like/cancel/\(noticeID)"
         }
     }
     
@@ -55,7 +58,8 @@ extension NoticeTargetType: UniVoiceTargetType {
                 .getNoticeDetail:
             return .get
         case .unreadQuickScanList,
-                .likeNotice:
+                .likeNotice,
+                .unlikeNotice:
             return .post
         }
     }
@@ -68,7 +72,8 @@ extension NoticeTargetType: UniVoiceTargetType {
                 .getCollegeStudentCouncilNoticeList,
                 .getDepartmentStudentCouncilNoticeList,
                 .getNoticeDetail,
-                .likeNotice:
+                .likeNotice,
+                .unlikeNotice:
             return .requestPlain
         case .unreadQuickScanList(let request):
             return .requestJSONEncodable(request)
