@@ -86,7 +86,7 @@ final class DetailNoticeVC: UIViewController {
             .bind(to: rootView.noticeImageCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        
+    
         rootView.noticeImageCollectionView.rx.didScroll
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
