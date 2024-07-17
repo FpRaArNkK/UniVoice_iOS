@@ -58,4 +58,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func getNoticeDetail(noticeID: Int) -> Single<NoticeDetailResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.getNoticeDetail(noticeID: noticeID),
+            model: NoticeDetailResponse.self,
+            service: noticeService
+        )
+    }
 }
