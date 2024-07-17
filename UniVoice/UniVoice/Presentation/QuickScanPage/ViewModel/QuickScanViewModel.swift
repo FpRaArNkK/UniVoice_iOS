@@ -7,12 +7,13 @@
 
 import RxSwift
 import RxCocoa
+import Foundation
 
 final class QuickScanViewModel: ViewModelType {
     
-    init() {
-        // API 로직
-        quickScans.accept(QuickScan.dummyData)
+    init(id: Int) {
+        // API 로직 수행
+        self.getQuickScans(id: id).bind(to: quickScans).disposed(by: disposeBag)
     }
     
     struct Input {
@@ -44,7 +45,7 @@ final class QuickScanViewModel: ViewModelType {
             .withLatestFrom(self.currentIndex)
             .flatMapLatest { [weak self] index -> Observable<Bool> in
                 guard let self = self else { return Observable.just(false) }
-                return self.patchBookmark(id: self.quickScans.value[index].noticeId)
+                return self.patchBookmark(id: self.quickScans.value[index].noticeId, isMarked: self.quickScans.value[index].isScrapped)
             }
             .bind(to: bookmarkResult)
             .disposed(by: disposeBag)
@@ -75,12 +76,49 @@ final class QuickScanViewModel: ViewModelType {
 // MARK: API Logic
 private extension QuickScanViewModel {
     func getQuickScans(id: Int) -> Observable<[QuickScan]> {
-        return Observable.just(QuickScan.dummyData)
+        if let affString = AffiliationType.init(rawValue: id)?.toKoreanString {
+            return Service.shared.unreadQuickScanList(request: .init(affiliation: affString))
+                    .asObservable()
+                    .map { response in
+                        let result = response.data.map { $0.toQuickScan() }
+                        return result
+                    }
+                    .catchAndReturn([])
+        } else {
+            print("affString error")
+            return Observable.just([])
+        }
     }
     
-    func patchBookmark(id: Int) -> Observable<Bool> {
-        // 해당 API 로직은 1초 딜레이가 필요합니다.
-        let item = self.quickScans.value.first(where: { $0.noticeId == id })
-        return Observable.just(!(item?.isScrapped ?? true))
+    func patchBookmark(id: Int, isMarked: Bool) -> Observable<Bool> {
+        
+        switch isMarked {
+        case true:
+            return Service.shared.cancleSavingNotice(noticeID: id).asObservable()
+//                .delay(.seconds(1), scheduler: MainScheduler.instance) // 필요 시 1초 딜레이 추가
+                .map { response in
+                    if 200...299 ~= response.status {
+                        print("취소 성공")
+                        return false
+                    } else {
+                        print("취소 실패")
+                        throw NSError(domain: "", code: response.status, userInfo: nil) // 에러 발생
+                    }
+                }
+                .catchAndReturn(true)
+        case false:
+            return Service.shared.saveNotice(noticeID: id).asObservable()
+//                .delay(.seconds(1), scheduler: MainScheduler.instance) // 필요 시 1초 딜레이 추가
+                .map { response in
+                    if 200...299 ~= response.status {
+                        print("저장 성공")
+                        return true
+                    } else {
+                        print("저장 실패")
+                        throw NSError(domain: "", code: response.status, userInfo: nil) // 에러 발생
+                    }
+                }
+                .catchAndReturn(false)
+        }
     }
 }
