@@ -225,6 +225,24 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        bindScroll(of: rootView.headerView.councilCollectionView,
+                   to: rootView.stickyHeaderView.councilCollectionView)
+        
+    }
+    
+    private func bindScroll(of source: UICollectionView, to target: UICollectionView) {
+        source.rx.contentOffset
+            .subscribe(onNext: { contentOffset in
+                target.contentOffset = contentOffset
+            })
+            .disposed(by: disposeBag)
+        
+        target.rx.contentOffset
+            .subscribe(onNext: { contentOffset in
+                source.contentOffset = contentOffset
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindUI() {
