@@ -168,7 +168,6 @@
 		212FCAD82C458CD1000E8223 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		212FCADA2C45933A000E8223 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		212FCADC2C459628000E8223 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
-		212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
 		212FCAE52C467802000E8223 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		212FCAE72C467933000E8223 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		212FCAE92C468289000E8223 /* UniversityDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityDataResponse.swift; sourceTree = "<group>"; };
@@ -563,7 +562,6 @@
 			isa = PBXGroup;
 			children = (
 				880ED95C2C23F75D0045A620 /* Info.plist */,
-				212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */,
 				88325C2C2C382DF4004A293D /* PreviewController.swift */,
 				212FCAF52C4714DB000E8223 /* KeyChain.swift */,
 			);
@@ -1325,7 +1323,6 @@
 		};
 		880ED9602C23F75D0045A620 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1361,7 +1358,6 @@
 		};
 		880ED9612C23F75D0045A620 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

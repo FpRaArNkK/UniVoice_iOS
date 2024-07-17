@@ -13,12 +13,12 @@ final class UniversityInputVM: ViewModelType {
     struct Input {
         let inputText: Observable<String>
         let selectedUniversity: Observable<String>
-        let univCellIsSelected: Observable<University>
+        let univCellIsSelected: Observable<String>
     }
     
     struct Output {
         let isNextButtonEnabled: Driver<Bool>
-        let filteredUniversities: Driver<[University]>
+        let filteredUniversities: Driver<[String]>
     }
     
     var disposeBag = DisposeBag()
@@ -31,6 +31,7 @@ final class UniversityInputVM: ViewModelType {
     private let textFieldString = BehaviorRelay(value: "")
     private let validationString = BehaviorRelay(value: "")
     private let isNextButtonEnabled = BehaviorRelay<Bool>(value: false)
+    private let universitiesRelay = BehaviorRelay<[String]>(value: [])
     
     func transform(input: Input) -> Output {
         input.inputText
@@ -59,48 +60,40 @@ final class UniversityInputVM: ViewModelType {
             .bind(to: isNextButtonEnabled)
             .disposed(by: disposeBag)
         
-        let filteredUniversities = input.inputText
-            .map { query in
-                self.filterUniversities(with: query)
+        // API 호출 추가
+        Service.shared.getUniversityList()
+            .subscribe { response in
+                switch response {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
             }
-            .asDriver(onErrorJustReturn: [])
+            .disposed(by: disposeBag)
         
-//        let selectedName = input.selectedUniversity
+        let filteredUniversities = Observable.combineLatest(input.inputText, universitiesRelay) { query, universities in
+            self.filterUniversities(with: query, from: universities)
+        }
+        .asDriver(onErrorJustReturn: [])
         
         return Output(
             isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false),
             filteredUniversities: filteredUniversities
         )
     }
-
 }
-
-struct University {
-    let name: String
-}
-
-// 더미 데이터
-private let dummyData = [
-    University(name: "가나다라 대학교"),
-    University(name: "가나다 대학교"),
-    University(name: "Harvard of Oxford"),
-    University(name: "Harvard Institute of Technology"),
-    University(name: "Harvard of Cambridge"),
-    University(name: "Harvard of Cambridge"),
-    University(name: "Harvard of Cambridge"),
-    University(name: "Harvard of Cambridge")
-]
 
 // MARK: API Logic
     // 일단 더미 데이터
 extension UniversityInputVM {
-    private func filterUniversities(with query: String) -> [University] {
+    private func filterUniversities(with query: String, from universities: [String]) -> [String] {
         guard !query.isEmpty else {
             return []
         }
 
-        return dummyData.filter { university in
-            university.name.lowercased().contains(query.lowercased())
+        return universities.filter { university in
+            university.lowercased().contains(query.lowercased())
         }
     }
 }

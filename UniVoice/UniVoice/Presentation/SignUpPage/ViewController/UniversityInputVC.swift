@@ -49,10 +49,10 @@ final class UniversityInputVC: UIViewController {
                     })
                     .disposed(by: disposeBag)
 
-        rootView.univTableView.rx.modelSelected(University.self)
-            .map { $0.name }
+        rootView.univTableView.rx.modelSelected(String.self)
             .bind(to: selectedUniversity)
             .disposed(by: disposeBag)
+
         
         rootView.univTextField.rx.text.orEmpty
             .bind(to: selectedUniversity)
@@ -65,7 +65,7 @@ final class UniversityInputVC: UIViewController {
         let input = UniversityInputVM.Input(
             inputText: rootView.univTextField.rx.text.orEmpty.asObservable(),
             selectedUniversity: selectedUniversity.asObservable(),
-            univCellIsSelected: rootView.univTableView.rx.modelSelected(University.self).asObservable()
+            univCellIsSelected: rootView.univTableView.rx.modelSelected(String.self).asObservable()
         )
         
         let output = viewModel.transform(input: input)
@@ -80,18 +80,12 @@ final class UniversityInputVC: UIViewController {
                 cellIdentifier: "UniversityTableViewCell",
                 cellType: UniversityTableViewCell.self
             )) { index, university, cell in
-                //rootView.univTextField.text // 서울
-                let attrString = AttributedString("university.name")
-                // attrString에서 rootView.univTextField.text랑 겹치는 부분 찾고, 해당 부분만 특정 폰트 지정가능
-                // 나머지 부분은 기본 지정 폰트로
-                cell.univNameLabel.text = university.name
+                cell.univNameLabel.text = university
             }
             .disposed(by: disposeBag)
         
-        rootView.univTableView.rx.modelSelected(University.self)
-            .subscribe(onNext: { university in
-                print("Selected university: \(university.name)")
-            })
+        rootView.univTableView.rx.modelSelected(String.self)
+            .bind(to: selectedUniversity)
             .disposed(by: disposeBag)
     }
 }
@@ -111,8 +105,8 @@ extension UniversityInputVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         // 학교 선택시
-        if let university = try? rootView.univTableView.rx.model(at: indexPath) as University {
-            print("Selected university: \(university.name)")
+        if let university = try? rootView.univTableView.rx.model(at: indexPath) as String {
+            print("Selected university: \(university)")
         }
     }
 }
