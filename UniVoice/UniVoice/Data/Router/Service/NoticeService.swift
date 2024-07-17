@@ -90,4 +90,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func cancleSavingNotice(noticeID: Int) -> Single<BaseResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.cancleSavingNotice(noticeID: noticeID),
+            model: BaseResponse.self,
+            service: noticeService
+        )
+    }
 }
