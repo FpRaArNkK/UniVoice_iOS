@@ -39,13 +39,13 @@ final class MainHomeViewModel: ViewModelType {
             .flatMapLatest { index -> Observable<[Article]> in
                 switch index {
                 case 0:
-                    return self.firstArticleApiCall()
+                    return self.allArticleApiCall()
                 case 1:
-                    return Observable.just([])//self.articleList
+                    return self.mainStudentArticleApiCall()
                 case 2:
-                    return Observable.just([])//self.articleList
+                    return self.collegeStudentArticleApiCall()
                 case 3:
-                    return Observable.just([])//self.articleList
+                    return self.departmentStudentArticleApiCall()
                 default:
                     return Observable.just([])
                 }
@@ -76,11 +76,38 @@ extension MainHomeViewModel {
     }
     
     
-    func firstArticleApiCall() -> Observable<[Article]> {
+    func allArticleApiCall() -> Observable<[Article]> {
         return Service.shared.getAllNoticeList()
             .asObservable()
             .map { response in
                 return self.convertAllNoticesToArticles(allNotices: response.data)
+            }
+            .catchAndReturn([])
+    }
+    
+    func mainStudentArticleApiCall() -> Observable<[Article]> {
+        return Service.shared.getMainStudentCouncilNoticeList()
+            .asObservable()
+            .map { response in
+                return self.convertmainNoticesToArticles(allNotices: response.data)
+            }
+            .catchAndReturn([])
+    }
+    
+    func collegeStudentArticleApiCall() -> Observable<[Article]> {
+        return Service.shared.getCollegeStudentCouncilNoticeList()
+            .asObservable()
+            .map { response in
+                return self.convertcollegeNoticesToArticles(allNotices: response.data)
+            }
+            .catchAndReturn([])
+    }
+    
+    func departmentStudentArticleApiCall() -> Observable<[Article]> {
+        return Service.shared.getDepartmentStudentCouncilNoticeList()
+            .asObservable()
+            .map { response in
+                return self.convertdepartmentNoticesToArticles(allNotices: response.data)
             }
             .catchAndReturn([])
     }
@@ -95,6 +122,18 @@ extension MainHomeViewModel {
     }
     
     func convertAllNoticesToArticles(allNotices: [AllNotice]) -> [Article] {
+        return allNotices.map { $0.toArticle() }
+    }
+    
+    func convertmainNoticesToArticles(allNotices: [MainStudentCouncilNotice]) -> [Article] {
+        return allNotices.map { $0.toArticle() }
+    }
+    
+    func convertcollegeNoticesToArticles(allNotices: [CollegeStudentCouncilNotice]) -> [Article] {
+        return allNotices.map { $0.toArticle() }
+    }
+    
+    func convertdepartmentNoticesToArticles(allNotices: [DepartmentStudentCouncilNotice]) -> [Article] {
         return allNotices.map { $0.toArticle() }
     }
     

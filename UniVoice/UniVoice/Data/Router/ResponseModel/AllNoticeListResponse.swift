@@ -38,7 +38,7 @@ extension AllNotice {
         return Article(chip: chip, 
                        articleTitle: articleTitle,
                        thumbnailImage: thumbnailImage,
-                       duration: duration,
+                       duration: createdAt.formatDate(from: createdAt),
                        likedNumber: likedNumber,
                        savedNumber: savedNumber)
     }
