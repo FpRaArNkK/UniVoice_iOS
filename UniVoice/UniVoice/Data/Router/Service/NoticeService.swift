@@ -26,4 +26,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func getMainStudentCouncilNoticeList() -> Single<MainStudentCouncilNoticeListResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.getMainStudentCouncilNoticeList,
+            model: MainStudentCouncilNoticeListResponse.self,
+            service: noticeService
+        )
+    }
 }
