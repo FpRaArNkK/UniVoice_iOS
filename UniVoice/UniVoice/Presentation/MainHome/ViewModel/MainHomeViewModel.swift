@@ -69,3 +69,26 @@ final class MainHomeViewModel: ViewModelType {
         )
     }
 }
+
+extension MainHomeViewModel {
+    func apiCall() -> Observable<[QS]> {
+        return Service.shared.getQuickScanStory()
+            .asObservable()
+            .map { response in
+                let result = response.data.toQS()
+                return result
+            }
+            .catchAndReturn([])
+    }
+}
+        
+//            .subscribe { res in
+//                switch res {
+//                case .success(let suc):
+//                    let result = suc.data.toQS()
+//                    return result
+//                case .failure(let fal):
+//                    print(fal)
+//                    return []
+//                }
+//            }

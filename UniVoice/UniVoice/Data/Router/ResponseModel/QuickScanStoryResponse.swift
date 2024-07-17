@@ -24,3 +24,13 @@ struct QuickScanStory: Codable {
     let departmentCount: Int
     let departmentLogoImage: String
 }
+
+extension QuickScanStory {
+    func toQS() -> [QS] {
+        return [
+            QS.init(councilImage: universityLogoImage, councilName: universityName, articleNumber: universityNameCount),
+            QS.init(councilImage: collegeDepartmentLogoImage, councilName: collegeDepartmentName, articleNumber: collegeDepartmentCount),
+            QS.init(councilImage: departmentLogoImage, councilName: departmentName, articleNumber: departmentCount)
+        ]
+    }
+}
