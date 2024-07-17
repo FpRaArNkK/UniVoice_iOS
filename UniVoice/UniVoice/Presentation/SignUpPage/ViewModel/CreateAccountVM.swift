@@ -102,11 +102,17 @@ final class CreateAccountVM: ViewModelType {
     }
 }
 
-//중복 확인 API 가정
 extension CreateAccountVM {
     private func checkDuplication(id: String) -> Observable<Bool> {
-        return id == "aaaaa"
-        ? Observable.just(true).delay(.milliseconds(200), scheduler: MainScheduler.instance)
-        : Observable.just(false).delay(.milliseconds(200), scheduler: MainScheduler.instance)
+        return Service.shared.checkIDDuplication(request: .init(email: id))
+            .map { response in
+                return response.status == 200
+            }
+            .asObservable()
     }
+//    private func checkDuplication(id: String) -> Observable<Bool> {
+//        return id == "aaaaa"
+//        ? Observable.just(true).delay(.milliseconds(200), scheduler: MainScheduler.instance)
+//        : Observable.just(false).delay(.milliseconds(200), scheduler: MainScheduler.instance)
+//    }
 }

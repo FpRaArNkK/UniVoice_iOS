@@ -32,7 +32,7 @@ extension UserTargetType: UniVoiceTargetType {
         case .checkIDDuplication:
             return "auth/check-email"
         case .requestSignUp:
-            return "signup"
+            return "auth/signup"
         }
     }
     
@@ -78,6 +78,11 @@ extension UserTargetType: UniVoiceTargetType {
     }
     
     var headers: [String: String]? {
-        return ["Content-Type": "application/json"]
+        switch self {
+        case .requestSignUp:
+            return ["Content-Type": "multipart/form-data"]
+        default:
+            return ["Content-Type": "application/json"]
+        }
     }
 }
