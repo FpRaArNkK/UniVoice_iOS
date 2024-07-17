@@ -18,4 +18,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func getAllNoticeList() -> Single<AllNoticeListResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.getAllNoticeList,
+            model: AllNoticeListResponse.self,
+            service: noticeService
+        )
+    }
 }

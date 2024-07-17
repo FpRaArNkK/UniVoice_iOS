@@ -10,6 +10,7 @@ import Moya
 
 enum NoticeTargetType {
     case getQuickScanStory
+    case getAllNoticeList //메인홈 전체 공지 리스트
 }
 
 extension NoticeTargetType: UniVoiceTargetType {
@@ -21,19 +22,23 @@ extension NoticeTargetType: UniVoiceTargetType {
         switch self {
         case .getQuickScanStory:
             return "notice/quickhead"
+        case .getAllNoticeList:
+            return "notice/all"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getQuickScanStory:
+        case .getQuickScanStory,
+                .getAllNoticeList:
             return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .getQuickScanStory:
+        case .getQuickScanStory,
+                .getAllNoticeList:
             return .requestPlain
         }
     }

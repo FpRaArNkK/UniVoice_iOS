@@ -25,7 +25,7 @@ final class InitialViewController: UIViewController {
         super.viewDidLoad()
 //        setUpFoundation()
         setUpBindUI()
-        Service.shared.getQuickScanStory()
+        Service.shared.getAllNoticeList()
             .subscribe { event in
                 switch event {
                 case .success(let data):
