@@ -30,6 +30,11 @@ final class CreateNoticeVC: UIViewController {
         self.view = rootView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(true)
+            self.tabBarController?.tabBar.isHidden = true
+        }
+    
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
