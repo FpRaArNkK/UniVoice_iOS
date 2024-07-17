@@ -66,4 +66,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func likeNotice(noticeID: Int) -> Single<BaseResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.likeNotice(noticeID: noticeID),
+            model: BaseResponse.self,
+            service: noticeService
+        )
+    }
 }
