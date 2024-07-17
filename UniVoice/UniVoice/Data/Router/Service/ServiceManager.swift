@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 final class ServiceManager<T: UniVoiceTargetType> {
-    let provider = MoyaProvider<T>(plugins: [MoyaLoggingPlugin()])
-    
-    init() {}
+    let loginProvider = MoyaProvider<T>(plugins: [MoyaLoginPlugin()])
+    let providerWithToken = MoyaProvider<T>(plugins: [AccessTokenPlugin()])
+    let provider = MoyaProvider<T>(plugins: [])
 }
