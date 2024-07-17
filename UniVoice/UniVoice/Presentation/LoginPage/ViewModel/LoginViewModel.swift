@@ -58,10 +58,12 @@ final class LoginViewModel: ViewModelType {
 
 // MARK: API Logic
 extension LoginViewModel {
-    // 대충 API 탔다고 가정
     private func login(id: String, password: String) -> Observable<Bool> {
-        return id != "Test"
-        ? Observable.just(true).delay(.milliseconds(200), scheduler: MainScheduler.instance)
-        : Observable.just(false).delay(.milliseconds(200), scheduler: MainScheduler.instance)
+        return Service.shared.login(request: .init(email: id, password: password))
+                .asObservable()
+                .map { response in
+                    return response.status == 200
+                }
+                .catchAndReturn(false)
     }
 }
