@@ -9,24 +9,33 @@ import Foundation
 import Moya
 
 enum NoticeTargetType {
-    
+    case getQuickScanStory
 }
 
 extension NoticeTargetType: UniVoiceTargetType {
     var baseURL: URL {
-        return URL(string: "test")!
+        return URL(string: Config.baseURL)!
     }
     
     var path: String {
-        return "test"
+        switch self {
+        case .getQuickScanStory:
+            return "notice/quickhead"
+        }
     }
     
     var method: Moya.Method {
-        return .get
+        switch self {
+        case .getQuickScanStory:
+            return .get
+        }
     }
     
     var task: Moya.Task {
-        return .requestPlain
+        switch self {
+        case .getQuickScanStory:
+            return .requestPlain
+        }
     }
     
     var headers: [String : String]? {

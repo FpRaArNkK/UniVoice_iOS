@@ -25,6 +25,16 @@ final class InitialViewController: UIViewController {
         super.viewDidLoad()
 //        setUpFoundation()
         setUpBindUI()
+        Service.shared.getQuickScanStory()
+            .subscribe { event in
+                switch event {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: setUpFoundation

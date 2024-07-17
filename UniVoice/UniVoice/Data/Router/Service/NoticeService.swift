@@ -11,4 +11,11 @@ import RxSwift
 import RxMoya
 
 extension Service {
+    func getQuickScanStory() -> Single<QuickScanStoryResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.getQuickScanStory,
+            model: QuickScanStoryResponse.self,
+            service: noticeService
+        )
+    }
 }
