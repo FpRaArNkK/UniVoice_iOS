@@ -19,10 +19,10 @@ struct QS {
 }
 
 struct Article {
-    let council: String
+//    let council: String
     let chip: String
     let articleTitle: String
-    let thumbnailImage: UIImage?
+    let thumbnailImage: String
     let duration: String
     let likedNumber: Int
     let savedNumber: Int

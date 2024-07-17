@@ -116,6 +116,7 @@ final class ArticleCVC: UICollectionViewCell {
         articleTitle.snp.makeConstraints {
             $0.top.equalTo(chipView.snp.bottom).offset(6)
             $0.leading.equalTo(chipView)
+            $0.trailing.equalTo(thumbnailImage.snp.leading).offset(-18)
         }
         thumbnailImage.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -174,7 +175,7 @@ extension ArticleCVC {
         let width = viewModel.chip.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]).width
         chip.text = viewModel.chip
         articleTitle.text = viewModel.articleTitle
-        thumbnailImage.image = viewModel.thumbnailImage
+        thumbnailImage.kf.setImage(with: URL(string: viewModel.thumbnailImage))
         duration.text = viewModel.duration
         likedNumber.text = "\(viewModel.likedNumber)"
         savedNumber.text = "\(viewModel.savedNumber)"

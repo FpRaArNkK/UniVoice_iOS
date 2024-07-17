@@ -12,18 +12,11 @@ import RxDataSources
 
 final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
-    //TODO: api - 학생회일 시 createButton.isHidden = false 추가
     //TODO: refresh control logic 추가
     
     //MARK: Properties
     private let disposeBag = DisposeBag()
-    
-    private let dummyData: [QS] = [
-        QS(councilImage: "defaultImage", councilName: "홍익대학교\n총학생회", articleNumber: 5),
-        QS(councilImage: "defaultImage", councilName: "공과대학\n학생회", articleNumber: 10),
-        QS(councilImage: "mainLogo", councilName: "컴퓨터공학과\n학생회", articleNumber: 0)
-    ]
-    
+
     private let viewModel = MainHomeViewModel()
     
     private let itemSelectedSubject = PublishSubject<IndexPath>()
@@ -55,6 +48,8 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         bindCollectionView()
         bindScrollView()
         bindUI()
+        bindScroll(of: rootView.headerView.councilCollectionView,
+                   to: rootView.stickyHeaderView.councilCollectionView)
     }
     
     private func setupCollectionView() {
@@ -108,7 +103,11 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         
         let output = viewModel.transform(input: input)
         
-        let qsItems = viewModel.apiCall()
+        let qsItems = viewModel.quickScanApiCall()        
+        
+
+                
+        let quickScanStories = qsItems
         
         let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QS>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
@@ -225,9 +224,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
             })
             .disposed(by: disposeBag)
-        
-        bindScroll(of: rootView.headerView.councilCollectionView,
-                   to: rootView.stickyHeaderView.councilCollectionView)
         
     }
     
