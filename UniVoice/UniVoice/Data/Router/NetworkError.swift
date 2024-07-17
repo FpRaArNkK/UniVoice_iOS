@@ -7,8 +7,7 @@
 
 import Foundation
 
-enum NetworkResult<T> {
-    case success(T)
+enum NetworkError: Error {
     case requestErr
     case decodedErr
     case pathErr

@@ -139,4 +139,7 @@ Package.resolved
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+### xcconfig ###
+*.xcconfig
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode,macos,swiftpm,swiftpackagemanager

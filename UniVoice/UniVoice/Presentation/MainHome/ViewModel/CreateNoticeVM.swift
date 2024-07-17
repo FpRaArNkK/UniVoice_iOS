@@ -17,20 +17,22 @@ final class CreateNoticeVM {
         let selectedImages: Observable<[UIImage]>
         let targetContenttext: Observable<String>
         let targetContentResult: Observable<String>
-        let startDate: Observable<Date?>
-        let finishDate: Observable<Date?>
+        let startDate: Observable<Date>
+        let finishDate: Observable<Date>
+        let isUsingTime: Observable<Bool>
     }
     
     struct Output {
         let buttonState: Driver<ButtonState>
         let images: Driver<[UIImage]>
         let targetContent: Driver<String>
-        let startDate: Driver<Date?>
-        let finishDate: Driver<Date?>
+        let startDate: Driver<Date>
+        let finishDate: Driver<Date>
         let showImageCollection: Driver<Bool>
         let showTargetView: Driver<Bool>
         let showDateView: Driver<Bool>
         let isTargetConfirmButtonEnabled: Driver<Bool>
+        let isUsingTime: Driver<Bool>
     }
     
     struct ButtonState {
@@ -45,11 +47,12 @@ final class CreateNoticeVM {
     private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
     private let targetContentRelay = BehaviorRelay<String>(value: "")
     private let targetContentResultRelay = BehaviorRelay<String>(value: "")
-    private let startDateRelay = BehaviorRelay<Date?>(value: nil)
-    private let finishDateRelay = BehaviorRelay<Date?>(value: nil)
+    private let startDateRelay = BehaviorRelay<Date>(value: Date())
+    private let finishDateRelay = BehaviorRelay<Date>(value: Date())
     private let showImageCollectionRelay = BehaviorRelay<Bool>(value: false)
     private let showTargetViewRelay = BehaviorRelay<Bool>(value: false)
     private let showDateViewRelay = BehaviorRelay<Bool>(value: false)
+    private let isUsingTimeRelay = BehaviorRelay<Bool>(value: true)
     
     func transform(input: Input) -> Output {
         
@@ -85,6 +88,10 @@ final class CreateNoticeVM {
             .bind(to: finishDateRelay)
             .disposed(by: disposeBag)
         
+        input.isUsingTime
+            .bind(to: isUsingTimeRelay)
+            .disposed(by: disposeBag)
+        
         let buttonState = Observable
             .combineLatest(titleTextRelay, isTextViewEmptyRelay)
             .map { title, isTextViewEmptyRelay in
@@ -98,9 +105,9 @@ final class CreateNoticeVM {
         
         let targetContent = input.targetContentResult.asDriver(onErrorJustReturn: "")
         
-        let startDate = input.startDate.asDriver(onErrorJustReturn: nil)
+        let startDate = input.startDate.asDriver(onErrorJustReturn: Date())
         
-        let finishDate = input.finishDate.asDriver(onErrorJustReturn: nil)
+        let finishDate = input.finishDate.asDriver(onErrorJustReturn: Date())
         
         let showImageCollection = selectedImagesRelay
             .map { !$0.isEmpty }
@@ -124,6 +131,9 @@ final class CreateNoticeVM {
             .map { !$0.isEmpty }
             .asDriver(onErrorJustReturn: false)
         
+        let isUsingTime = input.isUsingTime
+            .asDriver(onErrorJustReturn: true)
+        
         return Output(
             buttonState: buttonState,
             images: images,
@@ -133,7 +143,8 @@ final class CreateNoticeVM {
             showImageCollection: showImageCollection,
             showTargetView: showTargetView,
             showDateView: showDateView,
-            isTargetConfirmButtonEnabled: isTargetConfirmButtonEnabled
+            isTargetConfirmButtonEnabled: isTargetConfirmButtonEnabled,
+            isUsingTime: isUsingTime
         )
     }
     

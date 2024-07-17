@@ -9,15 +9,34 @@
 /* Begin PBXBuildFile section */
 		211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */; };
 		211B408C2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */; };
-		212FCAC92C4577BC000E8223 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAC82C4577BC000E8223 /* NetworkResult.swift */; };
+		212FCAC92C4577BC000E8223 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAC82C4577BC000E8223 /* NetworkError.swift */; };
 		212FCACD2C457907000E8223 /* UniVoiceTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCACC2C457907000E8223 /* UniVoiceTargetType.swift */; };
 		212FCACF2C457916000E8223 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCACE2C457916000E8223 /* UserTargetType.swift */; };
 		212FCAD12C45796C000E8223 /* NoticeTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD02C45796C000E8223 /* NoticeTargetType.swift */; };
 		212FCAD42C458709000E8223 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD32C458709000E8223 /* ServiceManager.swift */; };
-		212FCAD62C4587BD000E8223 /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */; };
+		212FCAD62C4587BD000E8223 /* MoyaLoginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD52C4587BD000E8223 /* MoyaLoginPlugin.swift */; };
 		212FCAD92C458CD1000E8223 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD82C458CD1000E8223 /* Service.swift */; };
 		212FCADB2C45933A000E8223 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADA2C45933A000E8223 /* UserService.swift */; };
 		212FCADD2C459628000E8223 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADC2C459628000E8223 /* NoticeService.swift */; };
+		212FCAE62C467802000E8223 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE52C467802000E8223 /* Config.swift */; };
+		212FCAE82C467933000E8223 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE72C467933000E8223 /* BaseResponse.swift */; };
+		212FCAEA2C468289000E8223 /* UniversityDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAE92C468289000E8223 /* UniversityDataResponse.swift */; };
+		212FCAED2C46A3AE000E8223 /* UniversityNameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAEC2C46A3AE000E8223 /* UniversityNameRequest.swift */; };
+		212FCAF02C46AF7B000E8223 /* IDCheckRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */; };
+		212FCAF22C470F24000E8223 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAF12C470F24000E8223 /* LoginRequest.swift */; };
+		212FCAF42C470FC3000E8223 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAF32C470FC3000E8223 /* LoginResponse.swift */; };
+		212FCAF62C4714DB000E8223 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAF52C4714DB000E8223 /* KeyChain.swift */; };
+		212FCAF82C471AE7000E8223 /* AccessTokenPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAF72C471AE7000E8223 /* AccessTokenPlugin.swift */; };
+		212FCAFB2C481D17000E8223 /* QuickScanStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAFA2C481D17000E8223 /* QuickScanStoryResponse.swift */; };
+		212FCAFD2C482057000E8223 /* AllNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAFC2C482057000E8223 /* AllNoticeListResponse.swift */; };
+		212FCAFF2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAFE2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift */; };
+		212FCB012C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB002C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift */; };
+		212FCB032C482563000E8223 /* DepartmentStudentCouncilNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB022C482563000E8223 /* DepartmentStudentCouncilNoticeListResponse.swift */; };
+		212FCB052C48266E000E8223 /* UnreadQuickScanRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB042C48266E000E8223 /* UnreadQuickScanRequest.swift */; };
+		212FCB072C4826EE000E8223 /* UnreadQuickScanListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB062C4826EE000E8223 /* UnreadQuickScanListResponse.swift */; };
+		212FCB092C482B17000E8223 /* NoticeDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */; };
+		212FCB0B2C4831C4000E8223 /* SavedNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */; };
+		212FCB0D2C4835ED000E8223 /* MyPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB0C2C4835ED000E8223 /* MyPageResponse.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -136,20 +155,42 @@
 		EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8992C42BCD100DE7643 /* UIView+.swift */; };
 		EDF4C89C2C43F9BD00DE7643 /* TargetInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89B2C43F9BD00DE7643 /* TargetInputView.swift */; };
 		EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */; };
+		EDF4C8A02C4729B900DE7643 /* UploadingNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */; };
+		EDF4C8A22C472A6100DE7643 /* UploadingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoInputVM.swift; sourceTree = "<group>"; };
 		211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoConfirmVM.swift; sourceTree = "<group>"; };
-		212FCAC82C4577BC000E8223 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		212FCAC82C4577BC000E8223 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		212FCACC2C457907000E8223 /* UniVoiceTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniVoiceTargetType.swift; sourceTree = "<group>"; };
 		212FCACE2C457916000E8223 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargetType.swift; sourceTree = "<group>"; };
 		212FCAD02C45796C000E8223 /* NoticeTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTargetType.swift; sourceTree = "<group>"; };
 		212FCAD32C458709000E8223 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
-		212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
+		212FCAD52C4587BD000E8223 /* MoyaLoginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoginPlugin.swift; sourceTree = "<group>"; };
 		212FCAD82C458CD1000E8223 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		212FCADA2C45933A000E8223 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		212FCADC2C459628000E8223 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
+		212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
+		212FCAE52C467802000E8223 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		212FCAE72C467933000E8223 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		212FCAE92C468289000E8223 /* UniversityDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityDataResponse.swift; sourceTree = "<group>"; };
+		212FCAEC2C46A3AE000E8223 /* UniversityNameRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityNameRequest.swift; sourceTree = "<group>"; };
+		212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDCheckRequest.swift; sourceTree = "<group>"; };
+		212FCAF12C470F24000E8223 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		212FCAF32C470FC3000E8223 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		212FCAF52C4714DB000E8223 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		212FCAF72C471AE7000E8223 /* AccessTokenPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenPlugin.swift; sourceTree = "<group>"; };
+		212FCAFA2C481D17000E8223 /* QuickScanStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanStoryResponse.swift; sourceTree = "<group>"; };
+		212FCAFC2C482057000E8223 /* AllNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNoticeListResponse.swift; sourceTree = "<group>"; };
+		212FCAFE2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStudentCouncilNoticeListResponse.swift; sourceTree = "<group>"; };
+		212FCB002C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeStudentCouncilNoticeListResponse.swift; sourceTree = "<group>"; };
+		212FCB022C482563000E8223 /* DepartmentStudentCouncilNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentStudentCouncilNoticeListResponse.swift; sourceTree = "<group>"; };
+		212FCB042C48266E000E8223 /* UnreadQuickScanRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadQuickScanRequest.swift; sourceTree = "<group>"; };
+		212FCB062C4826EE000E8223 /* UnreadQuickScanListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadQuickScanListResponse.swift; sourceTree = "<group>"; };
+		212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailResponse.swift; sourceTree = "<group>"; };
+		212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoticeListResponse.swift; sourceTree = "<group>"; };
+		212FCB0C2C4835ED000E8223 /* MyPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageResponse.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -259,6 +300,8 @@
 		EDF4C8992C42BCD100DE7643 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		EDF4C89B2C43F9BD00DE7643 /* TargetInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetInputView.swift; sourceTree = "<group>"; };
 		EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
+		EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeVC.swift; sourceTree = "<group>"; };
+		EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +345,44 @@
 				212FCADC2C459628000E8223 /* NoticeService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		212FCAEB2C46828E000E8223 /* ResponseModel */ = {
+			isa = PBXGroup;
+			children = (
+				212FCAF32C470FC3000E8223 /* LoginResponse.swift */,
+				212FCAE92C468289000E8223 /* UniversityDataResponse.swift */,
+				212FCAFA2C481D17000E8223 /* QuickScanStoryResponse.swift */,
+				212FCAFC2C482057000E8223 /* AllNoticeListResponse.swift */,
+				212FCAFE2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift */,
+				212FCB002C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift */,
+				212FCB022C482563000E8223 /* DepartmentStudentCouncilNoticeListResponse.swift */,
+				212FCB062C4826EE000E8223 /* UnreadQuickScanListResponse.swift */,
+				212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */,
+				212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */,
+				212FCB0C2C4835ED000E8223 /* MyPageResponse.swift */,
+			);
+			path = ResponseModel;
+			sourceTree = "<group>";
+		};
+		212FCAEE2C46A3E0000E8223 /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				212FCAF12C470F24000E8223 /* LoginRequest.swift */,
+				212FCAEC2C46A3AE000E8223 /* UniversityNameRequest.swift */,
+				212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */,
+				212FCB042C48266E000E8223 /* UnreadQuickScanRequest.swift */,
+			);
+			path = RequestModel;
+			sourceTree = "<group>";
+		};
+		212FCAF92C471AF0000E8223 /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				212FCAD52C4587BD000E8223 /* MoyaLoginPlugin.swift */,
+				212FCAF72C471AE7000E8223 /* AccessTokenPlugin.swift */,
+			);
+			path = Plugin;
 			sourceTree = "<group>";
 		};
 		2195F6DB2C397539008D2485 /* ViewModel */ = {
@@ -425,6 +506,7 @@
 		880ED9672C23FE0F0045A620 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				212FCAE72C467933000E8223 /* BaseResponse.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -432,10 +514,13 @@
 		880ED9682C23FE160045A620 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */,
-				212FCAC82C4577BC000E8223 /* NetworkResult.swift */,
-				212FCAD72C458C5D000E8223 /* Service */,
+				212FCAE52C467802000E8223 /* Config.swift */,
+				212FCAC82C4577BC000E8223 /* NetworkError.swift */,
+				212FCAF92C471AF0000E8223 /* Plugin */,
 				212FCAD22C45799D000E8223 /* TargetType */,
+				212FCAD72C458C5D000E8223 /* Service */,
+				212FCAEE2C46A3E0000E8223 /* RequestModel */,
+				212FCAEB2C46828E000E8223 /* ResponseModel */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -485,7 +570,9 @@
 			isa = PBXGroup;
 			children = (
 				880ED95C2C23F75D0045A620 /* Info.plist */,
+				212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */,
 				88325C2C2C382DF4004A293D /* PreviewController.swift */,
+				212FCAF52C4714DB000E8223 /* KeyChain.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -716,6 +803,7 @@
 				EDF4C8932C41DB0200DE7643 /* DateView.swift */,
 				EDF4C89B2C43F9BD00DE7643 /* TargetInputView.swift */,
 				EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */,
+				EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -743,6 +831,7 @@
 		DC33DB132C3B16D3008B321E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */,
 				DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */,
 				EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */,
 			);
@@ -1011,11 +1100,14 @@
 				212FCADD2C459628000E8223 /* NoticeService.swift in Sources */,
 				EDE8CA222C37C51300E828F1 /* DepartmentInputView.swift in Sources */,
 				880ED9532C23F75B0045A620 /* ViewController.swift in Sources */,
-				212FCAC92C4577BC000E8223 /* NetworkResult.swift in Sources */,
+				212FCB012C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift in Sources */,
+				212FCAC92C4577BC000E8223 /* NetworkError.swift in Sources */,
 				21E15DFE2C3F0637003358A0 /* UIImage+.swift in Sources */,
 				88325C362C38B5C5004A293D /* UINavigationBar+.swift in Sources */,
 				881A3C5B2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift in Sources */,
 				88293F7B2C42C1D10082A986 /* NoAccountViewController.swift in Sources */,
+				212FCB092C482B17000E8223 /* NoticeDetailResponse.swift in Sources */,
+				212FCAF42C470FC3000E8223 /* LoginResponse.swift in Sources */,
 				88325C302C384440004A293D /* CustomButton.swift in Sources */,
 				EDE8CA262C37C53F00E828F1 /* UnivInfoConfirmView.swift in Sources */,
 				2132A8442C3A6FEA00795667 /* SignUpInfoCheckingView.swift in Sources */,
@@ -1032,24 +1124,32 @@
 				EDF4C88B2C41966300DE7643 /* CreateNoticeVC.swift in Sources */,
 				EDF4C8872C41307400DE7643 /* DepartmentTableViewCell.swift in Sources */,
 				DC9F76132C43494E0019A83F /* DetailNotice.swift in Sources */,
+				212FCB052C48266E000E8223 /* UnreadQuickScanRequest.swift in Sources */,
 				88325C342C38762D004A293D /* UITextField+.swift in Sources */,
 				880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */,
+				212FCAEA2C468289000E8223 /* UniversityDataResponse.swift in Sources */,
+				212FCB072C4826EE000E8223 /* UnreadQuickScanListResponse.swift in Sources */,
 				21F7B1602C34748700A082D8 /* UIButton+.swift in Sources */,
 				88293F812C43BBBE0082A986 /* SavedNoticeView.swift in Sources */,
 				DC91FACF2C42E4710095DD5E /* TabBarVC.swift in Sources */,
 				EDE8CA282C37C59800E828F1 /* UniversityInputVC.swift in Sources */,
 				21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */,
-				212FCAD62C4587BD000E8223 /* MoyaLoggingPlugin.swift in Sources */,
+				212FCAD62C4587BD000E8223 /* MoyaLoginPlugin.swift in Sources */,
+				212FCAF22C470F24000E8223 /* LoginRequest.swift in Sources */,
 				DC91FAD22C42E75D0095DD5E /* AppTab.swift in Sources */,
 				21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */,
 				883B2CFD2C42B6E400D19A78 /* NoAccountView.swift in Sources */,
 				DC27DBD02C4708AB00401364 /* MyPageView.swift in Sources */,
 				2132A8402C3A6FC800795667 /* TOSCheckView.swift in Sources */,
+				EDF4C8A02C4729B900DE7643 /* UploadingNoticeVC.swift in Sources */,
 				21DF05C82C41A57B005EB117 /* TOSCheckVM.swift in Sources */,
+				212FCAE62C467802000E8223 /* Config.swift in Sources */,
+				212FCB0D2C4835ED000E8223 /* MyPageResponse.swift in Sources */,
 				EDF4C8812C3F13D900DE7643 /* CustomMenuTableViewCell.swift in Sources */,
 				EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */,
 				EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */,
 				882DB15F2C31C94A00D73FEF /* LoginViewModel.swift in Sources */,
+				EDF4C8A22C472A6100DE7643 /* UploadingNoticeView.swift in Sources */,
 				EDE8CA1E2C37C4AD00E828F1 /* SignUpIntroVC.swift in Sources */,
 				2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */,
 				2132A8422C3A6FD400795667 /* CreateAccountView.swift in Sources */,
@@ -1062,12 +1162,16 @@
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
 				EDF4C8982C42AF7900DE7643 /* CreateNoticeVM.swift in Sources */,
 				EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */,
+				212FCB032C482563000E8223 /* DepartmentStudentCouncilNoticeListResponse.swift in Sources */,
+				212FCAFD2C482057000E8223 /* AllNoticeListResponse.swift in Sources */,
+				212FCAED2C46A3AE000E8223 /* UniversityNameRequest.swift in Sources */,
 				21DF05C42C3FCE01005EB117 /* CreateAccountVM.swift in Sources */,
 				DC9EBCC02C4181C9007337A0 /* DetailNoticeView.swift in Sources */,
 				EDE8CA242C37C52B00E828F1 /* AdmissionYearSelectionView.swift in Sources */,
 				EDF4C89C2C43F9BD00DE7643 /* TargetInputView.swift in Sources */,
 				212FCACF2C457916000E8223 /* UserTargetType.swift in Sources */,
 				88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */,
+				212FCB0B2C4831C4000E8223 /* SavedNoticeListResponse.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
 				88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */,
 				EDF4C8942C41DB0200DE7643 /* DateView.swift in Sources */,
@@ -1078,16 +1182,20 @@
 				DC91FACC2C42B9A70095DD5E /* HeaderView.swift in Sources */,
 				212FCACD2C457907000E8223 /* UniVoiceTargetType.swift in Sources */,
 				DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */,
+				212FCAFF2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift in Sources */,
 				88AB98102C3FD35300AC5043 /* QuickScanViewModel.swift in Sources */,
 				882DB15D2C31C6D200D73FEF /* LoginViewController.swift in Sources */,
 				DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */,
 				212FCAD12C45796C000E8223 /* NoticeTargetType.swift in Sources */,
+				212FCAE82C467933000E8223 /* BaseResponse.swift in Sources */,
 				212FCAD42C458709000E8223 /* ServiceManager.swift in Sources */,
 				882DB1612C31D38300D73FEF /* InitialView.swift in Sources */,
+				212FCAF62C4714DB000E8223 /* KeyChain.swift in Sources */,
 				88293F852C43F4680082A986 /* SavedNoticeVM.swift in Sources */,
 				EDF4C8922C41DA6E00DE7643 /* TargetView.swift in Sources */,
 				211B408A2C3E8424008CFAAD /* StudentInfoInputVM.swift in Sources */,
 				EDF4C8962C42680200DE7643 /* ImageCVC.swift in Sources */,
+				212FCAF02C46AF7B000E8223 /* IDCheckRequest.swift in Sources */,
 				88AB98132C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift in Sources */,
 				2132A84C2C3A701D00795667 /* CreateAccountVC.swift in Sources */,
 				21DF05C62C4146B4005EB117 /* Reactive+.swift in Sources */,
@@ -1102,12 +1210,14 @@
 				DC9EBCB02C3EB2CC007337A0 /* mainHomeModel.swift in Sources */,
 				DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */,
 				88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */,
+				212FCAFB2C481D17000E8223 /* QuickScanStoryResponse.swift in Sources */,
 				88AB98062C3EC95B00AC5043 /* QuickScan.swift in Sources */,
 				EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */,
 				2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */,
 				882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */,
 				21F7B15C2C3471AA00A082D8 /* NSAttributedString+.swift in Sources */,
 				DC9EBCB22C3EC37C007337A0 /* CouncilCVC.swift in Sources */,
+				212FCAF82C471AE7000E8223 /* AccessTokenPlugin.swift in Sources */,
 				2132A84A2C3A701600795667 /* TOSCheckVC.swift in Sources */,
 				EDF4C8892C41965900DE7643 /* CreateNoticeView.swift in Sources */,
 				2132A8482C3A700F00795667 /* StudentInfoConfirmVC.swift in Sources */,
@@ -1251,6 +1361,7 @@
 		};
 		880ED9602C23F75D0045A620 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1286,6 +1397,7 @@
 		};
 		880ED9612C23F75D0045A620 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
