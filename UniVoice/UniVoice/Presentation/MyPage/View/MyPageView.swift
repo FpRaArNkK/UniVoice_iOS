@@ -145,6 +145,9 @@ final class MyPageView: UIView {
             $0.axis = .vertical
             $0.spacing = 0
         }
+        divider.do {
+            $0.backgroundColor = .light
+        }
         
         otherLabel.do {
             $0.setText("기타", font: .H6SB, color: .B_01)
