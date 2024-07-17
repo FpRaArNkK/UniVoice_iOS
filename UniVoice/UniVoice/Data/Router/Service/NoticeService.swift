@@ -82,4 +82,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func saveNotice(noticeID: Int) -> Single<BaseResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.saveNotice(noticeID: noticeID),
+            model: BaseResponse.self,
+            service: noticeService
+        )
+    }
 }
