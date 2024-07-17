@@ -59,7 +59,8 @@ final class MyPageSelectView: UIView {
         }
         
         selectButton.do {
-            $0.setImage(UIImage(named: "icn_forward"), for: .normal)
+            $0.setImage(UIImage(named: "icn_forward")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            $0.tintColor = .B_04
         }
     }
     
