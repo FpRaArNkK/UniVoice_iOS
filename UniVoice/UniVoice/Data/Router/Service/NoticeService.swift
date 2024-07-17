@@ -106,4 +106,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func increaseNoticeViewCount(noticeID: Int) -> Single<BaseResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.increaseNoticeViewCount(noticeID: noticeID),
+            model: BaseResponse.self,
+            service: noticeService
+        )
+    }
 }
