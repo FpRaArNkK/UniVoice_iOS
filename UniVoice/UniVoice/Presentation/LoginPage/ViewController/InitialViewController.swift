@@ -25,17 +25,6 @@ final class InitialViewController: UIViewController {
         super.viewDidLoad()
 //        setUpFoundation()
         setUpBindUI()
-        let request = UnreadQuickScanRequest(affiliation: "총학생회")
-        Service.shared.checkQuickScanAsRead(noticeID: 8)
-            .subscribe { event in
-                switch event {
-                case .success(let data):
-                    print(data)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-            .disposed(by: disposeBag)
     }
     
     // MARK: setUpFoundation

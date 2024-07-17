@@ -122,4 +122,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func getMyPage() -> Single<MyPageResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.getMyPage,
+            model: MyPageResponse.self,
+            service: noticeService
+        )
+    }
 }
