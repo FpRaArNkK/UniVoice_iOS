@@ -26,7 +26,7 @@ final class InitialViewController: UIViewController {
 //        setUpFoundation()
         setUpBindUI()
         let request = UnreadQuickScanRequest(affiliation: "총학생회")
-        Service.shared.increaseNoticeViewCount(noticeID: 8)
+        Service.shared.checkQuickScanAsRead(noticeID: 8)
             .subscribe { event in
                 switch event {
                 case .success(let data):

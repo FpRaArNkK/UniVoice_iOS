@@ -114,4 +114,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func checkQuickScanAsRead(noticeID: Int) -> Single<BaseResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.checkQuickScanAsRead(noticeID: noticeID),
+            model: BaseResponse.self,
+            service: noticeService
+        )
+    }
 }
