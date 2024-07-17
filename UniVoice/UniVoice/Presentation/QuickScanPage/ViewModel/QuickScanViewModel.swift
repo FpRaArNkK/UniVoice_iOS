@@ -13,7 +13,20 @@ final class QuickScanViewModel: ViewModelType {
     
     init(id: Int) {
         // API 로직 수행
-        self.getQuickScans(id: id).bind(to: quickScans).disposed(by: disposeBag)
+        self.getQuickScans(id: id)
+            .bind(to: quickScans)
+            .disposed(by: disposeBag)
+        
+        // 초기 진입 시 0번 인덱스 POST 호출
+        quickScans
+            .filter { !$0.isEmpty }
+            .take(1)
+            .subscribe(onNext: { [weak self] scans in
+                guard let self = self else { return }
+                let id = scans[0].noticeId
+                self.postQuickScanCompleted(noticeId: id)
+            })
+            .disposed(by: disposeBag)
     }
     
     struct Input {
@@ -63,6 +76,20 @@ final class QuickScanViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         let currentIndex = input.changeIndex
+        
+        currentIndex
+            .withLatestFrom(quickScans) { (index, scans) in
+                return (index, scans)
+            }
+            .filter { index, scans in
+                return !scans.isEmpty && index >= 0 && index < scans.count
+            }
+            .bind(onNext: { [weak self] index, scans in
+                guard let self = self else { return }
+                let id = scans[index].noticeId
+                self.postQuickScanCompleted(noticeId: id)
+            })
+            .disposed(by: disposeBag)
         
         return Output(
             quickScans: quickScans.asDriver(),
@@ -120,5 +147,19 @@ private extension QuickScanViewModel {
                 }
                 .catchAndReturn(false)
         }
+    }
+    
+    func postQuickScanCompleted(noticeId: Int) {
+        Service.shared.checkQuickScanAsRead(noticeID: noticeId)
+            .subscribe { result in
+                switch result {
+                    
+                case .success(let res):
+                    print(res.message)
+                case .failure(let err):
+                    print(err)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
