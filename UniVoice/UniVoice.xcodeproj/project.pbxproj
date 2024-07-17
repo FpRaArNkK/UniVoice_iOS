@@ -95,6 +95,7 @@
 		88AB98192C418A2000AC5043 /* QuickScanCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */; };
 		DC27DBCE2C4708A000401364 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCD2C4708A000401364 /* MyPageVC.swift */; };
 		DC27DBD02C4708AB00401364 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCF2C4708AB00401364 /* MyPageView.swift */; };
+		DC27DBD22C483DAB00401364 /* MyPageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */; };
 		DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DAF82C39CD1F008B321E /* MainHomeView.swift */; };
 		DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */; };
 		DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */; };
@@ -217,6 +218,7 @@
 		88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionViewController.swift; sourceTree = "<group>"; };
 		DC27DBCD2C4708A000401364 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		DC27DBCF2C4708AB00401364 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSelectView.swift; sourceTree = "<group>"; };
 		DC33DAF82C39CD1F008B321E /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainHomeViewController.swift; path = UniVoice/Presentation/MainHome/ViewController/MainHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScanCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 			isa = PBXGroup;
 			children = (
 				DC27DBCF2C4708AB00401364 /* MyPageView.swift */,
+				DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
 				88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */,
 				EDF4C8942C41DB0200DE7643 /* DateView.swift in Sources */,
+				DC27DBD22C483DAB00401364 /* MyPageSelectView.swift in Sources */,
 				882DB1652C31D83F00D73FEF /* WelcomeView.swift in Sources */,
 				DC27DBCE2C4708A000401364 /* MyPageVC.swift in Sources */,
 				88AB98082C3ECAB900AC5043 /* QuickScanView.swift in Sources */,
