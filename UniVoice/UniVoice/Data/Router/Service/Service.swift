@@ -76,4 +76,20 @@ final class Service {
                 return .error(NSError(domain: "", code: 0))
             }
     }
+    
+    func rxRequestWithToken<T: UniVoiceTargetType, R: Codable>(_ target: T, model: R.Type, service: ServiceManager<T>) -> Single<R> {
+        return service.providerWithToken.rx.request(target)
+            .flatMap { [weak self] response -> Single<R> in
+                guard let self = self else { return .error(NetworkError.networkFail) }
+                return self.handleResponse(response, model: model)
+            }
+            .catch { [weak self] error in
+                guard let self = self else { return .error(NetworkError.networkFail) }
+                guard let networkError = error as? NetworkError else {
+                    return .error(NetworkError.networkFail)
+                }
+                self.handleError(errorType: networkError, targetType: target)
+                return .error(NSError(domain: "", code: 0))
+            }
+    }
 }

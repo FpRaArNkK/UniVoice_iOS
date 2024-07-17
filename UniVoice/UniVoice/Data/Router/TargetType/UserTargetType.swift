@@ -24,13 +24,13 @@ extension UserTargetType: UniVoiceTargetType {
     var path: String {
         switch self {
         case .login:
-            return "api/v1/auth/signin"
+            return "auth/signin"
         case .getUniversityList:
-            return "api/v1/universityData/university"
+            return "universityData/university"
         case .getDepartmentList:
-            return "api/v1/universityData/department"
+            return "universityData/department"
         case .checkIDDuplication:
-            return "api/v1/auth/check-email"
+            return "auth/check-email"
         }
     }
     

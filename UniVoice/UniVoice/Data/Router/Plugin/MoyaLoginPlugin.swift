@@ -1,5 +1,5 @@
 //
-//  MoyaLoggingPlugin.swift
+//  MoyaLoginPlugin.swift
 //  UniVoice
 //
 //  Created by 왕정빈 on 7/16/24.
@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-final class MoyaLoggingPlugin: PluginType {
+final class MoyaLoginPlugin: PluginType {
     private let keychain = KeyChain.shared
     private let accessTokenKey = "accessToken"
     
@@ -25,7 +25,7 @@ final class MoyaLoggingPlugin: PluginType {
                     print("accessToken이 response에 없습니다.")
                 }
             } catch {
-                print("response를 decode하는데 실패했습니다. : \(error.localizedDescription)")
+                print("response를 decode하는데 실패했습니다.(keychain 입니다) : \(error.localizedDescription)")
             }
         case .failure(let error):
             print("네트워크 통신 오류 : \(error.localizedDescription)")

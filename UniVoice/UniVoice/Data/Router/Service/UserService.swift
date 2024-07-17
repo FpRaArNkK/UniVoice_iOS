@@ -12,11 +12,19 @@ import RxMoya
 
 extension Service {
     func login(request: LoginRequest) -> Single<LoginResponse> {
-        return rxRequest(
-            UserTargetType.login(request: request),
-            model: LoginResponse.self,
-            service: userService
-        )
+        return userService.loginProvider.rx.request(.login(request: request))
+            .flatMap { [weak self] response -> Single<LoginResponse> in
+                guard let self = self else { return .error(NetworkError.networkFail) }
+                return self.handleResponse(response, model: LoginResponse.self)
+            }
+            .catch { [weak self] error in
+                guard let self = self else { return .error(NetworkError.networkFail) }
+                guard let networkError = error as? NetworkError else {
+                    return .error(NetworkError.networkFail)
+                }
+                self.handleError(errorType: networkError, targetType: UserTargetType.login(request: request))
+                return .error(NSError(domain: "", code: 0))
+            }
     }
     
     func getUniversityList() -> Single<UniversityDataResponse> {

@@ -14,7 +14,7 @@
 		212FCACF2C457916000E8223 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCACE2C457916000E8223 /* UserTargetType.swift */; };
 		212FCAD12C45796C000E8223 /* NoticeTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD02C45796C000E8223 /* NoticeTargetType.swift */; };
 		212FCAD42C458709000E8223 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD32C458709000E8223 /* ServiceManager.swift */; };
-		212FCAD62C4587BD000E8223 /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */; };
+		212FCAD62C4587BD000E8223 /* MoyaLoginPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD52C4587BD000E8223 /* MoyaLoginPlugin.swift */; };
 		212FCAD92C458CD1000E8223 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAD82C458CD1000E8223 /* Service.swift */; };
 		212FCADB2C45933A000E8223 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADA2C45933A000E8223 /* UserService.swift */; };
 		212FCADD2C459628000E8223 /* NoticeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCADC2C459628000E8223 /* NoticeService.swift */; };
@@ -147,7 +147,7 @@
 		212FCACE2C457916000E8223 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargetType.swift; sourceTree = "<group>"; };
 		212FCAD02C45796C000E8223 /* NoticeTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeTargetType.swift; sourceTree = "<group>"; };
 		212FCAD32C458709000E8223 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
-		212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
+		212FCAD52C4587BD000E8223 /* MoyaLoginPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoginPlugin.swift; sourceTree = "<group>"; };
 		212FCAD82C458CD1000E8223 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		212FCADA2C45933A000E8223 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		212FCADC2C459628000E8223 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 		212FCAF92C471AF0000E8223 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				212FCAD52C4587BD000E8223 /* MoyaLoggingPlugin.swift */,
+				212FCAD52C4587BD000E8223 /* MoyaLoginPlugin.swift */,
 				212FCAF72C471AE7000E8223 /* AccessTokenPlugin.swift */,
 			);
 			path = Plugin;
@@ -994,7 +994,7 @@
 				DC91FACF2C42E4710095DD5E /* TabBarVC.swift in Sources */,
 				EDE8CA282C37C59800E828F1 /* UniversityInputVC.swift in Sources */,
 				21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */,
-				212FCAD62C4587BD000E8223 /* MoyaLoggingPlugin.swift in Sources */,
+				212FCAD62C4587BD000E8223 /* MoyaLoginPlugin.swift in Sources */,
 				212FCAF22C470F24000E8223 /* LoginRequest.swift in Sources */,
 				DC91FAD22C42E75D0095DD5E /* AppTab.swift in Sources */,
 				21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */,
