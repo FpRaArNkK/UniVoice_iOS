@@ -30,6 +30,7 @@
 		212FCAFB2C481D17000E8223 /* QuickScanStoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAFA2C481D17000E8223 /* QuickScanStoryResponse.swift */; };
 		212FCAFD2C482057000E8223 /* AllNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAFC2C482057000E8223 /* AllNoticeListResponse.swift */; };
 		212FCAFF2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCAFE2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift */; };
+		212FCB012C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB002C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -174,6 +175,7 @@
 		212FCAFA2C481D17000E8223 /* QuickScanStoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanStoryResponse.swift; sourceTree = "<group>"; };
 		212FCAFC2C482057000E8223 /* AllNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNoticeListResponse.swift; sourceTree = "<group>"; };
 		212FCAFE2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStudentCouncilNoticeListResponse.swift; sourceTree = "<group>"; };
+		212FCB002C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeStudentCouncilNoticeListResponse.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -335,6 +337,7 @@
 				212FCAFA2C481D17000E8223 /* QuickScanStoryResponse.swift */,
 				212FCAFC2C482057000E8223 /* AllNoticeListResponse.swift */,
 				212FCAFE2C482392000E8223 /* MainStudentCouncilNoticeListResponse.swift */,
+				212FCB002C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift */,
 			);
 			path = ResponseModel;
 			sourceTree = "<group>";
@@ -1046,6 +1049,7 @@
 				212FCADD2C459628000E8223 /* NoticeService.swift in Sources */,
 				EDE8CA222C37C51300E828F1 /* DepartmentInputView.swift in Sources */,
 				880ED9532C23F75B0045A620 /* ViewController.swift in Sources */,
+				212FCB012C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift in Sources */,
 				212FCAC92C4577BC000E8223 /* NetworkError.swift in Sources */,
 				21E15DFE2C3F0637003358A0 /* UIImage+.swift in Sources */,
 				88325C362C38B5C5004A293D /* UINavigationBar+.swift in Sources */,

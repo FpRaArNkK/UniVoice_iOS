@@ -12,6 +12,7 @@ enum NoticeTargetType {
     case getQuickScanStory
     case getAllNoticeList // 메인홈 전체 공지 리스트
     case getMainStudentCouncilNoticeList // 메인홈 총 학생회 공지 리스트
+    case getCollegeStudentCouncilNoticeList // 메인홈 단과 대학 공지 리스트
 }
 
 extension NoticeTargetType: UniVoiceTargetType {
@@ -27,6 +28,8 @@ extension NoticeTargetType: UniVoiceTargetType {
             return "notice/all"
         case .getMainStudentCouncilNoticeList:
             return "notice/university"
+        case .getCollegeStudentCouncilNoticeList:
+            return "notice/college-department"
         }
     }
     
@@ -34,7 +37,8 @@ extension NoticeTargetType: UniVoiceTargetType {
         switch self {
         case .getQuickScanStory,
                 .getAllNoticeList,
-                .getMainStudentCouncilNoticeList:
+                .getMainStudentCouncilNoticeList,
+                .getCollegeStudentCouncilNoticeList:
             return .get
         }
     }
@@ -43,12 +47,13 @@ extension NoticeTargetType: UniVoiceTargetType {
         switch self {
         case .getQuickScanStory,
                 .getAllNoticeList,
-                .getMainStudentCouncilNoticeList:
+                .getMainStudentCouncilNoticeList,
+                .getCollegeStudentCouncilNoticeList:
             return .requestPlain
         }
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return ["Content-Type": "application/json"]
     }
 }
