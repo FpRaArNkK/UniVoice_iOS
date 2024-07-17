@@ -50,4 +50,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func unreadQuickScanList(request: UnreadQuickScanRequest) -> Single<UnreadQuickScanListResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.unreadQuickScanList(request: request),
+            model: UnreadQuickScanListResponse.self,
+            service: noticeService
+        )
+    }
 }

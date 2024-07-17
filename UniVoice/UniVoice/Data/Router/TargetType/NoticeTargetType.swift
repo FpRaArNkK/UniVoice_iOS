@@ -14,6 +14,7 @@ enum NoticeTargetType {
     case getMainStudentCouncilNoticeList // 메인홈 총 학생회 공지 리스트
     case getCollegeStudentCouncilNoticeList // 메인홈 단과 대학 공지 리스트
     case getDepartmentStudentCouncilNoticeList // 메인홈 학과 학생회 공지 리스트
+    case unreadQuickScanList(request: UnreadQuickScanRequest) // 퀵 스캔 읽지 않은 공지 리스트
 }
 
 extension NoticeTargetType: UniVoiceTargetType {
@@ -33,6 +34,8 @@ extension NoticeTargetType: UniVoiceTargetType {
             return "notice/college-department"
         case .getDepartmentStudentCouncilNoticeList:
             return "notice/department"
+        case .unreadQuickScanList:
+            return "notice/quick"
         }
     }
     
@@ -44,6 +47,8 @@ extension NoticeTargetType: UniVoiceTargetType {
                 .getCollegeStudentCouncilNoticeList,
                 .getDepartmentStudentCouncilNoticeList:
             return .get
+        case .unreadQuickScanList:
+            return .post
         }
     }
     
@@ -55,6 +60,8 @@ extension NoticeTargetType: UniVoiceTargetType {
                 .getCollegeStudentCouncilNoticeList,
                 .getDepartmentStudentCouncilNoticeList:
             return .requestPlain
+        case .unreadQuickScanList(let request):
+            return .requestJSONEncodable(request)
         }
     }
     
