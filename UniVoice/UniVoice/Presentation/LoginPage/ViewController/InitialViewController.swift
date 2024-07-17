@@ -25,7 +25,7 @@ final class InitialViewController: UIViewController {
         super.viewDidLoad()
 //        setUpFoundation()
         setUpBindUI()
-        Service.shared.getCollegeStudentCouncilNoticeList()
+        Service.shared.getDepartmentStudentCouncilNoticeList()
             .subscribe { event in
                 switch event {
                 case .success(let data):
