@@ -26,7 +26,7 @@ final class InitialViewController: UIViewController {
 //        setUpFoundation()
         setUpBindUI()
         let request = UnreadQuickScanRequest(affiliation: "총학생회")
-        Service.shared.cancleSavingNotice(noticeID: 8)
+        Service.shared.getSavedNoticeList()
             .subscribe { event in
                 switch event {
                 case .success(let data):

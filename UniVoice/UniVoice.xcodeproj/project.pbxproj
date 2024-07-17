@@ -35,6 +35,7 @@
 		212FCB052C48266E000E8223 /* UnreadQuickScanRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB042C48266E000E8223 /* UnreadQuickScanRequest.swift */; };
 		212FCB072C4826EE000E8223 /* UnreadQuickScanListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB062C4826EE000E8223 /* UnreadQuickScanListResponse.swift */; };
 		212FCB092C482B17000E8223 /* NoticeDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */; };
+		212FCB0B2C4831C4000E8223 /* SavedNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -184,6 +185,7 @@
 		212FCB042C48266E000E8223 /* UnreadQuickScanRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadQuickScanRequest.swift; sourceTree = "<group>"; };
 		212FCB062C4826EE000E8223 /* UnreadQuickScanListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadQuickScanListResponse.swift; sourceTree = "<group>"; };
 		212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailResponse.swift; sourceTree = "<group>"; };
+		212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoticeListResponse.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -349,6 +351,7 @@
 				212FCB022C482563000E8223 /* DepartmentStudentCouncilNoticeListResponse.swift */,
 				212FCB062C4826EE000E8223 /* UnreadQuickScanListResponse.swift */,
 				212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */,
+				212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */,
 			);
 			path = ResponseModel;
 			sourceTree = "<group>";
@@ -1130,6 +1133,7 @@
 				EDF4C89C2C43F9BD00DE7643 /* TargetInputView.swift in Sources */,
 				212FCACF2C457916000E8223 /* UserTargetType.swift in Sources */,
 				88AB980C2C3F04B300AC5043 /* ChipContentView.swift in Sources */,
+				212FCB0B2C4831C4000E8223 /* SavedNoticeListResponse.swift in Sources */,
 				EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */,
 				88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */,
 				EDF4C8942C41DB0200DE7643 /* DateView.swift in Sources */,

@@ -98,4 +98,12 @@ extension Service {
             service: noticeService
         )
     }
+    
+    func getSavedNoticeList() -> Single<SavedNoticeListResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.getSavedNoticeList,
+            model: SavedNoticeListResponse.self,
+            service: noticeService
+        )
+    }
 }
