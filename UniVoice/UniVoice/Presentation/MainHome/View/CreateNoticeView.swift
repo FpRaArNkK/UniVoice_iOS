@@ -219,6 +219,10 @@ final class CreateNoticeView: UIView {
             $0.applyBorders(to: [.top], width: 1, color: .regular)
             $0.isHidden = true
         }
+        
+        dateInputView.do {
+            $0.isHidden = true
+        }
     }
     
     // MARK: setUpLayout
@@ -294,6 +298,12 @@ final class CreateNoticeView: UIView {
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalTo(self.keyboardLayoutGuide.snp.top)
             $0.height.equalTo(192)
+        }
+        
+        dateInputView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(406)
         }
     }
     

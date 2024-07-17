@@ -133,6 +133,8 @@
 		EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8992C42BCD100DE7643 /* UIView+.swift */; };
 		EDF4C89C2C43F9BD00DE7643 /* TargetInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89B2C43F9BD00DE7643 /* TargetInputView.swift */; };
 		EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */; };
+		EDF4C8A02C4729B900DE7643 /* UploadingNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */; };
+		EDF4C8A22C472A6100DE7643 /* UploadingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -253,6 +255,8 @@
 		EDF4C8992C42BCD100DE7643 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		EDF4C89B2C43F9BD00DE7643 /* TargetInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetInputView.swift; sourceTree = "<group>"; };
 		EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
+		EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeVC.swift; sourceTree = "<group>"; };
+		EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -683,6 +687,7 @@
 				EDF4C8932C41DB0200DE7643 /* DateView.swift */,
 				EDF4C89B2C43F9BD00DE7643 /* TargetInputView.swift */,
 				EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */,
+				EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -710,6 +715,7 @@
 		DC33DB132C3B16D3008B321E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */,
 				DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */,
 				EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */,
 			);
@@ -1011,11 +1017,13 @@
 				21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */,
 				883B2CFD2C42B6E400D19A78 /* NoAccountView.swift in Sources */,
 				2132A8402C3A6FC800795667 /* TOSCheckView.swift in Sources */,
+				EDF4C8A02C4729B900DE7643 /* UploadingNoticeVC.swift in Sources */,
 				21DF05C82C41A57B005EB117 /* TOSCheckVM.swift in Sources */,
 				EDF4C8812C3F13D900DE7643 /* CustomMenuTableViewCell.swift in Sources */,
 				EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */,
 				EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */,
 				882DB15F2C31C94A00D73FEF /* LoginViewModel.swift in Sources */,
+				EDF4C8A22C472A6100DE7643 /* UploadingNoticeView.swift in Sources */,
 				EDE8CA1E2C37C4AD00E828F1 /* SignUpIntroVC.swift in Sources */,
 				2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */,
 				2132A8422C3A6FD400795667 /* CreateAccountView.swift in Sources */,
