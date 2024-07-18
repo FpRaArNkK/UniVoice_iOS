@@ -346,7 +346,7 @@ extension DetailNoticeView {
         
         contents.enumerated().forEach { (index, content) in
             
-            guard let contentString = content else { return }
+            guard let contentString = content, !contentString.isEmpty else { return }
             
             let chipString: String = {
                 switch index {
