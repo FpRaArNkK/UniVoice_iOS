@@ -51,7 +51,7 @@ extension Date {
             return date.toFormattedStringWithoutTime()
         }
     }
-
+    
     /// Date를 "yyyy년 MM월 dd일" 형식의 문자열로 변환합니다. ex - "2024년 05월 21일"
     /// - Returns: 변환된 문자열
     func toDateString() -> String {
@@ -134,7 +134,8 @@ extension Date {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" // 문자열의 형식에 맞추어 포맷 설정
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0) // 필요시 타임존 설정
         return dateFormatter.date(from: dateString)
-
+    }
+    
     /// 날짜와 시간을 ISO 8601 문자열로 변환합니다.
     /// Date 객체를 ISO 8601 형식의 문자열로 변환합니다.
     /// - Returns: ISO 8601 형식의 문자열
