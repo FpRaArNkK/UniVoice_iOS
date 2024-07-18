@@ -133,8 +133,8 @@ final class MyPageView: UIView {
         }
         universityImage.do {
             $0.image = UIImage(named: "school_image")
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = $0.frame.height / 2
+            $0.layer.masksToBounds = true
+            $0.layer.cornerRadius = 87/2
             $0.contentMode = .scaleAspectFit
         }
         descriptionLabel.do {
