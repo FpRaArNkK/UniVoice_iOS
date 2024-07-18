@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 final class QuickScanCVC: UICollectionViewCell {
     
@@ -127,8 +128,8 @@ extension QuickScanCVC {
     }
     
     func quickScanDataBind(viewModel: QS) {
-        councilImage.image = UIImage(named: viewModel.councilImage)
-        councilName.text = viewModel.councilName
+        councilImage.kf.setImage(with: URL(string: viewModel.councilImage))
+        councilName.text = viewModel.councilName.replacingSpacesWithNewlines()
         articleNumber.text = "\(viewModel.articleNumber)"
         articleNumber.removeFromSuperview()
         circleView.addSubview(articleNumber)

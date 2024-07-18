@@ -2,9 +2,6 @@
 //  String+.swift
 //  UniVoice
 //
-//  Created by 박민서 on 7/18/24.
-//
-
 import Foundation
 
 extension String {
@@ -15,5 +12,15 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.date(from: self)
+    }
+  
+    func replacingSpacesWithNewlines() -> String {
+        return self.replacingOccurrences(of: " ", with: "\n")
+    }
+  
+    func formatDate(from createdAt: String) -> String {
+        let datePart = String(createdAt.prefix(10))
+        let formattedDate = datePart.replacingOccurrences(of: "-", with: "/")
+        return formattedDate
     }
 }
