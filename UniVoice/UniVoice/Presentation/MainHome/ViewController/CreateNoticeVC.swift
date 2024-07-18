@@ -45,6 +45,7 @@ final class CreateNoticeVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         setUpBindUI()
+        setupKeyboardDismissal()
     }
     
     // MARK: setUpFoundation
@@ -289,14 +290,9 @@ final class CreateNoticeVC: UIViewController {
             inputDates?.1.accept(endDate)
         }
     }
-    
-//    private func dateCancleButtonTapped() {
-//        self.rootView.dateInputView.isHidden = true
-//    }
 
     private func deleteImage(at indexPath: IndexPath) {
         var images = selectedImagesRelay.value
-        //        images.remove(at: indexPath.)
         print(indexPath.row)
         images.remove(at: indexPath.row)
         selectedImagesRelay.accept(images)

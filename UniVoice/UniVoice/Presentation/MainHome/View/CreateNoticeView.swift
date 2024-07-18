@@ -114,6 +114,7 @@ final class CreateNoticeView: UIView {
         
         imageCollectionView.do {
             $0.register(ImageCVC.self, forCellWithReuseIdentifier: ImageCVC.reuseIdentifier)
+            $0.backgroundColor = .white
         }
         
         titleTextField.do {
@@ -131,6 +132,7 @@ final class CreateNoticeView: UIView {
             $0.textColor = .B_03
             $0.textContainerInset = .init(top: 12, left: 0, bottom: 40, right: 0)
             $0.isScrollEnabled = false
+            $0.backgroundColor = .white
         }
         
         noticeStackView.do {
@@ -258,7 +260,7 @@ final class CreateNoticeView: UIView {
         contentTextView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.top.equalTo(devideView.snp.bottom)
-            $0.height.equalTo(150).priority(.low)
+            $0.height.equalTo(270).priority(.low)
         }
         
         imageCollectionView.snp.makeConstraints {
