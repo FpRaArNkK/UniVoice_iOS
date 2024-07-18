@@ -77,11 +77,43 @@ class TOSCheckVC: UIViewController {
             .disposed(by: viewModel.disposeBag)
         
         rootView.completeButton.bindData(buttonType: completeButtonState.asObservable())
+       
+        // URLSession 사용한 방법
+//        rootView.completeButton.rx.tap
+//            .flatMapLatest { _ in
+//                return SignUpDataManager.shared.getSignUpRequest()
+//            }
+//            .flatMap { signUpRequest in
+//                return self.viewModel.requestSignUp(signUpRequest: signUpRequest)
+//            }
+//            .subscribe(onNext: { [weak self] success in
+//                if success {
+//                    self?.navigationController?.pushViewController(SignUpInfoCheckingVC(), animated: true)
+//                } else {
+//                    print("회원가입 실패")
+//                }
+//            }, onError: { error in
+//                print("Sign up error: \(error)")
+//            })
+//            .disposed(by: viewModel.disposeBag)
         
+        // Moya 사용한 방법
         rootView.completeButton.rx.tap
-            .observe(on: MainScheduler.instance)
-            .bind { [weak self] _ in
-                self?.navigationController?.pushViewController(SignUpInfoCheckingVC(), animated: true)
+            .flatMapLatest { _ in
+                return SignUpDataManager.shared.getSignUpRequest()
+            }
+            .flatMap { signUpRequest in
+                return Service.shared.requestSignUp(request: signUpRequest)
+            }
+            .subscribe { [weak self] response in
+                switch response.status {
+                case 201:
+                    self?.navigationController?.pushViewController(SignUpInfoCheckingVC(), animated: true)
+                default:
+                    print(response.message)
+                }
+            } onError: { error in
+                print(error)
             }
             .disposed(by: viewModel.disposeBag)
     }
