@@ -15,8 +15,18 @@ final class DetailNoticeVC: UIViewController {
     
     // MARK: Views
     private let rootView = DetailNoticeView()
-    private var viewModel = DetailNoticeVM()
+    private let viewModel: DetailNoticeVM
     private let disposeBag = DisposeBag() // 임시
+    
+    // MARK: init
+    init(id: Int) {
+        self.viewModel = DetailNoticeVM(id: id)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: Life Cycle - loadView
     override func loadView() {
@@ -33,7 +43,7 @@ final class DetailNoticeVC: UIViewController {
     // MARK: setUpBindUI
     private func setUpBindUI() {
         
-        self.title = viewModel.notice.councilType
+        self.title = viewModel.noticeRelay.value.councilType
         
         let input = DetailNoticeVM.Input(
             likedButtonDidTap: rootView.likedButton.rx.tap.asObservable(),
@@ -52,7 +62,7 @@ final class DetailNoticeVC: UIViewController {
             .drive()
             .disposed(by: disposeBag)
         
-        rootView.fetchDetailNoticeData(cellModel: viewModel.notice)
+        rootView.fetchDetailNoticeData(cellModel: viewModel.noticeRelay.value)
         
         rootView.bindUI(
             isLiked: output.isLiked.asObservable(),
@@ -67,11 +77,15 @@ final class DetailNoticeVC: UIViewController {
         rootView.noticeImageCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
         
-        let imageUrls = viewModel.notice.noticeImageURL.compactMap { $0 }
+        let imageUrls = viewModel.noticeRelay.value.noticeImageURL?.compactMap { $0 }
         
-        rootView.noticeImageCollectionView.isHidden = imageUrls.isEmpty ? true : false
-        rootView.noticeImageIndicatorView.numberOfPages = imageUrls.count
-            
+        if ((imageUrls?.isEmpty) != nil) {
+            rootView.noticeImageCollectionView.isHidden = true
+        } else {
+            rootView.noticeImageCollectionView.isHidden = false
+        }
+        rootView.noticeImageIndicatorView.numberOfPages = imageUrls?.count ?? 0
+        
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
             configureCell: { _, collectionView, indexPath, url in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeImageCVC.identifier, for: indexPath) as? NoticeImageCVC else {
@@ -82,17 +96,17 @@ final class DetailNoticeVC: UIViewController {
                 return cell
             })
         
-        Observable.just([SectionModel(model: "section 0", items: imageUrls)])
+        Observable.just([SectionModel(model: "section 0", items: imageUrls ?? [""])])
             .bind(to: rootView.noticeImageCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-    
+        
         rootView.noticeImageCollectionView.rx.didScroll
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let visibleRect = CGRect(origin: self.rootView.noticeImageCollectionView.contentOffset, 
+                let visibleRect = CGRect(origin: self.rootView.noticeImageCollectionView.contentOffset,
                                          size: self.rootView.noticeImageCollectionView.bounds.size)
-                let visiblePoint = CGPoint(x: visibleRect.midX, 
+                let visiblePoint = CGPoint(x: visibleRect.midX,
                                            y: visibleRect.midY)
                 if let indexPath = self.rootView.noticeImageCollectionView.indexPathForItem(at: visiblePoint) {
                     self.rootView.noticeImageIndicatorView.currentPage = indexPath.item

@@ -234,7 +234,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         rootView.articleCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
-                let quickScanVC = DetailNoticeVC()
+                let quickScanVC = DetailNoticeVC(id: indexPath.row)
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
             })
             .disposed(by: disposeBag)
