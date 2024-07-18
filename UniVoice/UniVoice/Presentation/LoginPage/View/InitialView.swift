@@ -53,7 +53,7 @@ final class InitialView: UIView {
     // MARK: setUpUI
     private func setUpUI() {
         logoImageView.do {
-            $0.image = UIImage(systemName: "graduationcap.fill")
+            $0.image = UIImage.startLogo
         }
         
         buttonStack.do {
@@ -77,9 +77,9 @@ final class InitialView: UIView {
     // MARK: setUpLayout
     private func setUpLayout() {
         logoImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(257)
+            $0.bottom.equalTo(buttonStack.snp.top).offset(-270)
             $0.centerX.equalToSuperview()
-            $0.size.equalTo(224)
+            $0.size.equalTo(100)
         }
         
         buttonStack.snp.makeConstraints {
