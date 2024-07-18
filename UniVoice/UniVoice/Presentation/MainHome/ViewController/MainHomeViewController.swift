@@ -104,9 +104,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         let output = viewModel.transform(input: input)
         
         let qsItems = viewModel.quickScanApiCall()        
-                
-        let quickScanStories = qsItems
-        
+                        
         let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QS>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
             else {
