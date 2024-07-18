@@ -73,14 +73,14 @@ class CreateAccountVC: UIViewController {
             .disposed(by: viewModel.disposeBag)
         
         output.checkDuplication
-            .drive { [weak self] isDuplicated in
+            .drive { [weak self] isValidID in
                 let idConditionLabel = self?.rootView.idConditionLabel
                 DispatchQueue.main.async {
-                    idConditionLabel?.text = isDuplicated ? "이미 사용중인 아이디입니다" : "사용 가능한 아이디입니다"
-                    idConditionLabel?.textColor = isDuplicated ? .red0 : .mint600
+                    idConditionLabel?.text = isValidID ? "사용 가능한 아이디입니다" : "이미 사용중인 아이디입니다"
+                    idConditionLabel?.textColor = isValidID ? .mint600 : .red0
                 }
                 
-                if !isDuplicated {
+                if isValidID {
                     self?.rootView.pwTextField.becomeFirstResponder()
                 }
             }

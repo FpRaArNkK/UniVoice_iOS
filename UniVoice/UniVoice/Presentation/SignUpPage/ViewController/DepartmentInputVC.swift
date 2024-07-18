@@ -61,8 +61,8 @@ final class DepartmentInputVC: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        rootView.departTableView.rx.modelSelected(Department.self)
-            .map { $0.name }
+        rootView.departTableView.rx
+            .modelSelected(String.self)
             .bind(to: selectedDepartment)
             .disposed(by: disposeBag)
         
@@ -75,10 +75,11 @@ final class DepartmentInputVC: UIViewController {
             .disposed(by: disposeBag)
         
         let input = DepartmentInputVM.Input(
-            inputText: rootView.departTextField.rx.text.orEmpty.asObservable(),
-            selectedDepartment: selectedDepartment.asObservable(),
-            departmentCellIsSelected: rootView.departTableView.rx.modelSelected(Department.self).asObservable()
-        )
+             universityName: selectedUniversity.asObservable(),
+             inputText: rootView.departTextField.rx.text.orEmpty.asObservable(),
+             selectedDepartment: selectedDepartment.asObservable(),
+             departmentCellIsSelected: rootView.departTableView.rx.modelSelected(String.self).asObservable()
+         )
         
         let output = viewModel.transform(input: input)
         
@@ -87,18 +88,22 @@ final class DepartmentInputVC: UIViewController {
         
         rootView.nextButton.bindData(buttonType: isNextButtonEnabled.asObservable())
         
+        output.isNextButtonEnabled
+            .drive(rootView.departTableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         output.filteredDepartments
             .drive(rootView.departTableView.rx.items(
                 cellIdentifier: "DepartmentTableViewCell",
                 cellType: DepartmentTableViewCell.self
             )) { index, department, cell in
-                cell.departNameLabel.text = department.name
+                cell.departNameLabel.text = department
             }
             .disposed(by: disposeBag)
         
-        rootView.departTableView.rx.modelSelected(Department.self)
+        rootView.departTableView.rx.modelSelected(String.self)
             .subscribe(onNext: { department in
-                print("Selected department: \(department.name)")
+                print("Selected department: \(department)")
             })
             .disposed(by: disposeBag)
     }
@@ -119,8 +124,8 @@ extension DepartmentInputVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         // 학과 선택시
-        if let department = try? rootView.departTableView.rx.model(at: indexPath) as Department {
-            print("Selected department: \(department.name)")
+        if let department = try? rootView.departTableView.rx.model(at: indexPath) as String {
+            print("Selected department: \(department)")
         }
     }
 }

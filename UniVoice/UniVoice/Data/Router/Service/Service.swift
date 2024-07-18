@@ -21,6 +21,7 @@ final class Service {
     func handleResponse<T: Codable>(_ response: Response, model: T.Type) -> Single<T> {
         let statusCode = response.statusCode
         let data = response.data
+        data.printResponseDataAsString()
         return self.judgeStatus(by: statusCode, data, model)
     }
     

@@ -13,7 +13,7 @@ enum UserTargetType {
     case getUniversityList
     case getDepartmentList(request: UniversityNameRequest)
     case checkIDDuplication(request: IDCheckRequest)
-//    case requestSignUp(Data, description: String)
+    case requestSignUp(request: SignUpRequest)
 }
 
 extension UserTargetType: UniVoiceTargetType {
@@ -31,6 +31,8 @@ extension UserTargetType: UniVoiceTargetType {
             return "universityData/department"
         case .checkIDDuplication:
             return "auth/check-email"
+        case .requestSignUp:
+            return "auth/signup"
         }
     }
     
@@ -39,7 +41,8 @@ extension UserTargetType: UniVoiceTargetType {
         case .login,
                 .getUniversityList,
                 .getDepartmentList,
-                .checkIDDuplication:
+                .checkIDDuplication,
+                .requestSignUp:
             return .post
         }
     }
@@ -54,16 +57,32 @@ extension UserTargetType: UniVoiceTargetType {
             return .requestJSONEncodable(request)
         case .checkIDDuplication(let request):
             return .requestJSONEncodable(request)
-//        case let .requestSignUp(data, description):
-//            let gifData = MultipartFormData(provider: .data(data), name: "file", fileName: "gif.gif", mimeType: "image/gif")
-//            let descriptionData = MultipartFormData(provider: .data(description.data(using: .utf8)!), name: "description")
-//            let multipartData = [gifData, descriptionData]
-//            
-//            return .uploadMultipart(multipartData)
+        case .requestSignUp(let request):
+            var formData = [MultipartFormData]()
+            
+            formData.append(MultipartFormData(provider: .data(request.admissionNumber.data(using: .utf8)!), name: "admissionNumber"))
+            formData.append(MultipartFormData(provider: .data(request.name.data(using: .utf8)!), name: "name"))
+            formData.append(MultipartFormData(provider: .data(request.studentNumber.data(using: .utf8)!), name: "studentNumber"))
+            formData.append(MultipartFormData(provider: .data(request.email.data(using: .utf8)!), name: "email"))
+            formData.append(MultipartFormData(provider: .data(request.password.data(using: .utf8)!), name: "password"))
+            formData.append(MultipartFormData(provider: .data(request.universityName.data(using: .utf8)!), name: "universityName"))
+            formData.append(MultipartFormData(provider: .data(request.departmentName.data(using: .utf8)!), name: "departmentName"))
+            
+            // Convert UIImage to Data
+            if let imageData = request.studentCardImage.jpegData(compressionQuality: 0.8) {
+                formData.append(MultipartFormData(provider: .data(imageData), name: "studentCardImage", fileName: "student_card.jpg", mimeType: "image/jpeg"))
+            }
+            
+            return .uploadMultipart(formData)
         }
     }
     
     var headers: [String: String]? {
-        return ["Content-Type": "application/json"]
+        switch self {
+        case .requestSignUp:
+            return ["Content-Type": "multipart/form-data"]
+        default:
+            return ["Content-Type": "application/json"]
+        }
     }
 }

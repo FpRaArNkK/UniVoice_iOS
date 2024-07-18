@@ -13,18 +13,22 @@ import RxCocoa
 final class UploadingNoticeVC: UIViewController {
 
     // MARK: Views
-    private let rootView = UniversityInputView()
-    private let viewModel = UniversityInputVM()
+    private let rootView = UploadingNoticeView()
     private let disposeBag = DisposeBag()
 
     // MARK: Properties
-    var selectedUniversity = BehaviorRelay<String>(value: "")
     
     // MARK: Life Cycle - loadView
     override func loadView() {
         self.view = rootView
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(true)
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            self.tabBarController?.tabBar.isHidden = true
+        }
+    
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()

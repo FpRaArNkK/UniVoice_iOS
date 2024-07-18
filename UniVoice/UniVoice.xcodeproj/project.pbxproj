@@ -37,6 +37,9 @@
 		212FCB092C482B17000E8223 /* NoticeDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */; };
 		212FCB0B2C4831C4000E8223 /* SavedNoticeListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */; };
 		212FCB0D2C4835ED000E8223 /* MyPageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB0C2C4835ED000E8223 /* MyPageResponse.swift */; };
+		212FCB0F2C483FE1000E8223 /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB0E2C483FE1000E8223 /* SignUpRequest.swift */; };
+		212FCB112C4854DF000E8223 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB102C4854DF000E8223 /* Data+.swift */; };
+		212FCB132C48673C000E8223 /* SignUpDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212FCB122C48673C000E8223 /* SignUpDataManager.swift */; };
 		2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */; };
 		2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */; };
 		2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */; };
@@ -159,6 +162,10 @@
 		EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */; };
 		EDF4C8A02C4729B900DE7643 /* UploadingNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */; };
 		EDF4C8A22C472A6100DE7643 /* UploadingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */; };
+		EDF4C8A82C485C6D00DE7643 /* UniVoiceConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */; };
+		EDF4C8AB2C48808E00DE7643 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EDF4C8AA2C48808E00DE7643 /* Lottie */; };
+		EDF4C8AE2C4881BB00DE7643 /* finsh motion(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */; };
+		EDF4C8AF2C4881BB00DE7643 /* loading(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,7 +180,6 @@
 		212FCAD82C458CD1000E8223 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		212FCADA2C45933A000E8223 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		212FCADC2C459628000E8223 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
-		212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
 		212FCAE52C467802000E8223 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		212FCAE72C467933000E8223 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		212FCAE92C468289000E8223 /* UniversityDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityDataResponse.swift; sourceTree = "<group>"; };
@@ -193,6 +199,9 @@
 		212FCB082C482B17000E8223 /* NoticeDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailResponse.swift; sourceTree = "<group>"; };
 		212FCB0A2C4831C4000E8223 /* SavedNoticeListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoticeListResponse.swift; sourceTree = "<group>"; };
 		212FCB0C2C4835ED000E8223 /* MyPageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageResponse.swift; sourceTree = "<group>"; };
+		212FCB0E2C483FE1000E8223 /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
+		212FCB102C4854DF000E8223 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		212FCB122C48673C000E8223 /* SignUpDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDataManager.swift; sourceTree = "<group>"; };
 		2132A8372C3A6BA800795667 /* StudentIDPhotoInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputVC.swift; sourceTree = "<group>"; };
 		2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDPhotoInputView.swift; sourceTree = "<group>"; };
 		2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentInfoInputView.swift; path = UniVoice/Presentation/SignUpPage/View/StudentInfoInputView.swift; sourceTree = SOURCE_ROOT; };
@@ -306,6 +315,9 @@
 		EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
 		EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeVC.swift; sourceTree = "<group>"; };
 		EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeView.swift; sourceTree = "<group>"; };
+		EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
+		EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "finsh motion(ios).json"; sourceTree = "<group>"; };
+		EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "loading(ios).json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +336,7 @@
 				880ED9812C2402FC0045A620 /* ReactiveMoya in Frameworks */,
 				880ED9882C2403120045A620 /* RxRelay in Frameworks */,
 				880ED9792C2402CA0045A620 /* Then in Frameworks */,
+				EDF4C8AB2C48808E00DE7643 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +389,7 @@
 				212FCAEC2C46A3AE000E8223 /* UniversityNameRequest.swift */,
 				212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */,
 				212FCB042C48266E000E8223 /* UnreadQuickScanRequest.swift */,
+				212FCB0E2C483FE1000E8223 /* SignUpRequest.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -474,6 +488,7 @@
 		880ED9642C23FDAF0045A620 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				212FCB122C48673C000E8223 /* SignUpDataManager.swift */,
 				DC9F76112C43493F0019A83F /* DetailNotice */,
 				88AB98042C3EC8C800AC5043 /* QuickScan */,
 				DC9EBCAE2C3EB2B3007337A0 /* MainHomeModel */,
@@ -540,6 +555,8 @@
 		880ED96A2C23FE3A0045A620 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */,
+				EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */,
 				880ED9572C23F75D0045A620 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -568,6 +585,7 @@
 				88AB98142C3FDB2F00AC5043 /* Date+.swift */,
 				EDF4C8992C42BCD100DE7643 /* UIView+.swift */,
 				88C231A42C485416009BEA63 /* String+.swift */,
+				212FCB102C4854DF000E8223 /* Data+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -576,7 +594,7 @@
 			isa = PBXGroup;
 			children = (
 				880ED95C2C23F75D0045A620 /* Info.plist */,
-				212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */,
+				EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */,
 				88325C2C2C382DF4004A293D /* PreviewController.swift */,
 				212FCAF52C4714DB000E8223 /* KeyChain.swift */,
 			);
@@ -1005,6 +1023,7 @@
 				880ED9892C2403120045A620 /* RxSwift */,
 				880ED98C2C2403490045A620 /* Differentiator */,
 				880ED98E2C2403490045A620 /* RxDataSources */,
+				EDF4C8AA2C48808E00DE7643 /* Lottie */,
 			);
 			productName = UniVoice;
 			productReference = 880ED94B2C23F75B0045A620 /* UniVoice.app */;
@@ -1041,6 +1060,7 @@
 				880ED97D2C2402FC0045A620 /* XCRemoteSwiftPackageReference "Moya" */,
 				880ED9842C2403120045A620 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				880ED98B2C2403490045A620 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				EDF4C8A92C48808E00DE7643 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 880ED94C2C23F75B0045A620 /* Products */;
 			projectDirPath = "";
@@ -1056,10 +1076,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF4C8AE2C4881BB00DE7643 /* finsh motion(ios).json in Resources */,
 				21F7B1522C345F8F00A082D8 /* Pretendard-ExtraLight.otf in Resources */,
 				21F7B1542C345F8F00A082D8 /* Pretendard-Bold.otf in Resources */,
+				EDF4C8AF2C4881BB00DE7643 /* loading(ios).json in Resources */,
 				8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */,
 				21F7B1552C345F8F00A082D8 /* Pretendard-Thin.otf in Resources */,
+				EDF4C8A82C485C6D00DE7643 /* UniVoiceConfig.xcconfig in Resources */,
 				21F7B1502C345F8F00A082D8 /* Pretendard-Regular.otf in Resources */,
 				21F7B1582C345F8F00A082D8 /* Pretendard-Light.otf in Resources */,
 				21F7B1512C345F8F00A082D8 /* Pretendard-ExtraBold.otf in Resources */,
@@ -1123,6 +1146,8 @@
 				EDE8CA2A2C37C5B800E828F1 /* DepartmentInputVC.swift in Sources */,
 				DC9EBCBE2C4181BD007337A0 /* DetailNoticeVC.swift in Sources */,
 				DC9F76182C44489A0019A83F /* NoticeImageCVC.swift in Sources */,
+				212FCB112C4854DF000E8223 /* Data+.swift in Sources */,
+				212FCB0F2C483FE1000E8223 /* SignUpRequest.swift in Sources */,
 				EDF4C8792C3B12F700DE7643 /* UniversityInputVM.swift in Sources */,
 				DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */,
 				2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */,
@@ -1227,6 +1252,7 @@
 				DC9EBCB22C3EC37C007337A0 /* CouncilCVC.swift in Sources */,
 				212FCAF82C471AE7000E8223 /* AccessTokenPlugin.swift in Sources */,
 				2132A84A2C3A701600795667 /* TOSCheckVC.swift in Sources */,
+				212FCB132C48673C000E8223 /* SignUpDataManager.swift in Sources */,
 				EDF4C8892C41965900DE7643 /* CreateNoticeView.swift in Sources */,
 				2132A8482C3A700F00795667 /* StudentInfoConfirmVC.swift in Sources */,
 			);
@@ -1369,7 +1395,7 @@
 		};
 		880ED9602C23F75D0045A620 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
+			baseConfigurationReference = EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1405,7 +1431,7 @@
 		};
 		880ED9612C23F75D0045A620 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
+			baseConfigurationReference = EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1511,6 +1537,14 @@
 				minimumVersion = 5.0.2;
 			};
 		};
+		EDF4C8A92C48808E00DE7643 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1568,6 +1602,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 880ED98B2C2403490045A620 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
+		};
+		EDF4C8AA2C48808E00DE7643 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDF4C8A92C48808E00DE7643 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
