@@ -120,8 +120,6 @@
 		DC27DBCE2C4708A000401364 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCD2C4708A000401364 /* MyPageVC.swift */; };
 		DC27DBD02C4708AB00401364 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCF2C4708AB00401364 /* MyPageView.swift */; };
 		DC27DBD22C483DAB00401364 /* MyPageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */; };
-		DC27DBD42C484D4D00401364 /* UniVoiceConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = DC27DBD32C484D4D00401364 /* UniVoiceConfig.xcconfig */; };
-		DC27DBD62C48662A00401364 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBD52C48662A00401364 /* String+.swift */; };
 		DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DAF82C39CD1F008B321E /* MainHomeView.swift */; };
 		DC33DB102C3B1691008B321E /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */; };
 		DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */; };
@@ -272,11 +270,10 @@
 		88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionViewController.swift; sourceTree = "<group>"; };
 		88C231A42C485416009BEA63 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		88C231A92C48B441009BEA63 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		DC27DBCD2C4708A000401364 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		DC27DBCF2C4708AB00401364 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSelectView.swift; sourceTree = "<group>"; };
-		DC27DBD32C484D4D00401364 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
-		DC27DBD52C48662A00401364 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		DC33DAF82C39CD1F008B321E /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		DC33DB0F2C3B1691008B321E /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainHomeViewController.swift; path = UniVoice/Presentation/MainHome/ViewController/MainHomeViewController.swift; sourceTree = SOURCE_ROOT; };
 		DC33DB162C3B2A64008B321E /* QuickScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickScanCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -441,6 +438,7 @@
 		880ED9422C23F75B0045A620 = {
 			isa = PBXGroup;
 			children = (
+				88C231A82C48B426009BEA63 /* ci_scripts */,
 				8851A2712C2404CA006912D4 /* .swiftlint.yml */,
 				880ED94D2C23F75B0045A620 /* UniVoice */,
 				880ED94C2C23F75B0045A620 /* Products */,
@@ -782,6 +780,14 @@
 				88AB98122C3FD5E700AC5043 /* QuickScanContentCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		88C231A82C48B426009BEA63 /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				88C231A92C48B441009BEA63 /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 		DC27DBCA2C47088400401364 /* MyPage */ = {
