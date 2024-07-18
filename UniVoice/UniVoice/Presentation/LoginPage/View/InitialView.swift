@@ -8,15 +8,20 @@
 import UIKit
 import SnapKit
 import Then
+import Lottie
 
 final class InitialView: UIView {
     
     // MARK: Views
     private let logoImageView = UIImageView()
+    let splashView = LottieAnimationView(name: "splash(ios)")
     let buttonStack = UIStackView()
     let startButton = CustomButton(with: .active)
     let loginButton = CustomButton(with: .line)
 //    let councilButton = UIButton()
+    
+    // MARK: Properties
+    private var animationRepeatCount = 0
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -25,6 +30,7 @@ final class InitialView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
+        playSplashAnimation()
     }
     
     required init?(coder: NSCoder) {
@@ -40,20 +46,23 @@ final class InitialView: UIView {
     private func setUpHierarchy() {
         [
             startButton,
-            loginButton
+            loginButton,
 //            councilButton
         ].forEach { buttonStack.addArrangedSubview($0) }
         
         [
             logoImageView,
-            buttonStack
+            buttonStack,
+            splashView
         ].forEach { self.addSubview($0) }
     }
     
     // MARK: setUpUI
     private func setUpUI() {
+
         logoImageView.do {
-            $0.image = UIImage.startLogo
+            $0.image = UIImage.launchLogo
+            $0.contentMode = .scaleAspectFit
         }
         
         buttonStack.do {
@@ -76,10 +85,9 @@ final class InitialView: UIView {
     
     // MARK: setUpLayout
     private func setUpLayout() {
+        
         logoImageView.snp.makeConstraints {
-            $0.bottom.equalTo(buttonStack.snp.top).offset(-270)
-            $0.centerX.equalToSuperview()
-            $0.size.equalTo(100)
+            $0.edges.equalToSuperview()
         }
         
         buttonStack.snp.makeConstraints {
@@ -94,5 +102,19 @@ final class InitialView: UIView {
         loginButton.snp.makeConstraints {
             $0.height.equalTo(57)
         }
+        
+        splashView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
+    
+    // MARK: Splash Animation
+        private func playSplashAnimation() {
+            splashView.loopMode = .repeat(1)
+            splashView.play { [weak self] (finished) in
+                if finished {
+                    self?.splashView.isHidden = true
+                }
+            }
+        }
 }

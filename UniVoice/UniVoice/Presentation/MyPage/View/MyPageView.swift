@@ -26,16 +26,16 @@ final class MyPageView: UIView {
     
     private let descriptionLabel = UILabel()
     private let descriptionStackView = UIStackView()
-    private let serviceLabel = MyPageSelectView(title: "서비스 이용약관")
-    private let tosLabel = MyPageSelectView(title: "개인정보 처리방침")
-    private let versionLabel = MyPageSelectView(title: "버전 정보")
+    let serviceLabel = MyPageSelectView(title: "서비스 이용약관")
+    let tosLabel = MyPageSelectView(title: "개인정보 처리방침")
+    let versionLabel = MyPageSelectView(title: "버전 정보")
     
     private let divider = UIView()
     
     private let otherLabel = UILabel()
     private let otherStackView = UIStackView()
     private let serviceCenterLabel = MyPageSelectView(title: "고객센터")
-    private let logoutLabel = MyPageSelectView(title: "로그아웃")
+    let logoutLabel = MyPageSelectView(title: "로그아웃")
     
     // MARK: Init
     override init(frame: CGRect) {

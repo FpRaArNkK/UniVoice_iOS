@@ -169,6 +169,7 @@
 		EDF4C8AE2C4881BB00DE7643 /* finsh motion(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */; };
 		EDF4C8AF2C4881BB00DE7643 /* loading(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */; };
 		EDF4C8B12C490B3E00DE7643 /* AdmissionYearSelectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */; };
+		EDF4C8B32C49A15600DE7643 /* splash(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8B22C49A15600DE7643 /* splash(ios).json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -325,6 +326,7 @@
 		EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "finsh motion(ios).json"; sourceTree = "<group>"; };
 		EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "loading(ios).json"; sourceTree = "<group>"; };
 		EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionYearSelectionVM.swift; sourceTree = "<group>"; };
+		EDF4C8B22C49A15600DE7643 /* splash(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "splash(ios).json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -565,6 +567,7 @@
 		880ED96A2C23FE3A0045A620 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4C8B22C49A15600DE7643 /* splash(ios).json */,
 				EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */,
 				EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */,
 				880ED9572C23F75D0045A620 /* Assets.xcassets */,
@@ -1110,6 +1113,7 @@
 				21F7B1532C345F8F00A082D8 /* Pretendard-Black.otf in Resources */,
 				880ED95B2C23F75D0045A620 /* Base in Resources */,
 				21F7B1572C345F8F00A082D8 /* Pretendard-Medium.otf in Resources */,
+				EDF4C8B32C49A15600DE7643 /* splash(ios).json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

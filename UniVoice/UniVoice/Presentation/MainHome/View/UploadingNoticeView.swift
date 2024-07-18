@@ -16,6 +16,9 @@ final class UploadingNoticeView: UIView {
     let animationView = LottieAnimationView(name: "loading(ios)")
     let confirmButton = CustomButton()
     
+    // MARK: Properties
+    private var animationRepeatCount = 0
+    
     // MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,6 +26,7 @@ final class UploadingNoticeView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
+        configureAnimation()
     }
     
     required init?(coder: NSCoder) {
@@ -45,13 +49,9 @@ final class UploadingNoticeView: UIView {
     // MARK: setUpUI
     private func setUpUI() {
         
-        animationView.do {
-            $0.play()
-            animationView.loopMode = .repeat(3)
-        }
-        
         confirmButton.do {
             $0.setTitle("확인", for: .normal)
+            $0.isHidden = true
         }
     }
     
@@ -68,5 +68,29 @@ final class UploadingNoticeView: UIView {
             $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
     }
+    
+    // MARK: Configure Animation
+        private func configureAnimation() {
+            animationView.do {
+                $0.loopMode = .repeat(2)
+                $0.play(completion: { [weak self] _ in
+                    guard let self = self else { return }
+                    self.animationRepeatCount += 1
+                    if self.animationRepeatCount >= 1 {
+                        self.showCompletionAnimation()
+                    }
+                    print(animationRepeatCount)
+                })
+            }
+        }
+        
+        private func showCompletionAnimation() {
+            animationView.stop()
+            animationView.animation = LottieAnimation.named("finsh motion(ios)")
+            animationView.loopMode = .playOnce
+            animationView.play { [weak self] _ in
+                self?.confirmButton.isHidden = false
+            }
+        }
     
 }

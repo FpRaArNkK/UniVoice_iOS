@@ -20,6 +20,16 @@ final class InitialViewController: UIViewController {
         self.view = rootView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(true)
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(true)
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        }
+    
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()

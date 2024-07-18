@@ -45,6 +45,7 @@ final class CreateNoticeVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         setUpBindUI()
+        setupKeyboardDismissal()
     }
     
     // MARK: setUpFoundation
@@ -73,12 +74,14 @@ final class CreateNoticeVC: UIViewController {
         
         let input = CreateNoticeVM.Input(
             titleText:
-                rootView.titleTextField.rx.text.orEmpty.asObservable(),
+                rootView.titleTextField.rx.text.orEmpty.asObservable()
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) },
             contentText:
                 rootView.contentTextView.rx.text.orEmpty.asObservable(),
             isTextViewEmpty: rootView.isTextViewEmptyRelay.asObservable(),
             selectedImages: selectedImagesRelay.asObservable(),
-            targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
+            targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable()
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) },
             targetContentResult:
                 targetContentResultRelay.asObservable(),
             startDate: startDateRelay.asObservable().compactMap { $0 },
@@ -135,14 +138,12 @@ final class CreateNoticeVC: UIViewController {
         output.goNext.asObservable()
             .bind(onNext: { [weak self] in
                     let nextVC = UploadingNoticeVC()
-                    nextVC.modalPresentationStyle = .fullScreen
-                    self?.present(nextVC, animated: true)
+                self?.navigationController?.pushViewController(nextVC, animated: true)
             })
             .disposed(by: disposeBag)
         
         let isTargetConfirmButtonEnabled = output.isTargetConfirmButtonEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
-        
         
         rootView.imageButton.rx.tap
             .bind { [weak self] in
@@ -289,15 +290,9 @@ final class CreateNoticeVC: UIViewController {
             inputDates?.1.accept(endDate)
         }
     }
-    
-//    private func dateCancleButtonTapped() {
-//        self.rootView.dateInputView.isHidden = true
-//    }
 
-    
     private func deleteImage(at indexPath: IndexPath) {
         var images = selectedImagesRelay.value
-        //        images.remove(at: indexPath.)
         print(indexPath.row)
         images.remove(at: indexPath.row)
         selectedImagesRelay.accept(images)

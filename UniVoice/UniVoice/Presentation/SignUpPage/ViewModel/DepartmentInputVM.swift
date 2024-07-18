@@ -71,7 +71,7 @@ final class DepartmentInputVM: ViewModelType {
                     .catchAndReturn(UniversityDataResponse(status: -1, message: "Error", data: []))
             }
             .map { response in
-                response.data
+                response.data.sorted()
             }
             .bind(to: departmentsRelay)
             .disposed(by: disposeBag)
