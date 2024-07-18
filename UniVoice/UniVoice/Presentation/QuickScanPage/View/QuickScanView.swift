@@ -37,6 +37,7 @@ class QuickScanView: UIView {
     // MARK: setUpFoundation
     private func setUpFoundation() {
         self.backgroundColor = .white
+        self.quickScanContentCollectionView.backgroundColor = .white
         quickScanContentCollectionView.register(QuickScanContentCVC.self, forCellWithReuseIdentifier: QuickScanContentCVC.identifier)
     }
     

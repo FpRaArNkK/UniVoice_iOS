@@ -44,9 +44,11 @@ final class MainHomeViewModel: ViewModelType {
         let refreshQuit = quickScanItems.map { _ in Void() }
                 
         let councilItems = makeCouncilNamesArray(from: quickScanItems)
-        
-        let articleItems: Observable<[Article]> = selectedCouncilIndexRelay
-            .flatMapLatest { index -> Observable<[Article]> in
+                
+        let articleItems = input.fetchTrigger
+            .withLatestFrom(selectedCouncilIndexRelay)
+            .flatMapLatest { [weak self] index -> Observable<[Article]> in
+                guard let self = self else { return Observable.just([]) }
                 switch index {
                 case 0:
                     return self.allArticleApiCall()
