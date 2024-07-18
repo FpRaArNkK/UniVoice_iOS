@@ -26,9 +26,9 @@ final class MyPageView: UIView {
     
     private let descriptionLabel = UILabel()
     private let descriptionStackView = UIStackView()
-    private let serviceLabel = MyPageSelectView(title: "서비스 이용약관")
-    private let tosLabel = MyPageSelectView(title: "개인정보 처리방침")
-    private let versionLabel = MyPageSelectView(title: "버전 정보")
+    let serviceLabel = MyPageSelectView(title: "서비스 이용약관")
+    let tosLabel = MyPageSelectView(title: "개인정보 처리방침")
+    let versionLabel = MyPageSelectView(title: "버전 정보")
     
     private let divider = UIView()
     

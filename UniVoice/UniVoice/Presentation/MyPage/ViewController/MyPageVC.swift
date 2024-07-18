@@ -40,6 +40,30 @@ final class MyPageVC: UIViewController, UIScrollViewDelegate {
                 self.rootView.departmentLabel.text = "\(data.department) \(data.admissionNumber)"
             })
             .disposed(by: disposeBag)
+        setUpTapGestures()
+    }
+    
+    // MARK: Setup Tap Gestures
+    private func setUpTapGestures() {
+        let serviceTapGesture = UITapGestureRecognizer(target: self, action: #selector(serviceLabelTapped))
+        rootView.serviceLabel.addGestureRecognizer(serviceTapGesture)
+        rootView.serviceLabel.isUserInteractionEnabled = true
+
+        let tosTapGesture = UITapGestureRecognizer(target: self, action: #selector(tosLabelTapped))
+        rootView.tosLabel.addGestureRecognizer(tosTapGesture)
+        rootView.tosLabel.isUserInteractionEnabled = true
+    }
+    
+    @objc private func serviceLabelTapped() {
+        if let url = URL(string: "https://massive-maple-b53.notion.site/426578b24235447abccaae359549cdb7") {
+            UIApplication.shared.open(url)
+        }
+    }
+
+    @objc private func tosLabelTapped() {
+        if let url = URL(string: "https://massive-maple-b53.notion.site/430e2c92b8694ad6a8b4497f3a3b4452?pvs=4") {
+            UIApplication.shared.open(url)
+        }
     }
 }
 
