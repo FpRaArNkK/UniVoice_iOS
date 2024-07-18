@@ -126,4 +126,13 @@ extension Date {
     func toString(includeTime: Bool) -> String {
         return includeTime ? self.toDateTimeString() : self.toDateString()
     }
+    
+    
+    /// 문자열을 Date로 변환합니다
+    func dateFromString(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss" // 문자열의 형식에 맞추어 포맷 설정
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0) // 필요시 타임존 설정
+        return dateFormatter.date(from: dateString)
+    }
 }

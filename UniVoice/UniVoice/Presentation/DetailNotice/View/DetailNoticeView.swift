@@ -248,7 +248,7 @@ final class DetailNoticeView: UIView {
             $0.leading.equalToSuperview().offset(16)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(32)
-            $0.width.equalTo(66)
+            $0.width.equalTo(130)
         }
         
         buttonStackView.snp.makeConstraints {
@@ -273,9 +273,6 @@ extension DetailNoticeView {
         noticeTitleLabel.setText(cellModel.noticeTitle,
                                  font: .H5p1SB,
                                  color: .black)
-        createdDateLabel.setText("\(cellModel.createdTime ?? "")",
-                                 font: .B4R,
-                                 color: .B_03)
         viewCountLabel.setText("\(cellModel.viewCount)회",
                                font: .C3R,
                                color: .B_03)
@@ -284,6 +281,16 @@ extension DetailNoticeView {
                              color: .B_01)
         
         basicInfoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        if let createdTimeString = cellModel.createdTime,
+           let createdTimeDate = Date().dateFromString(createdTimeString) {
+            let timeAgo = Date().timeAgoString(from: createdTimeDate)
+            createdDateLabel.setText(timeAgo,
+                                     font: .B4R,
+                                     color: .B_03)
+        } else {
+            print("날짜 변환에 실패했습니다.")
+        }
         
         let contents = [
             cellModel.noticeTarget,
