@@ -31,7 +31,7 @@ final class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         
         let mainHomeVC = UINavigationController(rootViewController: MainHomeViewController())
         let savedNoticeVC = UINavigationController(rootViewController: SavedNoticeVC())
-        let myPageVC = UINavigationController(rootViewController: MainHomeViewController())
+        let myPageVC = UINavigationController(rootViewController: MyPageVC())
         
         let viewControllerList = [
             mainHomeVC,
