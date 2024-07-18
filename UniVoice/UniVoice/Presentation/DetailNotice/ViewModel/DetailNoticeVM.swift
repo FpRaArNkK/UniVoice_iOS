@@ -15,6 +15,8 @@ final class DetailNoticeVM: ViewModelType {
         self.detailNoticeAPICall(id: id)
             .bind(to: noticeRelay)
             .disposed(by: disposeBag)
+        
+        self.postIncreaseViewCount(id: id)
     }
     
     struct Input {
@@ -172,5 +174,19 @@ private extension DetailNoticeVM {
                 }
                 .catchAndReturn(false)
         }
+    }
+    
+    func postIncreaseViewCount(id: Int) {
+        Service.shared.increaseNoticeViewCount(noticeID: id)
+            .subscribe { result in
+                switch result {
+                    
+                case .success(let res):
+                    print(res.message)
+                case .failure(let err):
+                    print(err)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
