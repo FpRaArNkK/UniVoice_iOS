@@ -11,14 +11,15 @@ import RxCocoa
 final class DepartmentInputVM: ViewModelType {
     
     struct Input {
+        let universityName: Observable<String>
         let inputText: Observable<String>
         let selectedDepartment: Observable<String>
-        let departmentCellIsSelected: Observable<Department>
+        let departmentCellIsSelected: Observable<String>
     }
     
     struct Output {
         let isNextButtonEnabled: Driver<Bool>
-        let filteredDepartments: Driver<[Department]>
+        let filteredDepartments: Driver<[String]>
     }
     
     var disposeBag = DisposeBag()
@@ -31,6 +32,7 @@ final class DepartmentInputVM: ViewModelType {
     private let textFieldString = BehaviorRelay(value: "")
     private let validationString = BehaviorRelay(value: "")
     private let isNextButtonEnabled = BehaviorRelay<Bool>(value: false)
+    private let departmentsRelay = BehaviorRelay<[String]>(value: [])
     
     func transform(input: Input) -> Output {
         input.inputText
@@ -59,11 +61,22 @@ final class DepartmentInputVM: ViewModelType {
             .bind(to: isNextButtonEnabled)
             .disposed(by: disposeBag)
         
-        let filteredDepartments = input.inputText
-            .map { query in
-                self.filterDepartments(with: query)
+        input.universityName
+            .flatMapLatest { universityName in
+                Service.shared.getDepartmentList(request: UniversityNameRequest(universityName: universityName))
+                    .asObservable()
+                    .catchAndReturn(UniversityDataResponse(status: -1, message: "Error", data: []))
             }
-            .asDriver(onErrorJustReturn: [])
+            .map { response in
+                response.data
+            }
+            .bind(to: departmentsRelay)
+            .disposed(by: disposeBag)
+        
+        let filteredDepartments = Observable.combineLatest(input.inputText, departmentsRelay) { query, departments in
+            self.filterDepartments(with: query, from: departments)
+        }
+        .asDriver(onErrorJustReturn: [])
         
         return Output(
             isNextButtonEnabled: isNextButtonEnabled.asDriver(onErrorJustReturn: false),
@@ -72,30 +85,15 @@ final class DepartmentInputVM: ViewModelType {
     }
 }
 
-struct Department {
-    let name: String
-}
-
-// 더미 데이터
-private let dummyData = [
-    Department(name: "컴퓨터공학과"),
-    Department(name: "교육학과"),
-    Department(name: "역사학과"),
-    Department(name: "컴퓨터학과"),
-    Department(name: "유니브학과"),
-    Department(name: "학과학과")
-]
-
 // MARK: API Logic
-// 일단 더미 데이터
 extension DepartmentInputVM {
-    private func filterDepartments(with query: String) -> [Department] {
+    private func filterDepartments(with query: String, from departments: [String]) -> [String] {
         guard !query.isEmpty else {
             return []
         }
 
-        return dummyData.filter { department in
-            department.name.lowercased().contains(query.lowercased())
+        return departments.filter { department in
+            department.lowercased().contains(query.lowercased())
         }
     }
 }

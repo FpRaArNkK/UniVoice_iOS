@@ -50,4 +50,12 @@ extension Service {
             service: userService
         )
     }
+    
+    func requestSignUp(request: SignUpRequest) -> Single<BaseResponse> {
+        return rxRequest(
+            UserTargetType.requestSignUp(request: request),
+            model: BaseResponse.self,
+            service: userService
+        )
+    }
 }

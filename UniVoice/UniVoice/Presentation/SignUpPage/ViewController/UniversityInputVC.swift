@@ -43,17 +43,16 @@ final class UniversityInputVC: UIViewController {
                     .bind(onNext: { [weak self] in
                         guard let self = self, let inputText = self.rootView.univTextField.text else { return }
                         self.selectedUniversity.accept(inputText)
-                        let departmentInputVC = DepartmentInputVC(university: inputText)
+                        let departmentInputVC = DepartmentInputVC(university: self.selectedUniversity.value)
                         departmentInputVC.selectedUniversity = self.selectedUniversity
                         self.navigationController?.pushViewController(departmentInputVC, animated: true)
                     })
                     .disposed(by: disposeBag)
 
-        rootView.univTableView.rx.modelSelected(University.self)
-            .map { $0.name }
+        rootView.univTableView.rx.modelSelected(String.self)
             .bind(to: selectedUniversity)
             .disposed(by: disposeBag)
-        
+
         rootView.univTextField.rx.text.orEmpty
             .bind(to: selectedUniversity)
             .disposed(by: disposeBag)
@@ -65,7 +64,7 @@ final class UniversityInputVC: UIViewController {
         let input = UniversityInputVM.Input(
             inputText: rootView.univTextField.rx.text.orEmpty.asObservable(),
             selectedUniversity: selectedUniversity.asObservable(),
-            univCellIsSelected: rootView.univTableView.rx.modelSelected(University.self).asObservable()
+            univCellIsSelected: rootView.univTableView.rx.modelSelected(String.self).asObservable()
         )
         
         let output = viewModel.transform(input: input)
@@ -75,23 +74,21 @@ final class UniversityInputVC: UIViewController {
         
         rootView.nextButton.bindData(buttonType: isNextButtonEnabled.asObservable())
         
+        output.isNextButtonEnabled
+            .drive(rootView.univTableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         output.filteredUniversities
             .drive(rootView.univTableView.rx.items(
                 cellIdentifier: "UniversityTableViewCell",
                 cellType: UniversityTableViewCell.self
             )) { index, university, cell in
-                //rootView.univTextField.text // 서울
-                let attrString = AttributedString("university.name")
-                // attrString에서 rootView.univTextField.text랑 겹치는 부분 찾고, 해당 부분만 특정 폰트 지정가능
-                // 나머지 부분은 기본 지정 폰트로
-                cell.univNameLabel.text = university.name
+                cell.univNameLabel.text = university
             }
             .disposed(by: disposeBag)
         
-        rootView.univTableView.rx.modelSelected(University.self)
-            .subscribe(onNext: { university in
-                print("Selected university: \(university.name)")
-            })
+        rootView.univTableView.rx.modelSelected(String.self)
+            .bind(to: selectedUniversity)
             .disposed(by: disposeBag)
     }
 }
@@ -111,8 +108,8 @@ extension UniversityInputVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         // 학교 선택시
-        if let university = try? rootView.univTableView.rx.model(at: indexPath) as University {
-            print("Selected university: \(university.name)")
+        if let university = try? rootView.univTableView.rx.model(at: indexPath) as String {
+            print("Selected university: \(university)")
         }
     }
 }

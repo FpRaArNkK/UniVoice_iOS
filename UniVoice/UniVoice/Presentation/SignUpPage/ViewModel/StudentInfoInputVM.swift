@@ -82,6 +82,9 @@ final class StudentInfoInputVM: ViewModelType {
             }
             .asDriver(onErrorJustReturn: ButtonState.none)
         
+        SignUpDataManager.shared.bindStudentName(input.studentNameText)
+        SignUpDataManager.shared.bindStudentNumber(input.studentIDText)
+        
         return Output(
             nextButtonIsEnabled: nextButtonIsEnabled,
             nextButtonState: nextButtonState
