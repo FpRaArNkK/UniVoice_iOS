@@ -21,12 +21,15 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
     private let tabList = BehaviorRelay<[String]>(value: []) // 중간 부분에 들어가는 탭들 이름 리스트
     
+    private let fetchTrig = PublishRelay<Void>() // 새로고침 트리거
+    
     // MARK: Views
     private let rootView = MainHomeView()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.fetchTrig.accept(()) // 새로고침 트리거 emit
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,13 +46,11 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        
         setupCollectionView()
-        bindCollectionView()
-        bindScrollView()
         bindUI()
         bindScroll(of: rootView.headerView.councilCollectionView,
                    to: rootView.stickyHeaderView.councilCollectionView)
+        fetchTrig.accept(())
     }
     
     private func setupCollectionView() {
@@ -71,7 +72,8 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    private func bindScrollView() {
+    private func bindUI() {
+        
         rootView.scrollView.rx.contentOffset
             .map { $0.y > self.rootView.headerView.frame.minY }
             .observe(on: MainScheduler.instance)
@@ -94,16 +96,22 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 self.rootView.articleCollectionView.isScrollEnabled = !shouldDisableScroll
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func bindCollectionView() {
+        
         let input = MainHomeViewModel.Input(
-            councilSelected: itemSelectedSubject.asObservable()
+            councilSelected: itemSelectedSubject.asObservable(),
+            fetchTrigger: fetchTrig.asObservable()
         )
+        
+        rootView.scrollView.refreshControl?.rx.controlEvent(.valueChanged)
+            .debounce(.milliseconds(400), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.fetchTrig.accept(())
+            })
+            .disposed(by: disposeBag)
         
         let output = viewModel.transform(input: input)
         
-        let qsItems = viewModel.quickScanApiCall()        
+        let qsItems = output.qsItems
                         
         let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QS>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
@@ -124,7 +132,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 .bind(to: self.itemSelectedSubject)
                 .disposed(by: self.disposeBag)
             
-            let buttonType = self.viewModel.selectedCouncilIndexRelay
+            let buttonType = output.selectedCouncilIndex
                 .map { index in
                     return indexPath.row == index ? CustomButtonType.selected : CustomButtonType.unselected
                 }
@@ -188,6 +196,12 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: rootView.articleCollectionView.rx.items(dataSource: articleDataSource))
             .disposed(by: disposeBag)
         
+        output.refreshQuitTrigger
+            .bind(onNext: { [weak self] in
+                self?.rootView.scrollView.refreshControl?.endRefreshing()
+            })
+            .disposed(by: disposeBag)
+        
         rootView.quickScanCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.headerView.councilCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.stickyHeaderView.councilCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
@@ -196,14 +210,14 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         rootView.headerView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
+//                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
         rootView.stickyHeaderView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
+//                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
@@ -237,6 +251,12 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 self.navigationController?.pushViewController(detailNoticeVC, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        rootView.createNoticeButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(CreateNoticeVC(), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindScroll(of source: UICollectionView, to target: UICollectionView) {
@@ -249,14 +269,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         target.rx.contentOffset
             .subscribe(onNext: { contentOffset in
                 source.contentOffset = contentOffset
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func bindUI() {
-        rootView.createNoticeButton.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.navigationController?.pushViewController(CreateNoticeVC(), animated: true)
             })
             .disposed(by: disposeBag)
     }
