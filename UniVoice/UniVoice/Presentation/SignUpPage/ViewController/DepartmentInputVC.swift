@@ -42,6 +42,12 @@ final class DepartmentInputVC: UIViewController {
         setUpTableView()
     }
     
+    // MARK: Life Cycle - viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        rootView.departTextField.becomeFirstResponder()
+    }
+    
     // MARK: setUpFoundation
     private func setUpFoundation() {
         self.title = "개인정보입력"

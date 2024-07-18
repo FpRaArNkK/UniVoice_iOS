@@ -61,6 +61,9 @@ final class DepartmentInputVM: ViewModelType {
             .bind(to: isNextButtonEnabled)
             .disposed(by: disposeBag)
         
+        SignUpDataManager.shared.bindDepartmentName(input.selectedDepartment)
+        
+        // API 연동
         input.universityName
             .flatMapLatest { universityName in
                 Service.shared.getDepartmentList(request: UniversityNameRequest(universityName: universityName))
