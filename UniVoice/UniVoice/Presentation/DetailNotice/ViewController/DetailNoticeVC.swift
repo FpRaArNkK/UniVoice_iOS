@@ -52,6 +52,16 @@ final class DetailNoticeVC: UIViewController {
         self.title = ""
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     // MARK: setUpFoundation
     private func setUpFoundation() {
         rootView.noticeImageCollectionView.register(NoticeImageCVC.self,
@@ -76,7 +86,7 @@ final class DetailNoticeVC: UIViewController {
             .map { $0.councilType }
             .bind(to: self.rx.title)
             .disposed(by: disposeBag)
-                
+        
         let imageUrls = output.notice
             .compactMap { $0.noticeImageURL }
         
@@ -118,12 +128,12 @@ final class DetailNoticeVC: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
-                
+        
         rootView.bindUI(
             isLiked: output.isLiked.asObservable(),
             isSaved: output.isSaved.asObservable()
         )
-       
+        
     }
 }
 
