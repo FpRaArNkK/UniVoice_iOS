@@ -53,7 +53,11 @@ final class DetailNoticeView: UIView {
     
     let buttonStackView = UIStackView()
     
+    let likeStackView = UIStackView()
+    
     let likedButton = UIButton()
+    
+    let likeCount = UILabel()
     
     let savedButton = UIButton()
     
@@ -104,6 +108,11 @@ final class DetailNoticeView: UIView {
         
         [
             likedButton,
+            likeCount
+        ].forEach { likeStackView.addArrangedSubview($0) }
+        
+        [
+            likeStackView,
             savedButton
         ].forEach { buttonStackView.addArrangedSubview($0) }
         
@@ -158,8 +167,18 @@ final class DetailNoticeView: UIView {
             $0.backgroundColor = .white
         }
         
+        likeStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 4
+        }
+        
         likedButton.do {
-            $0.setImage(.icnLikeOn, for: .normal)
+            $0.setImage(.icnLikeOff, for: .normal)
+        }
+        
+        likeCount.do {
+            $0.font = .pretendardFont(for: .C3R)
+            $0.textColor = .B_03
         }
         
         savedButton.do {
@@ -255,7 +274,6 @@ final class DetailNoticeView: UIView {
             $0.trailing.equalToSuperview().inset(12)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(32)
-            $0.width.equalTo(76)
         }
         
         likedButton.snp.makeConstraints {
@@ -288,6 +306,10 @@ extension DetailNoticeView {
                              font: .B2R,
                              color: .B_01)
         
+        likedButton.setImage(cellModel.isLiked ? .icnLikeOn : .icnLikeOff, for: .normal)
+        likeCount.text = "\(cellModel.likeCount)"
+        savedButton.setImage(cellModel.isSaved ? .icnBookmarkOn : .icnBookmarkOff, for: .normal)
+        
         basicInfoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         if let createdTimeString = cellModel.createdTime,
@@ -305,8 +327,13 @@ extension DetailNoticeView {
         if let startTimeString = cellModel.startTime,
            let startTimeDate = Date().dateFromString(startTimeString),
            let endTimeString = cellModel.endTime,
-              let endTimeDate = Date().dateFromString(endTimeString){
-            timeDuration = Date().getDurationText(from: startTimeDate, to: endTimeDate)
+              let endTimeDate = Date().dateFromString(endTimeString) {
+            
+            if startTimeString.isEmpty || endTimeString.isEmpty {
+                timeDuration = nil
+            } else {
+                timeDuration = Date().getDurationText(from: startTimeDate, to: endTimeDate)
+            }
         } else {
             print("날짜 변환에 실패했습니다.")
             timeDuration = nil
@@ -334,7 +361,8 @@ extension DetailNoticeView {
             
             let contentView = ChipContentView(
                 chipString: chipString,
-                contentString: contentString
+                contentString: contentString,
+                isCenterY: true
             )
             self.basicInfoStackView.addArrangedSubview(contentView)
         }
@@ -344,10 +372,28 @@ extension DetailNoticeView {
         isLiked
             .map { $0 ? UIImage.icnLikeOn : UIImage.icnLikeOff }
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak likedButton] image in
-                guard let likedButton = likedButton else { return }
-                UIView.transition(with: likedButton, duration: 0.15, options: .transitionCrossDissolve, animations: {
-                    likedButton.setImage(image, for: .normal)
+            .subscribe(onNext: { [weak self] image in
+                guard let self = self else { return }
+                UIView.transition(with: self.likedButton, duration: 0.15, options: .transitionCrossDissolve, animations: {
+                    self.likedButton.setImage(image, for: .normal)
+                }, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        isLiked
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isLike in
+                guard let self = self else { return }
+                UIView.transition(with: self.likedButton,
+                                  duration: 0.15,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    if let tempCountStr = self.likeCount.text,
+                       var tempCount = Int(tempCountStr) {
+                        let num = isLike ? +1 : -1
+                        tempCount += num
+                        self.likeCount.text = "\(tempCount)"
+                    }
                 }, completion: nil)
             })
             .disposed(by: disposeBag)

@@ -12,6 +12,8 @@ import Then
 final class MyPageView: UIView {
     
     // MARK: Views
+    private let mypageScrollView = UIScrollView()
+    private let mypageContentView = UIView()
     private let titleLabel = UILabel()
     private let backgroundView = UIView()
     private let profileImage = UIImageView()
@@ -56,22 +58,27 @@ final class MyPageView: UIView {
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         
+        self.addSubview(mypageScrollView)
+        mypageScrollView.addSubview(mypageContentView)
         [
             titleLabel,
             backgroundView,
+            descriptionLabel,
+            descriptionStackView,
+            divider,
+            otherLabel,
+            otherStackView
+        ].forEach { mypageContentView.addSubview($0) }
+        
+        [
             profileImage,
             nameLabel,
             collegeDepartmentLabel,
             departmentLabel,
             connectLineView,
             universityImage,
-            universityLabel,
-            descriptionLabel,
-            descriptionStackView,
-            divider,
-            otherLabel,
-            otherStackView
-        ].forEach { self.addSubview($0) }
+            universityLabel
+        ].forEach { backgroundView.addSubview($0) }
         
         [
             serviceLabel,
@@ -161,16 +168,34 @@ final class MyPageView: UIView {
     
     // MARK: setUpLayout
     private func setUpLayout() {
+        mypageScrollView.snp.makeConstraints {
+            $0.top.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.width.equalToSuperview()
+        }
+        mypageContentView.snp.makeConstraints {
+            $0.edges.equalTo(mypageScrollView.contentLayoutGuide)
+            $0.width.equalToSuperview()
+        }
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(16)
+            $0.top.equalToSuperview().offset(16)
             $0.horizontalEdges.equalToSuperview().inset(16)
         }
         backgroundView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(26)
             $0.height.equalTo(264)
             $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.centerX.equalToSuperview()
         }
-        
+        connectLineView.snp.makeConstraints {
+            $0.top.equalTo(backgroundView).offset(100)
+            $0.horizontalEdges.equalTo(backgroundView).inset(131)
+            $0.height.equalTo(2)
+        }
+        profileImage.snp.makeConstraints {
+            $0.centerY.equalTo(connectLineView)
+            $0.trailing.equalTo(connectLineView.snp.leading)
+            $0.size.equalTo(87)
+        }
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(profileImage.snp.bottom).offset(8)
             $0.centerX.equalTo(profileImage)
@@ -184,18 +209,6 @@ final class MyPageView: UIView {
         departmentLabel.snp.makeConstraints {
             $0.top.equalTo(collegeDepartmentLabel.snp.bottom).offset(4)
             $0.centerX.equalTo(profileImage)
-        }
-        connectLineView.snp.makeConstraints {
-            $0.height.equalTo(2)
-            $0.width.equalTo(82)
-            $0.top.equalTo(backgroundView.snp.top).offset(100)
-            $0.leading.equalTo(profileImage.snp.trailing)
-            $0.centerX.equalToSuperview()
-        }
-        profileImage.snp.makeConstraints {
-            $0.centerY.equalTo(connectLineView)
-            $0.trailing.equalTo(connectLineView.snp.leading)
-            $0.size.equalTo(87)
         }
         universityImage.snp.makeConstraints {
             $0.centerY.equalTo(connectLineView)
@@ -240,6 +253,7 @@ final class MyPageView: UIView {
             $0.top.equalTo(otherLabel.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(58 * 2)
+            $0.bottom.equalToSuperview()
         }
         serviceCenterLabel.snp.makeConstraints {
             $0.height.equalTo(58)

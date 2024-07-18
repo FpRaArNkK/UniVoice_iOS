@@ -116,6 +116,7 @@
 		88AB98152C3FDB2F00AC5043 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98142C3FDB2F00AC5043 /* Date+.swift */; };
 		88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98162C41749D00AC5043 /* QuickScanCompletionView.swift */; };
 		88AB98192C418A2000AC5043 /* QuickScanCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */; };
+		88BC6D8E2C49831B008543A2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BC6D8D2C49831B008543A2 /* UIViewController+.swift */; };
 		88C231A52C485416009BEA63 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C231A42C485416009BEA63 /* String+.swift */; };
 		88C231A72C486C4E009BEA63 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */; };
 		DC27DBCE2C4708A000401364 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCD2C4708A000401364 /* MyPageVC.swift */; };
@@ -272,6 +273,7 @@
 		88AB98142C3FDB2F00AC5043 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		88AB98162C41749D00AC5043 /* QuickScanCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionView.swift; sourceTree = "<group>"; };
 		88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionViewController.swift; sourceTree = "<group>"; };
+		88BC6D8D2C49831B008543A2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		88C231A42C485416009BEA63 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		88C231A92C48B441009BEA63 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 				EDF4C8992C42BCD100DE7643 /* UIView+.swift */,
 				88C231A42C485416009BEA63 /* String+.swift */,
 				212FCB102C4854DF000E8223 /* Data+.swift */,
+				88BC6D8D2C49831B008543A2 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1216,6 +1219,7 @@
 				882DB15B2C31C45400D73FEF /* LoginView.swift in Sources */,
 				EDF4C8982C42AF7900DE7643 /* CreateNoticeVM.swift in Sources */,
 				EDF4C89A2C42BCD100DE7643 /* UIView+.swift in Sources */,
+				88BC6D8E2C49831B008543A2 /* UIViewController+.swift in Sources */,
 				212FCB032C482563000E8223 /* DepartmentStudentCouncilNoticeListResponse.swift in Sources */,
 				212FCAFD2C482057000E8223 /* AllNoticeListResponse.swift in Sources */,
 				212FCAED2C46A3AE000E8223 /* UniversityNameRequest.swift in Sources */,

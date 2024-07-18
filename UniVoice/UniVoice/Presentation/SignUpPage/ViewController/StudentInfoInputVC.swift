@@ -32,6 +32,7 @@ class StudentInfoInputVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupKeyboardDismissal()
         setUpFoundation()
         setUpBindUI()
     }
