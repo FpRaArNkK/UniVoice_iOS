@@ -17,6 +17,7 @@ final class SavedNoticeVM: ViewModelType {
     
     struct Output {
         let listData: Driver<[Article]>
+        let refreshQuitTrigger: Driver<Void>
     }
     
     var disposeBag = DisposeBag()
@@ -28,7 +29,10 @@ final class SavedNoticeVM: ViewModelType {
             })
             .asDriver(onErrorJustReturn: [])
         
-        return Output(listData: listData)
+        let refreshQuit = listData.map { _ in Void() }
+            .asDriver()
+        
+        return Output(listData: listData, refreshQuitTrigger: refreshQuit)
     }
 }
 
@@ -40,4 +44,3 @@ extension SavedNoticeVM {
             .map { $0.data.map { $0.toArticle() } }
     }
 }
-
