@@ -46,11 +46,16 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
+        setUpFoundation()
         setupCollectionView()
         bindUI()
         bindScroll(of: rootView.headerView.councilCollectionView,
                    to: rootView.stickyHeaderView.councilCollectionView)
         fetchTrig.accept(())
+    }
+    
+    private func setUpFoundation() {
+        self.view.backgroundColor = .white
     }
     
     private func setupCollectionView() {

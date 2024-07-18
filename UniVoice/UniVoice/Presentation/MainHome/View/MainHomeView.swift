@@ -93,6 +93,22 @@ final class MainHomeView: UIView {
             $0.spacing = 16
         }
         
+        articleCollectionView.do {
+            $0.backgroundColor = .white
+        }
+        
+        quickScanCollectionView.do {
+            $0.backgroundColor = .white
+        }
+        
+        headerView.councilCollectionView.do {
+            $0.backgroundColor = .white
+        }
+        
+        stickyHeaderView.councilCollectionView.do {
+            $0.backgroundColor = .white
+        }
+        
         emptyViewLabel.do {
             $0.setText("아직 학생회가 등록되어 있지 않아,\n공지사항을 확인할 수 없어요.",
                        font: .H7SB,
