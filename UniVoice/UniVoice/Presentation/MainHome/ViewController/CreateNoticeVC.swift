@@ -73,12 +73,14 @@ final class CreateNoticeVC: UIViewController {
         
         let input = CreateNoticeVM.Input(
             titleText:
-                rootView.titleTextField.rx.text.orEmpty.asObservable(),
+                rootView.titleTextField.rx.text.orEmpty.asObservable()
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) },
             contentText:
                 rootView.contentTextView.rx.text.orEmpty.asObservable(),
             isTextViewEmpty: rootView.isTextViewEmptyRelay.asObservable(),
             selectedImages: selectedImagesRelay.asObservable(),
-            targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable(),
+            targetContenttext: rootView.targetInputView.targetInputTextField.rx.text.orEmpty.asObservable()
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) },
             targetContentResult:
                 targetContentResultRelay.asObservable(),
             startDate: startDateRelay.asObservable().compactMap { $0 },
