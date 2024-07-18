@@ -35,7 +35,7 @@ extension AllNotice {
         let likedNumber = likeCount
         let savedNumber = viewCount
         
-        return Article(chip: chip, 
+        return Article(id: id, chip: chip, 
                        articleTitle: articleTitle,
                        thumbnailImage: thumbnailImage,
                        duration: createdAt.formatDate(from: createdAt),
