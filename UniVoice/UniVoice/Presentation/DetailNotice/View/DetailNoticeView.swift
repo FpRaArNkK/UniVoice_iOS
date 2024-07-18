@@ -57,7 +57,7 @@ final class DetailNoticeView: UIView {
     
     let likedButton = UIButton()
     
-    let likeCount = UILabel()
+    let likeCountLabel = UILabel()
     
     let savedButton = UIButton()
     
@@ -108,7 +108,7 @@ final class DetailNoticeView: UIView {
         
         [
             likedButton,
-            likeCount
+            likeCountLabel
         ].forEach { likeStackView.addArrangedSubview($0) }
         
         [
@@ -176,7 +176,7 @@ final class DetailNoticeView: UIView {
             $0.setImage(.icnLikeOff, for: .normal)
         }
         
-        likeCount.do {
+        likeCountLabel.do {
             $0.font = .pretendardFont(for: .C3R)
             $0.textColor = .B_03
         }
@@ -307,7 +307,7 @@ extension DetailNoticeView {
                              color: .B_01)
         
         likedButton.setImage(cellModel.isLiked ? .icnLikeOn : .icnLikeOff, for: .normal)
-        likeCount.text = "\(cellModel.likeCount)"
+        likeCountLabel.text = "\(cellModel.likeCount)"
         savedButton.setImage(cellModel.isSaved ? .icnBookmarkOn : .icnBookmarkOff, for: .normal)
         
         basicInfoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -346,7 +346,7 @@ extension DetailNoticeView {
         
         contents.enumerated().forEach { (index, content) in
             
-            guard let contentString = content else { return }
+            guard let contentString = content, !contentString.isEmpty else { return }
             
             let chipString: String = {
                 switch index {
@@ -368,7 +368,7 @@ extension DetailNoticeView {
         }
     }
     
-    func bindUI(isLiked: Observable<Bool>, isSaved: Observable<Bool>) {
+    func bindUI(isLiked: Observable<Bool>, isSaved: Observable<Bool>, cellModel: DetailNotice) {
         isLiked
             .map { $0 ? UIImage.icnLikeOn : UIImage.icnLikeOff }
             .observe(on: MainScheduler.instance)
@@ -376,6 +376,7 @@ extension DetailNoticeView {
                 guard let self = self else { return }
                 UIView.transition(with: self.likedButton, duration: 0.15, options: .transitionCrossDissolve, animations: {
                     self.likedButton.setImage(image, for: .normal)
+                    self.likeCountLabel.text =  "\(cellModel.likeCount + 1)"
                 }, completion: nil)
             })
             .disposed(by: disposeBag)
@@ -384,16 +385,8 @@ extension DetailNoticeView {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isLike in
                 guard let self = self else { return }
-                UIView.transition(with: self.likedButton,
-                                  duration: 0.15,
-                                  options: .transitionCrossDissolve,
-                                  animations: {
-                    if let tempCountStr = self.likeCount.text,
-                       var tempCount = Int(tempCountStr) {
-                        let num = isLike ? +1 : -1
-                        tempCount += num
-                        self.likeCount.text = "\(tempCount)"
-                    }
+                UIView.transition(with: self.likeCountLabel, duration: 0.15, options: .transitionCrossDissolve, animations: {
+                    self.likeCountLabel.text =  isLike ? "\(cellModel.likeCount + 1)" : "\(cellModel.likeCount)"
                 }, completion: nil)
             })
             .disposed(by: disposeBag)
@@ -408,5 +401,13 @@ extension DetailNoticeView {
                 }, completion: nil)
             })
             .disposed(by: disposeBag)
+        
+//        likeCount
+//            .map {
+//                print($0)
+//                return "\($0)"
+//            }
+//            .bind(to: self.likeCountLabel.rx.text)
+//            .disposed(by: disposeBag)
     }
 }

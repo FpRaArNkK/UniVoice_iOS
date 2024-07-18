@@ -94,8 +94,7 @@ private extension DetailNoticeVM {
     func detailNoticeAPICall(id: Int) -> Observable<DetailNotice> {
         return Service.shared.getNoticeDetail(noticeID: id)
             .asObservable()
-            .map({
-                response in
+            .map({ response in
                 if let detailNotice = response.data?.toDetailNotice() {
                     return detailNotice
                 } else {
