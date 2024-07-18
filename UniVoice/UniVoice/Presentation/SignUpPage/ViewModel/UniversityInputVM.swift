@@ -60,6 +60,8 @@ final class UniversityInputVM: ViewModelType {
             .bind(to: isNextButtonEnabled)
             .disposed(by: disposeBag)
         
+        SignUpDataManager.shared.bindUniversityName(input.selectedUniversity)
+        
         // API 호출 추가
         Service.shared.getUniversityList()
             .subscribe { response in
