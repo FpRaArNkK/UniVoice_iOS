@@ -15,6 +15,8 @@ final class DetailNoticeVM: ViewModelType {
         self.detailNoticeAPICall(id: id)
             .bind(to: noticeRelay)
             .disposed(by: disposeBag)
+        
+        self.postIncreaseViewCount(id: id)
     }
     
     struct Input {
@@ -25,6 +27,7 @@ final class DetailNoticeVM: ViewModelType {
     struct Output {
         let isLiked: Driver<Bool>
         let isSaved: Driver<Bool>
+        let notice: Driver<DetailNotice>
     }
     
     var disposeBag = DisposeBag()
@@ -55,6 +58,7 @@ final class DetailNoticeVM: ViewModelType {
                 guard let self = self else { return }
                 var tempQuickScans = self.noticeRelay.value
                 tempQuickScans.isLiked = result
+                self.noticeRelay.accept(tempQuickScans)
             })
             .disposed(by: disposeBag)
         
@@ -72,12 +76,14 @@ final class DetailNoticeVM: ViewModelType {
                 guard let self = self else { return }
                 var tempQuickScans = self.noticeRelay.value
                 tempQuickScans.isSaved = result
+                self.noticeRelay.accept(tempQuickScans)
             })
             .disposed(by: disposeBag)
                 
         return Output(
             isLiked: isLikedRelay.asDriver(onErrorJustReturn: false),
-            isSaved: isSavedRelay.asDriver(onErrorJustReturn: false)
+            isSaved: isSavedRelay.asDriver(onErrorJustReturn: false),
+            notice: noticeRelay.asDriver()
         )
     }
 }
@@ -89,8 +95,24 @@ private extension DetailNoticeVM {
         return Service.shared.getNoticeDetail(noticeID: id)
             .asObservable()
             .map({ response in
-                let result = response.data?.toDetailNotice()
-                return result!
+                if let detailNotice = response.data?.toDetailNotice() {
+                    return detailNotice
+                } else {
+                    return .init(
+                        noticeId: -1,
+                        councilType: "error",
+                        noticeTitle: "error",
+                        noticeTarget: nil,
+                        startTime: nil,
+                        endTime: nil,
+                        noticeImageURL: nil,
+                        content: "error",
+                        createdTime: nil,
+                        viewCount: 0,
+                        isLiked: false,
+                        isSaved: false
+                    )
+                }
             })
     }
     
@@ -101,10 +123,10 @@ private extension DetailNoticeVM {
             return Service.shared.unlikeNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
-                        print("취소 성공")
+                        print("좋아요 취소 성공")
                         return false
                     } else {
-                        print("취소 실패")
+                        print("좋아요 취소 실패")
                         throw NSError(domain: "", code: response.status, userInfo: nil)
                     }
                 }
@@ -113,10 +135,10 @@ private extension DetailNoticeVM {
             return Service.shared.likeNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
-                        print("저장 성공")
+                        print("좋아요 성공")
                         return true
                     } else {
-                        print("저장 실패")
+                        print("좋아요 실패")
                         throw NSError(domain: "", code: response.status, userInfo: nil)
                     }
                 }
@@ -128,29 +150,43 @@ private extension DetailNoticeVM {
         
         switch isMarked {
         case true:
-            return Service.shared.unlikeNotice(noticeID: id).asObservable()
+            return Service.shared.cancleSavingNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
                         print("취소 성공")
                         return false
                     } else {
                         print("취소 실패")
-                        throw NSError(domain: "", code: response.status, userInfo: nil)
+                        throw NSError(domain: "", code: response.status, userInfo: nil) // 에러 발생
                     }
                 }
                 .catchAndReturn(true)
         case false:
-            return Service.shared.likeNotice(noticeID: id).asObservable()
+            return Service.shared.saveNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
                         print("저장 성공")
                         return true
                     } else {
                         print("저장 실패")
-                        throw NSError(domain: "", code: response.status, userInfo: nil)
+                        throw NSError(domain: "", code: response.status, userInfo: nil) // 에러 발생
                     }
                 }
                 .catchAndReturn(false)
         }
+    }
+    
+    func postIncreaseViewCount(id: Int) {
+        Service.shared.increaseNoticeViewCount(noticeID: id)
+            .subscribe { result in
+                switch result {
+                    
+                case .success(let res):
+                    print(res.message)
+                case .failure(let err):
+                    print(err)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }

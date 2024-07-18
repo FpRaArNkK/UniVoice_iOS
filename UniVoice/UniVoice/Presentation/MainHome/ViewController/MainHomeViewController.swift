@@ -231,13 +231,17 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             })
             .disposed(by: disposeBag)
         
-        rootView.articleCollectionView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
-                let quickScanVC = DetailNoticeVC(id: indexPath.row)
-                self.navigationController?.pushViewController(quickScanVC, animated: true)
-            })
-            .disposed(by: disposeBag)
+        Observable.combineLatest(
+                   rootView.articleCollectionView.rx.itemSelected,
+                   output.articleItems
+               )
+               .subscribe(onNext: { [weak self] indexPath, articles in
+                   guard let self = self else { return }
+                   let selectedArticle = articles[indexPath.row]
+                   let detailNoticeVC = DetailNoticeVC(id: selectedArticle.id)
+                   self.navigationController?.pushViewController(detailNoticeVC, animated: true)
+               })
+               .disposed(by: disposeBag)
     }
     
     private func bindScroll(of source: UICollectionView, to target: UICollectionView) {

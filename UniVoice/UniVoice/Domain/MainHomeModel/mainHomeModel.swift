@@ -20,6 +20,7 @@ struct QS {
 
 struct Article {
 //    let council: String
+    let id: Int
     let chip: String
     let articleTitle: String
     let thumbnailImage: String
