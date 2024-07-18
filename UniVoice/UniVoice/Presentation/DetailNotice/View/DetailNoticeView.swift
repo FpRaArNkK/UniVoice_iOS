@@ -273,7 +273,7 @@ extension DetailNoticeView {
         noticeTitleLabel.setText(cellModel.noticeTitle,
                                  font: .H5p1SB,
                                  color: .black)
-        createdDateLabel.setText(Date().timeAgoString(from: cellModel.createdTime),
+        createdDateLabel.setText("\(cellModel.createdTime ?? "")",
                                  font: .B4R,
                                  color: .B_03)
         viewCountLabel.setText("\(cellModel.viewCount)회",
@@ -287,7 +287,7 @@ extension DetailNoticeView {
         
         let contents = [
             cellModel.noticeTarget,
-            Date().getDurationText(from: cellModel.startTime, to: cellModel.endTime)
+            "\(String(describing: cellModel.startTime))~\(String(describing: cellModel.endTime))"
         ]
         
         contents.enumerated().forEach { (index, content) in
