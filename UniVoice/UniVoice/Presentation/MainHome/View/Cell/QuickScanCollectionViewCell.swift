@@ -100,7 +100,7 @@ final class QuickScanCVC: UICollectionViewCell {
             $0.size.equalTo(68)
         }
         councilName.snp.makeConstraints {
-            $0.top.equalTo(councilImage.snp.bottom).offset(8)
+            $0.top.equalTo(councilImage.snp.bottom).offset(6)
             $0.centerX.equalToSuperview()
         }
         circleView.snp.makeConstraints {
