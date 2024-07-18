@@ -150,7 +150,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: rootView.quickScanCollectionView.rx.items(dataSource: qsDataSource))
             .disposed(by: disposeBag)
         
-        //기존 header
         output.councilItems
             .map { [SectionModel(model: "Section 2", items: $0)] }
             .do(onNext: { [weak self] councils in
@@ -178,7 +177,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         
         output.articleItems
             .do(onNext: { [weak self] articles in
-                if (articles.isEmpty) {
+                if articles.isEmpty {
                     self?.rootView.noCouncilLabel.isHidden = false
                     self?.rootView.scrollView.isScrollEnabled = false
                     self?.rootView.stickyHeaderView.isHidden = true
@@ -277,7 +276,6 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 97, height: 132)
         case rootView.headerView.councilCollectionView,
             rootView.stickyHeaderView.councilCollectionView:
-//            let title = viewModel.councilList[indexPath.row]
             if self.tabList.value.isEmpty {
                 return CGSize(width: 50, height: 32)
             } else {
