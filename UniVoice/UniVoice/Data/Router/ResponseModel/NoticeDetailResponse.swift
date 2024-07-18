@@ -44,6 +44,8 @@ extension NoticeDetail {
                             noticeImageURL: noticeImages,
                             content: content ?? "", createdTime: createdAt,
                             viewCount: viewCount, isLiked: likeCheck,
-                            isSaved: saveCheck)
+                            isSaved: saveCheck,
+                            likeCount: noticeLike
+        )
     }
 }

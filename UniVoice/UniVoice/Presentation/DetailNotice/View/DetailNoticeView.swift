@@ -53,7 +53,11 @@ final class DetailNoticeView: UIView {
     
     let buttonStackView = UIStackView()
     
+    let likeStackView = UIStackView()
+    
     let likedButton = UIButton()
+    
+    let likeCount = UILabel()
     
     let savedButton = UIButton()
     
@@ -104,6 +108,11 @@ final class DetailNoticeView: UIView {
         
         [
             likedButton,
+            likeCount
+        ].forEach { likeStackView.addArrangedSubview($0) }
+        
+        [
+            likeStackView,
             savedButton
         ].forEach { buttonStackView.addArrangedSubview($0) }
         
@@ -158,8 +167,18 @@ final class DetailNoticeView: UIView {
             $0.backgroundColor = .white
         }
         
+        likeStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 4
+        }
+        
         likedButton.do {
-            $0.setImage(.icnLikeOn, for: .normal)
+            $0.setImage(.icnLikeOff, for: .normal)
+        }
+        
+        likeCount.do {
+            $0.font = .pretendardFont(for: .C3R)
+            $0.textColor = .B_03
         }
         
         savedButton.do {
@@ -255,7 +274,6 @@ final class DetailNoticeView: UIView {
             $0.trailing.equalToSuperview().inset(12)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(32)
-            $0.width.equalTo(76)
         }
         
         likedButton.snp.makeConstraints {
@@ -287,6 +305,10 @@ extension DetailNoticeView {
         contentLabel.setText(cellModel.content,
                              font: .B2R,
                              color: .B_01)
+        
+        likedButton.setImage(cellModel.isLiked ? .icnLikeOn : .icnLikeOff, for: .normal)
+        likeCount.text = "\(cellModel.likeCount)"
+        savedButton.setImage(cellModel.isSaved ? .icnBookmarkOn : .icnBookmarkOff, for: .normal)
         
         basicInfoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         

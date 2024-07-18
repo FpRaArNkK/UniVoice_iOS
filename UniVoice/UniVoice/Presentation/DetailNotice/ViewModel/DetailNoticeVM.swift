@@ -37,7 +37,7 @@ final class DetailNoticeVM: ViewModelType {
                                                                       startTime: nil, endTime: nil,
                                                                       noticeImageURL: nil, content: "",
                                                                       createdTime: nil, viewCount: 0,
-                                                                      isLiked: false, isSaved: false))
+                                                                      isLiked: false, isSaved: false, likeCount: 0))
     
     private let isLikedRelay = PublishRelay<Bool>()
     private let isSavedRelay = PublishRelay<Bool>()
@@ -94,7 +94,8 @@ private extension DetailNoticeVM {
     func detailNoticeAPICall(id: Int) -> Observable<DetailNotice> {
         return Service.shared.getNoticeDetail(noticeID: id)
             .asObservable()
-            .map({ response in
+            .map({
+                response in
                 if let detailNotice = response.data?.toDetailNotice() {
                     return detailNotice
                 } else {
@@ -110,7 +111,8 @@ private extension DetailNoticeVM {
                         createdTime: nil,
                         viewCount: 0,
                         isLiked: false,
-                        isSaved: false
+                        isSaved: false,
+                        likeCount: 0
                     )
                 }
             })
