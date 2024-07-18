@@ -44,4 +44,7 @@ struct DetailNotice {
 
     /// 저장 유무
     var isSaved: Bool
+    
+    /// 좋아요 개수
+    var likeCount: Int
 }
