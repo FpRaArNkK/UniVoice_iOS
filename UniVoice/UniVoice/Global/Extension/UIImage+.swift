@@ -14,4 +14,18 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image ?? UIImage()
     }
+    
+    func compressed(to maxSizeMB: Double) -> Data? {
+        let maxSizeBytes = maxSizeMB * 1024 * 1024
+        var compression: CGFloat = 1.0
+        var compressedData: Data? = self.jpegData(compressionQuality: compression)
+        
+        while let data = compressedData, Double(data.count) > maxSizeBytes && compression > 0.1 {
+            compression -= 0.1
+            compressedData = self.jpegData(compressionQuality: compression)
+        }
+        
+        print(compressedData?.sizeInMB())
+        return compressedData
+    }
 }

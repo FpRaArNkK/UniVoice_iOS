@@ -126,4 +126,14 @@ extension Date {
     func toString(includeTime: Bool) -> String {
         return includeTime ? self.toDateTimeString() : self.toDateString()
     }
+    
+    /// 날짜와 시간을 ISO 8601 문자열로 변환합니다.
+    /// Date 객체를 ISO 8601 형식의 문자열로 변환합니다.
+    /// - Returns: ISO 8601 형식의 문자열
+    func toISO8601String() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return dateFormatter.string(from: self)
+    }
 }
