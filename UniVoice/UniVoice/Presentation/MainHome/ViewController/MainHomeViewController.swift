@@ -233,8 +233,11 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         
         // QuickScan item 셀 선택
         rootView.quickScanCollectionView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
+            .withLatestFrom(output.qsItems) { indexPath, items -> (IndexPath, [QS]) in
+                return (indexPath, items)
+            }
+            .subscribe(onNext: { [weak self] indexPath, items in
+                guard let self = self, items[indexPath.row].articleNumber != 0 else { return }
                 let quickScanVC = QuickScanViewController(id: indexPath.row)
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
             })
