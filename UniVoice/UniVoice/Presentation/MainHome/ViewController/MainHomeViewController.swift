@@ -12,8 +12,6 @@ import RxDataSources
 
 final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
-    //TODO: refresh control logic 추가
-    
     //MARK: Properties
     private let disposeBag = DisposeBag()
 
@@ -63,10 +61,10 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         }
         if let layout = rootView.headerView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 8, right: 16)
         }
         if let layout = rootView.stickyHeaderView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 8, right: 16)
         }
         if let layout = rootView.articleCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
@@ -106,9 +104,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         let output = viewModel.transform(input: input)
         
         let qsItems = viewModel.quickScanApiCall()        
-                
-        let quickScanStories = qsItems
-        
+                        
         let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QS>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
             else {
@@ -150,7 +146,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: rootView.quickScanCollectionView.rx.items(dataSource: qsDataSource))
             .disposed(by: disposeBag)
         
-        //기존 header
         output.councilItems
             .map { [SectionModel(model: "Section 2", items: $0)] }
             .do(onNext: { [weak self] councils in
@@ -178,7 +173,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         
         output.articleItems
             .do(onNext: { [weak self] articles in
-                if (articles.isEmpty) {
+                if articles.isEmpty {
                     self?.rootView.noCouncilLabel.isHidden = false
                     self?.rootView.scrollView.isScrollEnabled = false
                     self?.rootView.stickyHeaderView.isHidden = true
@@ -277,7 +272,6 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 97, height: 132)
         case rootView.headerView.councilCollectionView,
             rootView.stickyHeaderView.councilCollectionView:
-//            let title = viewModel.councilList[indexPath.row]
             if self.tabList.value.isEmpty {
                 return CGSize(width: 50, height: 32)
             } else {

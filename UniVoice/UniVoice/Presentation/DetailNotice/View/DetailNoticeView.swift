@@ -12,7 +12,7 @@ import RxCocoa
 final class DetailNoticeView: UIView {
     
     private var disposeBag = DisposeBag()
-
+    
     // MARK: Views
     
     let scrollView = UIScrollView()
@@ -22,9 +22,9 @@ final class DetailNoticeView: UIView {
     let noticeTitleLabel = UILabel()
     
     let divider = UIView()
-        
+    
     let basicInfoStackView = UIStackView() // (1) 대상 + 일시
-        
+    
     let noticeImageStackView = UIStackView() // (2) 이미지CV + indicatorView
     
     let noticeImageCollectionView: UICollectionView = {
@@ -38,7 +38,7 @@ final class DetailNoticeView: UIView {
     }()
     
     let noticeImageIndicatorView = UIPageControl()
-        
+    
     let contentLabel = UILabel()
     
     let bottomView = UIView()
@@ -65,11 +65,11 @@ final class DetailNoticeView: UIView {
         setUpUI()
         setUpLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: setUpFoundation
     private func setUpFoundation() {
         self.backgroundColor = .white
@@ -169,7 +169,7 @@ final class DetailNoticeView: UIView {
         noticeImageCollectionView.do {
             $0.isPagingEnabled = true
             $0.showsHorizontalScrollIndicator = false
-
+            
         }
         
         noticeImageIndicatorView.do {
@@ -179,7 +179,7 @@ final class DetailNoticeView: UIView {
             $0.currentPageIndicatorTintColor = .gray900
             $0.pageIndicatorTintColor = .gray200
         }
-    }    
+    }
     // MARK: setUpLayout
     private func setUpLayout() {
         scrollView.snp.makeConstraints {
@@ -248,7 +248,7 @@ final class DetailNoticeView: UIView {
             $0.leading.equalToSuperview().offset(16)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(32)
-            $0.width.equalTo(66)
+            $0.width.equalTo(130)
         }
         
         buttonStackView.snp.makeConstraints {
@@ -269,13 +269,18 @@ final class DetailNoticeView: UIView {
 }
 
 extension DetailNoticeView {
+    
+    func getDurationText(from startTime: Date?, to endTime: Date?) -> String? {
+        guard let startTime = startTime, let endTime = endTime else {
+            return nil
+        }
+        return "\(startTime.toFormattedString()) ~ \(endTime.toFormattedString())"
+    }
+    
     func fetchDetailNoticeData(cellModel: DetailNotice) {
         noticeTitleLabel.setText(cellModel.noticeTitle,
                                  font: .H5p1SB,
                                  color: .black)
-        createdDateLabel.setText("\(cellModel.createdTime ?? "")",
-                                 font: .B4R,
-                                 color: .B_03)
         viewCountLabel.setText("\(cellModel.viewCount)회",
                                font: .C3R,
                                color: .B_03)
@@ -285,9 +290,31 @@ extension DetailNoticeView {
         
         basicInfoStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
+        if let createdTimeString = cellModel.createdTime,
+           let createdTimeDate = Date().dateFromString(createdTimeString) {
+            let timeAgo = Date().timeAgoString(from: createdTimeDate)
+            createdDateLabel.setText(timeAgo,
+                                     font: .B4R,
+                                     color: .B_03)
+        } else {
+            print("날짜 변환에 실패했습니다.")
+        }
+        
+        var timeDuration: String?
+        
+        if let startTimeString = cellModel.startTime,
+           let startTimeDate = Date().dateFromString(startTimeString),
+           let endTimeString = cellModel.endTime,
+              let endTimeDate = Date().dateFromString(endTimeString){
+            timeDuration = Date().getDurationText(from: startTimeDate, to: endTimeDate)
+        } else {
+            print("날짜 변환에 실패했습니다.")
+            timeDuration = nil
+        }
+        
         let contents = [
             cellModel.noticeTarget,
-            "\(cellModel.startTime ?? "")~\(cellModel.endTime ?? "")"
+            timeDuration
         ]
         
         contents.enumerated().forEach { (index, content) in

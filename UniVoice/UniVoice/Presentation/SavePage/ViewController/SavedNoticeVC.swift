@@ -70,11 +70,6 @@ final class SavedNoticeVC: UIViewController {
             self?.navigationController?.pushViewController(nextVC, animated: true)
         })
         .disposed(by: viewModel.disposeBag)
-        
-        
-            
-        
-            
     }
 }
 

@@ -36,7 +36,7 @@ struct NoticeDetail: Codable {
 extension NoticeDetail {
     func toDetailNotice() -> DetailNotice {
         return DetailNotice(noticeId: id, 
-                            councilType: "",
+                            councilType: writeAffiliation,
                             noticeTitle: title,
                             noticeTarget: target,
                             startTime: startTime,
