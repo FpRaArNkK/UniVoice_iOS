@@ -63,10 +63,10 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         }
         if let layout = rootView.headerView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 8, right: 16)
         }
         if let layout = rootView.stickyHeaderView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 8, right: 16)
         }
         if let layout = rootView.articleCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
