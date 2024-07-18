@@ -42,6 +42,8 @@ final class CouncilCVC: UICollectionViewCell {
         councilButton.do {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 2
+            $0.titleLabel?.numberOfLines = 1
+            $0.titleLabel?.lineBreakMode = .byTruncatingTail
         }
     }
     // MARK: setUpLayout

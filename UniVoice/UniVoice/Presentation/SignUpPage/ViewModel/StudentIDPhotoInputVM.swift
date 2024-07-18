@@ -35,6 +35,8 @@ final class StudentIDPhotoInputVM: ViewModelType {
             .map { _ in false }
             .asDriver(onErrorJustReturn: false)
         
+        SignUpDataManager.shared.bindStudentCardImage(input.imageSelected)
+        
         return Output(image: image, nextButtonIsHidden: nextButtonState)
     }
 }

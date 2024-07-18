@@ -19,11 +19,29 @@ struct QS {
 }
 
 struct Article {
-    let council: String
+//    let council: String
     let chip: String
     let articleTitle: String
-    let thumbnailImage: UIImage?
+    let thumbnailImage: String
     let duration: String
     let likedNumber: Int
     let savedNumber: Int
+}
+
+enum AffiliationType: Int {
+    
+    case university
+    case collegeDepartment
+    case department
+    
+    var toKoreanString: String {
+        switch self {
+        case .university:
+            return "총학생회"
+        case .collegeDepartment:
+            return "단과대학 학생회"
+        case .department:
+            return "학과 학생회"
+        }
+    }
 }

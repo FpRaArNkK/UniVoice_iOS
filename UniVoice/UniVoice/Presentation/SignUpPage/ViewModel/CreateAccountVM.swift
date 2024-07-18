@@ -76,8 +76,8 @@ final class CreateAccountVM: ViewModelType {
                 checkDuplication.asObservable(),
                 pwIsValid.asObservable()
             )
-            .map { checkDuplication, pwIsValid in
-                return !checkDuplication && pwIsValid
+            .map { isValidID, pwIsValid in
+                return isValidID && pwIsValid
             }
         
         let nextButtonState = pwIsMatched
@@ -91,6 +91,9 @@ final class CreateAccountVM: ViewModelType {
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
         
+        SignUpDataManager.shared.bindEmail(input.idText)
+        SignUpDataManager.shared.bindPassword(input.pwText)
+        
         return Output(
             idIsValid: idIsValid,
             pwIsValid: pwIsValid,
@@ -102,11 +105,12 @@ final class CreateAccountVM: ViewModelType {
     }
 }
 
-//중복 확인 API 가정
 extension CreateAccountVM {
     private func checkDuplication(id: String) -> Observable<Bool> {
-        return id == "aaaaa"
-        ? Observable.just(true).delay(.milliseconds(200), scheduler: MainScheduler.instance)
-        : Observable.just(false).delay(.milliseconds(200), scheduler: MainScheduler.instance)
+        return Service.shared.checkIDDuplication(request: .init(email: id))
+            .map { response in
+                return response.status == 200
+            }
+            .asObservable()
     }
 }

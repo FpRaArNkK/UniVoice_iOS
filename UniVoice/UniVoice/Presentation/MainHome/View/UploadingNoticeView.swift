@@ -5,16 +5,15 @@
 //  Created by 이자민 on 7/17/24.
 //
 
-
 import UIKit
 import SnapKit
 import Then
+import Lottie
 
 final class UploadingNoticeView: UIView {
     
     // MARK: Views
-    let titleLabel = UILabel()
-    
+    let animationView = LottieAnimationView(name: "loading(ios)")
     let confirmButton = CustomButton()
     
     // MARK: Init
@@ -24,7 +23,6 @@ final class UploadingNoticeView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
-        bindUI()
     }
     
     required init?(coder: NSCoder) {
@@ -39,16 +37,17 @@ final class UploadingNoticeView: UIView {
     // MARK: setUpHierarchy
     private func setUpHierarchy() {
         [
-            titleLabel,
+            animationView,
             confirmButton
         ].forEach { self.addSubview($0) }
     }
     
     // MARK: setUpUI
     private func setUpUI() {
-        titleLabel.do {
-            $0.setText("공지를 등록하는 중이에요", font: .H5p1SB, color: .B_01)
-            $0.textAlignment = .center
+        
+        animationView.do {
+            $0.play()
+            animationView.loopMode = .repeat(3)
         }
         
         confirmButton.do {
@@ -58,19 +57,16 @@ final class UploadingNoticeView: UIView {
     
     // MARK: setUpLayout
     private func setUpLayout() {
-        titleLabel.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(35)
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(204)
+        
+        animationView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         confirmButton.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(57)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
-    }
-    
-    func bindUI() {
-        
     }
     
 }

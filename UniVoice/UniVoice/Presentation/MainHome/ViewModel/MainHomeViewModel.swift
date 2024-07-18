@@ -16,25 +16,12 @@ final class MainHomeViewModel: ViewModelType {
         "전체", "총학생회", "공과대학 학생회", "컴퓨터공학과 학생회"
     ]
     
-    let articleList: [Article] = [
-        Article(council: "총학생회", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: nil, duration: "2023/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "총학생회", chip: "공지사항", articleTitle: "간식 먹고, 열공하자!", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "선착순 이벤트", articleTitle: "아요 파이팅", thumbnailImage: nil, duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "선착순 이벤트", articleTitle: "기획 파이팅", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "디자인 파이팅", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "안드 파이팅", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "서버 파이팅", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-        Article(council: "공과대학 학생회", chip: "공지사항", articleTitle: "명절 귀향 버스 수요 조사", thumbnailImage: UIImage(named: "defaultImage"), duration: "2024/12/23", likedNumber: 10, savedNumber: 7),
-    ]
-    
     struct Input {
         let councilSelected: Observable<IndexPath>
     }
     
     struct Output {
-        let councilItems: Observable<[SectionModel<String, String>]>
+        let councilItems: Observable<[String]>//SectionModel<String, String>]>
         let articleItems: Observable<[Article]>
         let selectedCouncilIndex: Observable<Int>
     }
@@ -42,21 +29,29 @@ final class MainHomeViewModel: ViewModelType {
     var disposeBag = DisposeBag()
     
     let selectedCouncilIndexRelay = BehaviorRelay<Int>(value: 0)
-
+    
     func transform(input: Input) -> Output {
         
-        let councilItems = Observable.just(councilList)
-            .map { [SectionModel(model: "Section 2", items: $0)] }
+        let councilItems = makeCouncilNamesArray(from: quickScanApiCall())
+//        Observable.just(makeCouncilNamesArray(from: quickScanApiCall()))
+//            .map { [SectionModel(model: "Section 2", items: $0)] }
         
-        let articleItems = selectedCouncilIndexRelay
-            .map { index -> [Article] in
-                if index == 0 {
-                    return self.articleList
-                } else {
-                    return self.articleList.filter { $0.council == self.councilList[index] }
+        let articleItems: Observable<[Article]> = selectedCouncilIndexRelay
+            .flatMapLatest { index -> Observable<[Article]> in
+                switch index {
+                case 0:
+                    return self.allArticleApiCall()
+                case 1:
+                    return self.mainStudentArticleApiCall()
+                case 2:
+                    return self.collegeStudentArticleApiCall()
+                case 3:
+                    return self.departmentStudentArticleApiCall()
+                default:
+                    return Observable.just([])
                 }
             }
-
+                
         input.councilSelected
             .map { $0.row }
             .bind(to: selectedCouncilIndexRelay)
@@ -69,3 +64,88 @@ final class MainHomeViewModel: ViewModelType {
         )
     }
 }
+
+extension MainHomeViewModel {
+    func quickScanApiCall() -> Observable<[QS]> {
+        return Service.shared.getQuickScanStory()
+            .asObservable()
+            .map { response in
+                let result = response.data.toQS()
+                return result
+            }
+            .catchAndReturn([])
+    }
+    
+    func allArticleApiCall() -> Observable<[Article]> {
+        return Service.shared.getAllNoticeList()
+            .asObservable()
+            .map { response in
+                return self.convertAllNoticesToArticles(allNotices: response.data)
+            }
+            .catchAndReturn([])
+    }
+    
+    func mainStudentArticleApiCall() -> Observable<[Article]> {
+        return Service.shared.getMainStudentCouncilNoticeList()
+            .asObservable()
+            .map { response in
+                return self.convertmainNoticesToArticles(allNotices: response.data)
+            }
+            .catchAndReturn([])
+    }
+    
+    func collegeStudentArticleApiCall() -> Observable<[Article]> {
+        return Service.shared.getCollegeStudentCouncilNoticeList()
+            .asObservable()
+            .map { response in
+                return self.convertcollegeNoticesToArticles(allNotices: response.data)
+            }
+            .catchAndReturn([])
+    }
+    
+    func departmentStudentArticleApiCall() -> Observable<[Article]> {
+        return Service.shared.getDepartmentStudentCouncilNoticeList()
+            .asObservable()
+            .map { response in
+                return self.convertdepartmentNoticesToArticles(allNotices: response.data)
+            }
+            .catchAndReturn([])
+    }
+    
+    func makeCouncilNamesArray(from quickScanStories: Observable<[QS]>) -> Observable<[String]> {
+        return quickScanStories.map { qsList in
+            var councilNames = ["전체", "총학생회"]
+            councilNames.append(qsList[1].councilName)
+            councilNames.append(qsList[2].councilName)
+            return councilNames
+        }
+    }
+    
+    func convertAllNoticesToArticles(allNotices: [AllNotice]) -> [Article] {
+        return allNotices.map { $0.toArticle() }
+    }
+    
+    func convertmainNoticesToArticles(allNotices: [MainStudentCouncilNotice]) -> [Article] {
+        return allNotices.map { $0.toArticle() }
+    }
+    
+    func convertcollegeNoticesToArticles(allNotices: [CollegeStudentCouncilNotice]) -> [Article] {
+        return allNotices.map { $0.toArticle() }
+    }
+    
+    func convertdepartmentNoticesToArticles(allNotices: [DepartmentStudentCouncilNotice]) -> [Article] {
+        return allNotices.map { $0.toArticle() }
+    }
+    
+}
+
+//            .subscribe { res in
+//                switch res {
+//                case .success(let suc):
+//                    let result = suc.data.toQS()
+//                    return result
+//                case .failure(let fal):
+//                    print(fal)
+//                    return []
+//                }
+//            }

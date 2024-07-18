@@ -24,3 +24,21 @@ struct MainStudentCouncilNotice: Codable {
     let createdAt: String
     let image: String?
 }
+
+extension MainStudentCouncilNotice {
+    func toArticle() -> Article {
+        let chip = category
+        let articleTitle = title
+        let thumbnailImage = image ?? ""
+        let duration = createdAt
+        let likedNumber = likeCount
+        let savedNumber = viewCount
+        
+        return Article(chip: chip,
+                       articleTitle: articleTitle,
+                       thumbnailImage: thumbnailImage,
+                       duration: createdAt.formatDate(from: createdAt),
+                       likedNumber: likedNumber,
+                       savedNumber: savedNumber)
+    }
+}
