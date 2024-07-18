@@ -278,6 +278,7 @@ final class CreateNoticeVC: UIViewController {
     
     private func dateButtonTapped() {
         self.rootView.dateInputView.isHidden = false
+        view.endEditing(true)
     }
     
     @objc private func dateViewTapped() {

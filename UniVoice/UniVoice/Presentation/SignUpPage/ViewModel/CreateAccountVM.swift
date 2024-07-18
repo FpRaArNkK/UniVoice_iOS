@@ -111,6 +111,7 @@ extension CreateAccountVM {
             .map { response in
                 return response.status == 200
             }
+            .catchAndReturn(false)
             .asObservable()
     }
 }
