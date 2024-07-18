@@ -34,11 +34,10 @@ final class SavedNoticeVM: ViewModelType {
 
 // MARK: API Logic
 extension SavedNoticeVM {
-    // 대충 API 탔다고 가정
+
     private func getSavedList() -> Observable<[Article]> {
-        let mockData: Observable<[Article]> = Observable.just([])
-        
-        return mockData
+        return Service.shared.getSavedNoticeList().asObservable()
+            .map { $0.data.map { $0.toArticle() } }
     }
 }
 

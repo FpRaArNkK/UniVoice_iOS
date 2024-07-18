@@ -24,3 +24,17 @@ struct SavedNotice: Codable {
     let createdAt: String
     let image: String?
 }
+
+extension SavedNotice {
+    func toArticle() -> Article {
+        return .init(
+            id: id,
+            chip: category,
+            articleTitle: title,
+            thumbnailImage: image ?? "",
+            duration: "\(startTime ?? "")~\(endTime ?? "")",
+            likedNumber: noticeLike,
+            savedNumber: viewCount
+        )
+    }
+}
