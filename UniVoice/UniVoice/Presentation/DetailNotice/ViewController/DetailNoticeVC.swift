@@ -49,6 +49,7 @@ final class DetailNoticeVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         setUpBindUI()
+        self.title = ""
     }
     
     // MARK: setUpFoundation
@@ -101,6 +102,7 @@ final class DetailNoticeVC: UIViewController {
         output.notice
             .drive(onNext: { [weak self] notice in
                 self?.rootView.fetchDetailNoticeData(cellModel: notice)
+                self?.title = notice.councilType
             })
             .disposed(by: disposeBag)
         

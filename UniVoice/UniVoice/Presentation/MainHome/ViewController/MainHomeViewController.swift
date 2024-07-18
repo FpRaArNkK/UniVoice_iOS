@@ -12,8 +12,6 @@ import RxDataSources
 
 final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
-    //TODO: refresh control logic 추가
-    
     //MARK: Properties
     private let disposeBag = DisposeBag()
 

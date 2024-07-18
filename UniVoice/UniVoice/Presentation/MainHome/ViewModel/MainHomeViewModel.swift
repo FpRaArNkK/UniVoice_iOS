@@ -32,7 +32,9 @@ final class MainHomeViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
-        let councilItems = makeCouncilNamesArray(from: quickScanApiCall())
+        let quickScanItems = quickScanApiCall()
+        
+        let councilItems = makeCouncilNamesArray(from: quickScanItems)
         
         let articleItems: Observable<[Article]> = selectedCouncilIndexRelay
             .flatMapLatest { index -> Observable<[Article]> in
