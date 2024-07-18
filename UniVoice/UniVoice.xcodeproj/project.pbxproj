@@ -115,6 +115,8 @@
 		88AB98152C3FDB2F00AC5043 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98142C3FDB2F00AC5043 /* Date+.swift */; };
 		88AB98172C41749D00AC5043 /* QuickScanCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98162C41749D00AC5043 /* QuickScanCompletionView.swift */; };
 		88AB98192C418A2000AC5043 /* QuickScanCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */; };
+		88C231A52C485416009BEA63 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C231A42C485416009BEA63 /* String+.swift */; };
+		88C231A72C486C4E009BEA63 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */; };
 		DC27DBCE2C4708A000401364 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCD2C4708A000401364 /* MyPageVC.swift */; };
 		DC27DBD02C4708AB00401364 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCF2C4708AB00401364 /* MyPageView.swift */; };
 		DC27DBD22C483DAB00401364 /* MyPageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */; };
@@ -266,6 +268,8 @@
 		88AB98142C3FDB2F00AC5043 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		88AB98162C41749D00AC5043 /* QuickScanCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionView.swift; sourceTree = "<group>"; };
 		88AB98182C418A2000AC5043 /* QuickScanCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanCompletionViewController.swift; sourceTree = "<group>"; };
+		88C231A42C485416009BEA63 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		DC27DBCD2C4708A000401364 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		DC27DBCF2C4708AB00401364 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSelectView.swift; sourceTree = "<group>"; };
@@ -395,6 +399,7 @@
 			children = (
 				212FCAD52C4587BD000E8223 /* MoyaLoginPlugin.swift */,
 				212FCAF72C471AE7000E8223 /* AccessTokenPlugin.swift */,
+				88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */,
 			);
 			path = Plugin;
 			sourceTree = "<group>";
@@ -579,6 +584,7 @@
 				21DF05C52C4146B4005EB117 /* Reactive+.swift */,
 				88AB98142C3FDB2F00AC5043 /* Date+.swift */,
 				EDF4C8992C42BCD100DE7643 /* UIView+.swift */,
+				88C231A42C485416009BEA63 /* String+.swift */,
 				212FCB102C4854DF000E8223 /* Data+.swift */,
 			);
 			path = Extension;
@@ -1117,6 +1123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88325C322C385CD1004A293D /* CustomTextfield.swift in Sources */,
+				88C231A52C485416009BEA63 /* String+.swift in Sources */,
 				2132A84E2C3A702400795667 /* SignUpInfoCheckingVC.swift in Sources */,
 				88293F832C43C1370082A986 /* SavedNoticeVC.swift in Sources */,
 				2132A8462C3A6FFB00795667 /* StudentInfoInputVC.swift in Sources */,
@@ -1231,6 +1238,7 @@
 				DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */,
 				88AB98152C3FDB2F00AC5043 /* Date+.swift in Sources */,
 				212FCADB2C45933A000E8223 /* UserService.swift in Sources */,
+				88C231A72C486C4E009BEA63 /* MoyaLoggerPlugin.swift in Sources */,
 				DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */,
 				DC9EBCB02C3EB2CC007337A0 /* mainHomeModel.swift in Sources */,
 				DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */,
