@@ -52,6 +52,10 @@ final class MyPageVC: UIViewController, UIScrollViewDelegate {
         let tosTapGesture = UITapGestureRecognizer(target: self, action: #selector(tosLabelTapped))
         rootView.tosLabel.addGestureRecognizer(tosTapGesture)
         rootView.tosLabel.isUserInteractionEnabled = true
+        
+        let logoutTapGesture = UITapGestureRecognizer(target: self, action: #selector(logoutLabelTapped))
+        rootView.logoutLabel.addGestureRecognizer(logoutTapGesture)
+        rootView.logoutLabel.isUserInteractionEnabled = true
     }
     
     @objc private func serviceLabelTapped() {
@@ -64,6 +68,12 @@ final class MyPageVC: UIViewController, UIScrollViewDelegate {
         if let url = URL(string: "https://massive-maple-b53.notion.site/430e2c92b8694ad6a8b4497f3a3b4452?pvs=4") {
             UIApplication.shared.open(url)
         }
+    }
+    
+    @objc private func logoutLabelTapped() {
+        let VC = UINavigationController(rootViewController: InitialViewController())
+        VC.modalPresentationStyle = .fullScreen
+        self.present(VC, animated: true)
     }
 }
 

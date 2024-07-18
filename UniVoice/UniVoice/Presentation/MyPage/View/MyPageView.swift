@@ -35,7 +35,7 @@ final class MyPageView: UIView {
     private let otherLabel = UILabel()
     private let otherStackView = UIStackView()
     private let serviceCenterLabel = MyPageSelectView(title: "고객센터")
-    private let logoutLabel = MyPageSelectView(title: "로그아웃")
+    let logoutLabel = MyPageSelectView(title: "로그아웃")
     
     // MARK: Init
     override init(frame: CGRect) {
