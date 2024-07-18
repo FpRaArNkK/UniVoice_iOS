@@ -51,6 +51,7 @@ final class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     // MARK: setUpStyle
     private func setUpStyle() {
         self.tabBar.backgroundColor = .white
+        self.tabBar.barTintColor = .white
         self.tabBar.layer.borderColor = UIColor.gray50.cgColor
         self.tabBar.layer.borderWidth = 1
         self.tabBar.unselectedItemTintColor = .gray700
