@@ -12,11 +12,12 @@ import RxCocoa
 final class AdmissionYearSelectionVC: UIViewController {
     // MARK: Views
     private let rootView = AdmissionYearSelectionView()
+    private let viewModel = AdmissionYearSelectionVM()
     private let disposeBag = DisposeBag()
     
     // MARK: Properties
-    var selectedUniversity: BehaviorRelay<String>!
-    var selectedDepartment: BehaviorRelay<String>!
+    var selectedUniversity = BehaviorRelay<String>(value: "")
+    var selectedDepartment = BehaviorRelay<String>(value: "")
     var selectedAdmission = BehaviorRelay<String>(value: "")
     
     init(universityRelay: BehaviorRelay<String>, departmentRelay: BehaviorRelay<String>) {
@@ -66,6 +67,13 @@ final class AdmissionYearSelectionVC: UIViewController {
         rootView.admissionTextField.rx.text.orEmpty
             .bind(to: selectedAdmission)
             .disposed(by: disposeBag)
+        
+        let input = AdmissionYearSelectionVM.Input(
+            selectedAdmissionYear: selectedAdmission
+                .map { $0.components(separatedBy: "학번").first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "" }
+                .asObservable()
+        )
+        let output = viewModel.transform(input: input)
     }
     
     private func bindData() {
