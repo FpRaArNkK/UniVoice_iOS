@@ -78,6 +78,7 @@ final class ArticleCVC: UICollectionViewCell {
         }
         articleTitle.do {
             $0.setText("명절 귀향 버스 수요 조사", font: .T4SB, color: .B_01)
+            $0.lineBreakMode = .byTruncatingTail
         }
         duration.do {
             $0.setText("06/26 ~ 06/26", font: .C3R, color: .B_03)
@@ -175,6 +176,7 @@ extension ArticleCVC {
         let width = viewModel.chip.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]).width
         chip.text = viewModel.chip
         articleTitle.text = viewModel.articleTitle
+        articleTitle.lineBreakMode = .byTruncatingTail
         thumbnailImage.kf.setImage(with: URL(string: viewModel.thumbnailImage))
         duration.text = viewModel.duration
         likedNumber.text = "\(viewModel.likedNumber)"

@@ -21,6 +21,8 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     
     private let itemSelectedSubject = PublishSubject<IndexPath>()
     
+    private let tabList = BehaviorRelay<[String]>(value: []) // 중간 부분에 들어가는 탭들 이름 리스트
+    
     // MARK: Views
     private let rootView = MainHomeView()
     
@@ -170,6 +172,10 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: rootView.stickyHeaderView.councilCollectionView.rx.items(dataSource: councilDataSource))
             .disposed(by: disposeBag)
         
+        output.councilItems
+            .bind(to: self.tabList)
+            .disposed(by: disposeBag)
+        
         output.articleItems
             .do(onNext: { [weak self] articles in
                 if (articles.isEmpty) {
@@ -254,14 +260,20 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         switch collectionView {
         case rootView.quickScanCollectionView:
             return CGSize(width: 97, height: 132)
         case rootView.headerView.councilCollectionView,
             rootView.stickyHeaderView.councilCollectionView:
-            let title = viewModel.councilList[indexPath.row]
-            let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]).width + 20
-            return CGSize(width: width, height: 32)
+//            let title = viewModel.councilList[indexPath.row]
+            if self.tabList.value.isEmpty {
+                return CGSize(width: 50, height: 32)
+            } else {
+                let title = self.tabList.value[indexPath.row]
+                let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.pretendardFont(for: .B3SB)]).width + 30
+                return CGSize(width: width, height: 32)
+            }
         case rootView.articleCollectionView:
             return CGSize(width: UIScreen.main.bounds.width - 32, height: 78)
         default:
