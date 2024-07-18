@@ -13,6 +13,17 @@ import Kingfisher
 
 final class DetailNoticeVC: UIViewController {
     
+    // MARK: Properties
+    private let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
+        configureCell: { _, collectionView, indexPath, url in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeImageCVC.identifier, for: indexPath) as? NoticeImageCVC else {
+                return UICollectionViewCell()
+            }
+            cell.noticeImageDataBind(imgURL: url)
+            print(url)
+            return cell
+        })
+    
     // MARK: Views
     private let rootView = DetailNoticeView()
     private let viewModel: DetailNoticeVM
@@ -36,14 +47,21 @@ final class DetailNoticeVC: UIViewController {
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpFoundation()
         setUpBindUI()
-        updateNoticeImageStackView()
+//        updateNoticeImageStackView()
+    }
+    
+    // MARK: setUpFoundation
+    private func setUpFoundation() {
+        rootView.noticeImageCollectionView.register(NoticeImageCVC.self,
+                                                    forCellWithReuseIdentifier: NoticeImageCVC.identifier)
+        rootView.noticeImageCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
     
     // MARK: setUpBindUI
     private func setUpBindUI() {
-        
-        self.title = viewModel.noticeRelay.value.councilType
         
         let input = DetailNoticeVM.Input(
             likedButtonDidTap: rootView.likedButton.rx.tap.asObservable(),
@@ -51,6 +69,54 @@ final class DetailNoticeVC: UIViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        // notice의 학생회 종류 VC 타이틀로
+        output.notice
+            .asObservable()
+            .map { $0.councilType }
+            .bind(to: self.rx.title)
+            .disposed(by: disposeBag)
+                
+        let imageUrls = output.notice
+            .compactMap { $0.noticeImageURL }
+        
+        // 이미지 컬렉션 뷰에 데이터소스로 바인딩
+        imageUrls.asObservable()
+            .map { [SectionModel(model: "section 0", items: $0)] }
+            .bind(to: rootView.noticeImageCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        // 이미지 개수 뷰에 바인딩
+        imageUrls
+            .drive(onNext: { [weak self] urls in
+                if urls.isEmpty {
+                    self?.rootView.noticeImageCollectionView.isHidden = true
+                } else {
+                    self?.rootView.noticeImageCollectionView.isHidden = false
+                }
+                self?.rootView.noticeImageIndicatorView.numberOfPages = urls.count
+            })
+            .disposed(by: disposeBag)
+        
+        // noticeDetail 모델 View에 페치
+        output.notice
+            .drive(onNext: { [weak self] notice in
+                self?.rootView.fetchDetailNoticeData(cellModel: notice)
+            })
+            .disposed(by: disposeBag)
+        
+        rootView.noticeImageCollectionView.rx.didScroll
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let visibleRect = CGRect(origin: self.rootView.noticeImageCollectionView.contentOffset,
+                                         size: self.rootView.noticeImageCollectionView.bounds.size)
+                let visiblePoint = CGPoint(x: visibleRect.midX,
+                                           y: visibleRect.midY)
+                if let indexPath = self.rootView.noticeImageCollectionView.indexPathForItem(at: visiblePoint) {
+                    self.rootView.noticeImageIndicatorView.currentPage = indexPath.item
+                }
+            })
+            .disposed(by: disposeBag)
         
         //TODO: API 연동 후 작업
         output.isLiked
@@ -62,44 +128,26 @@ final class DetailNoticeVC: UIViewController {
             .drive()
             .disposed(by: disposeBag)
         
-        rootView.fetchDetailNoticeData(cellModel: viewModel.noticeRelay.value)
-        
         rootView.bindUI(
             isLiked: output.isLiked.asObservable(),
             isSaved: output.isSaved.asObservable()
         )
+       
     }
     
-    private func updateNoticeImageStackView() {
+    private func updateNoticeImageStackView(notice: DetailNotice) {
+        let imageUrls = notice.noticeImageURL?.compactMap { $0 }
         
-        rootView.noticeImageCollectionView.register(NoticeImageCVC.self,
-                                                    forCellWithReuseIdentifier: NoticeImageCVC.identifier)
-        rootView.noticeImageCollectionView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-        
-        let imageUrls = viewModel.noticeRelay.value.noticeImageURL?.compactMap { $0 }
-        
-        if ((imageUrls?.isEmpty) != nil) {
+        if (imageUrls?.isEmpty) != nil {
             rootView.noticeImageCollectionView.isHidden = true
         } else {
             rootView.noticeImageCollectionView.isHidden = false
         }
         rootView.noticeImageIndicatorView.numberOfPages = imageUrls?.count ?? 0
         
-        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
-            configureCell: { _, collectionView, indexPath, url in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeImageCVC.identifier, for: indexPath) as? NoticeImageCVC else {
-                    return UICollectionViewCell()
-                }
-                cell.noticeImageDataBind(imgURL: url)
-                print(url)
-                return cell
-            })
-        
         Observable.just([SectionModel(model: "section 0", items: imageUrls ?? [""])])
             .bind(to: rootView.noticeImageCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
         
         rootView.noticeImageCollectionView.rx.didScroll
             .subscribe(onNext: { [weak self] in

@@ -25,6 +25,7 @@ final class DetailNoticeVM: ViewModelType {
     struct Output {
         let isLiked: Driver<Bool>
         let isSaved: Driver<Bool>
+        let notice: Driver<DetailNotice>
     }
     
     var disposeBag = DisposeBag()
@@ -77,7 +78,8 @@ final class DetailNoticeVM: ViewModelType {
                 
         return Output(
             isLiked: isLikedRelay.asDriver(onErrorJustReturn: false),
-            isSaved: isSavedRelay.asDriver(onErrorJustReturn: false)
+            isSaved: isSavedRelay.asDriver(onErrorJustReturn: false),
+            notice: noticeRelay.asDriver()
         )
     }
 }
@@ -89,8 +91,24 @@ private extension DetailNoticeVM {
         return Service.shared.getNoticeDetail(noticeID: id)
             .asObservable()
             .map({ response in
-                let result = response.data?.toDetailNotice()
-                return result!
+                if let detailNotice = response.data?.toDetailNotice() {
+                    return detailNotice
+                } else {
+                    return .init(
+                        noticeId: -1,
+                        councilType: "error",
+                        noticeTitle: "error",
+                        noticeTarget: nil,
+                        startTime: nil,
+                        endTime: nil,
+                        noticeImageURL: nil,
+                        content: "error",
+                        createdTime: nil,
+                        viewCount: 0,
+                        isLiked: false,
+                        isSaved: false
+                    )
+                }
             })
     }
     
