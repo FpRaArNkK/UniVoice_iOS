@@ -49,7 +49,6 @@ final class DetailNoticeVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         setUpBindUI()
-//        updateNoticeImageStackView()
     }
     
     // MARK: setUpFoundation
@@ -117,50 +116,12 @@ final class DetailNoticeVC: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
-        //TODO: API 연동 후 작업
-        output.isLiked
-            .drive()
-            .disposed(by: disposeBag)
-        
-        //TODO: API 연동 후 작업
-        output.isSaved
-            .drive()
-            .disposed(by: disposeBag)
-        
+                
         rootView.bindUI(
             isLiked: output.isLiked.asObservable(),
             isSaved: output.isSaved.asObservable()
         )
        
-    }
-    
-    private func updateNoticeImageStackView(notice: DetailNotice) {
-        let imageUrls = notice.noticeImageURL?.compactMap { $0 }
-        
-        if (imageUrls?.isEmpty) != nil {
-            rootView.noticeImageCollectionView.isHidden = true
-        } else {
-            rootView.noticeImageCollectionView.isHidden = false
-        }
-        rootView.noticeImageIndicatorView.numberOfPages = imageUrls?.count ?? 0
-        
-        Observable.just([SectionModel(model: "section 0", items: imageUrls ?? [""])])
-            .bind(to: rootView.noticeImageCollectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        rootView.noticeImageCollectionView.rx.didScroll
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                let visibleRect = CGRect(origin: self.rootView.noticeImageCollectionView.contentOffset,
-                                         size: self.rootView.noticeImageCollectionView.bounds.size)
-                let visiblePoint = CGPoint(x: visibleRect.midX,
-                                           y: visibleRect.midY)
-                if let indexPath = self.rootView.noticeImageCollectionView.indexPathForItem(at: visiblePoint) {
-                    self.rootView.noticeImageIndicatorView.currentPage = indexPath.item
-                }
-            })
-            .disposed(by: disposeBag)
     }
 }
 

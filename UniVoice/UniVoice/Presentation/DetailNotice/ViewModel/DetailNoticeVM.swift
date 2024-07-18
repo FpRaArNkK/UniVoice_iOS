@@ -56,6 +56,7 @@ final class DetailNoticeVM: ViewModelType {
                 guard let self = self else { return }
                 var tempQuickScans = self.noticeRelay.value
                 tempQuickScans.isLiked = result
+                self.noticeRelay.accept(tempQuickScans)
             })
             .disposed(by: disposeBag)
         
@@ -73,6 +74,7 @@ final class DetailNoticeVM: ViewModelType {
                 guard let self = self else { return }
                 var tempQuickScans = self.noticeRelay.value
                 tempQuickScans.isSaved = result
+                self.noticeRelay.accept(tempQuickScans)
             })
             .disposed(by: disposeBag)
                 
@@ -119,10 +121,10 @@ private extension DetailNoticeVM {
             return Service.shared.unlikeNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
-                        print("취소 성공")
+                        print("좋아요 취소 성공")
                         return false
                     } else {
-                        print("취소 실패")
+                        print("좋아요 취소 실패")
                         throw NSError(domain: "", code: response.status, userInfo: nil)
                     }
                 }
@@ -131,10 +133,10 @@ private extension DetailNoticeVM {
             return Service.shared.likeNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
-                        print("저장 성공")
+                        print("좋아요 성공")
                         return true
                     } else {
-                        print("저장 실패")
+                        print("좋아요 실패")
                         throw NSError(domain: "", code: response.status, userInfo: nil)
                     }
                 }
@@ -146,26 +148,26 @@ private extension DetailNoticeVM {
         
         switch isMarked {
         case true:
-            return Service.shared.unlikeNotice(noticeID: id).asObservable()
+            return Service.shared.cancleSavingNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
                         print("취소 성공")
                         return false
                     } else {
                         print("취소 실패")
-                        throw NSError(domain: "", code: response.status, userInfo: nil)
+                        throw NSError(domain: "", code: response.status, userInfo: nil) // 에러 발생
                     }
                 }
                 .catchAndReturn(true)
         case false:
-            return Service.shared.likeNotice(noticeID: id).asObservable()
+            return Service.shared.saveNotice(noticeID: id).asObservable()
                 .map { response in
                     if 200...299 ~= response.status {
                         print("저장 성공")
                         return true
                     } else {
                         print("저장 실패")
-                        throw NSError(domain: "", code: response.status, userInfo: nil)
+                        throw NSError(domain: "", code: response.status, userInfo: nil) // 에러 발생
                     }
                 }
                 .catchAndReturn(false)

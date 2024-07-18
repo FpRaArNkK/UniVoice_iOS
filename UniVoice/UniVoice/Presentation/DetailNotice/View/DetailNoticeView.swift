@@ -287,7 +287,7 @@ extension DetailNoticeView {
         
         let contents = [
             cellModel.noticeTarget,
-            "\(String(describing: cellModel.startTime))~\(String(describing: cellModel.endTime))"
+            "\(cellModel.startTime ?? "")~\(cellModel.endTime ?? "")"
         ]
         
         contents.enumerated().forEach { (index, content) in
