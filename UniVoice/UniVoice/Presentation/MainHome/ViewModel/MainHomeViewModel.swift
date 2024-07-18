@@ -18,22 +18,31 @@ final class MainHomeViewModel: ViewModelType {
     
     struct Input {
         let councilSelected: Observable<IndexPath>
+        let fetchTrigger: Observable<Void>
     }
     
     struct Output {
+        let qsItems: Observable<[QS]>
         let councilItems: Observable<[String]>
         let articleItems: Observable<[Article]>
         let selectedCouncilIndex: Observable<Int>
+        let refreshQuitTrigger: Observable<Void>
     }
     
     var disposeBag = DisposeBag()
     
-    let selectedCouncilIndexRelay = BehaviorRelay<Int>(value: 0)
+    private let selectedCouncilIndexRelay = BehaviorRelay<Int>(value: 0)
     
     func transform(input: Input) -> Output {
         
-        let quickScanItems = quickScanApiCall()
+        let quickScanItems = input.fetchTrigger
+            .flatMapLatest({ [weak self] () -> Observable<[QS]> in
+                guard let self = self else { return Observable.just([]) }
+                return self.quickScanApiCall()
+            })
         
+        let refreshQuit = quickScanItems.map { _ in Void() }
+                
         let councilItems = makeCouncilNamesArray(from: quickScanItems)
         
         let articleItems: Observable<[Article]> = selectedCouncilIndexRelay
@@ -51,6 +60,12 @@ final class MainHomeViewModel: ViewModelType {
                     return Observable.just([])
                 }
             }
+        
+        input.councilSelected
+            .bind(onNext: { [weak self] indexPath in
+                self?.selectedCouncilIndexRelay.accept(indexPath.row)
+            })
+            .disposed(by: disposeBag)
                 
         input.councilSelected
             .map { $0.row }
@@ -58,14 +73,16 @@ final class MainHomeViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
+            qsItems: quickScanItems,
             councilItems: councilItems,
             articleItems: articleItems,
-            selectedCouncilIndex: selectedCouncilIndexRelay.asObservable()
+            selectedCouncilIndex: selectedCouncilIndexRelay.asObservable(), 
+            refreshQuitTrigger: refreshQuit
         )
     }
 }
 
-extension MainHomeViewModel {
+private extension MainHomeViewModel {
     func quickScanApiCall() -> Observable<[QS]> {
         return Service.shared.getQuickScanStory()
             .asObservable()
