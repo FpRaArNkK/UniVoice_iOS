@@ -31,9 +31,14 @@ final class CreateNoticeVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(true)
-            self.tabBarController?.tabBar.isHidden = true
-        }
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
     
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
@@ -78,7 +83,8 @@ final class CreateNoticeVC: UIViewController {
                 targetContentResultRelay.asObservable(),
             startDate: startDateRelay.asObservable().compactMap { $0 },
             finishDate: finishDateRelay.asObservable().compactMap { $0 },
-            isUsingTime: isUsingTimeRelay.asObservable().compactMap { $0 }
+            isUsingTime: isUsingTimeRelay.asObservable().compactMap { $0 }, 
+            postButtonDidTap: rootView.createButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)
@@ -124,6 +130,14 @@ final class CreateNoticeVC: UIViewController {
         
         output.isTargetConfirmButtonEnabled
             .drive(rootView.targetInputView.confirmButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.goNext.asObservable()
+            .bind(onNext: { [weak self] in
+                    let nextVC = UploadingNoticeVC()
+                    nextVC.modalPresentationStyle = .fullScreen
+                    self?.present(nextVC, animated: true)
+            })
             .disposed(by: disposeBag)
         
         let isTargetConfirmButtonEnabled = output.isTargetConfirmButtonEnabled

@@ -70,6 +70,7 @@
 		21F7B15C2C3471AA00A082D8 /* NSAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7B15B2C3471AA00A082D8 /* NSAttributedString+.swift */; };
 		21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7B15D2C3473C500A082D8 /* UILabel+.swift */; };
 		21F7B1602C34748700A082D8 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7B15F2C34748700A082D8 /* UIButton+.swift */; };
+		880370BA2C490B5000AA141A /* PostNoticeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880370B92C490B5000AA141A /* PostNoticeRequest.swift */; };
 		880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED94E2C23F75B0045A620 /* AppDelegate.swift */; };
 		880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED9502C23F75B0045A620 /* SceneDelegate.swift */; };
 		880ED9532C23F75B0045A620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED9522C23F75B0045A620 /* ViewController.swift */; };
@@ -166,6 +167,7 @@
 		EDF4C8AB2C48808E00DE7643 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EDF4C8AA2C48808E00DE7643 /* Lottie */; };
 		EDF4C8AE2C4881BB00DE7643 /* finsh motion(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */; };
 		EDF4C8AF2C4881BB00DE7643 /* loading(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */; };
+		EDF4C8B12C490B3E00DE7643 /* AdmissionYearSelectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -232,6 +234,7 @@
 		21F7B15B2C3471AA00A082D8 /* NSAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+.swift"; sourceTree = "<group>"; };
 		21F7B15D2C3473C500A082D8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		21F7B15F2C34748700A082D8 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		880370B92C490B5000AA141A /* PostNoticeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNoticeRequest.swift; sourceTree = "<group>"; };
 		880ED94B2C23F75B0045A620 /* UniVoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniVoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		880ED94E2C23F75B0045A620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		880ED9502C23F75B0045A620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -319,6 +322,7 @@
 		EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
 		EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "finsh motion(ios).json"; sourceTree = "<group>"; };
 		EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "loading(ios).json"; sourceTree = "<group>"; };
+		EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionYearSelectionVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -391,6 +395,7 @@
 				212FCAEF2C46AF7B000E8223 /* IDCheckRequest.swift */,
 				212FCB042C48266E000E8223 /* UnreadQuickScanRequest.swift */,
 				212FCB0E2C483FE1000E8223 /* SignUpRequest.swift */,
+				880370B92C490B5000AA141A /* PostNoticeRequest.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				21DF05C72C41A57B005EB117 /* TOSCheckVM.swift */,
 				EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */,
 				EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */,
+				EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1158,6 +1164,7 @@
 				DC9F76182C44489A0019A83F /* NoticeImageCVC.swift in Sources */,
 				212FCB112C4854DF000E8223 /* Data+.swift in Sources */,
 				212FCB0F2C483FE1000E8223 /* SignUpRequest.swift in Sources */,
+				EDF4C8B12C490B3E00DE7643 /* AdmissionYearSelectionVM.swift in Sources */,
 				EDF4C8792C3B12F700DE7643 /* UniversityInputVM.swift in Sources */,
 				DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */,
 				2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */,
@@ -1191,6 +1198,7 @@
 				EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */,
 				EDE8CA202C37C4FF00E828F1 /* UniversityInputView.swift in Sources */,
 				882DB15F2C31C94A00D73FEF /* LoginViewModel.swift in Sources */,
+				880370BA2C490B5000AA141A /* PostNoticeRequest.swift in Sources */,
 				EDF4C8A22C472A6100DE7643 /* UploadingNoticeView.swift in Sources */,
 				EDE8CA1E2C37C4AD00E828F1 /* SignUpIntroVC.swift in Sources */,
 				2132A83C2C3A6FAD00795667 /* StudentInfoInputView.swift in Sources */,

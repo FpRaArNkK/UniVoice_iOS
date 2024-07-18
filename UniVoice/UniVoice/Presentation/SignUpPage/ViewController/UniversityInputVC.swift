@@ -31,6 +31,12 @@ final class UniversityInputVC: UIViewController {
         setUpBindUI()
         setUpTableView()
     }
+    
+    // MARK: Life Cycle - viewDidAppear
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        rootView.univTextField.becomeFirstResponder()
+    }
 
     // MARK: setUpFoundation
     private func setUpFoundation() {

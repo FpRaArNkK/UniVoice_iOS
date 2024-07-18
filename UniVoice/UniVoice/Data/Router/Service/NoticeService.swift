@@ -99,6 +99,14 @@ extension Service {
         )
     }
     
+    func postNotice(request: PostNoticeRequest) -> Single<BaseResponse> {
+        return rxRequestWithToken(
+            NoticeTargetType.postNotice(request: request),
+            model: BaseResponse.self,
+            service: noticeService
+        )
+    }
+    
     func getSavedNoticeList() -> Single<SavedNoticeListResponse> {
         return rxRequestWithToken(
             NoticeTargetType.getSavedNoticeList,

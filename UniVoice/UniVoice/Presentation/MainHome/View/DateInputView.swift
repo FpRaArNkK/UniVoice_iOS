@@ -72,6 +72,8 @@ final class DateInputView: UIView {
     private func setUpFoundation() {
         self.backgroundColor = .gray50
         
+        useTimeButton.isHidden = true
+        
         let startDateTapGesture = UITapGestureRecognizer(target: self, action: #selector(startStackViewDidTap))
         let endDateTapGesture = UITapGestureRecognizer(target: self, action: #selector(endStackViewDidTap))
         
@@ -235,8 +237,9 @@ final class DateInputView: UIView {
         }
         
         dateView.snp.makeConstraints {
-            $0.centerY.equalTo(useTimeButton)
-            $0.centerX.equalTo(layView)
+//            $0.centerY.equalTo(useTimeButton)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(33)
+            $0.centerX.equalToSuperview()
 //            $0.leading.equalToSuperview().offset(24)
         }
         
@@ -268,13 +271,14 @@ final class DateInputView: UIView {
 //        }
         
         datePicker.snp.makeConstraints {
-            $0.top.equalTo(useTimeButton.snp.bottom).offset(38)
+//            $0.top.equalTo(useTimeButton.snp.bottom).offset(38)
+            $0.top.equalTo(dateView.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(44).priority(.low)
         }
         
         submitButton.snp.makeConstraints {
-            $0.top.equalTo(datePicker.snp.bottom).offset(38)
+            $0.top.equalTo(datePicker.snp.bottom).offset(30)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(57)
             $0.bottom.equalToSuperview().inset(50)

@@ -69,9 +69,18 @@ extension UserTargetType: UniVoiceTargetType {
             formData.append(MultipartFormData(provider: .data(request.departmentName.data(using: .utf8)!), name: "departmentName"))
             
             // Convert UIImage to Data
-            if let imageData = request.studentCardImage.jpegData(compressionQuality: 0.8) {
-                formData.append(MultipartFormData(provider: .data(imageData), name: "studentCardImage", fileName: "student_card.jpg", mimeType: "image/jpeg"))
+            //            if let imageData = request.studentCardImage.jpegData(compressionQuality: 0.8) {
+            //                formData.append(MultipartFormData(provider: .data(imageData), name: "studentCardImage", fileName: "student_card.jpg", mimeType: "image/jpeg"))
+            //            }
+            
+            if let imageData = request.studentCardImage.compressed(to: 5.0) {
+                let imageData = MultipartFormData(provider: .data(imageData), name: "noticeImages", fileName: "image.jpg", mimeType: "image/jpeg")
+                formData.append(imageData)
+            } else {
+                print("Image could not be compressed to under 5MB.")
+                return .requestPlain
             }
+            
             
             return .uploadMultipart(formData)
         }

@@ -12,7 +12,7 @@ import RxCocoa
 final class AdmissionYearSelectionVC: UIViewController {
     // MARK: Views
     private let rootView = AdmissionYearSelectionView()
-    private let disposeBag = DisposeBag() // 임시
+    private let disposeBag = DisposeBag()
     
     // MARK: Properties
     var selectedUniversity: BehaviorRelay<String>!

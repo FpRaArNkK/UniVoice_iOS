@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import UIKit
 
 enum NoticeTargetType {
     case getQuickScanStory
@@ -20,6 +21,7 @@ enum NoticeTargetType {
     case unlikeNotice(noticeID: Int) // 공지 좋아요 취소
     case saveNotice(noticeID: Int) // 공지 저장
     case cancleSavingNotice(noticeID: Int) // 공지 저장 취소
+    case postNotice(request: PostNoticeRequest) // 새로운 공지 생성
     case getSavedNoticeList // 저장한 공지들 보기
     case increaseNoticeViewCount(noticeID: Int) // 공지 조회수 증가[세부공지]
 //    case createNotice
@@ -56,6 +58,8 @@ extension NoticeTargetType: UniVoiceTargetType {
             return "notice/save/\(noticeID)"
         case .cancleSavingNotice(let noticeID):
             return "notice/save/cancel/\(noticeID)"
+        case .postNotice:
+            return "notice/create"
         case .getSavedNoticeList:
             return "notice/save/all"
         case .increaseNoticeViewCount(let noticeID):
@@ -84,7 +88,8 @@ extension NoticeTargetType: UniVoiceTargetType {
                 .saveNotice,
                 .cancleSavingNotice,
                 .increaseNoticeViewCount,
-                .checkQuickScanAsRead:
+                .checkQuickScanAsRead,
+                .postNotice:
             return .post
         }
     }
@@ -108,10 +113,37 @@ extension NoticeTargetType: UniVoiceTargetType {
             return .requestPlain
         case .unreadQuickScanList(let request):
             return .requestJSONEncodable(request)
+        case .postNotice(let request):
+            var formData = [MultipartFormData]()
+            
+            formData.append(MultipartFormData(provider: .data(request.title.data(using: .utf8)!), name: "title"))
+            formData.append(MultipartFormData(provider: .data(request.content.data(using: .utf8)!), name: "content"))
+            formData.append(MultipartFormData(provider: .data(request.target.data(using: .utf8)!), name: "target"))
+            let startTime = request.startTime.toISO8601String()
+            formData.append(MultipartFormData(provider: .data(startTime.data(using: .utf8)!), name: "startTime"))
+            let endTime = request.endTime.toISO8601String()
+            formData.append(MultipartFormData(provider: .data(endTime.data(using: .utf8)!), name: "endTime"))
+            
+            for (index, image) in request.noticeImages.enumerated() {
+                if let imageData = image.compressed(to: 1.0) {
+                    let imageData = MultipartFormData(provider: .data(imageData), name: "noticeImages", fileName: "image\(index).jpg", mimeType: "image/jpeg")
+                    formData.append(imageData)
+                } else {
+                    print("Image \(index) could not be compressed to under 5MB.")
+                    return .requestPlain
+                }
+            }
+            
+            return .uploadMultipart(formData)
         }
     }
     
     var headers: [String: String]? {
-        return ["Content-Type": "application/json"]
+        switch self {
+        case .postNotice:
+            return ["Content-type": "multipart/form-data"]
+        default:
+            return ["Content-Type": "application/json"]
+        }
     }
 }
