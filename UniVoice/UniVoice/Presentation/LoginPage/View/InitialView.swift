@@ -59,8 +59,10 @@ final class InitialView: UIView {
     
     // MARK: setUpUI
     private func setUpUI() {
+
         logoImageView.do {
-            $0.image = UIImage.startLogo
+            $0.image = UIImage.launchLogo
+            $0.contentMode = .scaleAspectFit
         }
         
         buttonStack.do {
@@ -83,10 +85,9 @@ final class InitialView: UIView {
     
     // MARK: setUpLayout
     private func setUpLayout() {
+        
         logoImageView.snp.makeConstraints {
-            $0.bottom.equalTo(buttonStack.snp.top).offset(-270)
-            $0.centerX.equalToSuperview()
-            $0.size.equalTo(100)
+            $0.edges.equalToSuperview()
         }
         
         buttonStack.snp.makeConstraints {
