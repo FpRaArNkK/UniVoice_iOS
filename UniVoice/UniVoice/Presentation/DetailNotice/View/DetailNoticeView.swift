@@ -305,8 +305,13 @@ extension DetailNoticeView {
         if let startTimeString = cellModel.startTime,
            let startTimeDate = Date().dateFromString(startTimeString),
            let endTimeString = cellModel.endTime,
-              let endTimeDate = Date().dateFromString(endTimeString){
-            timeDuration = Date().getDurationText(from: startTimeDate, to: endTimeDate)
+              let endTimeDate = Date().dateFromString(endTimeString) {
+            
+            if startTimeString.isEmpty || endTimeString.isEmpty {
+                timeDuration = nil
+            } else {
+                timeDuration = Date().getDurationText(from: startTimeDate, to: endTimeDate)
+            }
         } else {
             print("날짜 변환에 실패했습니다.")
             timeDuration = nil
@@ -334,7 +339,8 @@ extension DetailNoticeView {
             
             let contentView = ChipContentView(
                 chipString: chipString,
-                contentString: contentString
+                contentString: contentString,
+                isCenterY: true
             )
             self.basicInfoStackView.addArrangedSubview(contentView)
         }
