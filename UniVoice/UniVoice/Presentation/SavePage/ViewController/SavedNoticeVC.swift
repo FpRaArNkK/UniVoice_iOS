@@ -12,6 +12,9 @@ import RxDataSources
 
 final class SavedNoticeVC: UIViewController {
     
+    // MARK: Properties
+    private let refreshTrig = BehaviorRelay<Void>(value: ())
+    
     // MARK: Views
     private let rootView = SavedNoticeView()
     private let viewModel = SavedNoticeVM()
@@ -19,6 +22,7 @@ final class SavedNoticeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.refreshTrig.accept(())
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,8 +48,12 @@ final class SavedNoticeVC: UIViewController {
     }
     
     func bindUI() {
-        let input = SavedNoticeVM.Input(refreshEvent: .just(Void()))
+        let input = SavedNoticeVM.Input(refreshEvent: refreshTrig.asObservable())
         let output = viewModel.transform(input: input)
+        
+        rootView.savedCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
+            .bind(to: refreshTrig)
+            .disposed(by: viewModel.disposeBag)
         
         let articleDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Article>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCVC.identifier, for: indexPath) as? ArticleCVC else {
@@ -60,16 +68,23 @@ final class SavedNoticeVC: UIViewController {
             .drive(rootView.savedCollectionView.rx.items(dataSource: articleDataSource))
             .disposed(by: viewModel.disposeBag)
         
-        Observable.combineLatest(
-            rootView.savedCollectionView.rx.itemSelected.asObservable(),
-            output.listData.asObservable()
-        )
-        .subscribe(onNext: { [weak self] indexPath, articles in
-            let save = articles[indexPath.row]
-            let nextVC = DetailNoticeVC(id: save.id)
-            self?.navigationController?.pushViewController(nextVC, animated: true)
-        })
-        .disposed(by: viewModel.disposeBag)
+        output.refreshQuitTrigger
+            .drive(onNext: { [weak self] in
+                self?.rootView.savedCollectionView.refreshControl?.endRefreshing()
+            })
+            .disposed(by: viewModel.disposeBag)
+        
+        rootView.savedCollectionView.rx.itemSelected
+            .withLatestFrom(output.listData) { indexPath, articles -> (IndexPath, [Article]) in
+                return (indexPath, articles)
+            }
+            .subscribe(onNext: { [weak self] indexPath, articles in
+                let save = articles[indexPath.row]
+                let nextVC = DetailNoticeVC(id: save.id)
+                self?.navigationController?.pushViewController(nextVC, animated: true)
+            })
+            .disposed(by: viewModel.disposeBag)
+            
     }
 }
 

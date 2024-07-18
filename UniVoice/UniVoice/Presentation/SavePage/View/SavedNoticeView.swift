@@ -51,6 +51,10 @@ final class SavedNoticeView: UIView {
         titleLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .H5B, with: "저장한 공지사항")
         }
+        
+        savedCollectionView.do {
+            $0.refreshControl = UIRefreshControl()
+        }
     }
     
     // MARK: setUpLayout
