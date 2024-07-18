@@ -59,6 +59,22 @@ final class SavedNoticeVC: UIViewController {
             .map { [SectionModel(model: "Section 0", items: $0)] }
             .drive(rootView.savedCollectionView.rx.items(dataSource: articleDataSource))
             .disposed(by: viewModel.disposeBag)
+        
+        Observable.combineLatest(
+            rootView.savedCollectionView.rx.itemSelected.asObservable(),
+            output.listData.asObservable()
+        )
+        .subscribe(onNext: { [weak self] indexPath, articles in
+            let save = articles[indexPath.row]
+            let nextVC = DetailNoticeVC(id: save.id)
+            self?.navigationController?.pushViewController(nextVC, animated: true)
+        })
+        .disposed(by: viewModel.disposeBag)
+        
+        
+            
+        
+            
     }
 }
 
