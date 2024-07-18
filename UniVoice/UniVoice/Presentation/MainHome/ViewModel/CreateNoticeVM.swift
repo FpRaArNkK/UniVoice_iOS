@@ -20,6 +20,7 @@ final class CreateNoticeVM {
         let startDate: Observable<Date>
         let finishDate: Observable<Date>
         let isUsingTime: Observable<Bool>
+        let postButtonDidTap: Observable<Void>
     }
     
     struct Output {
@@ -33,6 +34,7 @@ final class CreateNoticeVM {
         let showDateView: Driver<Bool>
         let isTargetConfirmButtonEnabled: Driver<Bool>
         let isUsingTime: Driver<Bool>
+        let goNext: Driver<Void>
     }
     
     struct ButtonState {
@@ -53,6 +55,7 @@ final class CreateNoticeVM {
     private let showTargetViewRelay = BehaviorRelay<Bool>(value: false)
     private let showDateViewRelay = BehaviorRelay<Bool>(value: false)
     private let isUsingTimeRelay = BehaviorRelay<Bool>(value: true)
+    private let goNext = PublishRelay<Void>()
     
     func transform(input: Input) -> Output {
         
@@ -90,6 +93,22 @@ final class CreateNoticeVM {
         
         input.isUsingTime
             .bind(to: isUsingTimeRelay)
+            .disposed(by: disposeBag)
+        
+        input.postButtonDidTap
+            .bind(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.postNotice(
+                    req: .init(
+                        title: self.titleTextRelay.value,
+                        content: self.contentTextRelay.value,
+                        target: self.targetContentRelay.value,
+                        startTime: self.startDateRelay.value,
+                        endTime: self.finishDateRelay.value,
+                        noticeImages: self.selectedImagesRelay.value
+                    )
+                )
+            })
             .disposed(by: disposeBag)
         
         let buttonState = Observable
@@ -144,11 +163,32 @@ final class CreateNoticeVM {
             showTargetView: showTargetView,
             showDateView: showDateView,
             isTargetConfirmButtonEnabled: isTargetConfirmButtonEnabled,
-            isUsingTime: isUsingTime
+            isUsingTime: isUsingTime, 
+            goNext: goNext.asDriver(onErrorJustReturn: ())
         )
     }
     
     func updateSelectedImages(_ images: [UIImage]) {
         selectedImagesRelay.accept(images)
+    }
+}
+
+// MARK: API Logic
+extension CreateNoticeVM {
+    private func postNotice(req: PostNoticeRequest) {
+        Service.shared.postNotice(
+            request: req
+        )
+        .subscribe { [weak self] res in
+            switch res {
+                
+            case .success(let res):
+                print(res.message)
+                self?.goNext.accept(())
+            case .failure(let err):
+                print(err)
+            }
+        }
+        .disposed(by: disposeBag)
     }
 }

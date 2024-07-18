@@ -13,4 +13,8 @@ extension Data {
             print(dataString)
         }
     }
+    
+    func sizeInMB() -> Double {
+        return Double(self.count) / (1024.0 * 1024.0)
+    }
 }

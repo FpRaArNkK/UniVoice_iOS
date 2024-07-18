@@ -125,11 +125,12 @@ extension NoticeTargetType: UniVoiceTargetType {
             formData.append(MultipartFormData(provider: .data(endTime.data(using: .utf8)!), name: "endTime"))
             
             for (index, image) in request.noticeImages.enumerated() {
-                if let imageData = image.jpegData(compressionQuality: 0.8) {
+                if let imageData = image.compressed(to: 1.0) {
                     let imageData = MultipartFormData(provider: .data(imageData), name: "noticeImages", fileName: "image\(index).jpg", mimeType: "image/jpeg")
                     formData.append(imageData)
                 } else {
-                    print("imageData 삽입 실패")
+                    print("Image \(index) could not be compressed to under 5MB.")
+                    return .requestPlain
                 }
             }
             
