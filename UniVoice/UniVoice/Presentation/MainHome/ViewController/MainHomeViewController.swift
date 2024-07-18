@@ -104,8 +104,6 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         let output = viewModel.transform(input: input)
         
         let qsItems = viewModel.quickScanApiCall()        
-        
-
                 
         let quickScanStories = qsItems
         
@@ -152,6 +150,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         
         //기존 header
         output.councilItems
+            .map { [SectionModel(model: "Section 2", items: $0)] }
             .do(onNext: { [weak self] councils in
                 self?.rootView.emptyStackView.isHidden = !self!.viewModel.councilList.isEmpty
                 self?.rootView.headerView.isHidden = self!.viewModel.councilList.isEmpty
@@ -162,6 +161,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .disposed(by: disposeBag)
         
         output.councilItems
+            .map { [SectionModel(model: "Section 2", items: $0)] }
             .do(onNext: { [weak self] councils in
                 self?.rootView.emptyStackView.isHidden = !self!.viewModel.councilList.isEmpty
                 self?.rootView.scrollView.isHidden = self!.viewModel.councilList.isEmpty

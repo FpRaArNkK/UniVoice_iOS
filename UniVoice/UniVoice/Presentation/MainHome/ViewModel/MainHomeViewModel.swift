@@ -21,7 +21,7 @@ final class MainHomeViewModel: ViewModelType {
     }
     
     struct Output {
-        let councilItems: Observable<[SectionModel<String, String>]>
+        let councilItems: Observable<[String]>//SectionModel<String, String>]>
         let articleItems: Observable<[Article]>
         let selectedCouncilIndex: Observable<Int>
     }
@@ -32,8 +32,9 @@ final class MainHomeViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         
-        let councilItems = Observable.just(councilList)
-            .map { [SectionModel(model: "Section 2", items: $0)] }
+        let councilItems = makeCouncilNamesArray(from: quickScanApiCall())
+//        Observable.just(makeCouncilNamesArray(from: quickScanApiCall()))
+//            .map { [SectionModel(model: "Section 2", items: $0)] }
         
         let articleItems: Observable<[Article]> = selectedCouncilIndexRelay
             .flatMapLatest { index -> Observable<[Article]> in
@@ -74,7 +75,6 @@ extension MainHomeViewModel {
             }
             .catchAndReturn([])
     }
-    
     
     func allArticleApiCall() -> Observable<[Article]> {
         return Service.shared.getAllNoticeList()
