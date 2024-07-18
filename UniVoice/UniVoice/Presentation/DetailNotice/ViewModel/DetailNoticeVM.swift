@@ -9,9 +9,7 @@ import RxSwift
 import RxCocoa
 
 final class DetailNoticeVM: ViewModelType {
-    
-    var notice = DetailNotice.dummyData[0]
-    
+        
     struct Input {
         let likedButtonDidTap: Observable<Void>
         let savedButtonDidTap: Observable<Void>
@@ -68,6 +66,16 @@ final class DetailNoticeVM: ViewModelType {
 
 // MARK: API Logic
 private extension DetailNoticeVM {
+    
+    func detailNoticeAPICall(noticeId: Int) -> Observable<DetailNotice> {
+        return Service.shared.getNoticeDetail(noticeID: noticeId)
+            .asObservable()
+            .map({ response in
+                let result = response.data.toDetailNotice()
+                return result
+            })
+    }
+    
     func patchLiked(id: Int) -> Observable<Bool> {
         return Observable.just(!(self.notice.isLiked))
     }

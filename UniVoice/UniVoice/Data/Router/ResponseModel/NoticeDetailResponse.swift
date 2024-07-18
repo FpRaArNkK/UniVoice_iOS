@@ -32,3 +32,9 @@ struct NoticeDetail: Codable {
     let saveCheck: Bool
     let dayOfWeek: String?
 }
+
+extension NoticeDetail {
+    func toDetailNotice() -> DetailNotice {
+        return DetailNotice(noticeId: id, councilType: "", noticeTitle: title, noticeTarget: target, startTime: startTime, endTime: endTime, noticeImageURL: noticeImages, content: content, createdTime: createdAt, viewCount: viewCount, isLiked: likeCheck, isSaved: saveCheck)
+    }
+}

@@ -22,19 +22,19 @@ struct DetailNotice {
     let noticeTarget: String?
     
     /// 시작 시간
-    let startTime: Date?
+    let startTime: String?
     
     /// 종료 시간
-    let endTime: Date?
+    let endTime: String?
     
     /// 공지 이미지
-    let noticeImageURL: [String?]
+    let noticeImageURL: [String]?
     
     /// 공지 내용
     let content: String
     
     /// 공지 생성된 날짜
-    let createdTime: Date
+    let createdTime: String?
     
     /// 공지 조회수
     let viewCount: Int
