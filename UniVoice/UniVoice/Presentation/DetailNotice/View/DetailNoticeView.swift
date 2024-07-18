@@ -188,7 +188,7 @@ final class DetailNoticeView: UIView {
         noticeImageCollectionView.do {
             $0.isPagingEnabled = true
             $0.showsHorizontalScrollIndicator = false
-            
+            $0.backgroundColor = .white
         }
         
         noticeImageIndicatorView.do {

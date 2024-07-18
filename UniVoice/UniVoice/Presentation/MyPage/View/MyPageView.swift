@@ -96,6 +96,7 @@ final class MyPageView: UIView {
     private func setUpUI() {
         titleLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .H5B, with: "마이페이지")
+            $0.textColor = .B_01
         }
         
         backgroundView.do {

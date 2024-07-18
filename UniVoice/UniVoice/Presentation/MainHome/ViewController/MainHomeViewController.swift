@@ -46,11 +46,16 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
+        setUpFoundation()
         setupCollectionView()
         bindUI()
         bindScroll(of: rootView.headerView.councilCollectionView,
                    to: rootView.stickyHeaderView.councilCollectionView)
         fetchTrig.accept(())
+    }
+    
+    private func setUpFoundation() {
+        self.view.backgroundColor = .white
     }
     
     private func setupCollectionView() {
@@ -196,6 +201,14 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: rootView.articleCollectionView.rx.items(dataSource: articleDataSource))
             .disposed(by: disposeBag)
         
+        rootView.articleCollectionView.rx.observe(CGSize.self, "contentSize")
+            .compactMap { $0 }
+            .subscribe(onNext: { [weak self] size in
+                self?.updateCollectionViewHeight(size: size)
+            })
+            .disposed(by: disposeBag)
+            
+        
         output.refreshQuitTrigger
             .bind(onNext: { [weak self] in
                 self?.rootView.scrollView.refreshControl?.endRefreshing()
@@ -274,6 +287,13 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 source.contentOffset = contentOffset
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func updateCollectionViewHeight(size: CGSize) {
+        rootView.articleCollectionView.snp.updateConstraints {
+            $0.height.equalTo(size.height)
+        }
+        view.layoutIfNeeded()
     }
 }
 

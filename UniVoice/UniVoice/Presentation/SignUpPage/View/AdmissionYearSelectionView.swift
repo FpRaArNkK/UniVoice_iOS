@@ -65,6 +65,10 @@ final class AdmissionYearSelectionView: UIView {
             $0.isEnabled = false
         }
         
+        menuTableView.do {
+            $0.backgroundColor = .white
+        }
+        
         admissionButton.do {
             $0.setImage(.icnPolygonUp, for: .normal)
             $0.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)

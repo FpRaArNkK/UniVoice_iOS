@@ -50,6 +50,7 @@ final class SavedNoticeView: UIView {
     private func setUpUI() {
         titleLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .H5B, with: "저장한 공지사항")
+            $0.textColor = .B_01
         }
         
         savedCollectionView.do {
