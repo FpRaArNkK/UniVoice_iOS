@@ -157,6 +157,10 @@
 		EDF4C89E2C43F9C800DE7643 /* DateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */; };
 		EDF4C8A02C4729B900DE7643 /* UploadingNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */; };
 		EDF4C8A22C472A6100DE7643 /* UploadingNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */; };
+		EDF4C8A82C485C6D00DE7643 /* UniVoiceConfig.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */; };
+		EDF4C8AB2C48808E00DE7643 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EDF4C8AA2C48808E00DE7643 /* Lottie */; };
+		EDF4C8AE2C4881BB00DE7643 /* finsh motion(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */; };
+		EDF4C8AF2C4881BB00DE7643 /* loading(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,7 +175,6 @@
 		212FCAD82C458CD1000E8223 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		212FCADA2C45933A000E8223 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		212FCADC2C459628000E8223 /* NoticeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeService.swift; sourceTree = "<group>"; };
-		212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
 		212FCAE52C467802000E8223 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		212FCAE72C467933000E8223 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		212FCAE92C468289000E8223 /* UniversityDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityDataResponse.swift; sourceTree = "<group>"; };
@@ -302,6 +305,9 @@
 		EDF4C89D2C43F9C800DE7643 /* DateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInputView.swift; sourceTree = "<group>"; };
 		EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeVC.swift; sourceTree = "<group>"; };
 		EDF4C8A12C472A6100DE7643 /* UploadingNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeView.swift; sourceTree = "<group>"; };
+		EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
+		EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "finsh motion(ios).json"; sourceTree = "<group>"; };
+		EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "loading(ios).json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +326,7 @@
 				880ED9812C2402FC0045A620 /* ReactiveMoya in Frameworks */,
 				880ED9882C2403120045A620 /* RxRelay in Frameworks */,
 				880ED9792C2402CA0045A620 /* Then in Frameworks */,
+				EDF4C8AB2C48808E00DE7643 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +542,8 @@
 		880ED96A2C23FE3A0045A620 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */,
+				EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */,
 				880ED9572C23F75D0045A620 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -570,7 +579,7 @@
 			isa = PBXGroup;
 			children = (
 				880ED95C2C23F75D0045A620 /* Info.plist */,
-				212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */,
+				EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */,
 				88325C2C2C382DF4004A293D /* PreviewController.swift */,
 				212FCAF52C4714DB000E8223 /* KeyChain.swift */,
 			);
@@ -999,6 +1008,7 @@
 				880ED9892C2403120045A620 /* RxSwift */,
 				880ED98C2C2403490045A620 /* Differentiator */,
 				880ED98E2C2403490045A620 /* RxDataSources */,
+				EDF4C8AA2C48808E00DE7643 /* Lottie */,
 			);
 			productName = UniVoice;
 			productReference = 880ED94B2C23F75B0045A620 /* UniVoice.app */;
@@ -1035,6 +1045,7 @@
 				880ED97D2C2402FC0045A620 /* XCRemoteSwiftPackageReference "Moya" */,
 				880ED9842C2403120045A620 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				880ED98B2C2403490045A620 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				EDF4C8A92C48808E00DE7643 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 880ED94C2C23F75B0045A620 /* Products */;
 			projectDirPath = "";
@@ -1050,10 +1061,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF4C8AE2C4881BB00DE7643 /* finsh motion(ios).json in Resources */,
 				21F7B1522C345F8F00A082D8 /* Pretendard-ExtraLight.otf in Resources */,
 				21F7B1542C345F8F00A082D8 /* Pretendard-Bold.otf in Resources */,
+				EDF4C8AF2C4881BB00DE7643 /* loading(ios).json in Resources */,
 				8851A2722C2404CA006912D4 /* .swiftlint.yml in Resources */,
 				21F7B1552C345F8F00A082D8 /* Pretendard-Thin.otf in Resources */,
+				EDF4C8A82C485C6D00DE7643 /* UniVoiceConfig.xcconfig in Resources */,
 				21F7B1502C345F8F00A082D8 /* Pretendard-Regular.otf in Resources */,
 				21F7B1582C345F8F00A082D8 /* Pretendard-Light.otf in Resources */,
 				21F7B1512C345F8F00A082D8 /* Pretendard-ExtraBold.otf in Resources */,
@@ -1361,7 +1375,7 @@
 		};
 		880ED9602C23F75D0045A620 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
+			baseConfigurationReference = EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1397,7 +1411,7 @@
 		};
 		880ED9612C23F75D0045A620 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 212FCAE42C4677A7000E8223 /* UniVoiceConfig.xcconfig */;
+			baseConfigurationReference = EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1503,6 +1517,14 @@
 				minimumVersion = 5.0.2;
 			};
 		};
+		EDF4C8A92C48808E00DE7643 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1560,6 +1582,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 880ED98B2C2403490045A620 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
+		};
+		EDF4C8AA2C48808E00DE7643 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDF4C8A92C48808E00DE7643 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
