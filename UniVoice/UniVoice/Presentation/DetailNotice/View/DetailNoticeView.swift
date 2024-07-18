@@ -372,10 +372,28 @@ extension DetailNoticeView {
         isLiked
             .map { $0 ? UIImage.icnLikeOn : UIImage.icnLikeOff }
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak likedButton] image in
-                guard let likedButton = likedButton else { return }
-                UIView.transition(with: likedButton, duration: 0.15, options: .transitionCrossDissolve, animations: {
-                    likedButton.setImage(image, for: .normal)
+            .subscribe(onNext: { [weak self] image in
+                guard let self = self else { return }
+                UIView.transition(with: self.likedButton, duration: 0.15, options: .transitionCrossDissolve, animations: {
+                    self.likedButton.setImage(image, for: .normal)
+                }, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        isLiked
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isLike in
+                guard let self = self else { return }
+                UIView.transition(with: self.likedButton,
+                                  duration: 0.15,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                    if let tempCountStr = self.likeCount.text,
+                       var tempCount = Int(tempCountStr) {
+                        let num = isLike ? +1 : -1
+                        tempCount += num
+                        self.likeCount.text = "\(tempCount)"
+                    }
                 }, completion: nil)
             })
             .disposed(by: disposeBag)
