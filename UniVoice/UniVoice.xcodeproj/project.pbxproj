@@ -166,6 +166,7 @@
 		EDF4C8AB2C48808E00DE7643 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EDF4C8AA2C48808E00DE7643 /* Lottie */; };
 		EDF4C8AE2C4881BB00DE7643 /* finsh motion(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */; };
 		EDF4C8AF2C4881BB00DE7643 /* loading(ios).json in Resources */ = {isa = PBXBuildFile; fileRef = EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */; };
+		EDF4C8B12C490B3E00DE7643 /* AdmissionYearSelectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -319,6 +320,7 @@
 		EDF4C8A72C485C6D00DE7643 /* UniVoiceConfig.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = UniVoiceConfig.xcconfig; sourceTree = "<group>"; };
 		EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "finsh motion(ios).json"; sourceTree = "<group>"; };
 		EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "loading(ios).json"; sourceTree = "<group>"; };
+		EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionYearSelectionVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +417,7 @@
 				21DF05C72C41A57B005EB117 /* TOSCheckVM.swift */,
 				EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */,
 				EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */,
+				EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1158,6 +1161,7 @@
 				DC9F76182C44489A0019A83F /* NoticeImageCVC.swift in Sources */,
 				212FCB112C4854DF000E8223 /* Data+.swift in Sources */,
 				212FCB0F2C483FE1000E8223 /* SignUpRequest.swift in Sources */,
+				EDF4C8B12C490B3E00DE7643 /* AdmissionYearSelectionVM.swift in Sources */,
 				EDF4C8792C3B12F700DE7643 /* UniversityInputVM.swift in Sources */,
 				DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */,
 				2132A83A2C3A6E2B00795667 /* StudentIDPhotoInputView.swift in Sources */,
