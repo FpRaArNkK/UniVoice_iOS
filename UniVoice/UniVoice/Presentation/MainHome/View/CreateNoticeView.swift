@@ -258,7 +258,7 @@ final class CreateNoticeView: UIView {
         contentTextView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.top.equalTo(devideView.snp.bottom)
-            $0.height.equalTo(200).priority(.low)
+            $0.height.equalTo(150).priority(.low)
         }
         
         imageCollectionView.snp.makeConstraints {

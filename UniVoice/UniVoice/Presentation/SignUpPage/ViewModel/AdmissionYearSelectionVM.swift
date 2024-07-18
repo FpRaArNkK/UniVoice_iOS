@@ -19,14 +19,14 @@ final class AdmissionYearSelectionVM: ViewModelType {
     }
     
     var disposeBag = DisposeBag()
-    private let selectedAdmissionYearRelay = BehaviorRelay<String?>(value: nil)
+    private let selectedAdmissionYearRelay = BehaviorRelay<String>(value: "")
     
     func transform(input: Input) -> Output {
         input.selectedAdmissionYear
             .bind(to: selectedAdmissionYearRelay)
             .disposed(by: disposeBag)
         
-        SignUpDataManager.shared.bindUniversityName(input.selectedAdmissionYear)
+        SignUpDataManager.shared.bindAdmissionNumber(input.selectedAdmissionYear)
         
         return Output()
     }

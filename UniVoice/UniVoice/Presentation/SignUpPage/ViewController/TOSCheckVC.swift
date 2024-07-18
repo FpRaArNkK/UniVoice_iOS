@@ -79,42 +79,43 @@ class TOSCheckVC: UIViewController {
         rootView.completeButton.bindData(buttonType: completeButtonState.asObservable())
        
         // URLSession 사용한 방법
-//        rootView.completeButton.rx.tap
-//            .flatMapLatest { _ in
-//                return SignUpDataManager.shared.getSignUpRequest()
-//            }
-//            .flatMap { signUpRequest in
-//                return self.viewModel.requestSignUp(signUpRequest: signUpRequest)
-//            }
-//            .subscribe(onNext: { [weak self] success in
-//                if success {
-//                    self?.navigationController?.pushViewController(SignUpInfoCheckingVC(), animated: true)
-//                } else {
-//                    print("회원가입 실패")
-//                }
-//            }, onError: { error in
-//                print("Sign up error: \(error)")
-//            })
-//            .disposed(by: viewModel.disposeBag)
-        
-        // Moya 사용한 방법
         rootView.completeButton.rx.tap
             .flatMapLatest { _ in
                 return SignUpDataManager.shared.getSignUpRequest()
             }
             .flatMap { signUpRequest in
-                return Service.shared.requestSignUp(request: signUpRequest)
+                return self.viewModel.requestSignUp(signUpRequest: signUpRequest)
             }
-            .subscribe { [weak self] response in
-                switch response.status {
-                case 201:
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] success in
+                if success {
                     self?.navigationController?.pushViewController(SignUpInfoCheckingVC(), animated: true)
-                default:
-                    print(response.message)
+                } else {
+                    print("회원가입 실패")
                 }
-            } onError: { error in
-                print(error)
-            }
+            }, onError: { error in
+                print("Sign up error: \(error)")
+            })
             .disposed(by: viewModel.disposeBag)
+        
+        // Moya 사용한 방법
+//        rootView.completeButton.rx.tap
+//            .flatMapLatest { _ in
+//                return SignUpDataManager.shared.getSignUpRequest()
+//            }
+//            .flatMap { signUpRequest in
+//                return Service.shared.requestSignUp(request: signUpRequest)
+//            }
+//            .subscribe { [weak self] response in
+//                switch response.status {
+//                case 201:
+//                    self?.navigationController?.pushViewController(SignUpInfoCheckingVC(), animated: true)
+//                default:
+//                    print(response.message)
+//                }
+//            } onError: { error in
+//                print(error)
+//            }
+//            .disposed(by: viewModel.disposeBag)
     }
 }

@@ -101,7 +101,9 @@ extension TOSCheckVM {
             body.append("\(value)\r\n".data(using: .utf8)!)
         }
         
-        let imageData = image.jpegData(compressionQuality: 0.8)!
+        let imageData = image.compressed(to: 1.0)!
+        
+//        let imageData = image.jpegData(compressionQuality: 0.8)!
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"studentCardImage\"; filename=\"\(imageName)\"\r\n".data(using: .utf8)!)
         body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
