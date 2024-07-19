@@ -9,6 +9,12 @@
 
 <br>
 
+## 🎥 시연 영상
+https://github.com/user-attachments/assets/1b379d40-caa0-446c-981b-d1e407ef2599
+
+
+
+<br>
 
 ## 🍎 iOS Developer
 
