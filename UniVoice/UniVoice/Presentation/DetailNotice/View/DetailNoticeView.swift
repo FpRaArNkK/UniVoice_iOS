@@ -368,7 +368,7 @@ extension DetailNoticeView {
         }
     }
     
-    func bindUI(isLiked: Observable<Bool>, isSaved: Observable<Bool>, cellModel: DetailNotice) {
+    func bindUI(isLiked: Observable<Bool>, isSaved: Observable<Bool>) {
         isLiked
             .map { $0 ? UIImage.icnLikeOn : UIImage.icnLikeOff }
             .observe(on: MainScheduler.instance)
@@ -376,17 +376,6 @@ extension DetailNoticeView {
                 guard let self = self else { return }
                 UIView.transition(with: self.likedButton, duration: 0.15, options: .transitionCrossDissolve, animations: {
                     self.likedButton.setImage(image, for: .normal)
-                    self.likeCountLabel.text =  "\(cellModel.likeCount + 1)"
-                }, completion: nil)
-            })
-            .disposed(by: disposeBag)
-        
-        isLiked
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] isLike in
-                guard let self = self else { return }
-                UIView.transition(with: self.likeCountLabel, duration: 0.15, options: .transitionCrossDissolve, animations: {
-                    self.likeCountLabel.text =  isLike ? "\(cellModel.likeCount + 1)" : "\(cellModel.likeCount)"
                 }, completion: nil)
             })
             .disposed(by: disposeBag)
@@ -401,13 +390,5 @@ extension DetailNoticeView {
                 }, completion: nil)
             })
             .disposed(by: disposeBag)
-        
-//        likeCount
-//            .map {
-//                print($0)
-//                return "\($0)"
-//            }
-//            .bind(to: self.likeCountLabel.rx.text)
-//            .disposed(by: disposeBag)
     }
 }
