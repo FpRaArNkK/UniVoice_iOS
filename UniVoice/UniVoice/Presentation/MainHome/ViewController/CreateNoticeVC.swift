@@ -87,7 +87,7 @@ final class CreateNoticeVC: UIViewController {
             startDate: startDateRelay.asObservable().compactMap { $0 },
             finishDate: finishDateRelay.asObservable().compactMap { $0 },
             isUsingTime: isUsingTimeRelay.asObservable().compactMap { $0 }, 
-            postButtonDidTap: rootView.createButton.rx.tap.asObservable()
+            postButtonDidTap: rootView.createButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
         )
         
         let output = viewModel.transform(input: input)
@@ -104,12 +104,12 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         Driver.combineLatest(output.startDate, output.isUsingTime)
-            .map { date, includeTime in date.toString(includeTime: includeTime) }
+            .map { date, includeTime in date!.toString(includeTime: includeTime) }
             .drive(rootView.dateView.startDateLabel.rx.text)
             .disposed(by: disposeBag)
         
         Driver.combineLatest(output.finishDate, output.isUsingTime)
-            .map { date, includeTime in date.toString(includeTime: includeTime) }
+            .map { date, includeTime in date!.toString(includeTime: includeTime) }
             .drive(rootView.dateView.finishDateLabel.rx.text)
             .disposed(by: disposeBag)
         

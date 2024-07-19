@@ -119,10 +119,13 @@ extension NoticeTargetType: UniVoiceTargetType {
             formData.append(MultipartFormData(provider: .data(request.title.data(using: .utf8)!), name: "title"))
             formData.append(MultipartFormData(provider: .data(request.content.data(using: .utf8)!), name: "content"))
             formData.append(MultipartFormData(provider: .data(request.target.data(using: .utf8)!), name: "target"))
-            let startTime = request.startTime.toISO8601String()
-            formData.append(MultipartFormData(provider: .data(startTime.data(using: .utf8)!), name: "startTime"))
-            let endTime = request.endTime.toISO8601String()
-            formData.append(MultipartFormData(provider: .data(endTime.data(using: .utf8)!), name: "endTime"))
+            
+            if let startTime = request.startTime?.toISO8601String() {
+                formData.append(MultipartFormData(provider: .data(startTime.data(using: .utf8)!), name: "startTime"))
+            }
+            if let endTime = request.endTime?.toISO8601String() {
+                formData.append(MultipartFormData(provider: .data(endTime.data(using: .utf8)!), name: "endTime"))
+            }
             
             for (index, image) in request.noticeImages.enumerated() {
                 if let imageData = image.compressed(to: 1.0) {
