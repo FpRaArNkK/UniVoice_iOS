@@ -23,6 +23,8 @@ final class DetailNoticeView: UIView {
     
     let divider = UIView()
     
+    let contentStackView = UIStackView()
+    
     let basicInfoStackView = UIStackView() // (1) 대상 + 일시
     
     let noticeImageStackView = UIStackView() // (2) 이미지CV + indicatorView
@@ -91,10 +93,14 @@ final class DetailNoticeView: UIView {
         [
             noticeTitleLabel,
             divider,
+            contentStackView
+        ].forEach { contentView.addSubview($0) }
+        
+        [
             basicInfoStackView,
             noticeImageStackView,
             contentLabel
-        ].forEach { contentView.addSubview($0) }
+        ].forEach { contentStackView.addArrangedSubview($0) }
         
         [
             noticeImageCollectionView,
@@ -135,6 +141,11 @@ final class DetailNoticeView: UIView {
         
         dividerView.do {
             $0.backgroundColor = .light
+        }
+        
+        contentStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 16
         }
         
         basicInfoStackView.do {
@@ -222,14 +233,18 @@ final class DetailNoticeView: UIView {
             $0.height.equalTo(1)
         }
         
-        basicInfoStackView.snp.makeConstraints {
+        contentStackView.snp.makeConstraints {
             $0.top.equalTo(divider.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(70)
+        }
+        
+        basicInfoStackView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().inset(22)
         }
         
         noticeImageStackView.snp.makeConstraints {
-            $0.top.equalTo(basicInfoStackView.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(16)
         }
         
@@ -245,10 +260,8 @@ final class DetailNoticeView: UIView {
         }
         
         contentLabel.snp.makeConstraints {
-            $0.top.equalTo(noticeImageStackView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().inset(22)
-            $0.bottom.equalTo(contentView).inset(70)
         }
         
         bottomView.snp.makeConstraints {
@@ -346,7 +359,11 @@ extension DetailNoticeView {
         
         contents.enumerated().forEach { (index, content) in
             
-            guard let contentString = content, !contentString.isEmpty else { return }
+            guard let contentString = content, !contentString.isEmpty else { 
+                self.basicInfoStackView.isHidden = true
+                return }
+            
+            self.basicInfoStackView.isHidden = false
             
             let chipString: String = {
                 switch index {

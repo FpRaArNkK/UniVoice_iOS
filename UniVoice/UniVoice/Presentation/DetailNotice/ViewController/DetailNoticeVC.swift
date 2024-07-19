@@ -101,8 +101,10 @@ final class DetailNoticeVC: UIViewController {
             .drive(onNext: { [weak self] urls in
                 if urls.isEmpty {
                     self?.rootView.noticeImageCollectionView.isHidden = true
+                    self?.rootView.noticeImageStackView.isHidden = true
                 } else {
                     self?.rootView.noticeImageCollectionView.isHidden = false
+                    self?.rootView.noticeImageStackView.isHidden = false
                 }
                 self?.rootView.noticeImageIndicatorView.numberOfPages = urls.count
             })
