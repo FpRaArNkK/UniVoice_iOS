@@ -34,6 +34,12 @@ final class DepartmentInputVC: UIViewController {
         self.view = rootView
     }
     
+    // MARK: Life Cycle - viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.departTextField.becomeFirstResponder()
+    }
+    
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +47,6 @@ final class DepartmentInputVC: UIViewController {
         setUpFoundation()
         setUpBindUI()
         setUpTableView()
-    }
-    
-    // MARK: Life Cycle - viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        rootView.departTextField.becomeFirstResponder()
     }
     
     // MARK: setUpFoundation
