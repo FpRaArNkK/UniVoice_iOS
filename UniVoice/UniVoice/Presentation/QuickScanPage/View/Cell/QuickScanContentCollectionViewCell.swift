@@ -73,7 +73,7 @@ final class QuickScanContentCVC: UICollectionViewCell {
         }
         
         viewCountImage.do {
-            $0.image = UIImage.icnViewCount
+            $0.image = UIImage.icnViewCountGray
             $0.tintColor = .mint400
         }
         
