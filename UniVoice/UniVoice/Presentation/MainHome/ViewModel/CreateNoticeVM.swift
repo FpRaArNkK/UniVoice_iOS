@@ -98,16 +98,17 @@ final class CreateNoticeVM {
         input.postButtonDidTap
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.postNotice(
-                    req: .init(
-                        title: self.titleTextRelay.value,
-                        content: self.contentTextRelay.value,
-                        target: self.targetContentRelay.value,
-                        startTime: self.startDateRelay.value,
-                        endTime: self.finishDateRelay.value,
-                        noticeImages: self.selectedImagesRelay.value
-                    )
-                )
+                self.goNext.accept(())
+//                self.postNotice(
+//                    req: .init(
+//                        title: self.titleTextRelay.value,
+//                        content: self.contentTextRelay.value,
+//                        target: self.targetContentRelay.value,
+//                        startTime: self.startDateRelay.value,
+//                        endTime: self.finishDateRelay.value,
+//                        noticeImages: self.selectedImagesRelay.value
+//                    )
+//                )
             })
             .disposed(by: disposeBag)
         
@@ -184,22 +185,15 @@ final class CreateNoticeVM {
     }
 }
 
-// MARK: API Logic
 extension CreateNoticeVM {
-    private func postNotice(req: PostNoticeRequest) {
-        Service.shared.postNotice(
-            request: req
+    func getRequest() -> PostNoticeRequest {
+        return .init(
+            title: self.titleTextRelay.value,
+            content: self.contentTextRelay.value,
+            target: self.targetContentRelay.value,
+            startTime: self.startDateRelay.value,
+            endTime: self.finishDateRelay.value,
+            noticeImages: self.selectedImagesRelay.value
         )
-        .subscribe { [weak self] res in
-            switch res {
-                
-            case .success(let res):
-                print(res.message)
-                self?.goNext.accept(())
-            case .failure(let err):
-                print(err)
-            }
-        }
-        .disposed(by: disposeBag)
     }
 }

@@ -99,6 +99,7 @@ class CustomButton: UIButton {
     init(with type: CustomButtonType) {
         super.init(frame: .zero)
         self.initialState = type
+        self.overrideUserInterfaceStyle = .light
         bindUI()
     }
     

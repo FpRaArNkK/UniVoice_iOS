@@ -88,6 +88,7 @@
 		880ED98D2C2403490045A620 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 880ED98C2C2403490045A620 /* Differentiator */; };
 		880ED98F2C2403490045A620 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 880ED98E2C2403490045A620 /* RxDataSources */; };
 		881A3C5B2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881A3C5A2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift */; };
+		8820E69D2C4AA5D900452020 /* UploadingNoticeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820E69C2C4AA5D900452020 /* UploadingNoticeVM.swift */; };
 		88293F7B2C42C1D10082A986 /* NoAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88293F7A2C42C1D10082A986 /* NoAccountViewController.swift */; };
 		88293F812C43BBBE0082A986 /* SavedNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88293F802C43BBBE0082A986 /* SavedNoticeView.swift */; };
 		88293F832C43C1370082A986 /* SavedNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88293F822C43C1370082A986 /* SavedNoticeVC.swift */; };
@@ -245,6 +246,7 @@
 		880ED95A2C23F75D0045A620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		880ED95C2C23F75D0045A620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		881A3C5A2C3AE6E2003A72E6 /* QuickScanIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanIndicatorView.swift; sourceTree = "<group>"; };
+		8820E69C2C4AA5D900452020 /* UploadingNoticeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingNoticeVM.swift; sourceTree = "<group>"; };
 		88293F7A2C42C1D10082A986 /* NoAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAccountViewController.swift; sourceTree = "<group>"; };
 		88293F802C43BBBE0082A986 /* SavedNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoticeView.swift; sourceTree = "<group>"; };
 		88293F822C43C1370082A986 /* SavedNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNoticeVC.swift; sourceTree = "<group>"; };
@@ -858,6 +860,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9EBCB72C3F44FC007337A0 /* MainHomeViewModel.swift */,
+				8820E69C2C4AA5D900452020 /* UploadingNoticeVM.swift */,
 				EDF4C8972C42AF7900DE7643 /* CreateNoticeVM.swift */,
 			);
 			path = ViewModel;
@@ -1151,6 +1154,7 @@
 				88293F832C43C1370082A986 /* SavedNoticeVC.swift in Sources */,
 				2132A8462C3A6FFB00795667 /* StudentInfoInputVC.swift in Sources */,
 				212FCADD2C459628000E8223 /* NoticeService.swift in Sources */,
+				8820E69D2C4AA5D900452020 /* UploadingNoticeVM.swift in Sources */,
 				EDE8CA222C37C51300E828F1 /* DepartmentInputView.swift in Sources */,
 				880ED9532C23F75B0045A620 /* ViewController.swift in Sources */,
 				212FCB012C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift in Sources */,

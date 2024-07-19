@@ -35,6 +35,7 @@ final class SignUpIntroVC: UIViewController {
     // MARK: setUpBindUI
     private func setUpBindUI() {
         rootView.signUpStartButton.rx.tap
+            .take(1)
             .bind(onNext: { [weak self] in
                 self?.navigationController?.pushViewController(UniversityInputVC(), animated: true)
             })

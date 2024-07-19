@@ -123,12 +123,16 @@ final class InitialView: UIView {
     }
     
     // MARK: Splash Animation
-        private func playSplashAnimation() {
-            splashView.loopMode = .repeat(1)
-            splashView.play { [weak self] (finished) in
-                if finished {
+    private func playSplashAnimation() {
+        splashView.loopMode = .repeat(1)
+        splashView.play { [weak self] (finished) in
+            if finished {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self?.splashView.alpha = 0
+                }) { _ in
                     self?.splashView.isHidden = true
                 }
             }
         }
+    }
 }

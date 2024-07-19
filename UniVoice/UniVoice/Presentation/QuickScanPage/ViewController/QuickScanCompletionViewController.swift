@@ -44,6 +44,7 @@ final class QuickScanCompletionViewController: UIViewController {
     // MARK: setUpBindUI
     private func setUpBindUI() {
         rootView.completeButton.rx.tap
+            .take(1)
             .bind(onNext: { [weak self] in
                 self?.popToMainHome()
             })

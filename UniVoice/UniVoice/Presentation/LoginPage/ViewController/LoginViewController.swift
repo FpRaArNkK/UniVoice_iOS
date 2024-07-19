@@ -43,7 +43,9 @@ final class LoginViewController: UIViewController {
         let input = LoginViewModel.Input(
             idText: rootView.idTextField.rx.text.orEmpty.asObservable(),
             pwText: rootView.pwTextField.rx.text.orEmpty.asObservable(),
-            loginButtonDidTap: rootView.loginButton.rx.tap.asObservable()
+            loginButtonDidTap: rootView.loginButton.rx.tap
+                .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+                .asObservable()
         )
         
         let output = viewModel.transform(input: input)

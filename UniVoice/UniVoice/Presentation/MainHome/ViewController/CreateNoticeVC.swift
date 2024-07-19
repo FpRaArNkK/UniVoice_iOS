@@ -45,7 +45,11 @@ final class CreateNoticeVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         setUpBindUI()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [
+            rootView.targetButton,
+            rootView.imageButton,
+            rootView.dateButton
+        ])
     }
     
     // MARK: setUpFoundation
@@ -87,7 +91,7 @@ final class CreateNoticeVC: UIViewController {
             startDate: startDateRelay.asObservable().compactMap { $0 },
             finishDate: finishDateRelay.asObservable().compactMap { $0 },
             isUsingTime: isUsingTimeRelay.asObservable().compactMap { $0 }, 
-            postButtonDidTap: rootView.createButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
+            postButtonDidTap: rootView.createButton.rx.tap.take(1)
         )
         
         let output = viewModel.transform(input: input)
@@ -137,8 +141,9 @@ final class CreateNoticeVC: UIViewController {
         
         output.goNext.asObservable()
             .bind(onNext: { [weak self] in
-                    let nextVC = UploadingNoticeVC()
-                self?.navigationController?.pushViewController(nextVC, animated: true)
+                guard let self = self else { return }
+                let nextVC = UploadingNoticeVC(request: self.viewModel.getRequest())
+                self.navigationController?.pushViewController(nextVC, animated: true)
             })
             .disposed(by: disposeBag)
         
