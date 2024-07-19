@@ -45,7 +45,11 @@ final class CreateNoticeVC: UIViewController {
         super.viewDidLoad()
         setUpFoundation()
         setUpBindUI()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [
+            rootView.targetButton,
+            rootView.imageButton,
+            rootView.dateButton
+        ])
     }
     
     // MARK: setUpFoundation
