@@ -22,7 +22,7 @@ class CreateAccountVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.confirmAndNextButton])
         setUpFoundation()
         setUpBindUI()
     }
