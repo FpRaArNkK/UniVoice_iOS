@@ -48,9 +48,7 @@ final class MainHomeViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         
         let refreshQuit = quickScanItems.map { _ in Void() }
-        
-        let councilItems = quickScanItems.map { _ in self.councilList }
-        
+                
         let combinedTrigger = Observable.combineLatest(input.fetchTrigger, selectedCouncilIndexRelay)
         
         let combinedItems = combinedTrigger
@@ -82,7 +80,9 @@ final class MainHomeViewModel: ViewModelType {
         combinedItems
             .map { $0.0 }
             .bind(to: quickScanItems)
-            .disposed(by: disposeBag)
+            .disposed(by: disposeBag) 
+        
+        let councilItems = makeCouncilNamesArray(from: quickScanItems.asObservable())
         
         combinedItems
             .map { $0.1 }
