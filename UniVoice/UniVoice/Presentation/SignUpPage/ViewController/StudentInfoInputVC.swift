@@ -32,7 +32,7 @@ class StudentInfoInputVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.nextButton])
         setUpFoundation()
         setUpBindUI()
     }
