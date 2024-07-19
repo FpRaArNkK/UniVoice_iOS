@@ -70,7 +70,7 @@ final class AdmissionYearSelectionVC: UIViewController {
         
         let input = AdmissionYearSelectionVM.Input(
             selectedAdmissionYear: selectedAdmission
-                .map { $0.components(separatedBy: "학번").first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "" }
+                .map { $0.components(separatedBy: "기").first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "" }
                 .asObservable()
         )
         let output = viewModel.transform(input: input)

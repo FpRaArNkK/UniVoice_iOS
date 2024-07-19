@@ -25,11 +25,11 @@ struct UnreadQuickScanList: Codable {
     let createdAt: String
     let writeAffiliation: String
     let contentSummary: String
-    let logoImage: String
+    let logoImage: String?
     let saveCheck: Bool
 }
 
-extension UnreadQuickScanList{
+extension UnreadQuickScanList {
     func toQuickScan() -> QuickScan {
         // TODO: String toDate 옵셔널 추후 수정 필요
         return QuickScan.init(

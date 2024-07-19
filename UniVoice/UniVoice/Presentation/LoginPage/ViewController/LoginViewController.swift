@@ -20,10 +20,15 @@ final class LoginViewController: UIViewController {
         self.view = rootView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.idTextField.becomeFirstResponder()
+    }
+    
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.loginButton])
         setUpFoundation()
         setUpBindUI()
     }
@@ -31,7 +36,6 @@ final class LoginViewController: UIViewController {
     // MARK: setUpFoundation
     private func setUpFoundation() {
         self.title = "로그인"
-        rootView.idTextField.becomeFirstResponder()
     }
     
     // MARK: setUpBindUI

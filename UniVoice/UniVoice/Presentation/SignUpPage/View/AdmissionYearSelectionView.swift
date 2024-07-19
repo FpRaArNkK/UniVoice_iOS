@@ -21,7 +21,7 @@ final class AdmissionYearSelectionView: UIView {
     let nextButton = CustomButton(with: .inActive)
     
     private var isMenuOpen = true
-    let menuItems = (18...24).reversed().map { "\($0)학번" }
+    let menuItems = (28...34).reversed().map { "\($0)기" }
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -107,6 +107,7 @@ final class AdmissionYearSelectionView: UIView {
             $0.isScrollEnabled = false
             $0.separatorInset.left = 8
             $0.separatorInset.right = 8
+            $0.backgroundColor = .white
         }
     }
     // MARK: setUpLayout

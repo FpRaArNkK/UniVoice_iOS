@@ -27,16 +27,21 @@ final class UniversityInputVC: UIViewController {
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.univTableView,
+                                                            rootView.nextButton])
         setUpFoundation()
         setUpBindUI()
         setUpTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.univTextField.becomeFirstResponder()
+    }
+    
     // MARK: Life Cycle - viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        rootView.univTextField.becomeFirstResponder()
     }
 
     // MARK: setUpFoundation
