@@ -1,6 +1,8 @@
 # UniVoice_iOS
 
 #### “다양한 목소리를 통해 더 나은 학생 사회, 더 나은 대학 생활을 만들기 위해서” <br> 
+![유니보이스_브랜딩과제](https://github.com/user-attachments/assets/9fa19806-ade6-47a3-8245-49edcd773a31)
+
 학생회와 학생들의 목소리로 함께 만들어가는 대학 생활 필수 앱, **유니보이스** 입니다.
 
 - 34기 NOW SOPT APPJAM (2024.06.15 ~ )
@@ -12,8 +14,8 @@
 
 [박민서](https://github.com/FpRaArNkK) | [왕정빈](https://github.com/kingjeongkong) | [이자민](https://github.com/jaminleee) |[오연서](https://github.com/oyslucy) | 
 | :--: | :--: | :--: | :--: |
-| <img alt="민서" src="https://github.com/SOPKATHON-iOS-TEAM4/iOS/assets/84556636/3fd0433e-627d-48f6-bfa7-c62d460af2c9" width="350" height="300"/> | <img alt="정빈" src="https://github.com/SOPKATHON-iOS-TEAM4/iOS/assets/84556636/ba75edb2-db30-4eed-8dee-9e8520ce58df" width="350" height="300"/> | <img alt="자민" src= "https://github.com/Team-UniVoice/UniVoice_iOS/assets/84556636/202ae2f3-83e2-47a0-a4f9-6bfea9f39f69" width="350" height="300"/> | <img alt="연서" src="https://github.com/SOPKATHON-iOS-TEAM4/iOS/assets/84556636/58e074a6-b95c-4972-a2d1-b7ffea9ed8ba" width="350" height="300"/> |
-| [Team Leader] <br> 로그인 <br> 퀵스캔 <br> 저장 페이지 | [Team Member] <br> 회원가입(학생증 후) <br> API 구조 설계 후 구현 | [Team Member] <br> 회원가입(학생증 전) <br> 퀵스캔 | [Team Member] <br> 메인 홈 <br> 세부공지 확인 <br> 마이 페이지 |
+| <img alt="민서" src="https://github.com/SOPKATHON-iOS-TEAM4/iOS/assets/84556636/3fd0433e-627d-48f6-bfa7-c62d460af2c9" width="350"/> | <img alt="정빈" src="https://github.com/user-attachments/assets/b747b1db-5a8a-4269-ae79-4de906095d92" width="350"/> | <img alt="자민" src= "https://github.com/user-attachments/assets/9affbd0f-939d-4320-a99a-ac46671a17c1" width="350"/> | <img alt="연서" src="https://github.com/user-attachments/assets/487e7556-9aef-4901-9be4-0220e4731544" width="350"/> |
+| **[Team Leader]** <br> 로그인 <br> 퀵스캔 <br> 저장 페이지 | **[Team Member]** <br> 회원가입(학생증 후) <br> API 구조 설계 후 구현 | **[Team Member]** <br> 회원가입(학생증 전) <br> 공지사항 등록 | **[Team Member]** <br> 메인 홈 <br> 세부공지 확인 <br> 마이 페이지 |
 
 <br>
 
