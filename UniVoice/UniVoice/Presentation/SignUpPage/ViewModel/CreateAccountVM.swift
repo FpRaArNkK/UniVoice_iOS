@@ -38,7 +38,7 @@ final class CreateAccountVM: ViewModelType {
     func transform(input: Input) -> Output {
         let idIsValid = input.idText
             .map { id in
-                let idRegex = "^[a-z0-9\\[\\]\\{\\}\\#\\%\\^\\*\\+=_\\|\\~<>\\$£¥•\\-/:;\\(\\)₩&@“.,?!’\"\"\\\\]{5,20}$"
+                let idRegex = "^[a-z0-9\\[\\]\\{\\}\\#\\%\\^\\*\\+=_\\|\\~<>\\$£¥•\\-/:;\\(\\)₩&@.,?!‘’“”\\\\]{5,20}$"
                 let idTest = NSPredicate(format: "SELF MATCHES %@", idRegex)
                 return idTest.evaluate(with: id)
             }
@@ -46,7 +46,7 @@ final class CreateAccountVM: ViewModelType {
         
         let pwIsValid = input.pwText
             .map { password in
-                let pwRegex = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[\\[\\]\\{\\}\\#\\%\\^\\*\\+=_\\|\\~<>\\$£¥•\\-/:;\\(\\)₩&@“.,?!’\"\"\\\\]).{8,16}$"
+                let pwRegex = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[\\[\\]\\{\\}\\#\\%\\^\\*\\+=_\\|\\~<>\\$£¥•\\-/:;\\(\\)₩&@.,?!‘’“”\\\\]).{8,16}$"
                 let pwTest = NSPredicate(format: "SELF MATCHES %@", pwRegex)
                 return pwTest.evaluate(with: password)
             }
