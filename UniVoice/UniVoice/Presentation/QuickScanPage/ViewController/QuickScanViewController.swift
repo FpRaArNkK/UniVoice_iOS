@@ -164,12 +164,6 @@ final class QuickScanViewController: UIViewController {
         
 }
 
-extension QuickScanViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}
-
 // MARK: UICollectionViewDelegateFlowLayout
 extension QuickScanViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(

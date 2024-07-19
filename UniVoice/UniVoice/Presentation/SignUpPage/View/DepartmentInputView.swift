@@ -55,6 +55,7 @@ final class DepartmentInputView: UIView {
             $0.separatorInset.left = 0
             $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = .white
+            $0.overrideUserInterfaceStyle = .light
         }
         
         nextButton.do {

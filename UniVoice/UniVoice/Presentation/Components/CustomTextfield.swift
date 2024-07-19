@@ -60,6 +60,7 @@ class CustomTextfield: UITextField {
         clipsToBounds = false
         
         addHorizontalPadding(left: 5, right: 5)
+        self.overrideUserInterfaceStyle = .light
         
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.B_04,
