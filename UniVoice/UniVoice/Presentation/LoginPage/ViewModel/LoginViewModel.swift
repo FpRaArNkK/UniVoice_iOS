@@ -17,6 +17,13 @@ protocol ViewModelType {
     func transform(input: Input) -> Output
 }
 
+enum LoginButtonState {
+    case idIsEditingWithoutPW
+    case pwIsEditingWithoutID
+    case bothIsFilled
+    case none
+}
+
 final class LoginViewModel: ViewModelType {
     
     struct Input {
@@ -26,33 +33,68 @@ final class LoginViewModel: ViewModelType {
     }
     
     struct Output {
-        let isValid: Driver<Bool>
+        let loginButtonIsEnabled: Driver<Bool>
+        let loginButtonState: Driver<LoginButtonState>
         let loginState: Driver<Bool>
     }
     
+    private let idTextFieldCompletedRelay = BehaviorRelay<Bool>(value: false)
+    private let pwTextFieldCompletedRelay = BehaviorRelay<Bool>(value: false)
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
-        let isValid = Observable
-                    .combineLatest(input.idText, input.pwText)
-                    .map { id, pw in
-                        return !id.isEmpty && !pw.isEmpty
-                    }
-                    .asDriver(onErrorJustReturn: false)
+        let loginButtonIsEnabled = Observable
+            .combineLatest(
+                input.idText,
+                input.pwText,
+                idTextFieldCompletedRelay,
+                pwTextFieldCompletedRelay
+            )
+            .map { id, pw, idCompleted, pwCompleted in
+                if idCompleted {
+                    return !pw.isEmpty
+                } else if pwCompleted {
+                    return !id.isEmpty
+                } else {
+                    return !id.isEmpty || !pw.isEmpty
+                }
+            }
+            .startWith(false)
+            .asDriver(onErrorJustReturn: false)
+        
+        let loginButtonState = input.loginButtonDidTap
+            .withLatestFrom(Observable.combineLatest(input.idText, input.pwText))
+            .map { [weak self] id, pw in
+                if !id.isEmpty && pw.isEmpty {
+                    self?.idTextFieldCompletedRelay.accept(true)
+                    return LoginButtonState.idIsEditingWithoutPW
+                } else if id.isEmpty && !pw.isEmpty {
+                    self?.pwTextFieldCompletedRelay.accept(true)
+                    return LoginButtonState.pwIsEditingWithoutID
+                } else if !id.isEmpty && !pw.isEmpty {
+                    return LoginButtonState.bothIsFilled
+                } else {
+                    return LoginButtonState.none
+                }
+            }
+            .asDriver(onErrorJustReturn: LoginButtonState.none)
         
         let credentials = Observable
                    .combineLatest(input.idText, input.pwText)
         
-        let loginState = input.loginButtonDidTap
-            .withLatestFrom(isValid.asObservable())
-            .filter { $0 } // isValid가 true인 경우에만 통과
+        let loginState = loginButtonState
+            .asObservable()
+            .filter { $0 == .bothIsFilled }
             .withLatestFrom(credentials)
-            .flatMapLatest { id, pw in
-                return self.login(id: id, password: pw) //  로그인 로직 호출
+            .flatMapLatest { [weak self] id, pw in
+                self?.login(id: id, password: pw) ?? .just(false) // 로그인 로직 호출
             }
             .asDriver(onErrorJustReturn: false)
         
-        return Output(isValid: isValid, loginState: loginState)
+        return Output(
+            loginButtonIsEnabled: loginButtonIsEnabled,
+            loginButtonState: loginButtonState,
+            loginState: loginState)
     }
 }
 

@@ -48,10 +48,25 @@ final class LoginViewController: UIViewController {
         
         let output = viewModel.transform(input: input)
         
-        let isValid = output.isValid
+        let loginButtonIsEnabled = output.loginButtonIsEnabled
             .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
         
-        rootView.loginButton.bindData(buttonType: isValid.asObservable())
+        rootView.loginButton.bindData(buttonType: loginButtonIsEnabled.asObservable())
+        
+        output.loginButtonState
+            .drive { [weak self] buttonState in
+                switch buttonState {
+                case .idIsEditingWithoutPW:
+                    self?.rootView.pwTextField.becomeFirstResponder()
+                case .pwIsEditingWithoutID:
+                    self?.rootView.idTextField.becomeFirstResponder()
+                case .bothIsFilled:
+                    print("로그인 실행")
+                case .none:
+                    print("none")
+                }
+            }
+            .disposed(by: viewModel.disposeBag)
         
         output.loginState
             .drive(onNext: { [weak self] isUser in
