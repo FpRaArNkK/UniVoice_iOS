@@ -14,6 +14,7 @@ final class InitialView: UIView {
     
     // MARK: Views
     private let logoImageView = UIImageView()
+    let clearView = UIView()
     let splashView = LottieAnimationView(name: "splash(ios)")
     let buttonStack = UIStackView()
     let startButton = CustomButton(with: .active)
@@ -51,6 +52,7 @@ final class InitialView: UIView {
         ].forEach { buttonStack.addArrangedSubview($0) }
         
         [
+            clearView,
             logoImageView,
             buttonStack,
             splashView
@@ -60,8 +62,12 @@ final class InitialView: UIView {
     // MARK: setUpUI
     private func setUpUI() {
 
+        clearView.do {
+            $0.backgroundColor = .clear
+        }
+        
         logoImageView.do {
-            $0.image = UIImage.launchLogo
+            $0.image = UIImage.startLogo
             $0.contentMode = .scaleAspectFit
         }
         
@@ -86,8 +92,16 @@ final class InitialView: UIView {
     // MARK: setUpLayout
     private func setUpLayout() {
         
+        clearView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(buttonStack.snp.top)
+        }
+        
         logoImageView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.width.equalTo(108)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(clearView)
         }
         
         buttonStack.snp.makeConstraints {
