@@ -203,7 +203,7 @@ git-flow에 사용되는 브랜치는 총 5개 입니다. 🖐️ (main과 deve
 
 <br>
 
-## 우리의 사진
+## 📸 우리의 사진
 ![Untitled](https://github.com/user-attachments/assets/7dccc850-c3e3-4d4a-9ce1-7dd947ad68e1)
 
 <br>
