@@ -131,8 +131,7 @@ final class DetailNoticeVC: UIViewController {
         
         rootView.bindUI(
             isLiked: output.isLiked.asObservable(),
-            isSaved: output.isSaved.asObservable(),
-            cellModel: viewModel.noticeRelay.value
+            isSaved: output.isSaved.asObservable()
         )
         
     }

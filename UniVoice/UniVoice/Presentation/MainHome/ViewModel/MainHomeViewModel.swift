@@ -44,9 +44,11 @@ final class MainHomeViewModel: ViewModelType {
         let refreshQuit = quickScanItems.map { _ in Void() }
                 
         let councilItems = makeCouncilNamesArray(from: quickScanItems)
-        
-        let articleItems: Observable<[Article]> = selectedCouncilIndexRelay
-            .flatMapLatest { index -> Observable<[Article]> in
+                
+        let articleItems = input.fetchTrigger
+            .withLatestFrom(selectedCouncilIndexRelay)
+            .flatMapLatest { [weak self] index -> Observable<[Article]> in
+                guard let self = self else { return Observable.just([]) }
                 switch index {
                 case 0:
                     return self.allArticleApiCall()
@@ -132,8 +134,10 @@ private extension MainHomeViewModel {
     func makeCouncilNamesArray(from quickScanStories: Observable<[QS]>) -> Observable<[String]> {
         return quickScanStories.map { qsList in
             var councilNames = ["전체", "총학생회"]
-            councilNames.append(qsList[1].councilName)
-            councilNames.append(qsList[2].councilName)
+            if qsList.count > 1 {
+                councilNames.append(qsList[1].councilName)
+                councilNames.append(qsList[2].councilName)
+            }
             return councilNames
         }
     }

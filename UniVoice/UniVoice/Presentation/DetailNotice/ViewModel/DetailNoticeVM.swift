@@ -58,6 +58,7 @@ final class DetailNoticeVM: ViewModelType {
                 guard let self = self else { return }
                 var tempQuickScans = self.noticeRelay.value
                 tempQuickScans.isLiked = result
+                tempQuickScans.likeCount = result ? tempQuickScans.likeCount + 1 : tempQuickScans.likeCount - 1
                 self.noticeRelay.accept(tempQuickScans)
             })
             .disposed(by: disposeBag)
