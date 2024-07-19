@@ -66,6 +66,7 @@ class QuickScanCompletionView: UIView {
         
         completionLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .T1SB, with: "공지사항을 모두 확인했어요")
+            $0.textColor = .B_01
         }
         
         completionImageView.do {

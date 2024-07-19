@@ -74,10 +74,12 @@ final class NoAccountView: UIView {
         
         mainLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .T1SB, with: "가입된 계정이 없어요")
+            $0.textColor = .B_01
         }
         
         subLabel.do {
             $0.attributedText = .pretendardAttributedString(for: .B2R, with: "입력하신 아이디와 비밀번호를 다시 확인해주세요")
+            $0.textColor = .B_01
         }
         
         buttonStackView.do {
