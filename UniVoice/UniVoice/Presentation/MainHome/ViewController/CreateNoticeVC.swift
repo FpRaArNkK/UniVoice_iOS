@@ -141,8 +141,9 @@ final class CreateNoticeVC: UIViewController {
         
         output.goNext.asObservable()
             .bind(onNext: { [weak self] in
-                    let nextVC = UploadingNoticeVC()
-                self?.navigationController?.pushViewController(nextVC, animated: true)
+                guard let self = self else { return }
+                let nextVC = UploadingNoticeVC(request: self.viewModel.getRequest())
+                self.navigationController?.pushViewController(nextVC, animated: true)
             })
             .disposed(by: disposeBag)
         

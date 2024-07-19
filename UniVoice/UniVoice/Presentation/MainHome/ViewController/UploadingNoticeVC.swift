@@ -13,9 +13,22 @@ final class UploadingNoticeVC: UIViewController {
     
     // MARK: Views
     private let rootView = UploadingNoticeView()
-    private let disposeBag = DisposeBag()
+    
     
     // MARK: Properties
+    private lazy var viewModel = UploadingNoticeVM(request: request)
+    private let disposeBag = DisposeBag()
+    private let request: PostNoticeRequest
+    
+    // MARK: Init
+    init(request: PostNoticeRequest) {
+        self.request = request
+        super.init(nibName: nil, bundle: nil)
+    }
+        
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: Life Cycle - loadView
     override func loadView() {
@@ -49,6 +62,20 @@ final class UploadingNoticeVC: UIViewController {
     
     // MARK: setUpBindUI
     private func setUpBindUI() {
+        let output = self.viewModel.transform(input: .init(postNoticeRequest: Observable.just(self.request)))
+        // 업로드 완료 여부에 따라 동작을 수행
+        output.isUploadCompleted
+            .drive(onNext: { [weak self] success in
+                if success {
+                    print("업로드 완료")
+                    self?.rootView.showCompletionAnimation()
+                } else {
+                    print("업로드 실패")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 버튼 탭 이벤트와 바인딩하여 업로드 요청을 트리거
         rootView.confirmButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.popToMainHome()

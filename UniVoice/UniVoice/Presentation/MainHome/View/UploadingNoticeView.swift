@@ -72,7 +72,7 @@ final class UploadingNoticeView: UIView {
     // MARK: Configure Animation
         private func configureAnimation() {
             animationView.do {
-                $0.loopMode = .repeat(2)
+                $0.loopMode = .loop
                 $0.play(completion: { [weak self] _ in
                     guard let self = self else { return }
                     self.animationRepeatCount += 1
@@ -84,7 +84,7 @@ final class UploadingNoticeView: UIView {
             }
         }
         
-        private func showCompletionAnimation() {
+        func showCompletionAnimation() {
             animationView.stop()
             animationView.animation = LottieAnimation.named("finsh motion(ios)")
             animationView.loopMode = .playOnce
