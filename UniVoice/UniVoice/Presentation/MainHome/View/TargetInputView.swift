@@ -72,6 +72,7 @@ final class TargetInputView: UIView {
             $0.layer.borderWidth = 1
             $0.placeholder = "행사 대상을 입력해주세요."
             $0.addHorizontalPadding(left: 16)
+            $0.overrideUserInterfaceStyle = .light
         }
         
         confirmButton.do {

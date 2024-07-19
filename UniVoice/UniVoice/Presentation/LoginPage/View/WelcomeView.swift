@@ -61,6 +61,7 @@ final class WelcomeView: UIView {
         welcomeLabel.do {
             $0.text = "환영합니다!"
             $0.font = .pretendardFont(for: .T1SB)
+            $0.textColor = .b01
         }
         
         welcomeImageView.do {

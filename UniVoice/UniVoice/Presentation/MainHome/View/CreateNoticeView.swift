@@ -120,6 +120,7 @@ final class CreateNoticeView: UIView {
         titleTextField.do {
             $0.placeholder = "제목"
             $0.font = .pretendardFont(for: .H6SB)
+            $0.overrideUserInterfaceStyle = .light
         }
         
         devideView.do {
