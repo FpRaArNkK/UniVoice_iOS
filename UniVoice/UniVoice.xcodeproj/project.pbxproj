@@ -417,14 +417,14 @@
 		2195F6DB2C397539008D2485 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */,
+				EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */,
+				EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */,
 				2195F6D92C397531008D2485 /* StudentIDPhotoInputVM.swift */,
 				211B40892C3E8424008CFAAD /* StudentInfoInputVM.swift */,
 				211B408B2C3ED58A008CFAAD /* StudentInfoConfirmVM.swift */,
 				21DF05C32C3FCE01005EB117 /* CreateAccountVM.swift */,
 				21DF05C72C41A57B005EB117 /* TOSCheckVM.swift */,
-				EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */,
-				EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */,
-				EDF4C8B02C490B3E00DE7643 /* AdmissionYearSelectionVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -551,8 +551,6 @@
 				212FCAF92C471AF0000E8223 /* Plugin */,
 				212FCAD22C45799D000E8223 /* TargetType */,
 				212FCAD72C458C5D000E8223 /* Service */,
-				212FCAEE2C46A3E0000E8223 /* RequestModel */,
-				212FCAEB2C46828E000E8223 /* ResponseModel */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -560,6 +558,8 @@
 		880ED9692C23FE1E0045A620 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				212FCAEE2C46A3E0000E8223 /* RequestModel */,
+				212FCAEB2C46828E000E8223 /* ResponseModel */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
