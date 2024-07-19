@@ -33,52 +33,78 @@ final class MainHomeViewModel: ViewModelType {
     
     private let selectedCouncilIndexRelay = BehaviorRelay<Int>(value: 0)
     
+    private let quickScanItems = BehaviorRelay<[QS]>(value: [])
+    
+    private let articleItems = BehaviorRelay<[Article]>(value: [])
+        
+    private let allArticleRelay = BehaviorRelay<[Article]>(value: [])
+    
+    private let mainArticleRelay = BehaviorRelay<[Article]>(value: [])
+    
+    private let collegeArticleRelay = BehaviorRelay<[Article]>(value: [])
+    
+    private let departmentArticleRelay = BehaviorRelay<[Article]>(value: [])
+    
     func transform(input: Input) -> Output {
         
-        let quickScanItems = input.fetchTrigger
-            .flatMapLatest({ [weak self] () -> Observable<[QS]> in
-                guard let self = self else { return Observable.just([]) }
-                return self.quickScanApiCall()
-            })
-        
         let refreshQuit = quickScanItems.map { _ in Void() }
-                
-        let councilItems = makeCouncilNamesArray(from: quickScanItems)
-                
-        let articleItems = input.fetchTrigger
+        
+        let councilItems = quickScanItems.map { _ in self.councilList }
+        
+        let combinedTrigger = Observable.combineLatest(input.fetchTrigger, selectedCouncilIndexRelay)
+        
+        let combinedItems = combinedTrigger
             .withLatestFrom(selectedCouncilIndexRelay)
-            .flatMapLatest { [weak self] index -> Observable<[Article]> in
-                guard let self = self else { return Observable.just([]) }
+            .flatMapLatest { [weak self] index -> Observable<([QS], [Article])> in
+                guard let self = self else { return Observable.just(([], [])) }
+                
+                let quickScanObservable = self.quickScanApiCall()
+                
+                let articleObservable: Observable<[Article]>
+                
                 switch index {
                 case 0:
-                    return self.allArticleApiCall()
+                    articleObservable = self.allArticleApiCall()
                 case 1:
-                    return self.mainStudentArticleApiCall()
+                    articleObservable = self.mainStudentArticleApiCall()
                 case 2:
-                    return self.collegeStudentArticleApiCall()
+                    articleObservable = self.collegeStudentArticleApiCall()
                 case 3:
-                    return self.departmentStudentArticleApiCall()
+                    articleObservable = self.departmentStudentArticleApiCall()
                 default:
-                    return Observable.just([])
+                    articleObservable = Observable.just([])
                 }
+                
+                return Observable.zip(quickScanObservable, articleObservable)
             }
+            .share(replay: 1, scope: .whileConnected)
+        
+        combinedItems
+            .map { $0.0 }
+            .bind(to: quickScanItems)
+            .disposed(by: disposeBag)
+        
+        combinedItems
+            .map { $0.1 }
+            .bind(to: articleItems)
+            .disposed(by: disposeBag)
         
         input.councilSelected
             .bind(onNext: { [weak self] indexPath in
                 self?.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
-                
+        
         input.councilSelected
             .map { $0.row }
             .bind(to: selectedCouncilIndexRelay)
             .disposed(by: disposeBag)
         
         return Output(
-            qsItems: quickScanItems,
+            qsItems: quickScanItems.asObservable(),
             councilItems: councilItems,
-            articleItems: articleItems,
-            selectedCouncilIndex: selectedCouncilIndexRelay.asObservable(), 
+            articleItems: articleItems.asObservable(),
+            selectedCouncilIndex: selectedCouncilIndexRelay.asObservable(),
             refreshQuitTrigger: refreshQuit
         )
     }
