@@ -13,6 +13,7 @@
 [박민서](https://github.com/FpRaArNkK) | [왕정빈](https://github.com/kingjeongkong) | [이자민](https://github.com/jaminleee) |[오연서](https://github.com/oyslucy) | 
 | :--: | :--: | :--: | :--: |
 | <img alt="민서" src="https://github.com/SOPKATHON-iOS-TEAM4/iOS/assets/84556636/3fd0433e-627d-48f6-bfa7-c62d460af2c9" width="350" height="300"/> | <img alt="정빈" src="https://github.com/SOPKATHON-iOS-TEAM4/iOS/assets/84556636/ba75edb2-db30-4eed-8dee-9e8520ce58df" width="350" height="300"/> | <img alt="자민" src= "https://github.com/Team-UniVoice/UniVoice_iOS/assets/84556636/202ae2f3-83e2-47a0-a4f9-6bfea9f39f69" width="350" height="300"/> | <img alt="연서" src="https://github.com/SOPKATHON-iOS-TEAM4/iOS/assets/84556636/58e074a6-b95c-4972-a2d1-b7ffea9ed8ba" width="350" height="300"/> |
+| [Team Leader] <br> 로그인 <br> 퀵스캔 <br> 저장 페이지 | [Team Member] <br> 회원가입(학생증 후) <br> API 구조 설계 후 구현 | [Team Member] <br> 회원가입(학생증 전) <br> 퀵스캔 | [Team Member] <br> 메인 홈 <br> 세부공지 확인 <br> 마이 페이지 |
 
 <br>
 
@@ -22,8 +23,12 @@
 | --- | --- | --- |
 | [SnapKit](https://github.com/SnapKit/SnapKit) | 5.7.1 | 레이아웃 코드의 직관성, 간결성 강화,  UI Constraint 설정 간단화 |
 | [Then](https://github.com/devxoul/Then) | 3.0.0 | 객체를 초기화한 후 프로퍼티를 설정하는 과정 간단화, 가독성 증가 |
-| [Moya](https://github.com/Moya/Moya) | 15.0.0 | 네트워크 로직의 추상화, 구조화, 확장성 증가 |
+| [Moya](https://github.com/Moya/Moya) | 15.0.3 | 네트워크 로직의 추상화, 구조화, 확장성 증가 |
 | [KingFisher](https://github.com/onevcat/Kingfisher) | 7.12.0 | 이미지 캐싱, 이미지 처리 간편성 |
+| [RxSwift](https://github.com/ReactiveX/RxSwift) | 6.7.1 | 비동기 작업 관리 및 다양한 연산자를 활용한 데이터 스트림 처리 |
+| [RxDataSource](https://github.com/ReactiveX/RxSwift) | 5.0.2 | 테이블 뷰와 컬렉션 뷰의 데이터 소스를 반응형으로 관리 및 데이터 바인딩을 간편하게 처리 |
+| [RxMoya](https://github.com/Moya/Moya) | 15.0.3 | Moya를 사용하여 네트워크 요청을 관리하고, RxSwift를 통해 비동기 네트워크 작업을 처리 |
+| [Lottie](https://github.com/airbnb/lottie-ios) | 4.5.0 | JSON 기반의 애니메이션을 쉽게 구현 |
 <br>
 
 ## 📖 Coding Convention
@@ -50,7 +55,7 @@
 - 퀵헬프기능을 활용한 마크업 문법을 활용한 주석을 적극 사용한다.
 - 이외는 커스텀한 SwiftLint Rule을 적용한다.
 - image asset 추가 시 img_{name}의 이름으로 작성한다. snakecase로 작성
-- color asset 추가 시
+- color asset 추가 시 Figma 네이밍을 따름.
 ```
 
 ### 3. 개행
@@ -108,8 +113,8 @@
     
     ```swift
     switch ~~ {
-    	case 0: 
-    		print("")
+    	case 0:
+                print("")
     }
     ```
     
@@ -162,35 +167,32 @@ git-flow에 사용되는 브랜치는 총 5개 입니다. 🖐️ (main과 deve
 ## 📂 Project Foldering Convention
 
 ```bash
+├── ci_scripts
+│   ├── .swiftlint
 ├── Application
 │   ├── AppDelegate
 │   ├── SceneDelegate
+│   ├── LaunchScreen
 ├── Global
 │   ├── Extension
 │   ├── Literals
-│   │   ├── Image
-│   │   ├── String
-│   ├── Protocols
-│   ├── Resources
 │   │   ├── Font
+│   ├── Resources
 │   │   ├── Assets
+│   │   ├── Lottie Animation
+│   ├── Utility
 │   │   ├── Info.plist
-│   ├── Supporting Files
-│   │   ├── Base
-├───├───├───── LaunchScreen
+│   │   ├── Config.xcconfig
 ├── Domain
-│   ├── ViewModel
 ├── Data
-│   ├── View1
-│   │   ├── DTO
-│   │   ├── Router
-|   │   ├── Service
+│   ├── DTO
+│   ├── Router
+│   ├── Base
 ├── Presentation
 │   ├── Scene1
-│   │   │   ├── Views
-│   │   │   ├── ViewControllers
-│   │   │   ├── Cells
-│   │   │   │   ├── Cell1
-├───├───├───├───├── Cell2
+│   │   ├── View
+│   │   │   ├── Cell
+│   │   ├── ViewController
+│   │   ├── ViewModel
 ```
 <br>
