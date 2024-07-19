@@ -43,7 +43,8 @@ final class DepartmentInputVC: UIViewController {
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.departTableView,
+                                                            rootView.nextButton])
         setUpFoundation()
         setUpBindUI()
         setUpTableView()

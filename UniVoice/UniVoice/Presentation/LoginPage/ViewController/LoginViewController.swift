@@ -28,7 +28,7 @@ final class LoginViewController: UIViewController {
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.loginButton])
         setUpFoundation()
         setUpBindUI()
     }

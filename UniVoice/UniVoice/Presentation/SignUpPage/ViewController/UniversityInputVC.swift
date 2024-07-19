@@ -27,7 +27,8 @@ final class UniversityInputVC: UIViewController {
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissal()
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.univTableView,
+                                                            rootView.nextButton])
         setUpFoundation()
         setUpBindUI()
         setUpTableView()
