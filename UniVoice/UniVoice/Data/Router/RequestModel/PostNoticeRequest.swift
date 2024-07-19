@@ -11,7 +11,7 @@ struct PostNoticeRequest {
     let title: String
     let content: String
     let target: String
-    let startTime: Date
-    let endTime: Date
+    let startTime: Date?
+    let endTime: Date?
     let noticeImages: [UIImage]
 }

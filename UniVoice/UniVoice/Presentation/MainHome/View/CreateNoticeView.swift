@@ -264,23 +264,25 @@ final class CreateNoticeView: UIView {
         }
         
         imageCollectionView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
             $0.height.equalTo(86)
         }
         
         targetView.snp.makeConstraints {
             $0.height.equalTo(80)
-            $0.horizontalEdges.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(16)
         }
         
         dateView.snp.makeConstraints {
             $0.height.equalTo(104)
-            $0.horizontalEdges.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(16)
         }
         
         noticeStackView.snp.makeConstraints {
             $0.top.equalTo(contentTextView.snp.bottom)
-            $0.horizontalEdges.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(16)
+            $0.horizontalEdges.equalToSuperview()
         }
         
         bottomView.snp.makeConstraints {

@@ -17,8 +17,8 @@ final class CreateNoticeVM {
         let selectedImages: Observable<[UIImage]>
         let targetContenttext: Observable<String>
         let targetContentResult: Observable<String>
-        let startDate: Observable<Date>
-        let finishDate: Observable<Date>
+        let startDate: Observable<Date?>
+        let finishDate: Observable<Date?>
         let isUsingTime: Observable<Bool>
         let postButtonDidTap: Observable<Void>
     }
@@ -27,8 +27,8 @@ final class CreateNoticeVM {
         let buttonState: Driver<ButtonState>
         let images: Driver<[UIImage]>
         let targetContent: Driver<String>
-        let startDate: Driver<Date>
-        let finishDate: Driver<Date>
+        let startDate: Driver<Date?>
+        let finishDate: Driver<Date?>
         let showImageCollection: Driver<Bool>
         let showTargetView: Driver<Bool>
         let showDateView: Driver<Bool>
@@ -49,8 +49,8 @@ final class CreateNoticeVM {
     private let selectedImagesRelay = BehaviorRelay<[UIImage]>(value: [])
     private let targetContentRelay = BehaviorRelay<String>(value: "")
     private let targetContentResultRelay = BehaviorRelay<String>(value: "")
-    private let startDateRelay = BehaviorRelay<Date>(value: Date())
-    private let finishDateRelay = BehaviorRelay<Date>(value: Date())
+    private let startDateRelay = BehaviorRelay<Date?>(value: nil)
+    private let finishDateRelay = BehaviorRelay<Date?>(value: nil)
     private let showImageCollectionRelay = BehaviorRelay<Bool>(value: false)
     private let showTargetViewRelay = BehaviorRelay<Bool>(value: false)
     private let showDateViewRelay = BehaviorRelay<Bool>(value: false)
@@ -138,9 +138,20 @@ final class CreateNoticeVM {
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
         
+//        let showDateView = Observable
+//            .combineLatest(input.startDate, input.finishDate)
+//            .map { startDate, finishDate in
+//                return startDate != finishDate
+//            }
+//            .startWith(false)
+//            .asDriver(onErrorJustReturn: false)
+        
         let showDateView = Observable
             .combineLatest(input.startDate, input.finishDate)
             .map { startDate, finishDate in
+                guard let startDate = startDate, let finishDate = finishDate else {
+                    return false
+                }
                 return startDate != finishDate
             }
             .startWith(false)

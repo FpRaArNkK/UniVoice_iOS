@@ -87,7 +87,7 @@ final class CreateNoticeVC: UIViewController {
             startDate: startDateRelay.asObservable().compactMap { $0 },
             finishDate: finishDateRelay.asObservable().compactMap { $0 },
             isUsingTime: isUsingTimeRelay.asObservable().compactMap { $0 }, 
-            postButtonDidTap: rootView.createButton.rx.tap.asObservable()
+            postButtonDidTap: rootView.createButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
         )
         
         let output = viewModel.transform(input: input)
@@ -104,12 +104,12 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         Driver.combineLatest(output.startDate, output.isUsingTime)
-            .map { date, includeTime in date.toString(includeTime: includeTime) }
+            .map { date, includeTime in date!.toString(includeTime: includeTime) }
             .drive(rootView.dateView.startDateLabel.rx.text)
             .disposed(by: disposeBag)
         
         Driver.combineLatest(output.finishDate, output.isUsingTime)
-            .map { date, includeTime in date.toString(includeTime: includeTime) }
+            .map { date, includeTime in date!.toString(includeTime: includeTime) }
             .drive(rootView.dateView.finishDateLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -233,6 +233,11 @@ final class CreateNoticeVC: UIViewController {
             .disposed(by: disposeBag)
         
         rootView.imageCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        
+        selectedImagesRelay
+            .map { $0.count < 5 }
+            .bind(to: rootView.imageButton.rx.isUserInteractionEnabled)
+            .disposed(by: disposeBag)
     }
     
     private func imageButtonTapped() {
@@ -246,8 +251,20 @@ final class CreateNoticeVC: UIViewController {
         addImageAlert.addAction(addImageAction)
         addImageAlert.addAction(cancelAction)
         
-        present(addImageAlert, animated: true)
+        if !selectedImagesRelay.value.isEmpty {
+            let selectedImagesAlert = UIAlertController(title: "현재 선택된 이미지", message: nil, preferredStyle: .alert)
+            
+            for image in selectedImagesRelay.value {
+                let imageView = UIImageView(image: image)
+                imageView.contentMode = .scaleAspectFit
+                imageView.frame = CGRect(x: 0, y: 0, width: 240, height: 240)
+                selectedImagesAlert.view.addSubview(imageView)
+            }
+            
+            selectedImagesAlert.addAction(UIAlertAction(title: "확인", style: .default))
+        }
         
+        present(addImageAlert, animated: true)
     }
     
     private func targetButtonTapped() {
@@ -301,7 +318,7 @@ final class CreateNoticeVC: UIViewController {
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
-        configuration.selectionLimit = 5
+        configuration.selectionLimit = 5 - selectedImagesRelay.value.count
         
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
@@ -325,7 +342,7 @@ extension CreateNoticeVC: PHPickerViewControllerDelegate {
         let imageProviders = results.map { $0.itemProvider }
         
         let dispatchGroup = DispatchGroup()
-        var selectedImages = [UIImage]()
+        var selectedImages = selectedImagesRelay.value
         
         for provider in imageProviders {
             dispatchGroup.enter()

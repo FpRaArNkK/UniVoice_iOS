@@ -34,10 +34,14 @@ final class UniversityInputVC: UIViewController {
         setUpTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.univTextField.becomeFirstResponder()
+    }
+    
     // MARK: Life Cycle - viewDidAppear
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        rootView.univTextField.becomeFirstResponder()
     }
 
     // MARK: setUpFoundation
