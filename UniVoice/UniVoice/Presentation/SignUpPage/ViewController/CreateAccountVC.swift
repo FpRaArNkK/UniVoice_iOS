@@ -26,6 +26,11 @@ class CreateAccountVC: UIViewController {
         setUpFoundation()
         setUpBindUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.idTextField.becomeFirstResponder()
+    }
 
     // MARK: - setUpFoundation
     private func setUpFoundation() {
@@ -108,8 +113,8 @@ class CreateAccountVC: UIViewController {
                     self?.rootView.pwConditionLabel.isHidden = true
                     self?.rootView.confirmPwTextField.isHidden = false
                     self?.rootView.pwMatchLabel.isHidden = false
-                    self?.rootView.pwTextField.endEditing(true)
                     self?.rootView.confirmAndNextButton.setTitle("다음", for: .normal)
+                    self?.rootView.confirmPwTextField.becomeFirstResponder()
                     
                 case .next:
                     let tosCheckVC = UINavigationController(rootViewController: TOSCheckVC())
