@@ -125,6 +125,48 @@ final class QuickScanViewController: UIViewController {
             currentIndex: currentIndex
         )
         
+        quickScanCount
+            .filter { $0 == 1 }
+            .take(1)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:)))
+                panGestureRecognizer.delegate = self
+                self.rootView.quickScanContentCollectionView.addGestureRecognizer(panGestureRecognizer)
+            })
+            .disposed(by: viewModel.disposeBag)
+    }
+    
+    private var initialTranslationX: CGFloat = 0.0
+    private var isGestureHandled = false
+    
+    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        guard !isGestureHandled else { return }  // 제스처가 이미 처리되었는지 확인
+        
+        switch gesture.state {
+        case .began:
+            initialTranslationX = gesture.translation(in: rootView.quickScanContentCollectionView).x
+            print("Pan gesture began")
+        case .changed:
+            let translation = gesture.translation(in: rootView.quickScanContentCollectionView)
+            let delta = translation.x - initialTranslationX
+            print("Pan gesture changed with translation: \(translation)")
+            if delta <= -50 {
+                isGestureHandled = true
+                pushNextVC()
+            }
+        case .ended:
+            print("Pan gesture ended")
+        default:
+            break
+        }
+    }
+        
+}
+
+extension QuickScanViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 
