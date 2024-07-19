@@ -91,7 +91,7 @@ final class CreateNoticeVC: UIViewController {
             startDate: startDateRelay.asObservable().compactMap { $0 },
             finishDate: finishDateRelay.asObservable().compactMap { $0 },
             isUsingTime: isUsingTimeRelay.asObservable().compactMap { $0 }, 
-            postButtonDidTap: rootView.createButton.rx.tap.debounce(.seconds(1), scheduler: MainScheduler.instance)
+            postButtonDidTap: rootView.createButton.rx.tap.take(1)
         )
         
         let output = viewModel.transform(input: input)
