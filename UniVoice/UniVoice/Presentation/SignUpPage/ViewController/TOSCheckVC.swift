@@ -77,6 +77,22 @@ class TOSCheckVC: UIViewController {
             .disposed(by: viewModel.disposeBag)
         
         rootView.completeButton.bindData(buttonType: completeButtonState.asObservable())
+        
+        rootView.toServiceTermsDetailButton.rx.tap
+            .bind { _ in
+                if let url = URL(string: "https://massive-maple-b53.notion.site/426578b24235447abccaae359549cdb7") {
+                    UIApplication.shared.open(url)
+                }
+            }
+            .disposed(by: viewModel.disposeBag)
+        
+        rootView.toPersonalInfoTOSDetailButton.rx.tap
+            .bind { _ in
+                if let url = URL(string: "https://massive-maple-b53.notion.site/430e2c92b8694ad6a8b4497f3a3b4452?pvs=4") {
+                    UIApplication.shared.open(url)
+                }
+            }
+            .disposed(by: viewModel.disposeBag)
        
         // URLSession 사용한 방법
         rootView.completeButton.rx.tap
