@@ -134,8 +134,10 @@ private extension MainHomeViewModel {
     func makeCouncilNamesArray(from quickScanStories: Observable<[QS]>) -> Observable<[String]> {
         return quickScanStories.map { qsList in
             var councilNames = ["전체", "총학생회"]
-            councilNames.append(qsList[1].councilName)
-            councilNames.append(qsList[2].councilName)
+            if qsList.count > 1 {
+                councilNames.append(qsList[1].councilName)
+                councilNames.append(qsList[2].councilName)
+            }
             return councilNames
         }
     }
