@@ -28,6 +28,8 @@ class DepartmentTableViewCell: UITableViewCell {
     // MARK: setUpFoundation
     private func setUpFoundation() {
         self.backgroundColor = .white
+        self.contentView.backgroundColor = .white
+        self.tintColor = .white
     }
 
     // MARK: setUpHierarchy
