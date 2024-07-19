@@ -37,6 +37,11 @@ class StudentInfoInputVC: UIViewController {
         setUpBindUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.studentNameTextField.becomeFirstResponder()
+    }
+    
     // MARK: - setUpFoundation
     private func setUpFoundation() {
         self.title = "학생증 인증"

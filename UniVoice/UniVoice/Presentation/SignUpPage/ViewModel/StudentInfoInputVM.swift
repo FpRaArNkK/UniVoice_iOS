@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-enum ButtonState {
+enum StudentInfoInputButtonState {
     case nameIsEditingWithoutID
     case idIsEditingWithoutName
     case bothIsFilled
@@ -26,7 +26,7 @@ final class StudentInfoInputVM: ViewModelType {
     
     struct Output {
         let nextButtonIsEnabled: Driver<Bool>
-        let nextButtonState: Driver<ButtonState>
+        let nextButtonState: Driver<StudentInfoInputButtonState>
     }
     
     let photoImageRelay: BehaviorRelay<UIImage>
@@ -70,17 +70,17 @@ final class StudentInfoInputVM: ViewModelType {
             .map { [weak self] name, studentID in
                 if !name.isEmpty && studentID.isEmpty {
                     self?.nameTextFieldCompletedRelay.accept(true)
-                    return ButtonState.nameIsEditingWithoutID
+                    return StudentInfoInputButtonState.nameIsEditingWithoutID
                 } else if name.isEmpty && !studentID.isEmpty {
                     self?.idTextFieldCompletedRelay.accept(true)
-                    return ButtonState.idIsEditingWithoutName
+                    return StudentInfoInputButtonState.idIsEditingWithoutName
                 } else if !name.isEmpty && !studentID.isEmpty {
-                    return ButtonState.bothIsFilled
+                    return StudentInfoInputButtonState.bothIsFilled
                 } else {
-                    return ButtonState.none
+                    return StudentInfoInputButtonState.none
                 }
             }
-            .asDriver(onErrorJustReturn: ButtonState.none)
+            .asDriver(onErrorJustReturn: StudentInfoInputButtonState.none)
         
         SignUpDataManager.shared.bindStudentName(input.studentNameText)
         SignUpDataManager.shared.bindStudentNumber(input.studentIDText)
