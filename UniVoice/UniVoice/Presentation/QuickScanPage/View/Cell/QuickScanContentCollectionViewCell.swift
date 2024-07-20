@@ -137,7 +137,7 @@ final class QuickScanContentCVC: UICollectionViewCell {
         noticeTitleLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageView.snp.bottom).offset(14)
             $0.leading.equalToSuperview().offset(baseMargin)
-            $0.trailing.equalToSuperview().offset(-baseMargin-extraMargin).priority(.low)
+            $0.trailing.equalToSuperview().offset(-baseMargin-extraMargin)
         }
         
         contentStackView.snp.makeConstraints {
