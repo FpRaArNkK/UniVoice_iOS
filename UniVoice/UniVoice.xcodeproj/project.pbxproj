@@ -128,7 +128,6 @@
 		DC3B1A162C3182A7003FA5C9 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */; };
 		DC91FACC2C42B9A70095DD5E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC91FACB2C42B9A70095DD5E /* HeaderView.swift */; };
 		DC91FACF2C42E4710095DD5E /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC91FACE2C42E4710095DD5E /* TabBarVC.swift */; };
-		DC91FAD22C42E75D0095DD5E /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC91FAD12C42E75D0095DD5E /* AppTab.swift */; };
 		DC9EBCB02C3EB2CC007337A0 /* mainHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCAF2C3EB2CC007337A0 /* mainHomeModel.swift */; };
 		DC9EBCB22C3EC37C007337A0 /* CouncilCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */; };
 		DC9EBCB42C3EC386007337A0 /* ArticleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB32C3EC386007337A0 /* ArticleCVC.swift */; };
@@ -286,7 +285,6 @@
 		DC3B1A152C3182A7003FA5C9 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		DC91FACB2C42B9A70095DD5E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		DC91FACE2C42E4710095DD5E /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
-		DC91FAD12C42E75D0095DD5E /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
 		DC9EBCAF2C3EB2CC007337A0 /* mainHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainHomeModel.swift; sourceTree = "<group>"; };
 		DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouncilCVC.swift; sourceTree = "<group>"; };
 		DC9EBCB32C3EC386007337A0 /* ArticleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCVC.swift; sourceTree = "<group>"; };
@@ -847,18 +845,9 @@
 		DC91FACD2C42E3FA0095DD5E /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				DC91FAD02C42E7530095DD5E /* Model */,
 				DC91FACE2C42E4710095DD5E /* TabBarVC.swift */,
 			);
 			path = TabBar;
-			sourceTree = "<group>";
-		};
-		DC91FAD02C42E7530095DD5E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				DC91FAD12C42E75D0095DD5E /* AppTab.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		DC9EBCAE2C3EB2B3007337A0 /* MainHomeModel */ = {
@@ -1152,7 +1141,6 @@
 				21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */,
 				212FCAD62C4587BD000E8223 /* MoyaLoginPlugin.swift in Sources */,
 				212FCAF22C470F24000E8223 /* LoginRequest.swift in Sources */,
-				DC91FAD22C42E75D0095DD5E /* AppTab.swift in Sources */,
 				21F7B15A2C34620A00A082D8 /* UIFont+.swift in Sources */,
 				883B2CFD2C42B6E400D19A78 /* NoAccountView.swift in Sources */,
 				DC27DBD02C4708AB00401364 /* MyPageView.swift in Sources */,
