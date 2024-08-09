@@ -13,7 +13,7 @@ import Foundation
 struct MoyaLoggerPlugin: PluginType {
     
     // OSLog 인스턴스 생성
-    let logger = OSLog(subsystem: Bundle.main.bundleIdentifier ?? "NetworkLogger", category: "Network")
+    private let logger = OSLog(subsystem: Bundle.main.bundleIdentifier ?? "NetworkLogger", category: "Network")
 
     /// 요청이 보내지기 전에 호출되는 메서드
     /// - Parameters:
