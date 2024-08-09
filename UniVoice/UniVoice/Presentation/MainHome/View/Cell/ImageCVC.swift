@@ -59,7 +59,7 @@ final class ImageCVC: UICollectionViewCell {
             var config = UIButton.Configuration.filled()
             config.baseBackgroundColor = .gray500
             config.cornerStyle = .capsule
-            config.image = .btnWrtDelete
+            config.image = .icnWrtDelete
             $0.configuration = config
         }
     }

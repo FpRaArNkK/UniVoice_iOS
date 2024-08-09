@@ -107,7 +107,7 @@ final class MyPageView: UIView {
             $0.backgroundColor = .gray50
         }
         profileImage.do {
-            $0.image = UIImage(named: "profile_image")
+            $0.image = UIImage(named: "img_profile")
             $0.clipsToBounds = true
             $0.layer.cornerRadius = $0.frame.height / 2
             $0.contentMode = .scaleAspectFit
@@ -140,7 +140,7 @@ final class MyPageView: UIView {
             $0.backgroundColor = .blue200
         }
         universityImage.do {
-            $0.image = UIImage(named: "school_image")
+            $0.image = UIImage(named: "img_school")
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 87/2
             $0.contentMode = .scaleAspectFit

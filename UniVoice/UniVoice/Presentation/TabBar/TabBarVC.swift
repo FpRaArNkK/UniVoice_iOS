@@ -7,6 +7,34 @@
 
 import UIKit
 
+enum AppTab: String, CaseIterable {
+    case home = "홈"
+    case save = "저장"
+    case mypage = "설정"
+    
+    var image: UIImage {
+        switch self {
+        case .home:
+            return .icnHome
+        case .save:
+            return .icnSave
+        case .mypage:
+            return .icnMypage
+        }
+    }
+    
+    var selectedImage: UIImage {
+        switch self {
+        case .home:
+            return .icnHomeFilled.withRenderingMode(.alwaysOriginal)
+        case .save:
+            return .icnSaveFilled.withRenderingMode(.alwaysOriginal)
+        case .mypage:
+            return .icnMypageFilled.withRenderingMode(.alwaysOriginal)
+        }
+    }
+}
+
 final class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     
     // MARK: Life Cycle - viewDidLoad

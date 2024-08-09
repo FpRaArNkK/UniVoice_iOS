@@ -127,7 +127,7 @@ final class MainHomeView: UIView {
         }
         
         logoImageView.do {
-            $0.image = UIImage(named: "mainLogo")
+            $0.image = UIImage(named: "img_main_logo")
             $0.contentMode = .scaleAspectFit
         }
         

@@ -65,7 +65,7 @@ final class QuickScanCVC: UICollectionViewCell {
             $0.layer.cornerRadius = 20
         }
         councilImage.do {
-            $0.image = UIImage(named: "defaultImage")?.withRenderingMode(.alwaysOriginal)
+            $0.image = UIImage(named: "img_default_image")?.withRenderingMode(.alwaysOriginal)
             $0.layer.borderColor = UIColor.regular.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 34

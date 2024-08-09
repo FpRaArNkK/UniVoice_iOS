@@ -47,7 +47,7 @@ final class SignUpIntroView: UIView {
         }
         
         introIcon.do {
-            $0.image = .signUpIntro
+            $0.image = .imgSignUpIntro
             $0.contentMode = .scaleAspectFit
         }
         
