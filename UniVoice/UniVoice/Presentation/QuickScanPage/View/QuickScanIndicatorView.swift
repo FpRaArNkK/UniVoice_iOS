@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class QuickScanIndicatorView: UIView {
+final class QuickScanIndicatorView: UIView {
     
     // MARK: Properties
     private var quickScanCount = BehaviorRelay(value: 0)

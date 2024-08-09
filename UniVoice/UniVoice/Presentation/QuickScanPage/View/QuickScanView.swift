@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class QuickScanView: UIView {
+final class QuickScanView: UIView {
     
     // MARK: Properties
     private let baseMargin = 16

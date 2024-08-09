@@ -465,7 +465,7 @@ final class DateInputView: UIView {
     
     // MARK: 하루종일 버튼
     /// 일시 화면에서만 사용되는 시간설정/시간해제 버튼입니다.
-    class AllDayButton: UIButton {
+    final class AllDayButton: UIButton {
         
         // MARK: Properties
         enum ButtonType {
