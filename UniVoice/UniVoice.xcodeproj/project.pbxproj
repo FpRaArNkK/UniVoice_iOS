@@ -563,9 +563,7 @@
 		880ED96A2C23FE3A0045A620 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				EDF4C8B22C49A15600DE7643 /* splash(ios).json */,
-				EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */,
-				EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */,
+				88C580112C65FAA900B41D36 /* Animations */,
 				880ED9572C23F75D0045A620 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -757,6 +755,16 @@
 				88C231A92C48B441009BEA63 /* ci_post_clone.sh */,
 			);
 			path = ci_scripts;
+			sourceTree = "<group>";
+		};
+		88C580112C65FAA900B41D36 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				EDF4C8B22C49A15600DE7643 /* splash(ios).json */,
+				EDF4C8AC2C4881BB00DE7643 /* finsh motion(ios).json */,
+				EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		DC27DBCA2C47088400401364 /* MyPage */ = {
