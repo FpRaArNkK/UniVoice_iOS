@@ -14,8 +14,8 @@ import RxCocoa
 class QuickScanCompletionView: UIView {
     
     // MARK: Properties
-    let baseMargin = 16
-    let extraMargin = 6
+    private let baseMargin = 16
+    private let extraMargin = 6
     
     // MARK: Views
     private let blankView = UIView()
