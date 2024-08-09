@@ -73,7 +73,7 @@ final class LoginVC: UIViewController {
         output.loginState
             .drive(onNext: { [weak self] isUser in
                 if isUser {
-                    self?.navigationController?.pushViewController(WelcomeViewController(), animated: true)
+                    self?.navigationController?.pushViewController(WelcomeVC(), animated: true)
                 } else {
                     let NoAccountVC = UINavigationController(rootViewController: NoAccountViewController())
                     NoAccountVC.modalPresentationStyle = .overFullScreen
