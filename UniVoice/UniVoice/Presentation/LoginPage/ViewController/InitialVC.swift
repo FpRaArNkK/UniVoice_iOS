@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class InitialViewController: UIViewController {
+final class InitialVC: UIViewController {
     
     // MARK: Properties
     private let rootView = InitialView()

@@ -30,7 +30,7 @@ class SignUpInfoCheckingVC: UIViewController {
         rootView.backToInitialButton.rx.tap
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
-                let initialVC = UINavigationController(rootViewController: InitialViewController())
+                let initialVC = UINavigationController(rootViewController: InitialVC())
                 initialVC.modalPresentationStyle = .fullScreen
                 self.present(initialVC, animated: true)
             })
