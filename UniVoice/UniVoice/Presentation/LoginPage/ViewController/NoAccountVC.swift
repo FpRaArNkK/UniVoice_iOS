@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class NoAccountViewController: UIViewController {
+final class NoAccountVC: UIViewController {
     
     // MARK: Properties
     private let rootView = NoAccountView()
