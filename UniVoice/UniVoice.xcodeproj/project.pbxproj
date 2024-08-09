@@ -119,6 +119,7 @@
 		88BC6D8E2C49831B008543A2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BC6D8D2C49831B008543A2 /* UIViewController+.swift */; };
 		88C231A52C485416009BEA63 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C231A42C485416009BEA63 /* String+.swift */; };
 		88C231A72C486C4E009BEA63 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */; };
+		88C580172C66538E00B41D36 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C580162C66538E00B41D36 /* ViewModelType.swift */; };
 		DC27DBCE2C4708A000401364 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCD2C4708A000401364 /* MyPageVC.swift */; };
 		DC27DBD02C4708AB00401364 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBCF2C4708AB00401364 /* MyPageView.swift */; };
 		DC27DBD22C483DAB00401364 /* MyPageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */; };
@@ -276,6 +277,7 @@
 		88C231A42C485416009BEA63 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		88C231A62C486C4E009BEA63 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		88C231A92C48B441009BEA63 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
+		88C580162C66538E00B41D36 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		DC27DBCD2C4708A000401364 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		DC27DBCF2C4708AB00401364 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		DC27DBD12C483DAB00401364 /* MyPageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSelectView.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 		880ED9642C23FDAF0045A620 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				88C580152C66537E00B41D36 /* Protocols */,
 				88C580122C66172300B41D36 /* Singletons */,
 				DC9F76112C43493F0019A83F /* DetailNotice */,
 				88AB98042C3EC8C800AC5043 /* QuickScan */,
@@ -773,6 +776,14 @@
 				212FCB122C48673C000E8223 /* SignUpDataManager.swift */,
 			);
 			path = Singletons;
+			sourceTree = "<group>";
+		};
+		88C580152C66537E00B41D36 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				88C580162C66538E00B41D36 /* ViewModelType.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		DC27DBCA2C47088400401364 /* MyPage */ = {
@@ -1154,6 +1165,7 @@
 				88293F812C43BBBE0082A986 /* SavedNoticeView.swift in Sources */,
 				DC91FACF2C42E4710095DD5E /* TabBarVC.swift in Sources */,
 				EDE8CA282C37C59800E828F1 /* UniversityInputVC.swift in Sources */,
+				88C580172C66538E00B41D36 /* ViewModelType.swift in Sources */,
 				21F7B15E2C3473C500A082D8 /* UILabel+.swift in Sources */,
 				212FCAD62C4587BD000E8223 /* MoyaLoginPlugin.swift in Sources */,
 				212FCAF22C470F24000E8223 /* LoginRequest.swift in Sources */,
