@@ -67,7 +67,7 @@ final class InitialView: UIView {
         }
         
         logoImageView.do {
-            $0.image = UIImage.startLogo
+            $0.image = UIImage.imgStartLogo
             $0.contentMode = .scaleAspectFit
         }
         
