@@ -60,7 +60,7 @@ final class NoticeImageCVC: UICollectionViewCell {
 extension NoticeImageCVC {
     override func prepareForReuse() {
         super.prepareForReuse()
-        noticeImage.image = UIImage(named: "img_defaultImage")
+        noticeImage.image = UIImage(named: "img_default_image")
     }
     
     func noticeImageDataBind(imgURL: String) {

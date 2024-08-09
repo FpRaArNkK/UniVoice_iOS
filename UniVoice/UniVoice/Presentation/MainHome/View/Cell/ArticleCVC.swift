@@ -71,7 +71,7 @@ final class ArticleCVC: UICollectionViewCell {
             $0.layer.borderColor = UIColor.regular.cgColor
         }
         thumbnailImage.do {
-            $0.image = UIImage(named: "img_defaultImage")
+            $0.image = UIImage(named: "img_default_image")
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 5
             $0.contentMode = .scaleAspectFit
