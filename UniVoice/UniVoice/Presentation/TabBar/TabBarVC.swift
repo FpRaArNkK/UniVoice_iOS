@@ -15,22 +15,22 @@ enum AppTab: String, CaseIterable {
     var image: UIImage {
         switch self {
         case .home:
-            return .homeIc
+            return .icnHome
         case .save:
-            return .saveIc
+            return .icnSave
         case .mypage:
-            return .mypageIc
+            return .icnMypage
         }
     }
     
     var selectedImage: UIImage {
         switch self {
         case .home:
-            return .homeFilledIc.withRenderingMode(.alwaysOriginal)
+            return .icnHomeFilled.withRenderingMode(.alwaysOriginal)
         case .save:
-            return .saveFilledIc.withRenderingMode(.alwaysOriginal)
+            return .icnSaveFilled.withRenderingMode(.alwaysOriginal)
         case .mypage:
-            return .mypageFilledIc.withRenderingMode(.alwaysOriginal)
+            return .icnMypageFilled.withRenderingMode(.alwaysOriginal)
         }
     }
 }
