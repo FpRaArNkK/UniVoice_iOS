@@ -16,7 +16,7 @@ final class QuickScanVC: UIViewController {
     
     // MARK: Properties
     private let rootView = QuickScanView()
-    private let viewModel: QuickScanViewModel
+    private let viewModel: QuickScanVM
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,7 +30,7 @@ final class QuickScanVC: UIViewController {
         
     // MARK: init
     init(id: Int) {
-            self.viewModel = QuickScanViewModel(id: id)
+            self.viewModel = QuickScanVM(id: id)
             super.init(nibName: nil, bundle: nil)
         }
 
@@ -89,7 +89,7 @@ final class QuickScanVC: UIViewController {
         
         let bookmarkDidTap = PublishRelay<Int>()
         
-        let input = QuickScanViewModel.Input(
+        let input = QuickScanVM.Input(
             changeIndex: changeIndex,
             bookmarkDidTap: bookmarkDidTap.asObservable()
         )
