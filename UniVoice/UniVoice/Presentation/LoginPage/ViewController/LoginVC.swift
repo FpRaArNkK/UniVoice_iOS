@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class LoginViewController: UIViewController {
+final class LoginVC: UIViewController {
     
     // MARK: Properties
     private let rootView = LoginView()
