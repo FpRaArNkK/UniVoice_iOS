@@ -1,5 +1,5 @@
 //
-//  DepartmentTableViewCell.swift
+//  DepartmentTVC.swift
 //  UniVoice
 //
 //  Created by 이자민 on 7/12/24.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class DepartmentTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "DepartmentTableViewCell"
+final class DepartmentTVC: UITableViewCell {
+    static let reuseIdentifier = "DepartmentTVC"
     
     // MARK: Views
     let departNameLabel = UILabel()

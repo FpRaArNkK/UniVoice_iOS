@@ -102,8 +102,8 @@ final class DepartmentInputVC: UIViewController {
         
         output.filteredDepartments
             .drive(rootView.departTableView.rx.items(
-                cellIdentifier: "DepartmentTableViewCell",
-                cellType: DepartmentTableViewCell.self
+                cellIdentifier: "DepartmentTVC",
+                cellType: DepartmentTVC.self
             )) { index, department, cell in
                 cell.departNameLabel.text = department
             }
@@ -120,7 +120,7 @@ final class DepartmentInputVC: UIViewController {
 extension DepartmentInputVC: UITableViewDelegate {
     // MARK: setUpTableView
     private func setUpTableView() {
-        rootView.departTableView.register(DepartmentTableViewCell.self, forCellReuseIdentifier: "DepartmentTableViewCell")
+        rootView.departTableView.register(DepartmentTVC.self, forCellReuseIdentifier: "DepartmentTVC")
         rootView.departTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     

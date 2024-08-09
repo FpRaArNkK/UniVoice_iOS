@@ -1,5 +1,5 @@
 //
-//  UniversityTableViewCell.swift
+//  UniversityTVC.swift
 //  UniVoice
 //
 //  Created by 이자민 on 7/8/24.
@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Then
 
-final class UniversityTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "UniversityTableViewCell"
+final class UniversityTVC: UITableViewCell {
+    static let reuseIdentifier = "UniversityTVC"
     
     // MARK: Views
     let univNameLabel = UILabel()
