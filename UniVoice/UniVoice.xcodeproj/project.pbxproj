@@ -497,7 +497,7 @@
 		880ED9642C23FDAF0045A620 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				212FCB122C48673C000E8223 /* SignUpDataManager.swift */,
+				88C580122C66172300B41D36 /* Singletons */,
 				DC9F76112C43493F0019A83F /* DetailNotice */,
 				88AB98042C3EC8C800AC5043 /* QuickScan */,
 				DC9EBCAE2C3EB2B3007337A0 /* MainHomeModel */,
@@ -765,6 +765,14 @@
 				EDF4C8AD2C4881BB00DE7643 /* loading(ios).json */,
 			);
 			path = Animations;
+			sourceTree = "<group>";
+		};
+		88C580122C66172300B41D36 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				212FCB122C48673C000E8223 /* SignUpDataManager.swift */,
+			);
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 		DC27DBCA2C47088400401364 /* MyPage */ = {
