@@ -178,7 +178,7 @@ extension QuickScanVC: UICollectionViewDelegateFlowLayout {
 // MARK: Internal Logic
 private extension QuickScanVC {
     func pushNextVC() {
-        let nextVC = QuickScanCompletionViewController()
+        let nextVC = QuickScanCompletionVC()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

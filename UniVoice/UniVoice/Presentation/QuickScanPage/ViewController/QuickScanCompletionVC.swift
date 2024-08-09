@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class QuickScanCompletionViewController: UIViewController {
+final class QuickScanCompletionVC: UIViewController {
     
     // MARK: Properties
     private let rootView = QuickScanCompletionView()
@@ -53,7 +53,7 @@ final class QuickScanCompletionViewController: UIViewController {
 }
 
 // MARK: Internal Logic
-private extension QuickScanCompletionViewController {
+private extension QuickScanCompletionVC {
     func popToMainHome() {
         self.navigationController?.popToRootViewController(animated: true)
     }
