@@ -38,11 +38,6 @@ final class UniversityInputVC: UIViewController {
         super.viewWillAppear(animated)
         rootView.univTextField.becomeFirstResponder()
     }
-    
-    // MARK: Life Cycle - viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
 
     // MARK: setUpFoundation
     private func setUpFoundation() {
