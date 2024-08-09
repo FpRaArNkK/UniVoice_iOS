@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DepartmentTableViewCell: UITableViewCell {
+final class DepartmentTableViewCell: UITableViewCell {
     static let reuseIdentifier = "DepartmentTableViewCell"
     
     // MARK: Views

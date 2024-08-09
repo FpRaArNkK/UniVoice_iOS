@@ -14,7 +14,7 @@ final class DepartmentInputVC: UIViewController {
     // MARK: Views
     private let rootView = DepartmentInputView()
     private let viewModel = DepartmentInputVM()
-    private let disposeBag = DisposeBag() // 임시
+    private let disposeBag = DisposeBag()
     
     // MARK: Properties
     var selectedUniversity: BehaviorRelay<String>!

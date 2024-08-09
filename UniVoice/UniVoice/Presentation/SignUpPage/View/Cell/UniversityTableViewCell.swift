@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class UniversityTableViewCell: UITableViewCell {
+final class UniversityTableViewCell: UITableViewCell {
     static let reuseIdentifier = "UniversityTableViewCell"
     
     // MARK: Views

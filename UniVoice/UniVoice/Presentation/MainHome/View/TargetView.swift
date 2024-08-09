@@ -27,7 +27,6 @@ final class TargetView: UIView {
         setUpHierarchy()
         setUpUI()
         setUpLayout()
-        bindUI()
     }
     
     required init?(coder: NSCoder) {
@@ -76,12 +75,5 @@ final class TargetView: UIView {
             $0.top.trailing.equalToSuperview().inset(12)
             $0.width.height.equalTo(24)
         }
-    }
-    
-    // MARK: bindUI
-    private func bindUI() {
-        contentRelay
-            .bind(to: contentLabel.rx.text)
-            .disposed(by: disposeBag)
     }
 }
