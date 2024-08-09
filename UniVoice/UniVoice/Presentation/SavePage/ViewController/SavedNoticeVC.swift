@@ -42,12 +42,12 @@ final class SavedNoticeVC: UIViewController {
         bindUI()
     }
     
-    func setUpFoundation() {
+    private func setUpFoundation() {
         rootView.savedCollectionView.register(ArticleCVC.self, forCellWithReuseIdentifier: ArticleCVC.identifier)
         rootView.savedCollectionView.rx.setDelegate(self).disposed(by: viewModel.disposeBag)
     }
     
-    func bindUI() {
+    private func bindUI() {
         let input = SavedNoticeVM.Input(refreshEvent: refreshTrig.asObservable())
         let output = viewModel.transform(input: input)
         
