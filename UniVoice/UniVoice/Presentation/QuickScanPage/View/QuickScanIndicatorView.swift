@@ -138,14 +138,3 @@ extension QuickScanIndicatorView {
             .disposed(by: disposeBag)
     }
 }
-
-//    @available(iOS 17.0, *)
-//    #Preview {
-//        PreviewController(QuickScanIndicatorView(with: BehaviorRelay(value: 8)), snp: { view in
-//            view.snp.makeConstraints {
-//                $0.horizontalEdges.equalToSuperview().inset(16)
-//                $0.height.equalTo(4)
-//                $0.center.equalToSuperview()
-//            }
-//        })
-//    }

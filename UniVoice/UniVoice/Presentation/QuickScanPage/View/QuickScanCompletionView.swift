@@ -105,14 +105,3 @@ class QuickScanCompletionView: UIView {
         }
     }
 }
-
-@available(iOS 17.0, *)
-#Preview {
-    
-    PreviewController(QuickScanCompletionView(), snp: { view in
-        view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    })
-    
-}

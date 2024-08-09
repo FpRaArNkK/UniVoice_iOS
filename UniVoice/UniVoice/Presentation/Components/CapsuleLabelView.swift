@@ -81,12 +81,3 @@ extension CapsuleLabelView {
         }
     }
 }
-
-//@available(iOS 17.0, *)
-//#Preview {
-//    PreviewController(CapsuleLabelView(with: "실험"), snp: { view in
-//        view.snp.makeConstraints {
-//            $0.center.equalToSuperview()
-//        }
-//    })
-//}
