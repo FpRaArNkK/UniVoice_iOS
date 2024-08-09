@@ -73,7 +73,6 @@
 		880370BA2C490B5000AA141A /* PostNoticeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880370B92C490B5000AA141A /* PostNoticeRequest.swift */; };
 		880ED94F2C23F75B0045A620 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED94E2C23F75B0045A620 /* AppDelegate.swift */; };
 		880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED9502C23F75B0045A620 /* SceneDelegate.swift */; };
-		880ED9532C23F75B0045A620 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880ED9522C23F75B0045A620 /* ViewController.swift */; };
 		880ED9582C23F75D0045A620 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 880ED9572C23F75D0045A620 /* Assets.xcassets */; };
 		880ED95B2C23F75D0045A620 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 880ED95A2C23F75D0045A620 /* Base */; };
 		880ED9762C2402BF0045A620 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 880ED9752C2402BF0045A620 /* SnapKit */; };
@@ -241,7 +240,6 @@
 		880ED94B2C23F75B0045A620 /* UniVoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniVoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		880ED94E2C23F75B0045A620 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		880ED9502C23F75B0045A620 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		880ED9522C23F75B0045A620 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		880ED9572C23F75D0045A620 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		880ED95A2C23F75D0045A620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		880ED95C2C23F75D0045A620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -482,7 +480,6 @@
 			children = (
 				880ED94E2C23F75B0045A620 /* AppDelegate.swift */,
 				880ED9502C23F75B0045A620 /* SceneDelegate.swift */,
-				880ED9522C23F75B0045A620 /* ViewController.swift */,
 				880ED9592C23F75D0045A620 /* LaunchScreen.storyboard */,
 			);
 			path = Application;
@@ -532,7 +529,6 @@
 				88293F7C2C43BB710082A986 /* SavePage */,
 				DC27DBCA2C47088400401364 /* MyPage */,
 				880ED9732C24011A0045A620 /* Components */,
-				880ED96E2C23FEB30045A620 /* Dummy */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -615,45 +611,6 @@
 				212FCAF52C4714DB000E8223 /* KeyChain.swift */,
 			);
 			path = Utility;
-			sourceTree = "<group>";
-		};
-		880ED96E2C23FEB30045A620 /* Dummy */ = {
-			isa = PBXGroup;
-			children = (
-				880ED9712C23FED90045A620 /* ViewController */,
-				880ED9702C23FED20045A620 /* ViewModel */,
-				880ED96F2C23FECD0045A620 /* View */,
-			);
-			path = Dummy;
-			sourceTree = "<group>";
-		};
-		880ED96F2C23FECD0045A620 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				880ED9722C23FEE00045A620 /* Cell */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		880ED9702C23FED20045A620 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		880ED9712C23FED90045A620 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		880ED9722C23FEE00045A620 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		880ED9732C24011A0045A620 /* Components */ = {
@@ -1156,7 +1113,6 @@
 				212FCADD2C459628000E8223 /* NoticeService.swift in Sources */,
 				8820E69D2C4AA5D900452020 /* UploadingNoticeVM.swift in Sources */,
 				EDE8CA222C37C51300E828F1 /* DepartmentInputView.swift in Sources */,
-				880ED9532C23F75B0045A620 /* ViewController.swift in Sources */,
 				212FCB012C4824A5000E8223 /* CollegeStudentCouncilNoticeListResponse.swift in Sources */,
 				212FCAC92C4577BC000E8223 /* NetworkError.swift in Sources */,
 				21E15DFE2C3F0637003358A0 /* UIImage+.swift in Sources */,
