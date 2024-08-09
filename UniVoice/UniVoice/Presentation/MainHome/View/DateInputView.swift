@@ -570,7 +570,11 @@ final class DateInputView: UIView {
 extension DateInputView {
     /// DateInputView 컴포넌트에서 사용하는 시작 날짜, 종료 날짜, 시간포함여부의 Relay를 받아 컴포넌트와 바인드합니다.
     /// 해당 Observable들은 Submit(확인) 버튼을 눌렀을 때만 startDate, endDate, isUsingTime으로 방출됩니다.
-    func bindData(startDate: BehaviorRelay<Date?>, endDate: BehaviorRelay<Date?>, isUsingTime: BehaviorRelay<Bool?>) -> (BehaviorRelay<Date>, BehaviorRelay<Date>) {
+    func bindData(
+        startDate: BehaviorRelay<Date?>,
+        endDate: BehaviorRelay<Date?>,
+        isUsingTime: BehaviorRelay<Bool?>
+    ) -> (BehaviorRelay<Date>, BehaviorRelay<Date>) {
         
         submitButton.rx.tap
             .withLatestFrom(self.startDate.asObservable())
@@ -590,13 +594,3 @@ extension DateInputView {
         return (self.startDate, self.endDate)
     }
 }
-
-//@available(iOS 17.0, *)
-//#Preview {
-//    PreviewController(DateInputView(), snp: { view in
-//        view.snp.makeConstraints {
-//            $0.bottom.equalToSuperview()
-//            $0.horizontalEdges.equalToSuperview()
-//        }
-//    })
-//}
