@@ -58,10 +58,8 @@ extension UIViewController: UIGestureRecognizerDelegate {
     // UIGestureRecognizerDelegate 메서드 구현
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let exceptViews = objc_getAssociatedObject(gestureRecognizer, &AssociatedKeys.exceptViews) as? [UIView] {
-            for exceptView in exceptViews {
-                if touch.view?.isDescendant(of: exceptView) ?? false {
-                    return false
-                }
+            for exceptView in exceptViews where touch.view?.isDescendant(of: exceptView) ?? false {
+                return false
             }
         }
         return true
@@ -70,5 +68,5 @@ extension UIViewController: UIGestureRecognizerDelegate {
 
 // AssociatedKeys 구조체 추가
 private struct AssociatedKeys {
-    static var exceptViews = "exceptViews"
+    static var exceptViews: StaticString = "exceptViews"
 }
