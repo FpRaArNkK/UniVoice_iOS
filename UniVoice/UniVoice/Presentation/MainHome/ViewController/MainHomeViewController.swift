@@ -251,7 +251,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             }
             .subscribe(onNext: { [weak self] indexPath, items in
                 guard let self = self, items[indexPath.row].articleNumber != 0 else { return }
-                let quickScanVC = QuickScanViewController(id: indexPath.row)
+                let quickScanVC = QuickScanVC(id: indexPath.row)
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
             })
             .disposed(by: disposeBag)
