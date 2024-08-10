@@ -42,7 +42,6 @@ final class Service {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(object, from: data) else {
             print("⛔️ \(self)애서 디코딩 오류가 발생했습니다 ⛔️")
-            print(String(data: data, encoding: .utf8))
             return .error(NetworkError.decodedErr)
         }
         return .just(decodedData)

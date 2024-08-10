@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-//Button이 tap 됐을 때 title을 Observable로 보내기 위한 함수
+// Button이 tap 됐을 때 title을 Observable로 보내기 위한 함수
 extension Reactive where Base: UIButton {
     func title() -> Observable<String?> {
         return self.tap

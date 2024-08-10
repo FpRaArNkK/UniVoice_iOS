@@ -66,7 +66,8 @@ final class StudentInfoInputVM: ViewModelType {
             .asDriver(onErrorJustReturn: false)
         
         let nextButtonState = input.nextButtonDidTap
-            .withLatestFrom(Observable.combineLatest(input.studentNameText, input.studentIDText))
+            .withLatestFrom(Observable.combineLatest(input.studentNameText, 
+                                                     input.studentIDText))
             .map { [weak self] name, studentID in
                 if !name.isEmpty && studentID.isEmpty {
                     self?.nameTextFieldCompletedRelay.accept(true)

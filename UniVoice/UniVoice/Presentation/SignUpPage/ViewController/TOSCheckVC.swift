@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class TOSCheckVC: UIViewController {
+final class TOSCheckVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = TOSCheckView()

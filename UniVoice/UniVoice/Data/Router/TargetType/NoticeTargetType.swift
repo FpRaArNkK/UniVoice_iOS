@@ -24,7 +24,6 @@ enum NoticeTargetType {
     case postNotice(request: PostNoticeRequest) // 새로운 공지 생성
     case getSavedNoticeList // 저장한 공지들 보기
     case increaseNoticeViewCount(noticeID: Int) // 공지 조회수 증가[세부공지]
-//    case createNotice
     case checkQuickScanAsRead(noticeID: Int) // 공지 읽음 체크[퀵스캔확인]
     case getMyPage // 마이페이지
 }

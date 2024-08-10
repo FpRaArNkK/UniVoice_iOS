@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CreateAccountVC: UIViewController {
+final class CreateAccountVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = CreateAccountView()

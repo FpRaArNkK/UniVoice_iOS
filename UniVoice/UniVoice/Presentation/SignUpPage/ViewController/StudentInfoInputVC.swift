@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class StudentInfoInputVC: UIViewController {
+final class StudentInfoInputVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = StudentInfoInputView()
