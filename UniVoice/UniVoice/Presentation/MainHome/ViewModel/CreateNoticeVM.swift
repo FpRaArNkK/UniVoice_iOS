@@ -99,16 +99,6 @@ final class CreateNoticeVM {
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.goNext.accept(())
-//                self.postNotice(
-//                    req: .init(
-//                        title: self.titleTextRelay.value,
-//                        content: self.contentTextRelay.value,
-//                        target: self.targetContentRelay.value,
-//                        startTime: self.startDateRelay.value,
-//                        endTime: self.finishDateRelay.value,
-//                        noticeImages: self.selectedImagesRelay.value
-//                    )
-//                )
             })
             .disposed(by: disposeBag)
         
@@ -120,33 +110,18 @@ final class CreateNoticeVM {
                 return ButtonState(isEnabled: isEnabled, backgroundColor: backgroundColor)
             }
             .asDriver(onErrorJustReturn: ButtonState(isEnabled: false, backgroundColor: .gray200))
-        
         let images = input.selectedImages.asDriver(onErrorJustReturn: [])
-        
         let targetContent = input.targetContentResult.asDriver(onErrorJustReturn: "")
-        
         let startDate = input.startDate.asDriver(onErrorJustReturn: Date())
-        
         let finishDate = input.finishDate.asDriver(onErrorJustReturn: Date())
-        
         let showImageCollection = selectedImagesRelay
             .map { !$0.isEmpty }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
-        
         let showTargetView = input.targetContentResult
             .map { !$0.isEmpty }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
-        
-//        let showDateView = Observable
-//            .combineLatest(input.startDate, input.finishDate)
-//            .map { startDate, finishDate in
-//                return startDate != finishDate
-//            }
-//            .startWith(false)
-//            .asDriver(onErrorJustReturn: false)
-        
         let showDateView = Observable
             .combineLatest(input.startDate, input.finishDate)
             .map { startDate, finishDate in
@@ -157,11 +132,9 @@ final class CreateNoticeVM {
             }
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
-        
         let isTargetConfirmButtonEnabled = input.targetContenttext
             .map { !$0.isEmpty }
             .asDriver(onErrorJustReturn: false)
-        
         let isUsingTime = input.isUsingTime
             .asDriver(onErrorJustReturn: true)
         

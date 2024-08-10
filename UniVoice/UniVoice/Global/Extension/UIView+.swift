@@ -24,7 +24,7 @@ extension UIView {
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
         if axis == .horizontal {
-            gradientLayer.locations = [0.0 , 1.0]
+            gradientLayer.locations = [0.0, 1.0]
             gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
             gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
         } else if axis == .vertical {

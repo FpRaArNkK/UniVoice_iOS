@@ -57,7 +57,6 @@ final class UploadingNoticeView: UIView {
     
     // MARK: setUpLayout
     private func setUpLayout() {
-        
         animationView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

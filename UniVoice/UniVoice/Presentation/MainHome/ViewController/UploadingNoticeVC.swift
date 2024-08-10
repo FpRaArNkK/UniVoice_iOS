@@ -14,7 +14,6 @@ final class UploadingNoticeVC: UIViewController {
     // MARK: Views
     private let rootView = UploadingNoticeView()
     
-    
     // MARK: Properties
     private lazy var viewModel = UploadingNoticeVM(request: request)
     private let disposeBag = DisposeBag()

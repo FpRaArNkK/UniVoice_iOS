@@ -90,23 +90,6 @@ final class DateView: UIView {
             $0.top.horizontalEdges.equalToSuperview().inset(16)
         }
         
-//        startDateLabel.snp.makeConstraints {
-//            $0.leading.equalToSuperview().inset(16)
-//            $0.centerY.equalTo(nextIcon)
-//        }
-//        
-//        finishDateLabel.snp.makeConstraints {
-//            $0.bottom.trailing.equalToSuperview().inset(16)
-//            $0.centerY.equalTo(nextIcon)
-//        }
-//        
-//        nextIcon.snp.makeConstraints {
-//            $0.centerX.equalToSuperview()
-//            $0.centerY.equalTo(startDateLabel)
-//            $0.height.width.equalTo(24)
-//            
-//        }
-        
         deleteButton.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(12)
             $0.width.height.equalTo(24)
@@ -116,15 +99,4 @@ final class DateView: UIView {
             $0.horizontalEdges.bottom.equalToSuperview().inset(16)
         }
     }
-    
-    // MARK: bindUI
-    //    private func bindUI() {
-    //        startDateRelay
-    //            .bind(to: startDateLabel.rx.text)
-    //            .disposed(by: disposeBag)
-    //
-    //        finishDateRelay
-    //            .bind(to: finishDateLabel.rx.text)
-    //            .disposed(by: disposeBag)
-    //    }
 }

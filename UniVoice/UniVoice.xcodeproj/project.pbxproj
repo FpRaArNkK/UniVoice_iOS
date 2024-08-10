@@ -148,10 +148,10 @@
 		EDE8CA2C2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */; };
 		EDE8CA2E2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */; };
 		EDF4C8792C3B12F700DE7643 /* UniversityInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */; };
-		EDF4C87D2C3B17C000DE7643 /* UniversityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */; };
+		EDF4C87D2C3B17C000DE7643 /* UniversityTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C87C2C3B17C000DE7643 /* UniversityTVC.swift */; };
 		EDF4C8812C3F13D900DE7643 /* CustomMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8802C3F13D900DE7643 /* CustomMenuTableViewCell.swift */; };
 		EDF4C8852C412E9900DE7643 /* DepartmentInputVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */; };
-		EDF4C8872C41307400DE7643 /* DepartmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8862C41307400DE7643 /* DepartmentTableViewCell.swift */; };
+		EDF4C8872C41307400DE7643 /* DepartmentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8862C41307400DE7643 /* DepartmentTVC.swift */; };
 		EDF4C8892C41965900DE7643 /* CreateNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8882C41965900DE7643 /* CreateNoticeView.swift */; };
 		EDF4C88B2C41966300DE7643 /* CreateNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */; };
 		EDF4C8922C41DA6E00DE7643 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4C8912C41DA6E00DE7643 /* TargetView.swift */; };
@@ -305,10 +305,10 @@
 		EDE8CA2B2C37C5E500E828F1 /* AdmissionYearSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmissionYearSelectionVC.swift; sourceTree = "<group>"; };
 		EDE8CA2D2C37C5FA00E828F1 /* UnivInfoConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivInfoConfirmVC.swift; sourceTree = "<group>"; };
 		EDF4C8782C3B12F700DE7643 /* UniversityInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInputVM.swift; sourceTree = "<group>"; };
-		EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityTableViewCell.swift; sourceTree = "<group>"; };
+		EDF4C87C2C3B17C000DE7643 /* UniversityTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityTVC.swift; sourceTree = "<group>"; };
 		EDF4C8802C3F13D900DE7643 /* CustomMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenuTableViewCell.swift; sourceTree = "<group>"; };
 		EDF4C8842C412E9900DE7643 /* DepartmentInputVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentInputVM.swift; sourceTree = "<group>"; };
-		EDF4C8862C41307400DE7643 /* DepartmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentTableViewCell.swift; sourceTree = "<group>"; };
+		EDF4C8862C41307400DE7643 /* DepartmentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentTVC.swift; sourceTree = "<group>"; };
 		EDF4C8882C41965900DE7643 /* CreateNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeView.swift; sourceTree = "<group>"; };
 		EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoticeVC.swift; sourceTree = "<group>"; };
 		EDF4C8912C41DA6E00DE7643 /* TargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
@@ -975,8 +975,8 @@
 		EDF4C88E2C41C88D00DE7643 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				EDF4C87C2C3B17C000DE7643 /* UniversityTableViewCell.swift */,
-				EDF4C8862C41307400DE7643 /* DepartmentTableViewCell.swift */,
+				EDF4C87C2C3B17C000DE7643 /* UniversityTVC.swift */,
+				EDF4C8862C41307400DE7643 /* DepartmentTVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1143,7 +1143,7 @@
 				DC9EBCB42C3EC386007337A0 /* ArticleCVC.swift in Sources */,
 				882DB1672C31D8F200D73FEF /* WelcomeViewController.swift in Sources */,
 				EDF4C88B2C41966300DE7643 /* CreateNoticeVC.swift in Sources */,
-				EDF4C8872C41307400DE7643 /* DepartmentTableViewCell.swift in Sources */,
+				EDF4C8872C41307400DE7643 /* DepartmentTVC.swift in Sources */,
 				DC9F76132C43494E0019A83F /* DetailNotice.swift in Sources */,
 				212FCB052C48266E000E8223 /* UnreadQuickScanRequest.swift in Sources */,
 				88325C342C38762D004A293D /* UITextField+.swift in Sources */,
@@ -1223,7 +1223,7 @@
 				21DF05C62C4146B4005EB117 /* Reactive+.swift in Sources */,
 				2195F6DA2C397531008D2485 /* StudentIDPhotoInputVM.swift in Sources */,
 				880ED9512C23F75B0045A620 /* SceneDelegate.swift in Sources */,
-				EDF4C87D2C3B17C000DE7643 /* UniversityTableViewCell.swift in Sources */,
+				EDF4C87D2C3B17C000DE7643 /* UniversityTVC.swift in Sources */,
 				88AB980A2C3EF48F00AC5043 /* CapsuleLabelView.swift in Sources */,
 				DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */,
 				88AB98152C3FDB2F00AC5043 /* Date+.swift in Sources */,
