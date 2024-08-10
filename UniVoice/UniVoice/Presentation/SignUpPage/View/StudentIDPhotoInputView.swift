@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-class StudentIDPhotoInputView: UIView {
+final class StudentIDPhotoInputView: UIView {
     
     // MARK: - Views
     let studentIDPhotoimgaeView = UIImageView()

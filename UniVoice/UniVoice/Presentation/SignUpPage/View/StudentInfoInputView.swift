@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StudentInfoInputView: UIView {
+final class StudentInfoInputView: UIView {
 
     // MARK: - Views
     let studentNameTextField = CustomTextfield()
