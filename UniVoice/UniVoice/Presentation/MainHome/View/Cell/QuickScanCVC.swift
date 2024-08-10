@@ -15,25 +15,16 @@ import Kingfisher
 final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: Properties
-    
     static let identifier = "QuickScanCVC"
-    
     private let disposeBag = DisposeBag()
-    
     private let number = 10
-    
     private let circleWidth = 21
     
     // MARK: Views
-    
     private let content = UIView()
-    
     private let councilImage = UIImageView()
-    
     private let councilName = UILabel()
-    
     private let circleView = UIView()
-    
     private var noticeNumber = UILabel()
     
     // MARK: Init

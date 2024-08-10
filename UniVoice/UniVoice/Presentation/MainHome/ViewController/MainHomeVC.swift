@@ -14,13 +14,9 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
     
     // MARK: Properties
     private let disposeBag = DisposeBag()
-    
     private let viewModel = MainHomeVM()
-    
     private let itemSelectedSubject = PublishSubject<IndexPath>()
-    
     private let tabList = BehaviorRelay<[String]>(value: []) // 중간 부분에 들어가는 탭들 이름 리스트
-    
     private let fetchTrig = PublishRelay<Void>() // 새로고침 트리거
     
     // MARK: Views

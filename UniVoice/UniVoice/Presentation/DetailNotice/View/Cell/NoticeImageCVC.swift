@@ -15,11 +15,9 @@ import Kingfisher
 final class NoticeImageCVC: UICollectionViewCell {
     
     // MARK: Properties
-    
     static let identifier = "NoticeImageCVC"
     
     // MARK: Views
-    
     let noticeImage = UIImageView()
     
     // MARK: Init

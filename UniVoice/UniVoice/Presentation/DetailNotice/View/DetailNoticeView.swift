@@ -14,21 +14,13 @@ final class DetailNoticeView: UIView {
     private var disposeBag = DisposeBag()
     
     // MARK: Views
-    
     private let scrollView = UIScrollView()
-    
     private let contentView = UIView()
-    
     private let noticeTitleLabel = UILabel()
-    
     private let divider = UIView()
-    
     private let contentStackView = UIStackView()
-    
     private let basicInfoStackView = UIStackView() // (1) 대상 + 일시
-    
     let noticeImageStackView = UIStackView() // (2) 이미지CV + indicatorView
-    
     let noticeImageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -38,29 +30,17 @@ final class DetailNoticeView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-    
     let noticeImageIndicatorView = UIPageControl()
-    
     private let contentLabel = UILabel()
-    
     private let bottomView = UIView()
-    
     private let dividerView = UIView()
-    
     private let subInfoStackView = UIStackView() // 업로드일시, 조회수
-    
     private let createdDateLabel = UILabel()
-    
     private let viewCountLabel = UILabel()
-    
     private let buttonStackView = UIStackView()
-    
     private let likeStackView = UIStackView()
-    
     let likedButton = UIButton()
-    
     private let likeCountLabel = UILabel()
-    
     let savedButton = UIButton()
     
     // MARK: Init

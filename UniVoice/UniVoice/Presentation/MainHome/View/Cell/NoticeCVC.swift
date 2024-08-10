@@ -12,11 +12,9 @@ import Then
 final class NoticeCVC: UICollectionViewCell {
     
     // MARK: Properties
-    
     static let identifier = "NoticeCVC"
     
     // MARK: Views
-    
     private let chip = UILabel()
     private let chipView = UIView()
     private let noticeTitle = UILabel()

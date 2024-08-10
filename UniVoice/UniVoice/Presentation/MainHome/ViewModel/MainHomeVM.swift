@@ -30,19 +30,12 @@ final class MainHomeVM: ViewModelType {
     }
     
     var disposeBag = DisposeBag()
-    
     private let selectedCouncilIndexRelay = BehaviorRelay<Int>(value: 0)
-    
     private let quickScanItems = BehaviorRelay<[QuickScanProfile]>(value: [])
-    
     private let noticeItems = BehaviorRelay<[Notice]>(value: [])
-        
     private let allNoticeRelay = BehaviorRelay<[Notice]>(value: [])
-    
     private let mainNoticeRelay = BehaviorRelay<[Notice]>(value: [])
-    
     private let collegeNoticeRelay = BehaviorRelay<[Notice]>(value: [])
-    
     private let departmentNoticeRelay = BehaviorRelay<[Notice]>(value: [])
     
     func transform(input: Input) -> Output {
