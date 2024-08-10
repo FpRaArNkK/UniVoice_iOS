@@ -281,13 +281,6 @@ final class DetailNoticeView: UIView {
 
 extension DetailNoticeView {
     
-    func getDurationText(from startTime: Date?, to endTime: Date?) -> String? {
-        guard let startTime = startTime, let endTime = endTime else {
-            return nil
-        }
-        return "\(startTime.toFormattedString()) ~ \(endTime.toFormattedString())"
-    }
-    
     func fetchDetailNoticeData(cellModel: DetailNotice) {
         noticeTitleLabel.setText(cellModel.noticeTitle,
                                  font: .H5p1SB,
