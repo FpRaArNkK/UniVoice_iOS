@@ -12,11 +12,11 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-final class QuickScanCollectionViewCell: UICollectionViewCell {
+final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: Properties
     
-    static let identifier = "QuickScanCollectionViewCell"
+    static let identifier = "QuickScanCVC"
     
     private let disposeBag = DisposeBag()
     
