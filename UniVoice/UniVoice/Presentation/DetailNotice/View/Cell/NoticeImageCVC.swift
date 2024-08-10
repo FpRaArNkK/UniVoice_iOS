@@ -16,7 +16,7 @@ final class NoticeImageCVC: UICollectionViewCell {
     
     // MARK: Properties
     
-    static let identifier = "NoticeImageCollectionViewCell"
+    static let identifier = "NoticeImageCVC"
     
     // MARK: Views
     
