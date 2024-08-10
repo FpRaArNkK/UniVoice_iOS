@@ -9,6 +9,7 @@ import Moya
 import os.log
 import Foundation
 
+// swiftlint: disable non_optional_string_data_conversion
 /// 네트워크 요청 및 응답을 로깅하는 플러그인
 struct MoyaLoggerPlugin: PluginType {
     
@@ -48,3 +49,4 @@ struct MoyaLoggerPlugin: PluginType {
         }
     }
 }
+// swiftlint: enable non_optional_string_data_conversion
