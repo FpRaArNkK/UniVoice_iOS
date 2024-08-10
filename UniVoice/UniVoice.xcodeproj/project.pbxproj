@@ -130,7 +130,7 @@
 		DC91FACF2C42E4710095DD5E /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC91FACE2C42E4710095DD5E /* TabBarVC.swift */; };
 		DC951E892C6752960030BDA6 /* QuickScanProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC951E882C6752960030BDA6 /* QuickScanProfile.swift */; };
 		DC951E8B2C6753070030BDA6 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC951E8A2C6753070030BDA6 /* Notice.swift */; };
-		DC9EBCB02C3EB2CC007337A0 /* mainHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCAF2C3EB2CC007337A0 /* mainHomeModel.swift */; };
+		DC951E8D2C675DC50030BDA6 /* AffiliationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC951E8C2C675DC50030BDA6 /* AffiliationType.swift */; };
 		DC9EBCB22C3EC37C007337A0 /* CouncilCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */; };
 		DC9EBCB42C3EC386007337A0 /* NoticeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB32C3EC386007337A0 /* NoticeCVC.swift */; };
 		DC9EBCB82C3F44FC007337A0 /* MainHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EBCB72C3F44FC007337A0 /* MainHomeViewModel.swift */; };
@@ -289,7 +289,7 @@
 		DC91FACE2C42E4710095DD5E /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		DC951E882C6752960030BDA6 /* QuickScanProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickScanProfile.swift; sourceTree = "<group>"; };
 		DC951E8A2C6753070030BDA6 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
-		DC9EBCAF2C3EB2CC007337A0 /* mainHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainHomeModel.swift; sourceTree = "<group>"; };
+		DC951E8C2C675DC50030BDA6 /* AffiliationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliationType.swift; sourceTree = "<group>"; };
 		DC9EBCB12C3EC37C007337A0 /* CouncilCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouncilCVC.swift; sourceTree = "<group>"; };
 		DC9EBCB32C3EC386007337A0 /* NoticeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCVC.swift; sourceTree = "<group>"; };
 		DC9EBCB72C3F44FC007337A0 /* MainHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewModel.swift; sourceTree = "<group>"; };
@@ -505,6 +505,7 @@
 				88C580122C66172300B41D36 /* Singletons */,
 				DC9F76112C43493F0019A83F /* DetailNotice */,
 				88AB98042C3EC8C800AC5043 /* QuickScan */,
+				DC951E8C2C675DC50030BDA6 /* AffiliationType.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -873,7 +874,6 @@
 		DC951E872C674FBB0030BDA6 /* MainHome */ = {
 			isa = PBXGroup;
 			children = (
-				DC9EBCAF2C3EB2CC007337A0 /* mainHomeModel.swift */,
 				DC951E882C6752960030BDA6 /* QuickScanProfile.swift */,
 				DC951E8A2C6753070030BDA6 /* Notice.swift */,
 			);
@@ -1238,12 +1238,12 @@
 				212FCADB2C45933A000E8223 /* UserService.swift in Sources */,
 				88C231A72C486C4E009BEA63 /* MoyaLoggerPlugin.swift in Sources */,
 				DC33DAF92C39CD1F008B321E /* MainHomeView.swift in Sources */,
-				DC9EBCB02C3EB2CC007337A0 /* mainHomeModel.swift in Sources */,
 				DC33DB172C3B2A64008B321E /* QuickScanCollectionViewCell.swift in Sources */,
 				88325C2D2C382DF4004A293D /* PreviewController.swift in Sources */,
 				212FCAFB2C481D17000E8223 /* QuickScanStoryResponse.swift in Sources */,
 				88AB98062C3EC95B00AC5043 /* QuickScan.swift in Sources */,
 				EDE8CA1C2C37C42D00E828F1 /* SignUpIntroView.swift in Sources */,
+				DC951E8D2C675DC50030BDA6 /* AffiliationType.swift in Sources */,
 				2132A8382C3A6BA800795667 /* StudentIDPhotoInputVC.swift in Sources */,
 				882DB1632C31D74100D73FEF /* InitialViewController.swift in Sources */,
 				21F7B15C2C3471AA00A082D8 /* NSAttributedString+.swift in Sources */,

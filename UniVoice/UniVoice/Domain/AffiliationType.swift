@@ -1,8 +1,8 @@
 //
-//  mainHomeModel.swift
+//  AffiliationType.swift
 //  UniVoice
 //
-//  Created by 오연서 on 7/10/24.
+//  Created by 오연서 on 8/10/24.
 //
 
 import UIKit
