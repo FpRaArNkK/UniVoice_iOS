@@ -32,7 +32,7 @@ extension SavedNotice {
             chip: category,
             noticeTitle: title,
             thumbnailImage: image ?? "",
-            duration: Date().dateFromString(createdAt)?.toFormattedStringWithoutTime() ?? "",
+            createdTime: Date().dateFromString(createdAt)?.toFormattedStringWithoutTime() ?? "",
             likedNumber: noticeLike,
             savedNumber: viewCount
         )

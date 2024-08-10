@@ -19,7 +19,7 @@ final class NoticeCVC: UICollectionViewCell {
     private let chipView = UIView()
     private let noticeTitle = UILabel()
     private let thumbnailImage = UIImageView()
-    private let duration = UILabel()
+    private let createdTimeLabel = UILabel()
     private let divider = UIView()
     private let likedIcon = UIImageView()
     private let likedNumber = UILabel()
@@ -45,7 +45,7 @@ final class NoticeCVC: UICollectionViewCell {
             chipView,
             thumbnailImage,
             noticeTitle,
-            duration,
+            createdTimeLabel,
             divider,
             likedIcon,
             likedNumber,
@@ -79,7 +79,7 @@ final class NoticeCVC: UICollectionViewCell {
             $0.setText("명절 귀향 버스 수요 조사", font: .T4SB, color: .B_01)
             $0.lineBreakMode = .byTruncatingTail
         }
-        duration.do {
+        createdTimeLabel.do {
             $0.setText("06/26 ~ 06/26", font: .C3R, color: .B_03)
         }
         divider.do {
@@ -123,36 +123,36 @@ final class NoticeCVC: UICollectionViewCell {
             $0.trailing.equalToSuperview().inset(4)
             $0.size.equalTo(58)
         }
-        duration.snp.makeConstraints {
+        createdTimeLabel.snp.makeConstraints {
             $0.top.equalTo(noticeTitle.snp.bottom).offset(12)
             $0.leading.equalTo(chipView)
         }
         divider.snp.makeConstraints {
-            $0.centerY.equalTo(duration)
-            $0.leading.equalTo(duration.snp.trailing).offset(8)
+            $0.centerY.equalTo(createdTimeLabel)
+            $0.leading.equalTo(createdTimeLabel.snp.trailing).offset(8)
             $0.height.equalTo(12)
             $0.width.equalTo(1)
         }
         likedIcon.snp.makeConstraints {
-            $0.centerY.equalTo(duration)
+            $0.centerY.equalTo(createdTimeLabel)
             $0.leading.equalTo(divider.snp.trailing).offset(8)
             $0.size.equalTo(12)
         }
         likedNumber.snp.makeConstraints {
-            $0.centerY.equalTo(duration)
+            $0.centerY.equalTo(createdTimeLabel)
             $0.leading.equalTo(likedIcon.snp.trailing).offset(2)
         }
         savedIcon.snp.makeConstraints {
-            $0.centerY.equalTo(duration)
+            $0.centerY.equalTo(createdTimeLabel)
             $0.leading.equalTo(likedNumber.snp.trailing).offset(6)
             $0.size.equalTo(12)
         }
         savedNumber.snp.makeConstraints {
-            $0.centerY.equalTo(duration)
+            $0.centerY.equalTo(createdTimeLabel)
             $0.leading.equalTo(savedIcon.snp.trailing).offset(2)
         }
         cellDivider.snp.makeConstraints {
-            $0.top.equalTo(duration.snp.bottom).offset(12)
+            $0.top.equalTo(createdTimeLabel.snp.bottom).offset(12)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(1)
         }
@@ -166,7 +166,7 @@ extension NoticeCVC {
         chip.text = nil
         noticeTitle.text = nil
         thumbnailImage.image = nil
-        duration.text = nil
+        createdTimeLabel.text = nil
         likedNumber.text = nil
         savedNumber.text = nil
     }
@@ -177,7 +177,7 @@ extension NoticeCVC {
         noticeTitle.text = viewModel.noticeTitle
         noticeTitle.lineBreakMode = .byTruncatingTail
         thumbnailImage.kf.setImage(with: URL(string: viewModel.thumbnailImage))
-        duration.text = viewModel.duration
+        createdTimeLabel.text = viewModel.createdTime
         likedNumber.text = "\(viewModel.likedNumber)"
         savedNumber.text = "\(viewModel.savedNumber)"
         chipView.snp.removeConstraints()

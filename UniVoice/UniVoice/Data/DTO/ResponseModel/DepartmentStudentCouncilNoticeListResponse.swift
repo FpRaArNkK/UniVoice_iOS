@@ -38,7 +38,7 @@ extension DepartmentStudentCouncilNotice {
         return Notice(id: id, chip: chip,
                        noticeTitle: noticeTitle,
                        thumbnailImage: thumbnailImage,
-                       duration: createdAt.formatDate(from: createdAt),
+                       createdTime: createdAt.formatDate(from: createdAt),
                        likedNumber: likedNumber,
                        savedNumber: savedNumber)
     }
