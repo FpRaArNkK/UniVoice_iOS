@@ -31,7 +31,6 @@ extension AllNotice {
         let chip = category
         let noticeTitle = title
         let thumbnailImage = image ?? ""
-        let duration = createdAt
         let likedNumber = likeCount
         let savedNumber = viewCount
         

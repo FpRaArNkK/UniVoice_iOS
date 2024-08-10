@@ -12,9 +12,9 @@ import RxDataSources
 
 final class MainHomeVC: UIViewController, UIScrollViewDelegate {
     
-    //MARK: Properties
+    // MARK: Properties
     private let disposeBag = DisposeBag()
-
+    
     private let viewModel = MainHomeVM()
     
     private let itemSelectedSubject = PublishSubject<IndexPath>()
@@ -117,42 +117,48 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
         let output = viewModel.transform(input: input)
         
         let qsItems = output.qsItems
-                        
-        let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QuickScanProfile>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
-            else {
-                return UICollectionViewCell()
-            }
-            cell.quickScanDataBind(viewModel: viewModel)
-            return cell
-        })
         
-        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CouncilCVC.identifier, for: indexPath) as? CouncilCVC else {
-                return UICollectionViewCell()
-            }
-            
-            cell.councilButton.rx.tap
-                .map { return indexPath }
-                .bind(to: self.itemSelectedSubject)
-                .disposed(by: self.disposeBag)
-            
-            let buttonType = output.selectedCouncilIndex
-                .map { index in
-                    return indexPath.row == index ? CustomButtonType.selected : CustomButtonType.unselected
+        let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QuickScanProfile>>(
+            configureCell: { dataSource, collectionView, indexPath, viewModel in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
+                else {
+                    return UICollectionViewCell()
                 }
-            
-            cell.councilDataBind(councilName: viewModel, type: buttonType)
-            return cell
-        })
-        
-        let noticeDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Notice>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCVC.identifier, for: indexPath) as? NoticeCVC else {
-                return UICollectionViewCell()
+                cell.quickScanDataBind(viewModel: viewModel)
+                return cell
             }
-            cell.noticeDataBind(viewModel: viewModel)
-            return cell
-        })
+        )
+        
+        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
+            configureCell: { dataSource, collectionView, indexPath, viewModel in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CouncilCVC.identifier, for: indexPath) as? CouncilCVC else {
+                    return UICollectionViewCell()
+                }
+                
+                cell.councilButton.rx.tap
+                    .map { return indexPath }
+                    .bind(to: self.itemSelectedSubject)
+                    .disposed(by: self.disposeBag)
+                
+                let buttonType = output.selectedCouncilIndex
+                    .map { index in
+                        return indexPath.row == index ? CustomButtonType.selected : CustomButtonType.unselected
+                    }
+                
+                cell.councilDataBind(councilName: viewModel, type: buttonType)
+                return cell
+            }
+        )
+        
+        let noticeDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Notice>>(
+            configureCell: { dataSource, collectionView, indexPath, viewModel in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCVC.identifier, for: indexPath) as? NoticeCVC else {
+                    return UICollectionViewCell()
+                }
+                cell.noticeDataBind(viewModel: viewModel)
+                return cell
+            }
+        )
         
         qsItems
             .map { [SectionModel(model: "Section 1", items: $0)] }
@@ -207,7 +213,6 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
                 self?.updateCollectionViewHeight(size: size)
             })
             .disposed(by: disposeBag)
-            
         
         output.refreshQuitTrigger
             .bind(onNext: { [weak self] in
@@ -223,14 +228,14 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
         rootView.headerView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-//                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
+                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
         rootView.stickyHeaderView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-//                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
+                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         

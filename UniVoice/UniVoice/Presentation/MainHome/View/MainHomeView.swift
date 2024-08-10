@@ -12,11 +12,11 @@ import Then
 final class MainHomeView: UIView {
     
     // MARK: Views
-    ///empty view
+    /// empty view
     let emptyStackView = UIStackView()
     let emptyViewLabel = UILabel()
     let councilApplyButton = CustomButton(with: .active)
-    ///main view
+    /// main view
     let scrollView = UIScrollView()
     let contentView = UIView()
     let logoImageView = UIImageView()
@@ -149,7 +149,7 @@ final class MainHomeView: UIView {
     // MARK: setUpLayout
     private func setUpLayout() {
         
-        ///empty view
+        /// empty view
         emptyStackView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalTo(214)
@@ -161,7 +161,7 @@ final class MainHomeView: UIView {
             $0.width.equalTo(181)
         }
         
-        ///main view
+        /// main view
         scrollView.snp.makeConstraints {
             $0.top.bottom.equalTo(self.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()

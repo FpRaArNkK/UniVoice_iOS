@@ -7,11 +7,13 @@
 
 import Foundation
 
+// swiftlint: disable type_name
 struct DepartmentStudentCouncilNoticeListResponse: Codable {
     let status: Int
     let message: String
     let data: [DepartmentStudentCouncilNotice]
 }
+// swiftlint: enable type_name
 
 struct DepartmentStudentCouncilNotice: Codable {
     let id: Int
@@ -30,7 +32,6 @@ extension DepartmentStudentCouncilNotice {
         let chip = category
         let noticeTitle = title
         let thumbnailImage = image ?? ""
-        let duration = createdAt
         let likedNumber = likeCount
         let savedNumber = viewCount
         

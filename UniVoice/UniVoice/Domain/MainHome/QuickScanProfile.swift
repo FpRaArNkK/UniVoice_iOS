@@ -11,5 +11,5 @@ import UIKit
 struct QuickScanProfile {
     let councilImage: String
     let councilName: String
-    let noticeNumber: Int //읽지 않은 공지 개수
+    let noticeNumber: Int // 읽지 않은 공지 개수
 }

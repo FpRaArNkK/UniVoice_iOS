@@ -28,9 +28,18 @@ struct QuickScanStory: Codable {
 extension QuickScanStory {
     func toQS() -> [QuickScanProfile] {
         return [
-            QuickScanProfile.init(councilImage: universityLogoImage ?? "", councilName: universityName, noticeNumber: universityNameCount),
-            QuickScanProfile.init(councilImage: collegeDepartmentLogoImage ?? "", councilName: collegeDepartmentName, noticeNumber: collegeDepartmentCount),
-            QuickScanProfile.init(councilImage: departmentLogoImage ?? "", councilName: departmentName, noticeNumber: departmentCount)
+            QuickScanProfile.init(
+                councilImage: universityLogoImage ?? "",
+                councilName: universityName,
+                noticeNumber: universityNameCount),
+            QuickScanProfile.init(
+                councilImage: collegeDepartmentLogoImage ?? "",
+                councilName: collegeDepartmentName,
+                noticeNumber: collegeDepartmentCount),
+            QuickScanProfile.init(
+                councilImage: departmentLogoImage ?? "",
+                councilName: departmentName,
+                noticeNumber: departmentCount)
         ]
     }
 }

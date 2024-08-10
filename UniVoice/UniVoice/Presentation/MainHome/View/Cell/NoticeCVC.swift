@@ -15,7 +15,8 @@ final class NoticeCVC: UICollectionViewCell {
     
     static let identifier = "NoticeCVC"
     
-    //MARK: Views
+    // MARK: Views
+    
     private let chip = UILabel()
     private let chipView = UIView()
     private let noticeTitle = UILabel()
