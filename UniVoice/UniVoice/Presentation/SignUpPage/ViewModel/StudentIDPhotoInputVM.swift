@@ -31,12 +31,12 @@ final class StudentIDPhotoInputVM: ViewModelType {
         let image = input.imageSelected
             .asDriver(onErrorDriveWith: .empty())
         
-        let nextButtonState = input.imageSelected
+        let nextButtonIsHidden = input.imageSelected
             .map { _ in false }
             .asDriver(onErrorJustReturn: false)
         
         SignUpDataManager.shared.bindStudentCardImage(input.imageSelected)
         
-        return Output(image: image, nextButtonIsHidden: nextButtonState)
+        return Output(image: image, nextButtonIsHidden: nextButtonIsHidden)
     }
 }
