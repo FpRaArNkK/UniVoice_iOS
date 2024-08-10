@@ -13,7 +13,7 @@ final class SignUpIntroVC: UIViewController {
 
     // MARK: Views
     private let rootView = SignUpIntroView()
-    private let disposeBag = DisposeBag() // 임시
+    private let disposeBag = DisposeBag()
 
     // MARK: Life Cycle - loadView
     override func loadView() {

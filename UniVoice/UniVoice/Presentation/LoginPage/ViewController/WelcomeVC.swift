@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class WelcomeViewController: UIViewController {
+final class WelcomeVC: UIViewController {
     
     // MARK: Properties
     private let rootView = WelcomeView()

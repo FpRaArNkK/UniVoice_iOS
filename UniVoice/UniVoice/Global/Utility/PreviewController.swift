@@ -35,6 +35,7 @@ final class PreviewController: UIViewController {
     }
 }
 
+// swiftlint:disable comment_spacing
 // MARK: 사용 예시
 //@available(iOS 17.0, *)
 //#Preview {
@@ -45,4 +46,4 @@ final class PreviewController: UIViewController {
 //        }
 //    })
 //}
-
+// swiftlint:enable comment_spacing

@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class InitialViewController: UIViewController {
+final class InitialVC: UIViewController {
     
     // MARK: Properties
     private let rootView = InitialView()
@@ -52,7 +52,7 @@ final class InitialViewController: UIViewController {
         
         rootView.loginButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.navigationController?.pushViewController(LoginViewController(), animated: true)
+                self?.navigationController?.pushViewController(LoginVC(), animated: true)
             })
             .disposed(by: disposeBag)
     }

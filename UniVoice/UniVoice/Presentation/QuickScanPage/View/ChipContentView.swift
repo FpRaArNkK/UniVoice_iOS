@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ChipContentView: UIView {
+final class ChipContentView: UIView {
     
     // MARK: Properties
     private let chipString: String

@@ -38,11 +38,6 @@ final class UniversityInputVC: UIViewController {
         super.viewWillAppear(animated)
         rootView.univTextField.becomeFirstResponder()
     }
-    
-    // MARK: Life Cycle - viewDidAppear
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
 
     // MARK: setUpFoundation
     private func setUpFoundation() {
@@ -92,8 +87,8 @@ final class UniversityInputVC: UIViewController {
         
         output.filteredUniversities
             .drive(rootView.univTableView.rx.items(
-                cellIdentifier: "UniversityTableViewCell",
-                cellType: UniversityTableViewCell.self
+                cellIdentifier: "UniversityTVC",
+                cellType: UniversityTVC.self
             )) { index, university, cell in
                 cell.univNameLabel.text = university
             }
@@ -108,7 +103,7 @@ final class UniversityInputVC: UIViewController {
 extension UniversityInputVC: UITableViewDelegate {
     // MARK: setUpTableView
     private func setUpTableView() {
-        rootView.univTableView.register(UniversityTableViewCell.self, forCellReuseIdentifier: "UniversityTableViewCell")
+        rootView.univTableView.register(UniversityTVC.self, forCellReuseIdentifier: "UniversityTVC")
         rootView.univTableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     

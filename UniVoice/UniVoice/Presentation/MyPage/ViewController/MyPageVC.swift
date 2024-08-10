@@ -81,7 +81,7 @@ final class MyPageVC: UIViewController, UIScrollViewDelegate {
     }
     
     @objc private func logoutLabelTapped() {
-        let VC = UINavigationController(rootViewController: InitialViewController())
+        let VC = UINavigationController(rootViewController: InitialVC())
         VC.modalPresentationStyle = .fullScreen
         self.present(VC, animated: true)
     }

@@ -14,9 +14,7 @@ final class AdmissionYearSelectionVM: ViewModelType {
         let selectedAdmissionYear: Observable<String>
     }
     
-    struct Output {
-        
-    }
+    struct Output { }
     
     var disposeBag = DisposeBag()
     private let selectedAdmissionYearRelay = BehaviorRelay<String>(value: "")

@@ -8,15 +8,6 @@
 import RxSwift
 import RxCocoa
 
-protocol ViewModelType {
-    associatedtype Input
-    associatedtype Output
-    
-    var disposeBag: DisposeBag { get set }
-    
-    func transform(input: Input) -> Output
-}
-
 enum LoginButtonState {
     case idIsEditingWithoutPW
     case pwIsEditingWithoutID
@@ -24,7 +15,7 @@ enum LoginButtonState {
     case none
 }
 
-final class LoginViewModel: ViewModelType {
+final class LoginVM: ViewModelType {
     
     struct Input {
         let idText: Observable<String>
@@ -99,7 +90,7 @@ final class LoginViewModel: ViewModelType {
 }
 
 // MARK: API Logic
-extension LoginViewModel {
+extension LoginVM {
     private func login(id: String, password: String) -> Observable<Bool> {
         return Service.shared.login(request: .init(email: id, password: password))
                 .asObservable()

@@ -61,7 +61,6 @@ extension UploadingNoticeVM {
                 } else {
                     print("업로드 실패")
                     throw NSError(domain: "", code: response.status, userInfo: nil) // 에러 발생
-                    return false
                 }
             }
             .catchAndReturn(false)

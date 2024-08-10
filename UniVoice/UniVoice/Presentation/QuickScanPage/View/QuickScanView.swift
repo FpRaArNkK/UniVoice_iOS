@@ -11,11 +11,11 @@ import Then
 import RxSwift
 import RxCocoa
 
-class QuickScanView: UIView {
+final class QuickScanView: UIView {
     
     // MARK: Properties
-    let baseMargin = 16
-    let extraMargin = 6
+    private let baseMargin = 16
+    private let extraMargin = 6
     
     // MARK: Views
     let indicatorView = QuickScanIndicatorView()

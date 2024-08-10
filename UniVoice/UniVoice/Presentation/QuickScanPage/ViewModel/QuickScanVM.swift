@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 import Foundation
 
-final class QuickScanViewModel: ViewModelType {
+final class QuickScanVM: ViewModelType {
     
     init(id: Int) {
         // API 로직 수행
@@ -101,7 +101,7 @@ final class QuickScanViewModel: ViewModelType {
 }
 
 // MARK: API Logic
-private extension QuickScanViewModel {
+private extension QuickScanVM {
     func getQuickScans(id: Int) -> Observable<[QuickScan]> {
         if let affString = AffiliationType.init(rawValue: id)?.toKoreanString {
             return Service.shared.unreadQuickScanList(request: .init(affiliation: affString))

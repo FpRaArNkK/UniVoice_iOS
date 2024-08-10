@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         self.window?.overrideUserInterfaceStyle = .light
-        self.window?.rootViewController = UINavigationController(rootViewController: InitialViewController())
+        self.window?.rootViewController = UINavigationController(rootViewController: InitialVC())
         self.window?.makeKeyAndVisible()
     }
 
