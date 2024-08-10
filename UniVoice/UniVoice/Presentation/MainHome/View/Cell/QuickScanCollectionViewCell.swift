@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import Kingfisher
 
-final class QuickScanCVC: UICollectionViewCell {
+final class QuickScanCollectionViewCell: UICollectionViewCell {
     
     // MARK: Properties
     
