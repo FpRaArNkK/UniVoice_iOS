@@ -7,6 +7,7 @@
 
 import Foundation
 
+// swiftlint: disable non_optional_string_data_conversion
 extension Data {
     func printResponseDataAsString() {
         if let dataString = String(data: self, encoding: .utf8) {
@@ -18,3 +19,4 @@ extension Data {
         return Double(self.count) / (1024.0 * 1024.0)
     }
 }
+// swiftlint: enable non_optional_string_data_conversion

@@ -13,6 +13,7 @@ struct BaseResponse: Codable {
     let data: JSONNull?
 }
 
+// swiftlint: disable line_length
 // JSON으로 데이터를 받아올때 내부의 Null값을 받기 위한 class 타입
 class JSONNull: Codable, Hashable {
     
@@ -38,3 +39,4 @@ class JSONNull: Codable, Hashable {
         try container.encodeNil()
     }
 }
+// swiftlint: enable line_length

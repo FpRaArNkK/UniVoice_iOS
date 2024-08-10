@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-class StudentIDPhotoInputView: UIView {
+final class StudentIDPhotoInputView: UIView {
     
     // MARK: - Views
     let studentIDPhotoimgaeView = UIImageView()
@@ -18,8 +18,8 @@ class StudentIDPhotoInputView: UIView {
     private let mainDescriptionLabel = UILabel()
     private let subDescriptionLabel = UILabel()
     private let descriptionStack = UIStackView()
-    private let cautionLabel1 = UILabel()
-    private let cautionLabel2 = UILabel()
+    private let personalInfoWarningLabel = UILabel()
+    private let idNumberPrivacyWarningLabel = UILabel()
     private let cautionStack = UIStackView()
     
     // MARK: - Init
@@ -42,13 +42,25 @@ class StudentIDPhotoInputView: UIView {
     
     // MARK: - setUpHierarchy
     private func setUpHierarchy() {
-        [mainDescriptionLabel, subDescriptionLabel]
+        [
+            mainDescriptionLabel,
+            subDescriptionLabel
+        ]
             .forEach { descriptionStack.addArrangedSubview($0) }
         
-        [cautionLabel1, cautionLabel2]
+        [
+            personalInfoWarningLabel,
+            idNumberPrivacyWarningLabel
+        ]
             .forEach { cautionStack.addArrangedSubview($0) }
         
-        [descriptionStack, studentIDPhotoimgaeView, putPhotoLabel, cautionStack, nextButton]
+        [
+            descriptionStack,
+            studentIDPhotoimgaeView,
+            putPhotoLabel,
+            cautionStack,
+            nextButton
+        ]
             .forEach { addSubview($0) }
     }
     
@@ -92,14 +104,14 @@ class StudentIDPhotoInputView: UIView {
             $0.numberOfLines = 0
         }
         
-        cautionLabel1.do {
+        personalInfoWarningLabel.do {
             $0.setText("• 이름, 학교, 학과, 전체 학번이 모두 보여야 해요",
                        font: .B4R,
                        color: .B_01)
             $0.textAlignment = .left
         }
         
-        cautionLabel2.do {
+        idNumberPrivacyWarningLabel.do {
             $0.setText("• 주민등록번호가 있다면 가려주세요",
                        font: .B4R,
                        color: .B_01)

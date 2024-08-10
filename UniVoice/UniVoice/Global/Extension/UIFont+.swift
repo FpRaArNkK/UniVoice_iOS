@@ -7,6 +7,7 @@
 
 import UIKit
 
+// swiftlint: disable line_length
 extension UIFont {
     static func pretendardFont(for type: PretendardFont) -> UIFont {
         return UIFont(name: type.weight, size: type.size) ?? .systemFont(ofSize: type.size)
@@ -102,3 +103,4 @@ extension UIFont {
         return font
     }
 }
+// swiftlint: enable line_length

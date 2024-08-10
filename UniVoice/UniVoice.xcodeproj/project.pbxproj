@@ -964,8 +964,8 @@
 				2132A8392C3A6E2B00795667 /* StudentIDPhotoInputView.swift */,
 				2132A83B2C3A6FAD00795667 /* StudentInfoInputView.swift */,
 				2132A83D2C3A6FC000795667 /* StudentInfoConfirmView.swift */,
-				2132A83F2C3A6FC800795667 /* TOSCheckView.swift */,
 				2132A8412C3A6FD400795667 /* CreateAccountView.swift */,
+				2132A83F2C3A6FC800795667 /* TOSCheckView.swift */,
 				2132A8432C3A6FE900795667 /* SignUpInfoCheckingView.swift */,
 			);
 			path = View;

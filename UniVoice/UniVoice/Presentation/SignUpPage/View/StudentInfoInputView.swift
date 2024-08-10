@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StudentInfoInputView: UIView {
+final class StudentInfoInputView: UIView {
 
     // MARK: - Views
     let studentNameTextField = CustomTextfield()
@@ -37,10 +37,18 @@ class StudentInfoInputView: UIView {
     
     // MARK: - setUpHierarchy
     private func setUpHierarchy() {
-        [mainDescriptionLabel, subDescriptionLabel]
+        [
+            mainDescriptionLabel,
+            subDescriptionLabel
+        ]
             .forEach { descriptionStack.addArrangedSubview($0) }
         
-        [descriptionStack, studentNameTextField, studentIDTextField, nextButton]
+        [
+            descriptionStack,
+            studentNameTextField,
+            studentIDTextField,
+            nextButton
+        ]
             .forEach { addSubview($0) }
     }
     
