@@ -10,12 +10,12 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
+final class MainHomeVC: UIViewController, UIScrollViewDelegate {
     
     //MARK: Properties
     private let disposeBag = DisposeBag()
 
-    private let viewModel = MainHomeViewModel()
+    private let viewModel = MainHomeVM()
     
     private let itemSelectedSubject = PublishSubject<IndexPath>()
     
@@ -102,7 +102,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             })
             .disposed(by: disposeBag)
         
-        let input = MainHomeViewModel.Input(
+        let input = MainHomeVM.Input(
             councilSelected: itemSelectedSubject.asObservable(),
             fetchTrigger: fetchTrig.asObservable()
         )
@@ -297,7 +297,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     }
 }
 
-extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
+extension MainHomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {

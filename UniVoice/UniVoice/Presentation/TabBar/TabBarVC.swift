@@ -57,7 +57,7 @@ final class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     // MARK: setUpView
     private func setUpView() {
         
-        let mainHomeVC = UINavigationController(rootViewController: MainHomeViewController())
+        let mainHomeVC = UINavigationController(rootViewController: MainHomeVC())
         let savedNoticeVC = UINavigationController(rootViewController: SavedNoticeVC())
         let myPageVC = UINavigationController(rootViewController: MyPageVC())
         
