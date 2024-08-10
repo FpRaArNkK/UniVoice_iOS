@@ -190,13 +190,13 @@ extension NoticeCVC {
     }
 }
 
-//@available(iOS 17.0, *)
-//#Preview {
-//    PreviewController(NoticeCVC(), snp: { view in
-//        view.snp.makeConstraints {
-//            $0.height.equalTo(78)
-//            $0.horizontalEdges.equalToSuperview().inset(16)
-//            $0.center.equalToSuperview()
-//        }
-//    })
-//}
+// @available(iOS 17.0, *)
+// #Preview {
+//     PreviewController(NoticeCVC(), snp: { view in
+//         view.snp.makeConstraints {
+//             $0.height.equalTo(78)
+//             $0.horizontalEdges.equalToSuperview().inset(16)
+//             $0.center.equalToSuperview()
+//         }
+//     })
+// }
