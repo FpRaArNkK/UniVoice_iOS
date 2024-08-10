@@ -26,7 +26,7 @@ struct QuickScanStory: Codable {
 }
 
 extension QuickScanStory {
-    func toQS() -> [QuickScanProfile] {
+    func toQuickScanProfile() -> [QuickScanProfile] {
         return [
             QuickScanProfile.init(
                 councilImage: universityLogoImage ?? "",

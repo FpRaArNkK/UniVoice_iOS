@@ -108,7 +108,7 @@ private extension MainHomeVM {
         return Service.shared.getQuickScanStory()
             .asObservable()
             .map { response in
-                let result = response.data.toQS()
+                let result = response.data.toQuickScanProfile()
                 return result
             }
             .catchAndReturn([])
