@@ -1,5 +1,5 @@
 //
-//  ArticleCVC.swift
+//  NoticeCVC.swift
 //  UniVoice
 //
 //  Created by 오연서 on 7/10/24.
@@ -9,16 +9,16 @@ import UIKit
 import SnapKit
 import Then
 
-final class ArticleCVC: UICollectionViewCell {
+final class NoticeCVC: UICollectionViewCell {
     
     // MARK: Properties
     
-    static let identifier = "ArticleCVC"
+    static let identifier = "NoticeCVC"
     
     //MARK: Views
     let chip = UILabel()
     let chipView = UIView()
-    let articleTitle = UILabel()
+    let noticeTitle = UILabel()
     let thumbnailImage = UIImageView()
     let duration = UILabel()
     let divider = UIView()
@@ -45,7 +45,7 @@ final class ArticleCVC: UICollectionViewCell {
         [
             chipView,
             thumbnailImage,
-            articleTitle,
+            noticeTitle,
             duration,
             divider,
             likedIcon,
@@ -76,7 +76,7 @@ final class ArticleCVC: UICollectionViewCell {
             $0.layer.cornerRadius = 5
             $0.contentMode = .scaleAspectFit
         }
-        articleTitle.do {
+        noticeTitle.do {
             $0.setText("명절 귀향 버스 수요 조사", font: .T4SB, color: .B_01)
             $0.lineBreakMode = .byTruncatingTail
         }
@@ -114,7 +114,7 @@ final class ArticleCVC: UICollectionViewCell {
         chip.snp.makeConstraints {
             $0.center.equalTo(chipView)
         }
-        articleTitle.snp.makeConstraints {
+        noticeTitle.snp.makeConstraints {
             $0.top.equalTo(chipView.snp.bottom).offset(6)
             $0.leading.equalTo(chipView)
             $0.trailing.equalTo(thumbnailImage.snp.leading).offset(-18)
@@ -125,7 +125,7 @@ final class ArticleCVC: UICollectionViewCell {
             $0.size.equalTo(58)
         }
         duration.snp.makeConstraints {
-            $0.top.equalTo(articleTitle.snp.bottom).offset(12)
+            $0.top.equalTo(noticeTitle.snp.bottom).offset(12)
             $0.leading.equalTo(chipView)
         }
         divider.snp.makeConstraints {
@@ -160,23 +160,23 @@ final class ArticleCVC: UICollectionViewCell {
     }
 }
 
-extension ArticleCVC {
+extension NoticeCVC {
     
     override func prepareForReuse() {
         super.prepareForReuse()
         chip.text = nil
-        articleTitle.text = nil
+        noticeTitle.text = nil
         thumbnailImage.image = nil
         duration.text = nil
         likedNumber.text = nil
         savedNumber.text = nil
     }
     
-    func articleDataBind(viewModel: Article) {
+    func noticeDataBind(viewModel: Notice) {
         let width = viewModel.chip.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]).width
         chip.text = viewModel.chip
-        articleTitle.text = viewModel.articleTitle
-        articleTitle.lineBreakMode = .byTruncatingTail
+        noticeTitle.text = viewModel.noticeTitle
+        noticeTitle.lineBreakMode = .byTruncatingTail
         thumbnailImage.kf.setImage(with: URL(string: viewModel.thumbnailImage))
         duration.text = viewModel.duration
         likedNumber.text = "\(viewModel.likedNumber)"
@@ -193,7 +193,7 @@ extension ArticleCVC {
 
 @available(iOS 17.0, *)
 #Preview {
-    PreviewController(ArticleCVC(), snp: { view in
+    PreviewController(NoticeCVC(), snp: { view in
         view.snp.makeConstraints {
             $0.height.equalTo(78)
             $0.horizontalEdges.equalToSuperview().inset(16)

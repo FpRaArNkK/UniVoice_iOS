@@ -43,7 +43,7 @@ final class SavedNoticeVC: UIViewController {
     }
     
     func setUpFoundation() {
-        rootView.savedCollectionView.register(ArticleCVC.self, forCellWithReuseIdentifier: ArticleCVC.identifier)
+        rootView.savedCollectionView.register(NoticeCVC.self, forCellWithReuseIdentifier: NoticeCVC.identifier)
         rootView.savedCollectionView.rx.setDelegate(self).disposed(by: viewModel.disposeBag)
     }
     
@@ -55,17 +55,17 @@ final class SavedNoticeVC: UIViewController {
             .bind(to: refreshTrig)
             .disposed(by: viewModel.disposeBag)
         
-        let articleDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Article>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCVC.identifier, for: indexPath) as? ArticleCVC else {
+        let noticeDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Notice>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCVC.identifier, for: indexPath) as? NoticeCVC else {
                 return UICollectionViewCell()
             }
-            cell.articleDataBind(viewModel: viewModel)
+            cell.noticeDataBind(viewModel: viewModel)
             return cell
         })
         
         output.listData
             .map { [SectionModel(model: "Section 0", items: $0)] }
-            .drive(rootView.savedCollectionView.rx.items(dataSource: articleDataSource))
+            .drive(rootView.savedCollectionView.rx.items(dataSource: noticeDataSource))
             .disposed(by: viewModel.disposeBag)
         
         output.refreshQuitTrigger
@@ -75,11 +75,11 @@ final class SavedNoticeVC: UIViewController {
             .disposed(by: viewModel.disposeBag)
         
         rootView.savedCollectionView.rx.itemSelected
-            .withLatestFrom(output.listData) { indexPath, articles -> (IndexPath, [Article]) in
-                return (indexPath, articles)
+            .withLatestFrom(output.listData) { indexPath, notices -> (IndexPath, [Notice]) in
+                return (indexPath, notices)
             }
-            .subscribe(onNext: { [weak self] indexPath, articles in
-                let save = articles[indexPath.row]
+            .subscribe(onNext: { [weak self] indexPath, notices in
+                let save = notices[indexPath.row]
                 let nextVC = DetailNoticeVC(id: save.id)
                 self?.navigationController?.pushViewController(nextVC, animated: true)
             })

@@ -22,9 +22,9 @@ final class MainHomeViewModel: ViewModelType {
     }
     
     struct Output {
-        let qsItems: Observable<[QS]>
+        let qsItems: Observable<[QuickScanProfile]>
         let councilItems: Observable<[String]>
-        let articleItems: Observable<[Article]>
+        let noticeItems: Observable<[Notice]>
         let selectedCouncilIndex: Observable<Int>
         let refreshQuitTrigger: Observable<Void>
     }
@@ -33,17 +33,17 @@ final class MainHomeViewModel: ViewModelType {
     
     private let selectedCouncilIndexRelay = BehaviorRelay<Int>(value: 0)
     
-    private let quickScanItems = BehaviorRelay<[QS]>(value: [])
+    private let quickScanItems = BehaviorRelay<[QuickScanProfile]>(value: [])
     
-    private let articleItems = BehaviorRelay<[Article]>(value: [])
+    private let noticeItems = BehaviorRelay<[Notice]>(value: [])
         
-    private let allArticleRelay = BehaviorRelay<[Article]>(value: [])
+    private let allNoticeRelay = BehaviorRelay<[Notice]>(value: [])
     
-    private let mainArticleRelay = BehaviorRelay<[Article]>(value: [])
+    private let mainNoticeRelay = BehaviorRelay<[Notice]>(value: [])
     
-    private let collegeArticleRelay = BehaviorRelay<[Article]>(value: [])
+    private let collegeNoticeRelay = BehaviorRelay<[Notice]>(value: [])
     
-    private let departmentArticleRelay = BehaviorRelay<[Article]>(value: [])
+    private let departmentNoticeRelay = BehaviorRelay<[Notice]>(value: [])
     
     func transform(input: Input) -> Output {
         
@@ -53,27 +53,27 @@ final class MainHomeViewModel: ViewModelType {
         
         let combinedItems = combinedTrigger
             .withLatestFrom(selectedCouncilIndexRelay)
-            .flatMapLatest { [weak self] index -> Observable<([QS], [Article])> in
+            .flatMapLatest { [weak self] index -> Observable<([QuickScanProfile], [Notice])> in
                 guard let self = self else { return Observable.just(([], [])) }
                 
                 let quickScanObservable = self.quickScanApiCall()
                 
-                let articleObservable: Observable<[Article]>
+                let noticeObservable: Observable<[Notice]>
                 
                 switch index {
                 case 0:
-                    articleObservable = self.allArticleApiCall()
+                    noticeObservable = self.allNoticeApiCall()
                 case 1:
-                    articleObservable = self.mainStudentArticleApiCall()
+                    noticeObservable = self.mainStudentNoticeApiCall()
                 case 2:
-                    articleObservable = self.collegeStudentArticleApiCall()
+                    noticeObservable = self.collegeStudentNoticeApiCall()
                 case 3:
-                    articleObservable = self.departmentStudentArticleApiCall()
+                    noticeObservable = self.departmentStudentNoticeApiCall()
                 default:
-                    articleObservable = Observable.just([])
+                    noticeObservable = Observable.just([])
                 }
                 
-                return Observable.zip(quickScanObservable, articleObservable)
+                return Observable.zip(quickScanObservable, noticeObservable)
             }
             .share(replay: 1, scope: .whileConnected)
         
@@ -86,7 +86,7 @@ final class MainHomeViewModel: ViewModelType {
         
         combinedItems
             .map { $0.1 }
-            .bind(to: articleItems)
+            .bind(to: noticeItems)
             .disposed(by: disposeBag)
         
         input.councilSelected
@@ -103,7 +103,7 @@ final class MainHomeViewModel: ViewModelType {
         return Output(
             qsItems: quickScanItems.asObservable(),
             councilItems: councilItems,
-            articleItems: articleItems.asObservable(),
+            noticeItems: noticeItems.asObservable(),
             selectedCouncilIndex: selectedCouncilIndexRelay.asObservable(),
             refreshQuitTrigger: refreshQuit
         )
@@ -111,7 +111,7 @@ final class MainHomeViewModel: ViewModelType {
 }
 
 private extension MainHomeViewModel {
-    func quickScanApiCall() -> Observable<[QS]> {
+    func quickScanApiCall() -> Observable<[QuickScanProfile]> {
         return Service.shared.getQuickScanStory()
             .asObservable()
             .map { response in
@@ -121,43 +121,43 @@ private extension MainHomeViewModel {
             .catchAndReturn([])
     }
     
-    func allArticleApiCall() -> Observable<[Article]> {
+    func allNoticeApiCall() -> Observable<[Notice]> {
         return Service.shared.getAllNoticeList()
             .asObservable()
             .map { response in
-                return self.convertAllNoticesToArticles(allNotices: response.data)
+                return self.convertAllNoticesToNotice(allNotices: response.data)
             }
             .catchAndReturn([])
     }
     
-    func mainStudentArticleApiCall() -> Observable<[Article]> {
+    func mainStudentNoticeApiCall() -> Observable<[Notice]> {
         return Service.shared.getMainStudentCouncilNoticeList()
             .asObservable()
             .map { response in
-                return self.convertmainNoticesToArticles(allNotices: response.data)
+                return self.convertmainNoticesToNotice(allNotices: response.data)
             }
             .catchAndReturn([])
     }
     
-    func collegeStudentArticleApiCall() -> Observable<[Article]> {
+    func collegeStudentNoticeApiCall() -> Observable<[Notice]> {
         return Service.shared.getCollegeStudentCouncilNoticeList()
             .asObservable()
             .map { response in
-                return self.convertcollegeNoticesToArticles(allNotices: response.data)
+                return self.convertcollegeNoticesToNotice(allNotices: response.data)
             }
             .catchAndReturn([])
     }
     
-    func departmentStudentArticleApiCall() -> Observable<[Article]> {
+    func departmentStudentNoticeApiCall() -> Observable<[Notice]> {
         return Service.shared.getDepartmentStudentCouncilNoticeList()
             .asObservable()
             .map { response in
-                return self.convertdepartmentNoticesToArticles(allNotices: response.data)
+                return self.convertdepartmentNoticesToNotice(allNotices: response.data)
             }
             .catchAndReturn([])
     }
     
-    func makeCouncilNamesArray(from quickScanStories: Observable<[QS]>) -> Observable<[String]> {
+    func makeCouncilNamesArray(from quickScanStories: Observable<[QuickScanProfile]>) -> Observable<[String]> {
         return quickScanStories.map { qsList in
             var councilNames = ["전체", "총학생회"]
             if qsList.count > 1 {
@@ -168,20 +168,20 @@ private extension MainHomeViewModel {
         }
     }
     
-    func convertAllNoticesToArticles(allNotices: [AllNotice]) -> [Article] {
-        return allNotices.map { $0.toArticle() }
+    func convertAllNoticesToNotice(allNotices: [AllNotice]) -> [Notice] {
+        return allNotices.map { $0.toNotice() }
     }
     
-    func convertmainNoticesToArticles(allNotices: [MainStudentCouncilNotice]) -> [Article] {
-        return allNotices.map { $0.toArticle() }
+    func convertmainNoticesToNotice(allNotices: [MainStudentCouncilNotice]) -> [Notice] {
+        return allNotices.map { $0.toNotice() }
     }
     
-    func convertcollegeNoticesToArticles(allNotices: [CollegeStudentCouncilNotice]) -> [Article] {
-        return allNotices.map { $0.toArticle() }
+    func convertcollegeNoticesToNotice(allNotices: [CollegeStudentCouncilNotice]) -> [Notice] {
+        return allNotices.map { $0.toNotice() }
     }
     
-    func convertdepartmentNoticesToArticles(allNotices: [DepartmentStudentCouncilNotice]) -> [Article] {
-        return allNotices.map { $0.toArticle() }
+    func convertdepartmentNoticesToNotice(allNotices: [DepartmentStudentCouncilNotice]) -> [Notice] {
+        return allNotices.map { $0.toNotice() }
     }
     
 }

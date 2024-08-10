@@ -29,7 +29,7 @@ final class MainHomeView: UIView {
     }()
     let headerView = HeaderView()
     let stickyHeaderView = HeaderView()
-    let articleCollectionView: UICollectionView = {
+    let noticeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -81,7 +81,7 @@ final class MainHomeView: UIView {
             logoImageView,
             quickScanCollectionView,
             headerView,
-            articleCollectionView,
+            noticeCollectionView,
             noCouncilLabel
         ].forEach { contentView.addSubview($0) }
     }
@@ -93,7 +93,7 @@ final class MainHomeView: UIView {
             $0.spacing = 16
         }
         
-        articleCollectionView.do {
+        noticeCollectionView.do {
             $0.backgroundColor = .white
         }
         
@@ -189,7 +189,7 @@ final class MainHomeView: UIView {
             $0.top.equalTo(self.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
         }
-        articleCollectionView.snp.makeConstraints {
+        noticeCollectionView.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom).offset(8)
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.height.equalTo(UIScreen.main.bounds.size.height - 70)
