@@ -42,13 +42,25 @@ final class StudentIDPhotoInputView: UIView {
     
     // MARK: - setUpHierarchy
     private func setUpHierarchy() {
-        [mainDescriptionLabel, subDescriptionLabel]
+        [
+            mainDescriptionLabel,
+            subDescriptionLabel
+        ]
             .forEach { descriptionStack.addArrangedSubview($0) }
         
-        [cautionLabel1, cautionLabel2]
+        [
+            cautionLabel1,
+            cautionLabel2
+        ]
             .forEach { cautionStack.addArrangedSubview($0) }
         
-        [descriptionStack, studentIDPhotoimgaeView, putPhotoLabel, cautionStack, nextButton]
+        [
+            descriptionStack,
+            studentIDPhotoimgaeView,
+            putPhotoLabel,
+            cautionStack,
+            nextButton
+        ]
             .forEach { addSubview($0) }
     }
     

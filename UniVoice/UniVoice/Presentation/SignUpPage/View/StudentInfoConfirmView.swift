@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StudentInfoConfirmView: UIView {
+final class StudentInfoConfirmView: UIView {
 
     // MARK: - Views
     let studentIDPhotoimgaeView = UIImageView()
