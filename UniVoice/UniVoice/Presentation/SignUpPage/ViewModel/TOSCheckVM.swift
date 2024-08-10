@@ -91,6 +91,8 @@ final class TOSCheckVM: ViewModelType {
     }
 }
 
+// swiftlint: disable line_length
+// swiftlint: disable non_optional_string_data_conversion
 extension TOSCheckVM {
     private func createMultipartFormDataBody(with parameters: [String: String], boundary: String, image: UIImage, imageName: String) -> Data {
         var body = Data()
@@ -103,7 +105,6 @@ extension TOSCheckVM {
         
         let imageData = image.compressed(to: 1.0)!
         
-//        let imageData = image.jpegData(compressionQuality: 0.8)!
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"studentCardImage\"; filename=\"\(imageName)\"\r\n".data(using: .utf8)!)
         body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
@@ -165,3 +166,5 @@ extension TOSCheckVM {
             }
         }
 }
+// swiftlint: enable line_length
+// swiftlint: enable non_optional_string_data_conversion

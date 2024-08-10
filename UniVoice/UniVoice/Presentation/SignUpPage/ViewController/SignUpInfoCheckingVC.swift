@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SignUpInfoCheckingVC: UIViewController {
+final class SignUpInfoCheckingVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = SignUpInfoCheckingView()
