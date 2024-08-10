@@ -7,28 +7,6 @@
 
 import UIKit
 
-enum PresentType {
-    case noCouncil
-    case present
-}
-
-struct QS {
-    let councilImage: String
-    let councilName: String
-    let articleNumber: Int
-}
-
-struct Article {
-//    let council: String
-    let id: Int
-    let chip: String
-    let articleTitle: String
-    let thumbnailImage: String
-    let duration: String
-    let likedNumber: Int
-    let savedNumber: Int
-}
-
 enum AffiliationType: Int {
     
     case university
