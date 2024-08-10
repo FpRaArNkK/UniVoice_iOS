@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class MainHomeViewModel: ViewModelType {
+final class MainHomeVM: ViewModelType {
     
     let councilList: [String] = [
         "전체", "총학생회", "공과대학 학생회", "컴퓨터공학과 학생회"
@@ -110,7 +110,7 @@ final class MainHomeViewModel: ViewModelType {
     }
 }
 
-private extension MainHomeViewModel {
+private extension MainHomeVM {
     func quickScanApiCall() -> Observable<[QuickScanProfile]> {
         return Service.shared.getQuickScanStory()
             .asObservable()
