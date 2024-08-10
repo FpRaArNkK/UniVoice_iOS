@@ -74,7 +74,6 @@ final class AdmissionYearSelectionVC: UIViewController {
                 .map { $0.components(separatedBy: "학번").first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "" }
                 .asObservable()
         )
-        let output = viewModel.transform(input: input)
     }
     
     private func bindData() {
