@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateAccountView: UIView {
+final class CreateAccountView: UIView {
     
     // MARK: - Views
     let confirmAndNextButton = CustomButton()
