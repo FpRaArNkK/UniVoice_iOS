@@ -154,7 +154,7 @@ final class MyPageView: UIView {
             $0.spacing = 0
         }
         divider.do {
-            $0.backgroundColor = .light
+            $0.backgroundColor = .lineLight
         }
         
         otherLabel.do {

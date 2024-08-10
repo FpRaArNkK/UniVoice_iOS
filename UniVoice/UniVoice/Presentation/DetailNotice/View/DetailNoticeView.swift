@@ -116,11 +116,11 @@ final class DetailNoticeView: UIView {
         }
         
         divider.do {
-            $0.backgroundColor = .regular
+            $0.backgroundColor = .lineRegular
         }
         
         dividerView.do {
-            $0.backgroundColor = .light
+            $0.backgroundColor = .lineLight
         }
         
         contentStackView.do {

@@ -67,7 +67,7 @@ final class NoticeCVC: UICollectionViewCell {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 8
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.regular.cgColor
+            $0.layer.borderColor = UIColor.lineRegular.cgColor
         }
         thumbnailImage.do {
             $0.image = UIImage(named: "img_default_image")
@@ -98,7 +98,7 @@ final class NoticeCVC: UICollectionViewCell {
             $0.setText("8", font: .C3R, color: .B_03)
         }
         cellDivider.do {
-            $0.backgroundColor = UIColor.regular
+            $0.backgroundColor = UIColor.lineRegular
         }
 
     }

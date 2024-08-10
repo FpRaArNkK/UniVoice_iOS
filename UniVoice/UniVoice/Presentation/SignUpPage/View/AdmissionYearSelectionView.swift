@@ -99,7 +99,7 @@ final class AdmissionYearSelectionView: UIView {
             $0.delegate = self
             $0.dataSource = self
             $0.register(CustomMenuTableViewCell.self, forCellReuseIdentifier: "CustomMenuTableViewCell")
-            $0.layer.borderColor = UIColor(named: "Regular")?.cgColor
+            $0.layer.borderColor = UIColor(named: "lineRegular")?.cgColor
             $0.layer.borderWidth = 3
             $0.layer.cornerRadius = 10
             $0.rowHeight = 45
