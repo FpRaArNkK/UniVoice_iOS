@@ -11,6 +11,8 @@ import Then
 import RxSwift
 
 final class ImageCVC: UICollectionViewCell {
+    
+    // MARK: Properties
     static let reuseIdentifier = "ImageCVC"
     
     // MARK: Views

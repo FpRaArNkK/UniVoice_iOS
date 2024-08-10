@@ -14,7 +14,17 @@ import RxDataSources
 final class MyPageVC: UIViewController, UIScrollViewDelegate {
     
     // MARK: Properties
-    private let myInfo = BehaviorRelay<MyPage>(value: .init(id: 0, name: "", collegeDepartment: "", department: "", admissionNumber: "", university: "", universityLogoImage: ""))
+    private let myInfo = BehaviorRelay<MyPage>(
+        value: .init(
+            id: 0,
+            name: "",
+            collegeDepartment: "",
+            department: "",
+            admissionNumber: "",
+            university: "",
+            universityLogoImage: ""
+        )
+    )
     private let disposeBag = DisposeBag()
     
     // MARK: Views

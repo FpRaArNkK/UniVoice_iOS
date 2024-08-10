@@ -31,14 +31,12 @@ final class DetailNoticeVM: ViewModelType {
     }
     
     var disposeBag = DisposeBag()
-    
     let noticeRelay = BehaviorRelay<DetailNotice>(value: DetailNotice(noticeId: 0, councilType: "",
                                                                       noticeTitle: "", noticeTarget: nil,
                                                                       startTime: nil, endTime: nil,
                                                                       noticeImageURL: nil, content: "",
                                                                       createdTime: nil, viewCount: 0,
                                                                       isLiked: false, isSaved: false, likeCount: 0))
-    
     private let isLikedRelay = PublishRelay<Bool>()
     private let isSavedRelay = PublishRelay<Bool>()
     

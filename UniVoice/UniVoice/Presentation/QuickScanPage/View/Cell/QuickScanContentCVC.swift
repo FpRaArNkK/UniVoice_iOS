@@ -155,33 +155,6 @@ final class QuickScanContentCVC: UICollectionViewCell {
     }
 }
 
-// MARK: Internal Logic
-private extension QuickScanContentCVC {
-    private func getDurationText(from startTime: Date?, to endTime: Date?) -> String? {
-        guard let startTime = startTime, let endTime = endTime else {
-            return nil
-        }
-        return "\(startTime.toFormattedString()) ~ \(endTime.toFormattedString())"
-    }
-    
-    private func timeAgoString(from date: Date) -> String {
-        let now = Date()
-        let timeInterval = now.timeIntervalSince(date)
-        
-        if timeInterval < 60 {
-            return "방금 전"
-        } else if timeInterval < 3600 {
-            let minutes = Int(timeInterval / 60)
-            return "\(minutes)분 전"
-        } else if timeInterval < 86400 {
-            let hours = Int(timeInterval / 3600)
-            return "\(hours)시간 전"
-        } else {
-            return date.toFormattedStringWithoutTime()
-        }
-    }
-}
-
 // MARK: External Logic
 extension QuickScanContentCVC {
     func fetchData(cellModel: QuickScan) {
@@ -193,7 +166,7 @@ extension QuickScanContentCVC {
         }
         
         affilationNameLabel.text = cellModel.affiliationName
-        uploadTimeLabel.text = timeAgoString(from: cellModel.createdTime)
+        uploadTimeLabel.text = Date().timeAgoString(from: cellModel.createdTime)
         viewCountLabel.text = "\(cellModel.viewCount)회"
         noticeTitleLabel.text = cellModel.noticeTitle
         
@@ -201,7 +174,7 @@ extension QuickScanContentCVC {
         
         let contents = [
             cellModel.noticeTarget,
-            getDurationText(from: cellModel.startTime, to: cellModel.endTime),
+            Date().getDurationText(from: cellModel.startTime, to: cellModel.endTime),
             cellModel.content
         ]
         

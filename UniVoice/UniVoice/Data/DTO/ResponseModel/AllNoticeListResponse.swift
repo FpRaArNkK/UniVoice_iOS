@@ -27,18 +27,17 @@ struct AllNotice: Codable {
 }
 
 extension AllNotice {
-    func toArticle() -> Article {
+    func toNotice() -> Notice {
         let chip = category
-        let articleTitle = title
+        let noticeTitle = title
         let thumbnailImage = image ?? ""
-        let duration = createdAt
         let likedNumber = likeCount
         let savedNumber = viewCount
         
-        return Article(id: id, chip: chip, 
-                       articleTitle: articleTitle,
+        return Notice(id: id, chip: chip, 
+                       noticeTitle: noticeTitle,
                        thumbnailImage: thumbnailImage,
-                       duration: createdAt.formatDate(from: createdAt),
+                       createdTime: createdAt.formatDate(from: createdAt),
                        likedNumber: likedNumber,
                        savedNumber: savedNumber)
     }

@@ -44,23 +44,12 @@ final class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         setUpStyle()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-//    }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
-    
     // MARK: setUpView
     private func setUpView() {
         
-        let mainHomeVC = UINavigationController(rootViewController: MainHomeViewController())
+        let mainHomeVC = UINavigationController(rootViewController: MainHomeVC())
         let savedNoticeVC = UINavigationController(rootViewController: SavedNoticeVC())
         let myPageVC = UINavigationController(rootViewController: MyPageVC())
-        
         let viewControllerList = [
             mainHomeVC,
             savedNoticeVC,

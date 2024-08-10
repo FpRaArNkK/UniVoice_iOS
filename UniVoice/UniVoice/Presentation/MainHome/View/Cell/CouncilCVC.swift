@@ -13,11 +13,9 @@ import RxSwift
 final class CouncilCVC: UICollectionViewCell {
     
     // MARK: Properties
-    
     static let identifier = "CouncilCVC"
     
     // MARK: Views
-    
     let councilButton = CustomButton(with: .unselected)
     
     // MARK: Init
