@@ -15,17 +15,17 @@ final class DetailNoticeView: UIView {
     
     // MARK: Views
     
-    let scrollView = UIScrollView()
+    private let scrollView = UIScrollView()
     
-    let contentView = UIView()
+    private let contentView = UIView()
     
-    let noticeTitleLabel = UILabel()
+    private let noticeTitleLabel = UILabel()
     
-    let divider = UIView()
+    private let divider = UIView()
     
-    let contentStackView = UIStackView()
+    private let contentStackView = UIStackView()
     
-    let basicInfoStackView = UIStackView() // (1) 대상 + 일시
+    private let basicInfoStackView = UIStackView() // (1) 대상 + 일시
     
     let noticeImageStackView = UIStackView() // (2) 이미지CV + indicatorView
     
@@ -41,25 +41,25 @@ final class DetailNoticeView: UIView {
     
     let noticeImageIndicatorView = UIPageControl()
     
-    let contentLabel = UILabel()
+    private let contentLabel = UILabel()
     
-    let bottomView = UIView()
+    private let bottomView = UIView()
     
-    let dividerView = UIView()
+    private let dividerView = UIView()
     
-    let subInfoStackView = UIStackView() // 업로드일시, 조회수
+    private let subInfoStackView = UIStackView() // 업로드일시, 조회수
     
-    let createdDateLabel = UILabel()
+    private let createdDateLabel = UILabel()
     
-    let viewCountLabel = UILabel()
+    private let viewCountLabel = UILabel()
     
-    let buttonStackView = UIStackView()
+    private let buttonStackView = UIStackView()
     
-    let likeStackView = UIStackView()
+    private let likeStackView = UIStackView()
     
     let likedButton = UIButton()
     
-    let likeCountLabel = UILabel()
+    private let likeCountLabel = UILabel()
     
     let savedButton = UIButton()
     

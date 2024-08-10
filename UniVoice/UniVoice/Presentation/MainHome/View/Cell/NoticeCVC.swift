@@ -16,17 +16,17 @@ final class NoticeCVC: UICollectionViewCell {
     static let identifier = "NoticeCVC"
     
     //MARK: Views
-    let chip = UILabel()
-    let chipView = UIView()
-    let noticeTitle = UILabel()
-    let thumbnailImage = UIImageView()
-    let duration = UILabel()
-    let divider = UIView()
-    let likedIcon = UIImageView()
-    let likedNumber = UILabel()
-    let savedIcon = UIImageView()
-    let savedNumber = UILabel()
-    let cellDivider = UIView()
+    private let chip = UILabel()
+    private let chipView = UIView()
+    private let noticeTitle = UILabel()
+    private let thumbnailImage = UIImageView()
+    private let duration = UILabel()
+    private let divider = UIView()
+    private let likedIcon = UIImageView()
+    private let likedNumber = UILabel()
+    private let savedIcon = UIImageView()
+    private let savedNumber = UILabel()
+    private let cellDivider = UIView()
     
     // MARK: Init
     override init(frame: CGRect) {
