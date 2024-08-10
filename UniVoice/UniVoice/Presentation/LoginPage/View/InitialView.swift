@@ -47,7 +47,7 @@ final class InitialView: UIView {
     private func setUpHierarchy() {
         [
             startButton,
-            loginButton,
+            loginButton
 //            councilButton
         ].forEach { buttonStack.addArrangedSubview($0) }
         
@@ -129,9 +129,9 @@ final class InitialView: UIView {
             if finished {
                 UIView.animate(withDuration: 0.2, animations: {
                     self?.splashView.alpha = 0
-                }) { _ in
+                }, completion: { _ in
                     self?.splashView.isHidden = true
-                }
+                })
             }
         }
     }

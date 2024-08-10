@@ -12,11 +12,11 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class QuickScanViewController: UIViewController {
+final class QuickScanVC: UIViewController {
     
     // MARK: Properties
     private let rootView = QuickScanView()
-    private let viewModel: QuickScanViewModel
+    private let viewModel: QuickScanVM
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,7 +30,7 @@ final class QuickScanViewController: UIViewController {
         
     // MARK: init
     init(id: Int) {
-            self.viewModel = QuickScanViewModel(id: id)
+            self.viewModel = QuickScanVM(id: id)
             super.init(nibName: nil, bundle: nil)
         }
 
@@ -89,7 +89,7 @@ final class QuickScanViewController: UIViewController {
         
         let bookmarkDidTap = PublishRelay<Int>()
         
-        let input = QuickScanViewModel.Input(
+        let input = QuickScanVM.Input(
             changeIndex: changeIndex,
             bookmarkDidTap: bookmarkDidTap.asObservable()
         )
@@ -165,7 +165,7 @@ final class QuickScanViewController: UIViewController {
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
-extension QuickScanViewController: UICollectionViewDelegateFlowLayout {
+extension QuickScanVC: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -176,9 +176,9 @@ extension QuickScanViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: Internal Logic
-private extension QuickScanViewController {
+private extension QuickScanVC {
     func pushNextVC() {
-        let nextVC = QuickScanCompletionViewController()
+        let nextVC = QuickScanCompletionVC()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

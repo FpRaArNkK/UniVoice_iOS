@@ -9,11 +9,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class LoginViewController: UIViewController {
+final class LoginVC: UIViewController {
     
     // MARK: Properties
     private let rootView = LoginView()
-    private let viewModel = LoginViewModel()
+    private let viewModel = LoginVM()
     
     // MARK: Life Cycle - loadView
     override func loadView() {
@@ -40,7 +40,7 @@ final class LoginViewController: UIViewController {
     
     // MARK: setUpBindUI
     private func setUpBindUI() {
-        let input = LoginViewModel.Input(
+        let input = LoginVM.Input(
             idText: rootView.idTextField.rx.text.orEmpty.asObservable(),
             pwText: rootView.pwTextField.rx.text.orEmpty.asObservable(),
             loginButtonDidTap: rootView.loginButton.rx.tap
@@ -73,9 +73,9 @@ final class LoginViewController: UIViewController {
         output.loginState
             .drive(onNext: { [weak self] isUser in
                 if isUser {
-                    self?.navigationController?.pushViewController(WelcomeViewController(), animated: true)
+                    self?.navigationController?.pushViewController(WelcomeVC(), animated: true)
                 } else {
-                    let NoAccountVC = UINavigationController(rootViewController: NoAccountViewController())
+                    let NoAccountVC = UINavigationController(rootViewController: NoAccountVC())
                     NoAccountVC.modalPresentationStyle = .overFullScreen
                     self?.present(NoAccountVC, animated: true)
                 }

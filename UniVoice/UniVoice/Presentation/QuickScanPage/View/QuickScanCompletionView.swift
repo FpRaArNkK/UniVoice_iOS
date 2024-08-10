@@ -11,11 +11,11 @@ import Then
 import RxSwift
 import RxCocoa
 
-class QuickScanCompletionView: UIView {
+final class QuickScanCompletionView: UIView {
     
     // MARK: Properties
-    let baseMargin = 16
-    let extraMargin = 6
+    private let baseMargin = 16
+    private let extraMargin = 6
     
     // MARK: Views
     private let blankView = UIView()
@@ -104,15 +104,4 @@ class QuickScanCompletionView: UIView {
             $0.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
     }
-}
-
-@available(iOS 17.0, *)
-#Preview {
-    
-    PreviewController(QuickScanCompletionView(), snp: { view in
-        view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-    })
-    
 }
