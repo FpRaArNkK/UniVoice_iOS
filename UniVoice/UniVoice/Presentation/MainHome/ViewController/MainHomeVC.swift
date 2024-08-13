@@ -224,14 +224,12 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
         rootView.headerView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
         rootView.stickyHeaderView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
@@ -276,6 +274,8 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
             .disposed(by: disposeBag)
     }
     
+    /// source collectionview와 target collectionview의 스크롤 정도를 동기화하는 함수입니다.
+    /// (stickyheader<->기존 header과의 스크롤 정도 동기화를 위함)
     private func bindScroll(of source: UICollectionView, to target: UICollectionView) {
         source.rx.contentOffset
             .subscribe(onNext: { contentOffset in
