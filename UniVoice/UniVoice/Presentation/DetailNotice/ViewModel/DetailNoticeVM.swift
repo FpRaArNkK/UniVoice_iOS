@@ -10,12 +10,13 @@ import RxCocoa
 import Foundation
 
 final class DetailNoticeVM: ViewModelType {
-        
+    
     init(id: Int) {
+        /// API 로직을 수행합니다
         self.detailNoticeAPICall(id: id)
             .bind(to: noticeRelay)
             .disposed(by: disposeBag)
-        
+        /// 조회수를 증가시킵니다
         self.postIncreaseViewCount(id: id)
     }
     
@@ -116,9 +117,15 @@ private extension DetailNoticeVM {
             })
     }
     
+    /// 좋아요 누름/취소를 반영하는 함수
+    /// - Parameter
+    ///     id: 공지사항 id
+    ///     isMarked: 현재 좋아요 여부
+    /// - Return: 현재 좋아요 여부
     func patchLiked(id: Int, isMarked: Bool) -> Observable<Bool> {
         
         switch isMarked {
+        ///현재 좋아요를 누른 상태
         case true:
             return Service.shared.unlikeNotice(noticeID: id).asObservable()
                 .map { response in
@@ -131,6 +138,7 @@ private extension DetailNoticeVM {
                     }
                 }
                 .catchAndReturn(true)
+        ///현재 좋아요를 누르지 않은 상태
         case false:
             return Service.shared.likeNotice(noticeID: id).asObservable()
                 .map { response in
@@ -146,6 +154,11 @@ private extension DetailNoticeVM {
         }
     }
     
+    /// 저장 누름/취소를 반영하는 함수
+    /// - Parameter
+    ///     id: 공지사항 id
+    ///     isMarked: 현재 저장 여부
+    /// - Return: 현재 저장 여부
     func patchSaved(id: Int, isMarked: Bool) -> Observable<Bool> {
         
         switch isMarked {
