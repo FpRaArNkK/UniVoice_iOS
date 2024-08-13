@@ -54,10 +54,10 @@ final class DetailNoticeVM: ViewModelType {
         isLikedRelay
             .bind(onNext: { [weak self] result in
                 guard let self = self else { return }
-                var tempQuickScans = self.noticeRelay.value
-                tempQuickScans.isLiked = result
-                tempQuickScans.likeCount = result ? tempQuickScans.likeCount + 1 : tempQuickScans.likeCount - 1
-                self.noticeRelay.accept(tempQuickScans)
+                var tempNotice = self.noticeRelay.value
+                tempNotice.isLiked = result
+                tempNotice.likeCount = result ? tempNotice.likeCount + 1 : tempNotice.likeCount - 1
+                self.noticeRelay.accept(tempNotice)
             })
             .disposed(by: disposeBag)
         
@@ -73,9 +73,9 @@ final class DetailNoticeVM: ViewModelType {
         isSavedRelay
             .bind(onNext: { [weak self] result in
                 guard let self = self else { return }
-                var tempQuickScans = self.noticeRelay.value
-                tempQuickScans.isSaved = result
-                self.noticeRelay.accept(tempQuickScans)
+                var tempNotice = self.noticeRelay.value
+                tempNotice.isSaved = result
+                self.noticeRelay.accept(tempNotice)
             })
             .disposed(by: disposeBag)
                 
