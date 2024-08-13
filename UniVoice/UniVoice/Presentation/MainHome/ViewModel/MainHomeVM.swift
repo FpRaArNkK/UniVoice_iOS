@@ -40,7 +40,8 @@ final class MainHomeVM: ViewModelType {
     func transform(input: Input) -> Output {
         
         let refreshQuit = quickScanItems.map { _ in Void() }
-                
+        
+        /// fetchTrigger(새로고침 등)와 selectedCouncilIndexRelay(학생회 선택)의 이벤트를 동시에 처리하는 트리거입니다.
         let combinedTrigger = Observable.combineLatest(input.fetchTrigger, selectedCouncilIndexRelay)
         
         let combinedItems = combinedTrigger
@@ -69,22 +70,19 @@ final class MainHomeVM: ViewModelType {
             }
             .share(replay: 1, scope: .whileConnected)
         
+        /// 1. quickScanItems (퀵스캔)
         combinedItems
             .map { $0.0 }
             .bind(to: quickScanItems)
             .disposed(by: disposeBag) 
         
+        /// 2. councilItems (학생회 목록에 대한 리스트)
         let councilItems = makeCouncilNamesArray(from: quickScanItems.asObservable())
         
+        /// 3. noticeItems (공지사항 리스트)
         combinedItems
             .map { $0.1 }
             .bind(to: noticeItems)
-            .disposed(by: disposeBag)
-        
-        input.councilSelected
-            .bind(onNext: { [weak self] indexPath in
-                self?.selectedCouncilIndexRelay.accept(indexPath.row)
-            })
             .disposed(by: disposeBag)
         
         input.councilSelected
@@ -149,6 +147,7 @@ private extension MainHomeVM {
             .catchAndReturn([])
     }
     
+    /// quickScanItems을 이용하여 학생회 이름의 리스트(ex. 총학생회, 소프트웨어융합대학 학생회)를 업데이트하는 함수입니다.
     func makeCouncilNamesArray(from quickScanStories: Observable<[QuickScanProfile]>) -> Observable<[String]> {
         return quickScanStories.map { qsList in
             var councilNames = ["전체", "총학생회"]
