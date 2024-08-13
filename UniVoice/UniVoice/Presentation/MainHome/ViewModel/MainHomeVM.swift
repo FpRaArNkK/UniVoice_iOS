@@ -126,7 +126,7 @@ private extension MainHomeVM {
         return Service.shared.getMainStudentCouncilNoticeList()
             .asObservable()
             .map { response in
-                return self.convertmainNoticesToNotice(allNotices: response.data)
+                return self.convertmainNoticesToNotice(mainStudentCouncilNotice: response.data)
             }
             .catchAndReturn([])
     }
@@ -135,7 +135,7 @@ private extension MainHomeVM {
         return Service.shared.getCollegeStudentCouncilNoticeList()
             .asObservable()
             .map { response in
-                return self.convertcollegeNoticesToNotice(allNotices: response.data)
+                return self.convertcollegeNoticesToNotice(colledgeCouncilNotices: response.data)
             }
             .catchAndReturn([])
     }
@@ -144,7 +144,7 @@ private extension MainHomeVM {
         return Service.shared.getDepartmentStudentCouncilNoticeList()
             .asObservable()
             .map { response in
-                return self.convertdepartmentNoticesToNotice(allNotices: response.data)
+                return self.convertdepartmentNoticesToNotice(departmentNotices: response.data)
             }
             .catchAndReturn([])
     }
@@ -164,16 +164,16 @@ private extension MainHomeVM {
         return allNotices.map { $0.toNotice() }
     }
     
-    func convertmainNoticesToNotice(allNotices: [MainStudentCouncilNotice]) -> [Notice] {
-        return allNotices.map { $0.toNotice() }
+    func convertmainNoticesToNotice(mainStudentCouncilNotice: [MainStudentCouncilNotice]) -> [Notice] {
+        return mainStudentCouncilNotice.map { $0.toNotice() }
     }
     
-    func convertcollegeNoticesToNotice(allNotices: [CollegeStudentCouncilNotice]) -> [Notice] {
-        return allNotices.map { $0.toNotice() }
+    func convertcollegeNoticesToNotice(colledgeCouncilNotices: [CollegeStudentCouncilNotice]) -> [Notice] {
+        return colledgeCouncilNotices.map { $0.toNotice() }
     }
     
-    func convertdepartmentNoticesToNotice(allNotices: [DepartmentStudentCouncilNotice]) -> [Notice] {
-        return allNotices.map { $0.toNotice() }
+    func convertdepartmentNoticesToNotice(departmentNotices: [DepartmentStudentCouncilNotice]) -> [Notice] {
+        return departmentNotices.map { $0.toNotice() }
     }
     
 }
