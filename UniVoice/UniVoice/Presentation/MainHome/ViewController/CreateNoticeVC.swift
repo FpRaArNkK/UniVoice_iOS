@@ -220,11 +220,7 @@ final class CreateNoticeVC: UIViewController {
         
         let images: Observable<[UIImage]> = input.selectedImages.asObservable()
         
-        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, UIImage>>(configureCell: {
-            dataSource,
-            collectionView,
-            indexPath,
-            image in
+        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, UIImage>>(configureCell: {dataSource, collectionView, indexPath, image in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCVC.reuseIdentifier, for: indexPath) as? ImageCVC else {
                 return UICollectionViewCell()
             }

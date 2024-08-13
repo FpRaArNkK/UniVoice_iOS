@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/// 사용자가 선택한 대학교 정보를 확인하고 회원가입을 진행하는 뷰 컨트롤러입니다.
 final class UnivInfoConfirmVC: UIViewController {
 
     // MARK: Views
@@ -18,11 +19,21 @@ final class UnivInfoConfirmVC: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = UniversityInputVM()
     
+    /// 사용자가 선택한 대학교 이름을 저장하는 프로퍼티입니다.
     var selectedUniversity: String
+    
+    /// 사용자가 선택한 학과 이름을 저장하는 프로퍼티입니다.
     var selectedDepartment: String
+    
+    /// 사용자가 선택한 입학년도를 저장하는 프로퍼티입니다.
     var selectedAdmission: String
     
     // MARK: Init
+    /// 지정 초기화 메서드로, 선택한 대학교, 학과, 입학년도를 받아 초기화합니다.
+    /// - Parameters:
+    ///   - university: 사용자가 선택한 대학교 이름.
+    ///   - department: 사용자가 선택한 학과 이름.
+    ///   - admission: 사용자가 선택한 입학년도.
     init(university: String, department: String, admission: String) {
         self.selectedUniversity = university
         self.selectedDepartment = department

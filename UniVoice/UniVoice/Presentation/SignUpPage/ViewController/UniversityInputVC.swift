@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/// 사용자가 대학교를 입력하고 선택하는 뷰 컨트롤러입니다.
 final class UniversityInputVC: UIViewController {
 
     // MARK: Views
@@ -17,6 +18,7 @@ final class UniversityInputVC: UIViewController {
     private let disposeBag = DisposeBag()
 
     // MARK: Properties
+    /// 사용자가 선택한 대학교를 저장하는 프로퍼티입니다.
     var selectedUniversity = BehaviorRelay<String>(value: "")
     
     // MARK: Life Cycle - loadView
@@ -114,7 +116,7 @@ extension UniversityInputVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // 학교 선택시
+        /// 학교 선택시
         if let university = try? rootView.univTableView.rx.model(at: indexPath) as String {
             print("Selected university: \(university)")
         }

@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/// 사용자가 입학년도를 선택하는 뷰 컨트롤러입니다.
 final class AdmissionYearSelectionVC: UIViewController {
     
     // MARK: Views
@@ -17,10 +18,19 @@ final class AdmissionYearSelectionVC: UIViewController {
     private let disposeBag = DisposeBag()
     
     // MARK: Properties
+    /// 사용자가 선택한 대학교를 저장하는 프로퍼티입니다.
     var selectedUniversity = BehaviorRelay<String>(value: "")
+        
+    /// 사용자가 선택한 학과를 저장하는 프로퍼티입니다.
     var selectedDepartment = BehaviorRelay<String>(value: "")
+    
+    /// 사용자가 선택한 입학년도를 저장하는 프로퍼티입니다.
     var selectedAdmission = BehaviorRelay<String>(value: "")
     
+    /// 지정 초기화 메서드로, 선택된 대학교와 학과를 받아 초기화합니다.
+    /// - Parameters:
+    ///   - universityRelay: 사용자가 선택한 대학교 이름을 저장하는 `BehaviorRelay`.
+    ///   - departmentRelay: 사용자가 선택한 학과 이름을 저장하는 `BehaviorRelay`.
     init(universityRelay: BehaviorRelay<String>, departmentRelay: BehaviorRelay<String>) {
         self.selectedUniversity = universityRelay
         self.selectedDepartment = departmentRelay

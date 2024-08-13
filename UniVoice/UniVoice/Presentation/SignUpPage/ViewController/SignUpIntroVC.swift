@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/// 회원가입 초기화면 뷰컨트롤러 입니다.
 final class SignUpIntroVC: UIViewController {
 
     // MARK: Views
