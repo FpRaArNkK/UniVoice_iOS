@@ -72,7 +72,8 @@ final class StudentInfoInputVM: ViewModelType {
         // 이름, 학번 TextField의 상태를 바탕으로 버튼의 상태를 업데이트
         let nextButtonState = input.nextButtonDidTap
             .withLatestFrom(Observable.combineLatest(input.studentNameText, 
-                                                     input.studentIDText))
+                                                     input.studentIDText)
+            )
             .map { [weak self] name, studentID in
                 if !name.isEmpty && studentID.isEmpty {
                     self?.nameTextFieldCompletedRelay.accept(true)
