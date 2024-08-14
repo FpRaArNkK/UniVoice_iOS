@@ -62,6 +62,7 @@ final class StudentInfoInputVC: UIViewController {
         
         rootView.nextButton.bindData(buttonType: nextButtonIsEnabled.asObservable())
         
+        // 이름, 학번 입력에 따른 Button Action 분기 처리
         output.nextButtonState
             .drive(onNext: { [weak self] currentState in
                 switch currentState {
@@ -81,7 +82,6 @@ final class StudentInfoInputVC: UIViewController {
                                                          studentNameRelay: studentNameRelay,
                                                          studentIDRelay: studentIDRelay)
                     let viewController = StudentInfoConfirmVC(viewModel: viewModel)
-                    
                     self?.navigationController?.pushViewController(viewController, animated: true)
                 case .none:
                     print("none")

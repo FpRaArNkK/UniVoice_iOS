@@ -29,12 +29,15 @@ final class StudentInfoInputVM: ViewModelType {
         let nextButtonState: Driver<StudentInfoInputButtonState>
     }
     
+    // 다음 ViewController로 stream을 넘기기 위한 Relay
     let photoImageRelay: BehaviorRelay<UIImage>
     let studentNameRelay = BehaviorRelay<String>(value: "")
     let studentIDRelay = BehaviorRelay<String>(value: "")
     
+    // 이름, 학번 TextField의 텍스트 여부에 따른 Button 분기처리를 위한 Relay
     private let nameTextFieldCompletedRelay = BehaviorRelay<Bool>(value: false)
     private let idTextFieldCompletedRelay = BehaviorRelay<Bool>(value: false)
+    
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
@@ -46,6 +49,7 @@ final class StudentInfoInputVM: ViewModelType {
             .bind(to: studentIDRelay)
             .disposed(by: disposeBag)
         
+        // 입력된 이름과 학번의 상태에 따라 nextButton 활성화 여부 결정
         let nextButtonIsEnabled = Observable
             .combineLatest(
                 input.studentNameText,
@@ -65,6 +69,7 @@ final class StudentInfoInputVM: ViewModelType {
             .startWith(false)
             .asDriver(onErrorJustReturn: false)
         
+        // 이름, 학번 TextField의 상태를 바탕으로 버튼의 상태를 업데이트
         let nextButtonState = input.nextButtonDidTap
             .withLatestFrom(Observable.combineLatest(input.studentNameText, 
                                                      input.studentIDText))
