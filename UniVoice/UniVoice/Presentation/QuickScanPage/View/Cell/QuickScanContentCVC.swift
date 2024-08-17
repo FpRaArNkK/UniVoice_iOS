@@ -162,25 +162,26 @@ extension QuickScanContentCVC {
             // API 로직 호출
             profileImageView.kf.setImage(with: url, placeholder: UIImage.icnDefaultProfile)
         } else {
+            // URL 없는 경우 기본 이미지 설정
             profileImageView.image = .icnDefaultProfile
         }
-        
+        // UI 데이터 작성
         affilationNameLabel.text = cellModel.affiliationName
         uploadTimeLabel.text = Date().timeAgoString(from: cellModel.createdTime)
         viewCountLabel.text = "\(cellModel.viewCount)회"
         noticeTitleLabel.text = cellModel.noticeTitle
         
-        contentStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        contentStackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // 셀 초기화 작업
         
         let contents = [
             cellModel.noticeTarget,
             Date().getDurationText(from: cellModel.startTime, to: cellModel.endTime),
             cellModel.content
-        ]
+        ] // 대상, 일시, 요약 칸에 들어갈 데이터를 배열로 준비
         
-        contents.enumerated().forEach { (index, content) in
+        contents.enumerated().forEach { (index, content) in // 배열 순회하며 인덱스, 내용 제공
             
-            guard let contentString = content else { return }
+            guard let contentString = content else { return } // 해당 데이터가 존재하지 않는 경우 스택뷰 추가 없이 리턴
             
             let chipString: String = {
                 switch index {
@@ -195,16 +196,19 @@ extension QuickScanContentCVC {
                 }
             }()
             
+            // 추출한 내용을 컴포넌트로 작성
             let contentView = ChipContentView(
                 chipString: chipString,
                 contentString: contentString
             )
             
+            // 컴포넌트를 스택뷰에 추가
             self.contentStackView.addArrangedSubview(contentView)
         }
     }
     
     func bindTapEvent(relay: PublishRelay<Int>, index: Int) {
+        // 북마크 버튼의 탭 이벤트를 바인딩
         self.bookmarkButton.rx.tap
             .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
             .map { index }
@@ -213,6 +217,7 @@ extension QuickScanContentCVC {
     }
     
     func bindUI(isScrapped: Observable<Bool>) {
+        // isScrapped Observable을 북마크 버튼 UI에 바인딩
         isScrapped
             .map { $0 ? UIImage.icnBookmarkOn : UIImage.icnBookmarkOff }
             .observe(on: MainScheduler.instance)
