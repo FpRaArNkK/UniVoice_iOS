@@ -68,7 +68,7 @@ final class TargetInputView: UIView {
         targetInputTextField.do {
             $0.backgroundColor = .white
             $0.layer.cornerRadius = 4
-            $0.layer.borderColor = UIColor.regular.cgColor
+            $0.layer.borderColor = UIColor.lineRegular.cgColor
             $0.layer.borderWidth = 1
             $0.placeholder = "행사 대상을 입력해주세요."
             $0.addHorizontalPadding(left: 16)

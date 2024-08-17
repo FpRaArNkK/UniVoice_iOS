@@ -119,7 +119,7 @@ final class DateInputView: UIView {
     // MARK: setUpUI
     private func setUpUI() {
         borderLine.do {
-            $0.backgroundColor = .regular
+            $0.backgroundColor = .lineRegular
         }
         
         titleLabel.do {

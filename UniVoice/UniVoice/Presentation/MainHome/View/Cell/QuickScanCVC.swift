@@ -57,7 +57,7 @@ final class QuickScanCVC: UICollectionViewCell {
         }
         councilImage.do {
             $0.image = UIImage(named: "img_default_image")?.withRenderingMode(.alwaysOriginal)
-            $0.layer.borderColor = UIColor.regular.cgColor
+            $0.layer.borderColor = UIColor.lineRegular.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 34
             $0.clipsToBounds = true

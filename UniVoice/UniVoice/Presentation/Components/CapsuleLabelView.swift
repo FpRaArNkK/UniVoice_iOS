@@ -24,7 +24,7 @@ class CapsuleLabelView: UIView {
         with name: String,
         font: UIFont = .pretendardFont(for: .BUT4SB),
         labelColor: UIColor = .gray800,
-        borderColor: UIColor = .regular
+        borderColor: UIColor = .lineRegular
     ) {
         super.init(frame: .zero)
         setupView()

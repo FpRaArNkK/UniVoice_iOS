@@ -124,7 +124,7 @@ final class CreateNoticeView: UIView {
         }
         
         devideView.do {
-            $0.backgroundColor = .regular
+            $0.backgroundColor = .lineRegular
         }
         
         contentTextView.do {
@@ -143,13 +143,13 @@ final class CreateNoticeView: UIView {
         
         targetView.do {
             $0.layer.cornerRadius = 16
-            $0.layer.borderColor = UIColor.regular.cgColor
+            $0.layer.borderColor = UIColor.lineRegular.cgColor
             $0.layer.borderWidth = 1
         }
         
         dateView.do {
             $0.layer.cornerRadius = 16
-            $0.layer.borderColor = UIColor.regular.cgColor
+            $0.layer.borderColor = UIColor.lineRegular.cgColor
             $0.layer.borderWidth = 1
         }
         
@@ -219,7 +219,7 @@ final class CreateNoticeView: UIView {
         }
         
         targetInputView.do {
-            $0.applyBorders(to: [.top], width: 1, color: .regular)
+            $0.applyBorders(to: [.top], width: 1, color: .lineRegular)
             $0.isHidden = true
         }
         

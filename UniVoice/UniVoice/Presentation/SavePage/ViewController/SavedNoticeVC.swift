@@ -55,13 +55,15 @@ final class SavedNoticeVC: UIViewController {
             .bind(to: refreshTrig)
             .disposed(by: viewModel.disposeBag)
         
-        let noticeDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Notice>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCVC.identifier, for: indexPath) as? NoticeCVC else {
-                return UICollectionViewCell()
+        let noticeDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Notice>>(
+            configureCell: { dataSource, collectionView, indexPath, viewModel in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCVC.identifier, for: indexPath) as? NoticeCVC else {
+                    return UICollectionViewCell()
+                }
+                cell.noticeDataBind(viewModel: viewModel)
+                return cell
             }
-            cell.noticeDataBind(viewModel: viewModel)
-            return cell
-        })
+        )
         
         output.listData
             .map { [SectionModel(model: "Section 0", items: $0)] }

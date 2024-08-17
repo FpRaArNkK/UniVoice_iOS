@@ -220,22 +220,21 @@ final class CreateNoticeVC: UIViewController {
         
         let images: Observable<[UIImage]> = input.selectedImages.asObservable()
         
-        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, UIImage>>(configureCell: {
-            dataSource,
-            collectionView,
-            indexPath,
-            image in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCVC.reuseIdentifier, for: indexPath) as? ImageCVC else {
-                return UICollectionViewCell()
-            }
-            cell.imageView.image = image
-            cell.deleteButton.rx.tap
-                .bind { [weak self] in
-                    self?.deleteImage(at: indexPath)
+        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, UIImage>>(
+            configureCell: { dataSource, collectionView, indexPath, image in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCVC.reuseIdentifier, for: indexPath) as? ImageCVC else {
+                    return UICollectionViewCell()
                 }
-                .disposed(by: cell.disposeBag)
-            return cell
-        })
+                cell.imageView.image = image
+                cell.deleteButton.rx.tap
+                    .bind { [weak self] in
+                        self?.deleteImage(at: indexPath)
+                    }
+                    .disposed(by: cell.disposeBag)
+                return cell
+            }
+        )
+        
         images
             .map { [SectionModel(model: "Section 1", items: $0)] }
             .bind(to: rootView.imageCollectionView.rx.items(dataSource: dataSource))

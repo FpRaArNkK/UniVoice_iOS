@@ -18,7 +18,7 @@ class CustomTextfield: UITextField {
     private let disposeBag = DisposeBag()
     private let borderLayer = CALayer()
     private let activeColor = UIColor.mint600
-    private let inactiveColor = UIColor.regular
+    private let inactiveColor = UIColor.lineRegular
     
     // MARK: - Layout
     override func layoutSubviews() {
