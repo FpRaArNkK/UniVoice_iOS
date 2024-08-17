@@ -11,11 +11,17 @@ import Then
 import RxSwift
 import RxCocoa
 
+/// 커스텀 버튼의 타입입니다.
 enum CustomButtonType {
+    /// 활성 상태
     case active
+    /// 비활성 상태
     case inActive
+    /// 선택된 상태
     case selected
+    /// 선택되지 않은 상태
     case unselected
+    /// 라인만 있는 버튼 상태
     case line
     
     var titleFont: UIFont {
@@ -86,8 +92,10 @@ enum CustomButtonType {
 class CustomButton: UIButton {
     
     // MARK: Properties
+    /// 버튼 타입을 관리하는 BehaviorRelay
     private lazy var customButtonType = BehaviorRelay<CustomButtonType>(value: initialState)
     private let disposeBag = DisposeBag()
+    /// 초기 버튼 타입 상태
     private var initialState: CustomButtonType = .active
     
     // MARK: Init
@@ -96,6 +104,8 @@ class CustomButton: UIButton {
         bindUI()
     }
     
+    /// 버튼을 init합니다
+    /// - Parameter type: 초기버튼 타입으로 사용되는 고정 CustomButtonType입니다.
     init(with type: CustomButtonType) {
         super.init(frame: .zero)
         self.initialState = type
@@ -110,6 +120,7 @@ class CustomButton: UIButton {
     
     // MARK: bindUI
     private func bindUI() {
+        // customButtonType를 버튼 UI에 바인딩
         customButtonType.asDriver(onErrorJustReturn: initialState)
             .drive(onNext: { [weak self] type in
                 self?.updateUI(with: type)
@@ -120,7 +131,7 @@ class CustomButton: UIButton {
 
 // MARK: Internal Logic
 private extension CustomButton {
-    
+    /// 버튼의 UI를 입력받은 type과 title대로 업데이트
     func updateUI(with type: CustomButtonType, title: String? = nil) {
         self.configuration = self.createButtonConfiguration(
             title: title ?? self.titleLabel?.text ?? "",
@@ -135,6 +146,7 @@ private extension CustomButton {
         self.isUserInteractionEnabled = type != .inActive
     }
     
+    /// 버튼의 Configuration 생성
     func createButtonConfiguration(
         title: String,
         font: UIFont,
@@ -165,10 +177,15 @@ private extension CustomButton {
 // MARK: External Logic
 extension CustomButton {
     
+    /// 버튼의 setTitle을 오버라이딩합니다.
+    /// - Parameter title: 버튼 타이틀
+    /// - Parameter state: 버튼의 Control 상태
     override func setTitle(_ title: String?, for state: UIControl.State) {
         updateUI(with: initialState, title: title)
     }
     
+    /// 버튼에 데이터 스트림을 바인딩합니다
+    /// - Parameter buttonType: CustomButtonType Rx 데이터 스트림
     func bindData(buttonType: Observable<CustomButtonType>) {
         buttonType
             .bind(to: customButtonType)
