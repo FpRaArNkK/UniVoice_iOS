@@ -51,16 +51,25 @@ final class LoginVC: UIViewController {
         let output = viewModel.transform(input: input)
         
         // 로그인 버튼 활성화 상태에 따른 버튼 타입 설정
-        let loginButtonIsEnabled = output.loginButtonIsEnabled
-            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
+        let loginButtonIsEnabled = output.loginButtonState
+            .map { state in
+                switch state {
+                case .none:
+                    return CustomButtonType.inActive
+                default:
+                    return CustomButtonType.active
+                }
+            }
+            .asObservable()
         
-        // 로그인 버튼 데이터 바인딩
-        rootView.loginButton.bindData(buttonType: loginButtonIsEnabled.asObservable())
+        // 버튼 상태 바인딩
+        rootView.loginButton.bindData(buttonType: loginButtonIsEnabled)
         
         // 로그인 버튼 상태에 따른 동작 설정
-        output.loginButtonState
-            .drive { [weak self] buttonState in
-                switch buttonState {
+        rootView.loginButton.rx.tap
+            .withLatestFrom(output.loginButtonState)
+            .bind(onNext: { [weak self] state in
+                switch state {
                 case .idIsEditingWithoutPW:
                     self?.rootView.pwTextField.becomeFirstResponder()
                 case .pwIsEditingWithoutID:
@@ -70,18 +79,18 @@ final class LoginVC: UIViewController {
                 case .none:
                     print("none")
                 }
-            }
+            })
             .disposed(by: viewModel.disposeBag)
-        
+                
         // 로그인 상태에 따른 화면 전환
         output.loginState
             .drive(onNext: { [weak self] isUser in
                 if isUser {
                     self?.navigationController?.pushViewController(WelcomeVC(), animated: true)
                 } else {
-                    let NoAccountVC = UINavigationController(rootViewController: NoAccountVC())
-                    NoAccountVC.modalPresentationStyle = .overFullScreen
-                    self?.present(NoAccountVC, animated: true)
+                    let noAccountVC = UINavigationController(rootViewController: NoAccountVC())
+                    noAccountVC.modalPresentationStyle = .overFullScreen
+                    self?.present(noAccountVC, animated: true)
                 }
             })
             .disposed(by: viewModel.disposeBag)

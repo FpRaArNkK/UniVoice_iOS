@@ -32,8 +32,6 @@ final class LoginVM: ViewModelType {
     }
     
     struct Output {
-        /// 로그인 버튼 활성화 여부
-        let loginButtonIsEnabled: Driver<Bool>
         /// 로그인 버튼 상태
         let loginButtonState: Driver<LoginButtonState>
         /// 로그인 성공 여부
@@ -47,62 +45,38 @@ final class LoginVM: ViewModelType {
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
-        // 로그인 버튼 활성화 여부를 계산
-        let loginButtonIsEnabled = Observable
-            .combineLatest(
-                input.idText,
-                input.pwText,
-                idTextFieldCompletedRelay,
-                pwTextFieldCompletedRelay
-            )
-            .map { id, pw, idCompleted, pwCompleted in
-                if idCompleted {
-                    return !pw.isEmpty // pw가 작성되었는지
-                } else if pwCompleted {
-                    return !id.isEmpty // id가 작성되었는지
+        // ID와 PW의 유효성 검사
+        let credentials = Observable.combineLatest(input.idText, input.pwText)
+        
+        // 로그인 버튼 상태 및 활성화 여부를 결정하는 로직
+        let loginButtonState = credentials
+            .map { id, pw -> LoginButtonState in
+                if !id.isEmpty && pw.isEmpty {
+                    return .idIsEditingWithoutPW
+                } else if id.isEmpty && !pw.isEmpty {
+                    return .pwIsEditingWithoutID
+                } else if !id.isEmpty && !pw.isEmpty {
+                    return .bothIsFilled
                 } else {
-                    return !id.isEmpty || !pw.isEmpty // 둘 중 하나라도 작성되었는지
+                    return .none
                 }
             }
-            .startWith(false)
-            .asDriver(onErrorJustReturn: false)
-        
-        // 로그인 버튼 상태를 결정
-        let loginButtonState = input.loginButtonDidTap
-            .withLatestFrom(Observable.combineLatest(input.idText, input.pwText))
-            .map { [weak self] id, pw in
-                if !id.isEmpty && pw.isEmpty { // id 작성, pw 미작성
-                    self?.idTextFieldCompletedRelay.accept(true)
-                    return LoginButtonState.idIsEditingWithoutPW
-                } else if id.isEmpty && !pw.isEmpty { // id 미작성, pw 작성
-                    self?.pwTextFieldCompletedRelay.accept(true)
-                    return LoginButtonState.pwIsEditingWithoutID
-                } else if !id.isEmpty && !pw.isEmpty { // 모두 작성
-                    return LoginButtonState.bothIsFilled
-                } else { // 모두 미작성
-                    return LoginButtonState.none
-                }
-            }
-            .asDriver(onErrorJustReturn: LoginButtonState.none)
-        
-        // ID와 PW 입력 값 합성
-        let credentials = Observable
-            .combineLatest(input.idText, input.pwText)
+            .asDriver(onErrorJustReturn: .none)
         
         // 로그인 상태를 결정하는 로직
-        let loginState = loginButtonState
-            .asObservable()
-            .filter { $0 == .bothIsFilled } // 모두 작성되었을 때만
+        let loginState = input.loginButtonDidTap
+            .withLatestFrom(loginButtonState)
+            .filter { $0 == .bothIsFilled }
             .withLatestFrom(credentials)
             .flatMapLatest { [weak self] id, pw in
-                self?.login(id: id, password: pw) ?? .just(false) // 로그인 로직 호출
+                self?.login(id: id, password: pw) ?? .just(false)
             }
             .asDriver(onErrorJustReturn: false)
         
         return Output(
-            loginButtonIsEnabled: loginButtonIsEnabled,
             loginButtonState: loginButtonState,
-            loginState: loginState)
+            loginState: loginState
+        )
     }
 }
 
