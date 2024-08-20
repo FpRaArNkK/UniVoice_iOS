@@ -12,40 +12,49 @@ import UIKit
 
 final class SavedNoticeVM: ViewModelType {
     
+    // MARK: - Init
+    init() {
+        // 초기 데이터를 불러와서 Relay에 저장
+        getSavedList_MOCK()
+            .bind(to: noticeList)
+            .disposed(by: disposeBag)
+    }
+    
     struct Input {
         /// 새로고침 이벤트
         let refreshEvent: Observable<Void>
     }
     
     struct Output {
-        //        let listData: Driver<[Notice]>
         /// 공지 목록 데이터
         let sectionedListData: Driver<[SectionModel<String, Notice>]>
         /// 새로고침 종료 트리거
         let refreshQuitTrigger: Driver<Void>
     }
     
+    private let noticeList = BehaviorRelay<[Notice]>(value: [])
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
-        // 새로고침 이벤트에 따라 저장된 공지 목록을 가져옴
-        let listData = input.refreshEvent
-            .flatMapLatest({ [weak self] in
-                // self?.getSavedList() ?? .just([])
+        // 새로고침 이벤트에 따라 저장된 공지 목록을 업데이트
+        input.refreshEvent
+            .flatMapLatest { [weak self] in
                 self?.getSavedList_MOCK() ?? .just([])
-            })
-            .asDriver(onErrorJustReturn: [])
+            }
+            .bind(to: noticeList)
+            .disposed(by: disposeBag)
         
-        // SectionModel로 변환
-        let sectionedListData = listData
+        // SectionModel로 변환하여 Driver로 반환
+        let sectionedListData = noticeList
             .map { notices in
-                return [SectionModel(model: "noticeList", items: notices)]
+                [SectionModel(model: "noticeList", items: notices)]
             }
             .asDriver(onErrorJustReturn: [])
         
-        // 공지 목록 데이터를 받아 새로고침 종료 트리거를 활성화
-        let refreshQuit = listData.map { _ in Void() }
-            .asDriver()
+        // 새로고침 종료 트리거
+        let refreshQuit = noticeList
+            .map { _ in Void() }
+            .asDriver(onErrorJustReturn: ())
         
         return Output(sectionedListData: sectionedListData, refreshQuitTrigger: refreshQuit)
     }

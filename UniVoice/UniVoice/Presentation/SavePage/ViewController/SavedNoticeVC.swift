@@ -12,10 +12,6 @@ import RxDataSources
 
 final class SavedNoticeVC: UIViewController {
     
-    // MARK: Properties
-    /// 새로고침 트리거를 관리하는 Relay
-    private let refreshTrig = BehaviorRelay<Void>(value: ())
-    
     // MARK: Views
     private let rootView = SavedNoticeView()
     private let viewModel = SavedNoticeVM()
@@ -23,7 +19,6 @@ final class SavedNoticeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.refreshTrig.accept(()) // 화면이 나타날 때 새로고침 트리거를 활성화
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,13 +44,11 @@ final class SavedNoticeVC: UIViewController {
     }
     
     private func bindUI() {
-        let input = SavedNoticeVM.Input(refreshEvent: refreshTrig.asObservable())
-        let output = viewModel.transform(input: input)
+        // 새로고침 컨트롤 이벤트 스트림 참조
+        guard let refreshTrig = rootView.savedCollectionView.refreshControl?.rx.controlEvent(.valueChanged).asObservable() else { return }
         
-        // 새로고침 컨트롤 이벤트를 새로고침 트리거에 바인딩
-        rootView.savedCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
-            .bind(to: refreshTrig)
-            .disposed(by: viewModel.disposeBag)
+        let input = SavedNoticeVM.Input(refreshEvent: refreshTrig)
+        let output = viewModel.transform(input: input)
         
         // 데이터 소스 설정
         let noticeDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Notice>>(
@@ -80,7 +73,7 @@ final class SavedNoticeVC: UIViewController {
                 self?.rootView.savedCollectionView.refreshControl?.endRefreshing()
             })
             .disposed(by: viewModel.disposeBag)
-                
+        
         // 항목 선택 시 상세 화면으로 이동
         rootView.savedCollectionView.rx.itemSelected
             .withLatestFrom(output.sectionedListData) { indexPath, sectionModels -> Notice in
