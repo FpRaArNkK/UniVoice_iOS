@@ -70,8 +70,7 @@ final class SavedNoticeVC: UIViewController {
         )
         
         // ViewModel에서 가져온 데이터를 RxDataSource에 바인딩
-        output.listData
-            .map { [SectionModel(model: "Section 0", items: $0)] }
+        output.sectionedListData
             .drive(rootView.savedCollectionView.rx.items(dataSource: noticeDataSource))
             .disposed(by: viewModel.disposeBag)
         
@@ -81,19 +80,17 @@ final class SavedNoticeVC: UIViewController {
                 self?.rootView.savedCollectionView.refreshControl?.endRefreshing()
             })
             .disposed(by: viewModel.disposeBag)
-        
+                
         // 항목 선택 시 상세 화면으로 이동
         rootView.savedCollectionView.rx.itemSelected
-            .withLatestFrom(output.listData) { indexPath, notices -> (IndexPath, [Notice]) in
-                return (indexPath, notices)
+            .withLatestFrom(output.sectionedListData) { indexPath, sectionModels -> Notice in
+                return sectionModels[indexPath.section].items[indexPath.row]
             }
-            .subscribe(onNext: { [weak self] indexPath, notices in
-                let save = notices[indexPath.row]
-                let nextVC = DetailNoticeVC(id: save.id)
+            .subscribe(onNext: { [weak self] notice in
+                let nextVC = DetailNoticeVC(id: notice.id)
                 self?.navigationController?.pushViewController(nextVC, animated: true)
             })
             .disposed(by: viewModel.disposeBag)
-        
     }
 }
 

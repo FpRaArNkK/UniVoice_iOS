@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxCocoa
+import RxDataSources
 import UIKit
 
 final class SavedNoticeVM: ViewModelType {
@@ -17,8 +18,9 @@ final class SavedNoticeVM: ViewModelType {
     }
     
     struct Output {
+        //        let listData: Driver<[Notice]>
         /// 공지 목록 데이터
-        let listData: Driver<[Notice]>
+        let sectionedListData: Driver<[SectionModel<String, Notice>]>
         /// 새로고침 종료 트리거
         let refreshQuitTrigger: Driver<Void>
     }
@@ -34,11 +36,18 @@ final class SavedNoticeVM: ViewModelType {
             })
             .asDriver(onErrorJustReturn: [])
         
+        // SectionModel로 변환
+        let sectionedListData = listData
+            .map { notices in
+                return [SectionModel(model: "noticeList", items: notices)]
+            }
+            .asDriver(onErrorJustReturn: [])
+        
         // 공지 목록 데이터를 받아 새로고침 종료 트리거를 활성화
         let refreshQuit = listData.map { _ in Void() }
             .asDriver()
         
-        return Output(listData: listData, refreshQuitTrigger: refreshQuit)
+        return Output(sectionedListData: sectionedListData, refreshQuitTrigger: refreshQuit)
     }
 }
 
