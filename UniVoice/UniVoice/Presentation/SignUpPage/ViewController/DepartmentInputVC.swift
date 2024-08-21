@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+/// 사용자가 학과를 입력하고 선택하는 뷰 컨트롤러입니다.
 final class DepartmentInputVC: UIViewController {
     
     // MARK: Views
@@ -17,9 +18,14 @@ final class DepartmentInputVC: UIViewController {
     private let disposeBag = DisposeBag()
     
     // MARK: Properties
-    var selectedUniversity: BehaviorRelay<String>!
+    /// 사용자가 선택한 대학교를 저장하는 프로퍼티입니다.
+    var selectedUniversity = BehaviorRelay<String>(value: "")
+    
+    /// 사용자가 선택한 학과를 저장하는 프로퍼티입니다.
     var selectedDepartment = BehaviorRelay<String>(value: "")
     
+    /// 지정 초기화 메서드로, 선택된 대학교 이름을 받아 초기화합니다.
+    /// - Parameter university: 사용자가 선택한 대학교 이름.
     init(university: String) {
         super.init(nibName: nil, bundle: nil)
         self.selectedUniversity = BehaviorRelay<String>(value: university)

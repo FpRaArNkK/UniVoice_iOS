@@ -25,6 +25,8 @@ final class DepartmentInputVM: ViewModelType {
     var disposeBag = DisposeBag()
     let selectedDepartment = BehaviorRelay<String?>(value: nil)
     
+    /// 학과 선택 메서드로, 선택한 학과 이름을 `selectDepartment`에 저장합니다.
+    /// - Parameter departmentName: 선택한 학과 이름.
     func selectDepartment(_ departmentName: String) {
         selectedDepartment.accept(departmentName)
     }

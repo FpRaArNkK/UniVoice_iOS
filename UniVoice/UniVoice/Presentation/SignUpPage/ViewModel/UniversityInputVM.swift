@@ -24,6 +24,8 @@ final class UniversityInputVM: ViewModelType {
     var disposeBag = DisposeBag()
     let selectedUniversity = BehaviorRelay<String?>(value: nil)
     
+    /// 대학교 선택 메서드로, 선택한 대학교 이름을 `selectedUniversity`에 저장합니다.
+    /// - Parameter universityName: 선택한 대학교의 이름.
     func selectUniversity(_ universityName: String) {
         selectedUniversity.accept(universityName)
     }
