@@ -16,6 +16,7 @@ final class NoticeImageCVC: UICollectionViewCell {
     
     // MARK: Properties
     static let identifier = "NoticeImageCVC"
+    private var disposeBag = DisposeBag()
     
     // MARK: Views
     let noticeImage = UIImageView()
@@ -58,7 +59,7 @@ final class NoticeImageCVC: UICollectionViewCell {
 extension NoticeImageCVC {
     override func prepareForReuse() {
         super.prepareForReuse()
-        noticeImage.image = UIImage(named: "img_default_image")
+        self.disposeBag = DisposeBag()
     }
     
     func noticeImageDataBind(imgURL: String) {
