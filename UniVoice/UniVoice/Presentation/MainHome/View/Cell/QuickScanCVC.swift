@@ -8,15 +8,12 @@
 import UIKit
 import SnapKit
 import Then
-import RxSwift
-import RxCocoa
 import Kingfisher
 
 final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: Properties
     static let identifier = "QuickScanCVC"
-    private let disposeBag = DisposeBag()
     private let number = 10
     private let circleWidth = 21
     

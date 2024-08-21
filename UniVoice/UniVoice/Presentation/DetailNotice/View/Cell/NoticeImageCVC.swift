@@ -8,8 +8,6 @@
 import UIKit
 import SnapKit
 import Then
-import RxSwift
-import RxCocoa
 import Kingfisher
 
 final class NoticeImageCVC: UICollectionViewCell {

@@ -867,8 +867,8 @@
 		DC33DB132C3B16D3008B321E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */,
 				DC33DB0F2C3B1691008B321E /* MainHomeVC.swift */,
+				EDF4C89F2C4729B900DE7643 /* UploadingNoticeVC.swift */,
 				EDF4C88A2C41966300DE7643 /* CreateNoticeVC.swift */,
 			);
 			path = ViewController;
