@@ -16,9 +16,11 @@ final class DetailNoticeVC: UIViewController {
     // MARK: Properties
     private let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
         configureCell: { _, collectionView, indexPath, url in
+            // swiftlint: disable line_length
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeImageCVC.identifier, for: indexPath) as? NoticeImageCVC else {
                 return UICollectionViewCell()
             }
+            // swiftlint: enable line_length
             cell.noticeImageDataBind(imgURL: url)
             print(url)
             return cell

@@ -25,7 +25,6 @@ extension UIImage {
             compressedData = self.jpegData(compressionQuality: compression)
         }
         
-        print(compressedData?.sizeInMB())
         return compressedData
     }
 }

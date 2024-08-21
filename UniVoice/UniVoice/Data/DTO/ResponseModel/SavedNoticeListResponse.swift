@@ -26,13 +26,13 @@ struct SavedNotice: Codable {
 }
 
 extension SavedNotice {
-    func toArticle() -> Article {
+    func toNotice() -> Notice {
         return .init(
             id: id,
             chip: category,
-            articleTitle: title,
+            noticeTitle: title,
             thumbnailImage: image ?? "",
-            duration: Date().dateFromString(createdAt)?.toFormattedStringWithoutTime() ?? "",
+            createdTime: Date().dateFromString(createdAt)?.toFormattedStringWithoutTime() ?? "",
             likedNumber: noticeLike,
             savedNumber: viewCount
         )

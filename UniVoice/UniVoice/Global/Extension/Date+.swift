@@ -126,7 +126,7 @@ extension Date {
     func toString(includeTime: Bool) -> String {
         return includeTime ? self.toDateTimeString() : self.toDateString()
     }
-    
+        
     /// 문자열을 Date로 변환합니다
     func dateFromString(_ dateString: String) -> Date? {
         let dateFormatter = DateFormatter()

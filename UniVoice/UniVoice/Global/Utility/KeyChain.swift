@@ -8,6 +8,7 @@
 import Foundation
 import Security
 
+// swiftlint: disable non_optional_string_data_conversion
 class KeyChain {
     static let shared = KeyChain()
     private init() {}
@@ -51,3 +52,4 @@ class KeyChain {
         SecItemDelete(query)
     }
 }
+// swiftlint: enable non_optional_string_data_conversion

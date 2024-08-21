@@ -10,17 +10,13 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
+final class MainHomeVC: UIViewController, UIScrollViewDelegate {
     
-    //MARK: Properties
+    // MARK: Properties
     private let disposeBag = DisposeBag()
-
-    private let viewModel = MainHomeViewModel()
-    
+    private let viewModel = MainHomeVM()
     private let itemSelectedSubject = PublishSubject<IndexPath>()
-    
     private let tabList = BehaviorRelay<[String]>(value: []) // 중간 부분에 들어가는 탭들 이름 리스트
-    
     private let fetchTrig = PublishRelay<Void>() // 새로고침 트리거
     
     // MARK: Views
@@ -62,7 +58,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         rootView.quickScanCollectionView.register(QuickScanCVC.self, forCellWithReuseIdentifier: QuickScanCVC.identifier)
         rootView.headerView.councilCollectionView.register(CouncilCVC.self, forCellWithReuseIdentifier: CouncilCVC.identifier)
         rootView.stickyHeaderView.councilCollectionView.register(CouncilCVC.self, forCellWithReuseIdentifier: CouncilCVC.identifier)
-        rootView.articleCollectionView.register(ArticleCVC.self, forCellWithReuseIdentifier: ArticleCVC.identifier)
+        rootView.noticeCollectionView.register(NoticeCVC.self, forCellWithReuseIdentifier: NoticeCVC.identifier)
         if let layout = rootView.quickScanCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         }
@@ -72,7 +68,7 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         if let layout = rootView.stickyHeaderView.councilCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 8, right: 16)
         }
-        if let layout = rootView.articleCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let layout = rootView.noticeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
         }
     }
@@ -98,11 +94,11 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .subscribe(onNext: { [weak self] shouldDisableScroll in
                 guard let self = self else { return }
                 
-                self.rootView.articleCollectionView.isScrollEnabled = !shouldDisableScroll
+                self.rootView.noticeCollectionView.isScrollEnabled = !shouldDisableScroll
             })
             .disposed(by: disposeBag)
         
-        let input = MainHomeViewModel.Input(
+        let input = MainHomeVM.Input(
             councilSelected: itemSelectedSubject.asObservable(),
             fetchTrigger: fetchTrig.asObservable()
         )
@@ -117,42 +113,48 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         let output = viewModel.transform(input: input)
         
         let qsItems = output.qsItems
-                        
-        let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QS>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
-            else {
-                return UICollectionViewCell()
-            }
-            cell.quickScanDataBind(viewModel: viewModel)
-            return cell
-        })
         
-        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CouncilCVC.identifier, for: indexPath) as? CouncilCVC else {
-                return UICollectionViewCell()
-            }
-            
-            cell.councilButton.rx.tap
-                .map { return indexPath }
-                .bind(to: self.itemSelectedSubject)
-                .disposed(by: self.disposeBag)
-            
-            let buttonType = output.selectedCouncilIndex
-                .map { index in
-                    return indexPath.row == index ? CustomButtonType.selected : CustomButtonType.unselected
+        let qsDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, QuickScanProfile>>(
+            configureCell: { dataSource, collectionView, indexPath, viewModel in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuickScanCVC.identifier, for: indexPath) as? QuickScanCVC
+                else {
+                    return UICollectionViewCell()
                 }
-            
-            cell.councilDataBind(councilName: viewModel, type: buttonType)
-            return cell
-        })
-        
-        let articleDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Article>>(configureCell: { dataSource, collectionView, indexPath, viewModel in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCVC.identifier, for: indexPath) as? ArticleCVC else {
-                return UICollectionViewCell()
+                cell.quickScanDataBind(viewModel: viewModel)
+                return cell
             }
-            cell.articleDataBind(viewModel: viewModel)
-            return cell
-        })
+        )
+        
+        let councilDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(
+            configureCell: { dataSource, collectionView, indexPath, viewModel in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CouncilCVC.identifier, for: indexPath) as? CouncilCVC else {
+                    return UICollectionViewCell()
+                }
+                
+                cell.councilButton.rx.tap
+                    .map { return indexPath }
+                    .bind(to: self.itemSelectedSubject)
+                    .disposed(by: self.disposeBag)
+                
+                let buttonType = output.selectedCouncilIndex
+                    .map { index in
+                        return indexPath.row == index ? CustomButtonType.selected : CustomButtonType.unselected
+                    }
+                
+                cell.councilDataBind(councilName: viewModel, type: buttonType)
+                return cell
+            }
+        )
+        
+        let noticeDataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Notice>>(
+            configureCell: { dataSource, collectionView, indexPath, viewModel in
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCVC.identifier, for: indexPath) as? NoticeCVC else {
+                    return UICollectionViewCell()
+                }
+                cell.noticeDataBind(viewModel: viewModel)
+                return cell
+            }
+        )
         
         qsItems
             .map { [SectionModel(model: "Section 1", items: $0)] }
@@ -184,9 +186,9 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
             .bind(to: self.tabList)
             .disposed(by: disposeBag)
         
-        output.articleItems
-            .do(onNext: { [weak self] articles in
-                if articles.isEmpty {
+        output.noticeItems
+            .do(onNext: { [weak self] notices in
+                if notices.isEmpty {
                     self?.rootView.noCouncilLabel.isHidden = false
                     self?.rootView.scrollView.isScrollEnabled = false
                     self?.rootView.stickyHeaderView.isHidden = true
@@ -198,16 +200,15 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 }
             })
             .map { [SectionModel(model: "Section 3", items: $0)] }
-            .bind(to: rootView.articleCollectionView.rx.items(dataSource: articleDataSource))
+            .bind(to: rootView.noticeCollectionView.rx.items(dataSource: noticeDataSource))
             .disposed(by: disposeBag)
         
-        rootView.articleCollectionView.rx.observe(CGSize.self, "contentSize")
+        rootView.noticeCollectionView.rx.observe(CGSize.self, "contentSize")
             .compactMap { $0 }
             .subscribe(onNext: { [weak self] size in
                 self?.updateCollectionViewHeight(size: size)
             })
             .disposed(by: disposeBag)
-            
         
         output.refreshQuitTrigger
             .bind(onNext: { [weak self] in
@@ -218,19 +219,19 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
         rootView.quickScanCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.headerView.councilCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         rootView.stickyHeaderView.councilCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        rootView.articleCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        rootView.noticeCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         
         rootView.headerView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-//                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
+                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
         rootView.stickyHeaderView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-//                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
+                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
@@ -240,30 +241,30 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
                 
                 self.rootView.headerView.councilCollectionView.reloadData()
                 self.rootView.stickyHeaderView.councilCollectionView.reloadData()
-                self.rootView.articleCollectionView.reloadData()
+                self.rootView.noticeCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
         
         // QuickScan item 셀 선택
         rootView.quickScanCollectionView.rx.itemSelected
-            .withLatestFrom(output.qsItems) { indexPath, items -> (IndexPath, [QS]) in
+            .withLatestFrom(output.qsItems) { indexPath, items -> (IndexPath, [QuickScanProfile]) in
                 return (indexPath, items)
             }
             .subscribe(onNext: { [weak self] indexPath, items in
-                guard let self = self, items[indexPath.row].articleNumber != 0 else { return }
+                guard let self = self, items[indexPath.row].noticeNumber != 0 else { return }
                 let quickScanVC = QuickScanVC(id: indexPath.row)
                 self.navigationController?.pushViewController(quickScanVC, animated: true)
             })
             .disposed(by: disposeBag)
         
-        rootView.articleCollectionView.rx.itemSelected
-            .withLatestFrom(output.articleItems) { indexPath, articles -> (Int, [Article]) in
-                return (indexPath.row, articles)
+        rootView.noticeCollectionView.rx.itemSelected
+            .withLatestFrom(output.noticeItems) { indexPath, notices -> (Int, [Notice]) in
+                return (indexPath.row, notices)
             }
-            .bind(onNext: { [weak self] index, articles in
+            .bind(onNext: { [weak self] index, notices in
                 guard let self = self else { return }
-                let selectedArticle = articles[index]
-                let detailNoticeVC = DetailNoticeVC(id: selectedArticle.id)
+                let selectedNotice = notices[index]
+                let detailNoticeVC = DetailNoticeVC(id: selectedNotice.id)
                 self.navigationController?.pushViewController(detailNoticeVC, animated: true)
             })
             .disposed(by: disposeBag)
@@ -290,14 +291,14 @@ final class MainHomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     private func updateCollectionViewHeight(size: CGSize) {
-        rootView.articleCollectionView.snp.updateConstraints {
+        rootView.noticeCollectionView.snp.updateConstraints {
             $0.height.equalTo(size.height)
         }
         view.layoutIfNeeded()
     }
 }
 
-extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
+extension MainHomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -314,7 +315,7 @@ extension MainHomeViewController: UICollectionViewDelegateFlowLayout {
                 let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.pretendardFont(for: .B3SB)]).width + 30
                 return CGSize(width: width, height: 32)
             }
-        case rootView.articleCollectionView:
+        case rootView.noticeCollectionView:
             return CGSize(width: UIScreen.main.bounds.width - 32, height: 78)
         default:
             return CGSize(width: 0, height: 0)

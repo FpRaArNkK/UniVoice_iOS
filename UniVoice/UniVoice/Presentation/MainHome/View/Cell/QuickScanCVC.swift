@@ -15,26 +15,17 @@ import Kingfisher
 final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: Properties
-    
-    static let identifier = "QuickScanCollectionViewCell"
-    
+    static let identifier = "QuickScanCVC"
     private let disposeBag = DisposeBag()
-    
     private let number = 10
-    
     private let circleWidth = 21
     
     // MARK: Views
-    
     private let content = UIView()
-    
     private let councilImage = UIImageView()
-    
     private let councilName = UILabel()
-    
     private let circleView = UIView()
-    
-    private var articleNumber = UILabel()
+    private var noticeNumber = UILabel()
     
     // MARK: Init
     override init(frame: CGRect) {
@@ -54,7 +45,7 @@ final class QuickScanCVC: UICollectionViewCell {
         [councilImage, councilName, circleView].forEach {
             content.addSubview($0)
         }
-        circleView.addSubview(articleNumber)
+        circleView.addSubview(noticeNumber)
     }
     
     // MARK: setUpUI
@@ -66,7 +57,7 @@ final class QuickScanCVC: UICollectionViewCell {
         }
         councilImage.do {
             $0.image = UIImage(named: "img_default_image")?.withRenderingMode(.alwaysOriginal)
-            $0.layer.borderColor = UIColor.regular.cgColor
+            $0.layer.borderColor = UIColor.lineRegular.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 34
             $0.clipsToBounds = true
@@ -82,7 +73,7 @@ final class QuickScanCVC: UICollectionViewCell {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 21/2
         }
-        articleNumber.do {
+        noticeNumber.do {
             $0.setText("\(number)", font: .B2SB, color: .W_01)
             $0.textAlignment = .center
         }
@@ -109,7 +100,7 @@ final class QuickScanCVC: UICollectionViewCell {
             $0.height.equalTo(21)
             $0.width.equalTo(circleWidth)
         }
-        articleNumber.snp.makeConstraints {
+        noticeNumber.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
     }
@@ -121,31 +112,31 @@ extension QuickScanCVC {
         super.prepareForReuse()
         councilImage.image = nil
         councilName.text = nil
-        articleNumber.text = nil
-        articleNumber.removeFromSuperview()
-        circleView.addSubview(articleNumber)
+        noticeNumber.text = nil
+        noticeNumber.removeFromSuperview()
+        circleView.addSubview(noticeNumber)
         circleView.isHidden = true
     }
     
-    func quickScanDataBind(viewModel: QS) {
+    func quickScanDataBind(viewModel: QuickScanProfile) {
         councilImage.kf.setImage(with: URL(string: viewModel.councilImage))
         councilName.text = viewModel.councilName.replacingSpacesWithNewlines()
-        articleNumber.text = "\(viewModel.articleNumber)"
-        articleNumber.removeFromSuperview()
-        circleView.addSubview(articleNumber)
-        circleView.isHidden = viewModel.articleNumber == 0 ? true : false
+        noticeNumber.text = "\(viewModel.noticeNumber)"
+        noticeNumber.removeFromSuperview()
+        circleView.addSubview(noticeNumber)
+        circleView.isHidden = viewModel.noticeNumber == 0 ? true : false
         circleView.snp.removeConstraints()
         circleView.snp.makeConstraints {
             $0.top.equalTo(content).offset(6)
             $0.centerX.equalTo(councilImage).offset(21)
-            if viewModel.articleNumber > 9 {
+            if viewModel.noticeNumber > 9 {
                 
                 $0.size.equalTo(CGSize(width: 28, height: 21))
             } else {
                 $0.size.equalTo(CGSize(width: 21, height: 21))
             }
         }
-        articleNumber.snp.makeConstraints {
+        noticeNumber.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
     }

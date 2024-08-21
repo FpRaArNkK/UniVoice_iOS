@@ -10,7 +10,7 @@ import PhotosUI
 import RxSwift
 import RxCocoa
 
-class StudentIDPhotoInputVC: UIViewController {
+final class StudentIDPhotoInputVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = StudentIDPhotoInputView()
@@ -70,6 +70,7 @@ class StudentIDPhotoInputVC: UIViewController {
         rootView.studentIDPhotoimgaeView.isUserInteractionEnabled = true
     }
     
+    // MARK: - Image Select(PHPicker)
     @objc
     private func imageViewDidTap() {
         if rootView.studentIDPhotoimgaeView.image == nil {
@@ -81,8 +82,8 @@ class StudentIDPhotoInputVC: UIViewController {
                                               preferredStyle: .actionSheet)
         
         let addImageAction = UIAlertAction(title: "이미지 첨부하기", style: .default) { [weak self] _ in
-            self?.checkPhotoLibraryPermission(completion: { [weak self] granted in
-                granted ? self?.presentPHPicker() : self?.showAccessDeniedAlert()
+            self?.checkPhotoLibraryPermission(completion: { [weak self] isAccessible in
+                isAccessible ? self?.presentPHPicker() : self?.showAccessDeniedAlert()
             })
         }
         let cancelAction = UIAlertAction(title: "취소", style: .destructive) { [weak self] _ in
@@ -94,12 +95,16 @@ class StudentIDPhotoInputVC: UIViewController {
         present(addImageAlert, animated: true)
     }
     
+    // TODO : escaping 클로저 RxSwift로 리팩토링
     private func checkPhotoLibraryPermission(completion: @escaping (Bool) -> Void) {
+        // 사진 접근 권한 상태
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        
         switch status {
         case .authorized, .limited:
             completion(true)
         case .notDetermined:
+            // 초기 진입시 접근 권한 설정 안 돼 있음므로 접근 권한 요청
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { statusForRequest in
                 DispatchQueue.main.async {
                     completion(statusForRequest == .authorized || statusForRequest == .limited)
@@ -110,6 +115,7 @@ class StudentIDPhotoInputVC: UIViewController {
         }
     }
     
+    // 사진 선택을 위한 PHPicker 호출
     private func presentPHPicker() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
@@ -125,6 +131,7 @@ class StudentIDPhotoInputVC: UIViewController {
                                       message: "학생증 인증을 위해 사진 접근 권한이 필요합니다. 설정에서 권한을 허용해 주세요.",
                                       preferredStyle: .alert)
         
+        // 설정으로 화면 전환을 위한 Action
         let settingsAction = UIAlertAction(title: "설정으로 이동", style: .default) { _ in
             guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(settingsURL)
@@ -137,12 +144,14 @@ class StudentIDPhotoInputVC: UIViewController {
     }
 }
 
+// MARK: - PHPickerViewControllerDelegate
 extension StudentIDPhotoInputVC: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
         guard let provider = results.first?.itemProvider else { return }
         
+        // provider(item 즉 image)가 UIImage로 Load 가능한지 판별 후 이미지 처리
         if provider.canLoadObject(ofClass: UIImage.self) {
             provider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
                 guard let image = image as? UIImage else { return }

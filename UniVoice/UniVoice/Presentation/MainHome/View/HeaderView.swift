@@ -12,7 +12,7 @@ import Then
 final class HeaderView: UIView {
     
     // MARK: Views
-    let articleLabel = UILabel()
+    let noticeLabel = UILabel()
     let councilCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -43,14 +43,14 @@ final class HeaderView: UIView {
     private func setUpHierarchy() {
         
         [
-            articleLabel,
+            noticeLabel,
             councilCollectionView
         ].forEach { self.addSubview($0) }
     }
     
     // MARK: setUpUI
     private func setUpUI() {
-        articleLabel.do {
+        noticeLabel.do {
             $0.setText("공지사항",
                        font: .H5B,
                        color: .B_01)
@@ -59,12 +59,12 @@ final class HeaderView: UIView {
     
     // MARK: setUpLayout
     private func setUpLayout() {
-        articleLabel.snp.makeConstraints {
+        noticeLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
         }
         councilCollectionView.snp.makeConstraints {
-            $0.top.equalTo(articleLabel.snp.bottom).offset(14)
+            $0.top.equalTo(noticeLabel.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(32)
             $0.bottom.equalToSuperview().inset(8)

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class TOSCheckView: UIView {
+final class TOSCheckView: UIView {
 
     // MARK: - Views
     let dimmedView = UIVisualEffectView(effect: nil)
@@ -48,13 +48,22 @@ class TOSCheckView: UIView {
     
     // MARK: - setUpHierarchy
     private func setUpHierarchy() {
-        [overallAgreeCheckBox, overallAgreeLabel]
+        [
+            overallAgreeCheckBox,
+            overallAgreeLabel
+        ]
             .forEach { overallAgreeStack.addArrangedSubview($0) }
         
-        [serviceTermsCheckBox, serviceTermsLabel]
+        [
+            serviceTermsCheckBox,
+            serviceTermsLabel
+        ]
             .forEach { serviceTermsStack.addArrangedSubview($0) }
         
-        [personalInfoTOSCheckBox, personalInfoTOSLabel]
+        [
+            personalInfoTOSCheckBox,
+            personalInfoTOSLabel
+        ]
             .forEach { personalInfoTOSStack.addArrangedSubview($0) }
         
         [
@@ -68,7 +77,10 @@ class TOSCheckView: UIView {
         ]
             .forEach { tosView.addSubview($0) }
         
-        [dimmedView, tosView]
+        [
+            dimmedView,
+            tosView
+        ]
             .forEach { addSubview($0) }
     }
     

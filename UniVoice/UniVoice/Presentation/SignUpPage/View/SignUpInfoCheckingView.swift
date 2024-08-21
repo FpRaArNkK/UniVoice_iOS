@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 import Then
 
-class SignUpInfoCheckingView: UIView {
+final class SignUpInfoCheckingView: UIView {
 
     // MARK: - Views
+    let backToInitialButton = CustomButton(with: .active)
     private let mainDescriptionLabel = UILabel()
     private let subDescriptionLabel = UILabel()
     private let descriptionStack = UIStackView()
     private let iconImageView = UIImageView()
-    let backToInitialButton = CustomButton(with: .active)
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -38,10 +38,17 @@ class SignUpInfoCheckingView: UIView {
     
     // MARK: - setUpHierarchy
     private func setUpHierarchy() {
-        [mainDescriptionLabel, subDescriptionLabel]
+        [
+            mainDescriptionLabel,
+            subDescriptionLabel
+        ]
             .forEach { descriptionStack.addArrangedSubview($0) }
         
-        [descriptionStack, iconImageView, backToInitialButton]
+        [
+            descriptionStack,
+            iconImageView,
+            backToInitialButton
+        ]
             .forEach { addSubview($0) }
     }
     
@@ -69,7 +76,6 @@ class SignUpInfoCheckingView: UIView {
         }
         
         iconImageView.do {
-//            $0.backgroundColor = .gray300
             $0.contentMode = .scaleAspectFit
             $0.image = .imgCheckUniv
         }

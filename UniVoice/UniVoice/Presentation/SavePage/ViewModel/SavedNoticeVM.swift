@@ -16,7 +16,7 @@ final class SavedNoticeVM: ViewModelType {
     }
     
     struct Output {
-        let listData: Driver<[Article]>
+        let listData: Driver<[Notice]>
         let refreshQuitTrigger: Driver<Void>
     }
     
@@ -39,8 +39,8 @@ final class SavedNoticeVM: ViewModelType {
 // MARK: API Logic
 extension SavedNoticeVM {
 
-    private func getSavedList() -> Observable<[Article]> {
+    private func getSavedList() -> Observable<[Notice]> {
         return Service.shared.getSavedNoticeList().asObservable()
-            .map { $0.data.map { $0.toArticle() } }
+            .map { $0.data.map { $0.toNotice() } }
     }
 }

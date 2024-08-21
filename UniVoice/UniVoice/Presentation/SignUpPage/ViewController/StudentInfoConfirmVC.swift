@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class StudentInfoConfirmVC: UIViewController {
+final class StudentInfoConfirmVC: UIViewController {
     
     // MARK: - Properties
     private let rootView = StudentInfoConfirmView()
