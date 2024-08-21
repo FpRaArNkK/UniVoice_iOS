@@ -38,6 +38,7 @@ final class CreateAccountVC: UIViewController {
     }
     
     private func setUpBindUI() {
+        // confirmAndNextButton이 tap 됐을 때 title을 전달
         let confirmAndNextButtonDidTap = rootView.confirmAndNextButton.rx.tap
             .withLatestFrom(rootView.confirmAndNextButton.rx.title())
         

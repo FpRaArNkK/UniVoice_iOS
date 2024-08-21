@@ -12,6 +12,10 @@ final class MoyaLoginPlugin: PluginType {
     private let keychain = KeyChain.shared
     private let accessTokenKey = "accessToken"
     
+    /// 네트워크 요청의 응답을 처리 후 accessToken를 KeyChain에 저장
+    /// - Parameters:
+    ///   - result: Moya 요청의 결과, 성공 또는 실패
+    ///   - target: 요청된 API의 타겟 정보
     func didReceive(_ result: Result<Moya.Response, MoyaError>, target: TargetType) {
         switch result {
         case .success(let response):

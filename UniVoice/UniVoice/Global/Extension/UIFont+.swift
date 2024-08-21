@@ -9,6 +9,7 @@ import UIKit
 
 // swiftlint: disable line_length
 extension UIFont {
+    // PretendardFont 타입에 맞는 UIFont를 생성하는 함수
     static func pretendardFont(for type: PretendardFont) -> UIFont {
         return UIFont(name: type.weight, size: type.size) ?? .systemFont(ofSize: type.size)
     }

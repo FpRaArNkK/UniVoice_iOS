@@ -8,6 +8,9 @@
 import UIKit
 
 extension UIImage {
+    /// 지정된 크기의 빈 UIImage를 생성
+    /// - Parameter size: 생성할 이미지의 크기
+    /// - Returns: 지정된 크기의 빈 UIImage를 반환
     static func emptyImage(size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let image = UIGraphicsGetImageFromCurrentImageContext()
