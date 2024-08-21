@@ -13,7 +13,7 @@ final class QuickScanVM: ViewModelType {
     
     init(id: Int) {
         // API 로직 수행
-        self.getQuickScans(id: id)
+        self.getQuickScans_MOCK(id: id)
             .bind(to: quickScans)
             .disposed(by: disposeBag)
         
@@ -24,7 +24,7 @@ final class QuickScanVM: ViewModelType {
             .subscribe(onNext: { [weak self] scans in
                 guard let self = self else { return }
                 let id = scans[0].noticeId
-                self.postQuickScanCompleted(noticeId: id)
+                // self.postQuickScanCompleted(noticeId: id) // post 해제
             })
             .disposed(by: disposeBag)
     }
@@ -173,5 +173,12 @@ private extension QuickScanVM {
                 }
             }
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: Temp Mock Data
+extension QuickScanVM {
+    private func getQuickScans_MOCK(id: Int) -> Observable<[QuickScan]> {
+        return .just(QuickScan.dummyData)
     }
 }
