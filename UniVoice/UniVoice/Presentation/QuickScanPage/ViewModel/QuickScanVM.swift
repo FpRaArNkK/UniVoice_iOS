@@ -30,30 +30,42 @@ final class QuickScanVM: ViewModelType {
     }
     
     struct Input {
+        /// 페이지 인덱스 변경 이벤트
         let changeIndex: Observable<Int>
+        /// 북마크 버튼 탭 이벤트
         let bookmarkDidTap: Observable<Int>
     }
     
     struct Output {
+        /// QuickScans 데이터 스트림
         let quickScans: Driver<[QuickScan]>
+        /// 현재 페이지 인덱스 스트림
         let currentIndex: Driver<Int>
+        /// 북마크 결과 스트림
         let bookmarkResult: Driver<Bool>
+        /// 퀵스캔 확인 완료 상태 스트림
         let viewComplete: Driver<Bool>
     }
     
     var disposeBag = DisposeBag()
     
+    /// QuickScans 데이터를 관리하는 BehaviorRelay
     private let quickScans: BehaviorRelay<[QuickScan]> = BehaviorRelay(value: [])
+    /// 현재 페이지 인덱스를 관리하는 BehaviorRelay
     private let currentIndex = BehaviorRelay(value: 0)
+    /// 북마크 결과를 관리하는 PublishRelay
     private let bookmarkResult = PublishRelay<Bool>()
+    /// 퀵스캔 확인 완료 상태를 관리하는 PublishRelay
     private let viewComplete = PublishRelay<Bool>()
     
     func transform(input: Input) -> Output {
         
+        // 페이지 인덱스 변경 시 currentIndex에 바인딩
         input.changeIndex
             .bind(to: self.currentIndex)
             .disposed(by: disposeBag)
         
+        // 북마크 버튼 탭 이벤트 처리
         input.bookmarkDidTap
             .withLatestFrom(self.currentIndex)
             .flatMapLatest { [weak self] index -> Observable<Bool> in
@@ -63,6 +75,7 @@ final class QuickScanVM: ViewModelType {
             .bind(to: bookmarkResult)
             .disposed(by: disposeBag)
         
+        // 북마크 결과에 따라 QuickScans 데이터 업데이트
         bookmarkResult
             .withLatestFrom(self.currentIndex) { (result, index) -> (Bool, Int) in
                 return (result, index)
@@ -77,6 +90,7 @@ final class QuickScanVM: ViewModelType {
         
         let currentIndex = input.changeIndex
         
+        // 페이지 인덱스 변경 시 POST 요청 수행
         currentIndex
             .withLatestFrom(quickScans) { (index, scans) in
                 return (index, scans)
@@ -105,12 +119,12 @@ private extension QuickScanVM {
     func getQuickScans(id: Int) -> Observable<[QuickScan]> {
         if let affString = AffiliationType.init(rawValue: id)?.toKoreanString {
             return Service.shared.unreadQuickScanList(request: .init(affiliation: affString))
-                    .asObservable()
-                    .map { response in
-                        let result = response.data.map { $0.toQuickScan() }
-                        return result
-                    }
-                    .catchAndReturn([])
+                .asObservable()
+                .map { response in
+                    let result = response.data.map { $0.toQuickScan() }
+                    return result
+                }
+                .catchAndReturn([])
         } else {
             print("affString error")
             return Observable.just([])
@@ -122,7 +136,6 @@ private extension QuickScanVM {
         switch isMarked {
         case true:
             return Service.shared.cancleSavingNotice(noticeID: id).asObservable()
-//                .delay(.seconds(1), scheduler: MainScheduler.instance) // 필요 시 1초 딜레이 추가
                 .map { response in
                     if 200...299 ~= response.status {
                         print("취소 성공")
@@ -135,7 +148,6 @@ private extension QuickScanVM {
                 .catchAndReturn(true)
         case false:
             return Service.shared.saveNotice(noticeID: id).asObservable()
-//                .delay(.seconds(1), scheduler: MainScheduler.instance) // 필요 시 1초 딜레이 추가
                 .map { response in
                     if 200...299 ~= response.status {
                         print("저장 성공")
