@@ -16,7 +16,7 @@ final class QuickScanCVC: UICollectionViewCell {
     
     // MARK: Properties
     static let identifier = "QuickScanCVC"
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     private let number = 10
     private let circleWidth = 21
     
@@ -110,11 +110,7 @@ extension QuickScanCVC {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        councilImage.image = nil
-        councilName.text = nil
-        noticeNumber.text = nil
-        noticeNumber.removeFromSuperview()
-        circleView.addSubview(noticeNumber)
+        self.disposeBag = DisposeBag()
         circleView.isHidden = true
     }
     
