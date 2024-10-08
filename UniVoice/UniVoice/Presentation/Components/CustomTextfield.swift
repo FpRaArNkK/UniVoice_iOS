@@ -16,8 +16,11 @@ class CustomTextfield: UITextField {
     
     // MARK: Properties
     private let disposeBag = DisposeBag()
+    /// 텍스트필드 하단 border 레이어
     private let borderLayer = CALayer()
+    /// 텍스트필드 활성화 시 색상
     private let activeColor = UIColor.mint600
+    /// 텍스트필드 비활성화 시 색상
     private let inactiveColor = UIColor.lineRegular
     
     // MARK: - Layout
@@ -42,6 +45,7 @@ class CustomTextfield: UITextField {
         bindUI()
     }
     
+    // 커서의 너비 조절
     override func caretRect(for position: UITextPosition) -> CGRect {
         var originalRect = super.caretRect(for: position)
         originalRect.size.width = 2.0
@@ -76,6 +80,7 @@ class CustomTextfield: UITextField {
     
     // MARK: bindUI
     private func bindUI() {
+        // 작성 중인지 판단하여 UI에 바인딩
         Observable.merge(
             self.rx.controlEvent([.editingDidBegin]).map { true },
             self.rx.controlEvent([.editingDidEnd]).map { false }

@@ -22,13 +22,13 @@ final class LoginVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        rootView.idTextField.becomeFirstResponder()
+        rootView.idTextField.becomeFirstResponder() // 화면이 나타날 때 ID 텍스트 필드에 포커스
     }
     
     // MARK: Life Cycle - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.loginButton])
+        setupKeyboardDismissalExceptComponent(exceptViews: [rootView.loginButton]) // 로그인 버튼을 제외한 영역에서 키보드 내리기 활성화
         setUpFoundation()
         setUpBindUI()
     }
@@ -50,14 +50,26 @@ final class LoginVC: UIViewController {
         
         let output = viewModel.transform(input: input)
         
-        let loginButtonIsEnabled = output.loginButtonIsEnabled
-            .map { $0 ? CustomButtonType.active : CustomButtonType.inActive }
+        // 로그인 버튼 활성화 상태에 따른 버튼 타입 설정
+        let loginButtonIsEnabled = output.loginButtonState
+            .map { state in
+                switch state {
+                case .none:
+                    return CustomButtonType.inActive
+                default:
+                    return CustomButtonType.active
+                }
+            }
+            .asObservable()
         
-        rootView.loginButton.bindData(buttonType: loginButtonIsEnabled.asObservable())
+        // 버튼 상태 바인딩
+        rootView.loginButton.bindData(buttonType: loginButtonIsEnabled)
         
-        output.loginButtonState
-            .drive { [weak self] buttonState in
-                switch buttonState {
+        // 로그인 버튼 상태에 따른 동작 설정
+        rootView.loginButton.rx.tap
+            .withLatestFrom(output.loginButtonState)
+            .bind(onNext: { [weak self] state in
+                switch state {
                 case .idIsEditingWithoutPW:
                     self?.rootView.pwTextField.becomeFirstResponder()
                 case .pwIsEditingWithoutID:
@@ -67,17 +79,18 @@ final class LoginVC: UIViewController {
                 case .none:
                     print("none")
                 }
-            }
+            })
             .disposed(by: viewModel.disposeBag)
-        
+                
+        // 로그인 상태에 따른 화면 전환
         output.loginState
             .drive(onNext: { [weak self] isUser in
                 if isUser {
                     self?.navigationController?.pushViewController(WelcomeVC(), animated: true)
                 } else {
-                    let NoAccountVC = UINavigationController(rootViewController: NoAccountVC())
-                    NoAccountVC.modalPresentationStyle = .overFullScreen
-                    self?.present(NoAccountVC, animated: true)
+                    let noAccountVC = UINavigationController(rootViewController: NoAccountVC())
+                    noAccountVC.modalPresentationStyle = .overFullScreen
+                    self?.present(noAccountVC, animated: true)
                 }
             })
             .disposed(by: viewModel.disposeBag)

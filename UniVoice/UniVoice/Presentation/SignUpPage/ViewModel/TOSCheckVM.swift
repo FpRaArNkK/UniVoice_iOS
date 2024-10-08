@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+// 체크박스의 상태를 나타내는 enum
 enum CheckBoxState {
     case checked
     case unchecked
@@ -29,9 +30,11 @@ final class TOSCheckVM: ViewModelType {
         let completeButtonState: Driver<Bool>
     }
     
+    // 각 체크박스의 상태를 관리하는 Relay
     private var overallAgreeCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
     private var serviceTermsCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
     private var personalInfoTOSCheckBoxRelay = BehaviorRelay<CheckBoxState>(value: .unchecked)
+    
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
@@ -83,6 +86,7 @@ final class TOSCheckVM: ViewModelType {
         )
     }
     
+    // 전체 동의 체크박스의 상태를 개별 체크박스의 상태에 따라 업데이트
     private func updateOverallAgreeCheckBox() {
         let serviceTermsCheckBoxState = serviceTermsCheckBoxRelay.value == .checked
         let personalInfoTOSCheckeBoxState = personalInfoTOSCheckBoxRelay.value == .checked
@@ -93,6 +97,7 @@ final class TOSCheckVM: ViewModelType {
 
 // swiftlint: disable line_length
 // swiftlint: disable non_optional_string_data_conversion
+// URLSession을 활용하여 multipart/form 네트워크 통신
 extension TOSCheckVM {
     private func createMultipartFormDataBody(with parameters: [String: String], boundary: String, image: UIImage, imageName: String) -> Data {
         var body = Data()

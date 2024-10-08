@@ -38,6 +38,7 @@ final class CreateAccountVM: ViewModelType {
     func transform(input: Input) -> Output {
         let idIsValid = input.idText
             .map { id in
+                // 영문 소문자, 숫자, 특수문자 사용하여 5~20자 정규식
                 let idRegex = "^[a-z0-9\\[\\]\\{\\}\\#\\%\\^\\*\\+=_\\|\\~<>\\$£¥•\\-/:;\\(\\)₩&@.,?!‘’“”\\\\]{5,20}$"
                 let idTest = NSPredicate(format: "SELF MATCHES %@", idRegex)
                 return idTest.evaluate(with: id)
@@ -46,6 +47,7 @@ final class CreateAccountVM: ViewModelType {
         
         let pwIsValid = input.pwText
             .map { password in
+                // 영문, 숫자, 특수문자 각각 1개 이상 포함 8~16자 정규식
                 let pwRegex = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[\\[\\]\\{\\}\\#\\%\\^\\*\\+=_\\|\\~<>\\$£¥•\\-/:;\\(\\)₩&@.,?!‘’“”\\\\]).{8,16}$"
                 let pwTest = NSPredicate(format: "SELF MATCHES %@", pwRegex)
                 return pwTest.evaluate(with: password)
@@ -60,7 +62,7 @@ final class CreateAccountVM: ViewModelType {
             .asDriver(onErrorJustReturn: false)
         
         let confirmAndNextAction = input.confirmAndNextButtonDidTap
-            .map { title -> ConfirmAndNextAction in
+            .map { title in
                 return title == "확인" ? ConfirmAndNextAction.confirm : ConfirmAndNextAction.next
             }
             .asDriver(onErrorJustReturn: .confirm)
@@ -83,6 +85,7 @@ final class CreateAccountVM: ViewModelType {
         let nextButtonState = pwIsMatched
             .asObservable()
         
+        // confirmAndNextButton이 tap되면 stream을 바꿈
         let confirmAndNextButtonIsEnabled = Observable
             .merge(
                 confirmButtonState.take(until: input.confirmAndNextButtonDidTap),

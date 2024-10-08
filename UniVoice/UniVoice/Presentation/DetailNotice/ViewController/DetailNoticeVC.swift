@@ -9,8 +9,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
-import Kingfisher
 
+/// 세부 공지사항 화면에 대한 ViewController 입니다.
 final class DetailNoticeVC: UIViewController {
     
     // MARK: Properties

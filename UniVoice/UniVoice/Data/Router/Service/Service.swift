@@ -62,6 +62,12 @@ final class Service {
         }
     }
     
+    /// 네트워크 요청을 RxSwift의 Single로 감싸서 수행하는 메서드 -> 하나의 메서드로 추상화를 위해서 만듦
+    /// - Parameters:
+    ///   - target: 요청할 API의 타겟 정보
+    ///   - model: 응답 데이터를 디코딩할 모델 타입
+    ///   - service: 요청을 관리할 ServiceManager 인스턴스
+    /// - Returns: 요청 결과를 디코딩한 모델 객체를 Single로 반환
     func rxRequest<T: UniVoiceTargetType, R: Codable>(_ target: T, model: R.Type, service: ServiceManager<T>) -> Single<R> {
         return service.provider.rx.request(target)
             .flatMap { [weak self] response -> Single<R> in
@@ -78,6 +84,12 @@ final class Service {
             }
     }
     
+    /// 토큰이 필요한 네트워크 요청을 RxSwift의 Single로 감싸서 수행하는 메서드 -> 하나의 메서드로 추상화를 위해서 만듦
+    /// - Parameters:
+    ///   - target: 요청할 API의 타겟 정보
+    ///   - model: 응답 데이터를 디코딩할 모델 타입
+    ///   - service: 요청을 관리할 ServiceManager 인스턴스
+    /// - Returns: 요청 결과를 디코딩한 모델 객체를 Single로 반환
     func rxRequestWithToken<T: UniVoiceTargetType, R: Codable>(_ target: T, model: R.Type, service: ServiceManager<T>) -> Single<R> {
         return service.providerWithToken.rx.request(target)
             .flatMap { [weak self] response -> Single<R> in

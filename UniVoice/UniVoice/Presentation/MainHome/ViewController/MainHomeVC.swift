@@ -16,8 +16,8 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
     private let disposeBag = DisposeBag()
     private let viewModel = MainHomeVM()
     private let itemSelectedSubject = PublishSubject<IndexPath>()
-    private let tabList = BehaviorRelay<[String]>(value: []) // 중간 부분에 들어가는 탭들 이름 리스트
-    private let fetchTrig = PublishRelay<Void>() // 새로고침 트리거
+    private let councilList = BehaviorRelay<[String]>(value: [])
+    private let fetchTrig = PublishRelay<Void>()
     
     // MARK: Views
     private let rootView = MainHomeView()
@@ -183,7 +183,7 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
             .disposed(by: disposeBag)
         
         output.councilItems
-            .bind(to: self.tabList)
+            .bind(to: self.councilList)
             .disposed(by: disposeBag)
         
         output.noticeItems
@@ -224,14 +224,12 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
         rootView.headerView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
         rootView.stickyHeaderView.councilCollectionView.rx.itemSelected
             .subscribe(onNext: { indexPath in
                 self.itemSelectedSubject.on(.next(indexPath))
-                //                self.viewModel.selectedCouncilIndexRelay.accept(indexPath.row)
             })
             .disposed(by: disposeBag)
         
@@ -276,6 +274,8 @@ final class MainHomeVC: UIViewController, UIScrollViewDelegate {
             .disposed(by: disposeBag)
     }
     
+    /// source collectionview와 target collectionview의 스크롤 정도를 동기화하는 함수입니다.
+    /// (stickyheader<->기존 header과의 스크롤 정도 동기화를 위함)
     private func bindScroll(of source: UICollectionView, to target: UICollectionView) {
         source.rx.contentOffset
             .subscribe(onNext: { contentOffset in
@@ -308,10 +308,10 @@ extension MainHomeVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: 97, height: 132)
         case rootView.headerView.councilCollectionView,
             rootView.stickyHeaderView.councilCollectionView:
-            if self.tabList.value.isEmpty {
+            if self.councilList.value.isEmpty {
                 return CGSize(width: 50, height: 32)
             } else {
-                let title = self.tabList.value[indexPath.row]
+                let title = self.councilList.value[indexPath.row]
                 let width = title.size(withAttributes: [NSAttributedString.Key.font: UIFont.pretendardFont(for: .B3SB)]).width + 30
                 return CGSize(width: width, height: 32)
             }
