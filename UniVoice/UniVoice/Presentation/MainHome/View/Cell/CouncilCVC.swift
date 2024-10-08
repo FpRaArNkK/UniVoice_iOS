@@ -14,6 +14,7 @@ final class CouncilCVC: UICollectionViewCell {
     
     // MARK: Properties
     static let identifier = "CouncilCVC"
+    private var disposeBag = DisposeBag()
     
     // MARK: Views
     let councilButton = CustomButton(with: .unselected)
@@ -56,7 +57,7 @@ extension CouncilCVC {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        councilButton.setTitle("", font: .B3SB, titleColor: .B_01)
+        self.disposeBag = DisposeBag()
     }
     
     func councilDataBind(councilName: String, type: Observable<CustomButtonType>) {

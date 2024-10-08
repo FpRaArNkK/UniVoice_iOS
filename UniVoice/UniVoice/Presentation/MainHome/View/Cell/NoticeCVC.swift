@@ -8,11 +8,13 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 final class NoticeCVC: UICollectionViewCell {
     
     // MARK: Properties
     static let identifier = "NoticeCVC"
+    private var disposeBag = DisposeBag()
     
     // MARK: Views
     private let chip = UILabel()
@@ -163,12 +165,7 @@ extension NoticeCVC {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        chip.text = nil
-        noticeTitle.text = nil
-        thumbnailImage.image = nil
-        createdTimeLabel.text = nil
-        likedNumber.text = nil
-        savedNumber.text = nil
+        self.disposeBag = DisposeBag()
     }
     
     func noticeDataBind(viewModel: Notice) {
