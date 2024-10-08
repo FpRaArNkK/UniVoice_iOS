@@ -13,20 +13,20 @@ final class QuickScanVM: ViewModelType {
     
     init(id: Int) {
         // API 로직 수행
-        self.getQuickScans(id: id)
+        self.getQuickScans_MOCK(id: id)
             .bind(to: quickScans)
             .disposed(by: disposeBag)
         
         // 초기 진입 시 0번 인덱스 POST 호출
-        quickScans
-            .filter { !$0.isEmpty }
-            .take(1)
-            .subscribe(onNext: { [weak self] scans in
-                guard let self = self else { return }
-                let id = scans[0].noticeId
-                self.postQuickScanCompleted(noticeId: id)
-            })
-            .disposed(by: disposeBag)
+    //        quickScans
+    //            .filter { !$0.isEmpty }
+    //            .take(1)
+    //            .subscribe(onNext: { [weak self] scans in
+    //                guard let self = self else { return }
+    //                let id = scans[0].noticeId
+    //                self.postQuickScanCompleted(noticeId: id)
+    //            })
+    //            .disposed(by: disposeBag)
     }
     
     struct Input {
@@ -41,10 +41,6 @@ final class QuickScanVM: ViewModelType {
         let quickScans: Driver<[QuickScan]>
         /// 현재 페이지 인덱스 스트림
         let currentIndex: Driver<Int>
-        /// 북마크 결과 스트림
-        let bookmarkResult: Driver<Bool>
-        /// 퀵스캔 확인 완료 상태 스트림
-        let viewComplete: Driver<Bool>
     }
     
     var disposeBag = DisposeBag()
@@ -55,8 +51,6 @@ final class QuickScanVM: ViewModelType {
     private let currentIndex = BehaviorRelay(value: 0)
     /// 북마크 결과를 관리하는 PublishRelay
     private let bookmarkResult = PublishRelay<Bool>()
-    /// 퀵스캔 확인 완료 상태를 관리하는 PublishRelay
-    private let viewComplete = PublishRelay<Bool>()
     
     func transform(input: Input) -> Output {
         
@@ -88,8 +82,6 @@ final class QuickScanVM: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        let currentIndex = input.changeIndex
-        
         // 페이지 인덱스 변경 시 POST 요청 수행
         currentIndex
             .withLatestFrom(quickScans) { (index, scans) in
@@ -107,9 +99,7 @@ final class QuickScanVM: ViewModelType {
         
         return Output(
             quickScans: quickScans.asDriver(),
-            currentIndex: currentIndex.asDriver(onErrorJustReturn: 0),
-            bookmarkResult: bookmarkResult.asDriver(onErrorJustReturn: false),
-            viewComplete: viewComplete.asDriver(onErrorJustReturn: false)
+            currentIndex: currentIndex.asDriver(onErrorJustReturn: 0)
         )
     }
 }
@@ -173,5 +163,12 @@ private extension QuickScanVM {
                 }
             }
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: Temp Mock Data
+extension QuickScanVM {
+    private func getQuickScans_MOCK(id: Int) -> Observable<[QuickScan]> {
+        return .just(QuickScan.dummyData)
     }
 }

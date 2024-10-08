@@ -171,8 +171,6 @@ extension QuickScanContentCVC {
         viewCountLabel.text = "\(cellModel.viewCount)회"
         noticeTitleLabel.text = cellModel.noticeTitle
         
-        contentStackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // 셀 초기화 작업
-        
         let contents = [
             cellModel.noticeTarget,
             Date().getDurationText(from: cellModel.startTime, to: cellModel.endTime),
@@ -233,5 +231,7 @@ extension QuickScanContentCVC {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.disposeBag = DisposeBag()
+        self.contentStackView.arrangedSubviews.forEach { $0.removeFromSuperview() } // 스택뷰 초기화
+        profileImageView.image = nil
     }
 }
